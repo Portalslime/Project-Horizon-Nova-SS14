@@ -1,96 +1,113 @@
-<p align="center"> <img alt="Sector Frontier 14" height="300" src="https://github.com/Lua-Frontier/sector-frontier-14/blob/master/Resources/Textures/_Lua/Logo/logogit.png?raw=true" /></p>
+# Horizon Nova
 
-![Alt](https://repobeats.axiom.co/api/embed/c952b4552bf0f50fd5cc7f247c6636779fa87f4a.svg "Repobeats analytics image")
+**Horizon Nova** (Горизонт Нова) — русскоязычный форк [Space Station 14](https://github.com/space-wizards/space-station-14), основанный на сборке [Sector Frontier 14 (Lua)](https://github.com/Lua-Frontier/sector-frontier-14) (коммит `3fdcbcae09`).
 
-Sector Frontier 14 — это форк [Frontier Station 14](https://github.com/new-frontiers-14/frontier-station-14)/[Space Station 14](https://github.com/space-wizards/space-station-14), работающий на движке [Robust Toolbox](https://github.com/space-wizards/RobustToolbox), написанном на C#.
+Проект ориентирован на создание стабильной и удобной в поддержке сборки с прозрачной структурой веток и чёткими правилами разработки.
 
-Это основной репозиторий Sector Frontier 14. Является форком Frontier Station 14.
+## Атрибуция и используемые сборки
 
-## Ссылки
+Проект основан на [Sector Frontier 14](https://github.com/Lua-Frontier/sector-frontier-14) (Lua).  
+При заимствовании контента из других форков он по возможности размещается в соответствующих подкаталогах для удобства отслеживания авторства.
 
-[Discord](https://discord.gg/3Uak8dpDpJ) | [Steam](https://store.steampowered.com/app/1255460/Space_Station_14/)
+| Подкаталог       | Название форка      | Репозиторий                                                          | Лицензия  |
+|------------------|---------------------|----------------------------------------------------------------------|-----------|
+| `_NF`            | Frontier Station    | https://github.com/new-frontiers-14/frontier-station-14              | AGPL 3.0  |
+| `_CD`            | Cosmatic Drift      | https://github.com/cosmatic-drift-14/cosmatic-drift                  | MIT       |
+| `_Corvax`        | Corvax              | https://github.com/space-syndicate/space-station-14                  | MIT       |
+| `_Corvax`        | Corvax Frontier     | https://github.com/Corvax-Frontier/Frontier                          | AGPL 3.0  |
+| `_Corvax`        | Corvax WL           | https://github.com/corvax-team/ss14-wl                               | —         |
+| `_Corvax_Goob`   | Corvax Goob         | —                                                                    | —         |
+| `_DV`            | Delta-V             | https://github.com/DeltaV-Station/Delta-v                            | AGPL 3.0  |
+| `_EE`            | Einstein Engines    | https://github.com/Simple-Station/Einstein-Engines                   | AGPL 3.0  |
+| `_Emberfall`     | Emberfall           | https://github.com/emberfall-14/emberfall                            | MIT       |
+| `_EstacaoPirata` | Estacao Pirata      | https://github.com/Day-OS/estacao-pirata-14                          | AGPL 3.0  |
+| `_Goobstation`   | Goob Station        | https://github.com/Goob-Station/Goob-Station                         | AGPL 3.0  |
+| `_Impstation`    | Impstation          | https://github.com/impstation/imp-station-14                         | AGPL 3.0  |
+| `_NC14`          | Nuclear 14          | https://github.com/Vault-Overseers/nuclear-14                        | AGPL 3.0  |
+| `Nyanotrasen`    | Nyanotrasen         | https://github.com/Nyanotrasen/Nyanotrasen                           | MIT       |
+| `_Lua`           | Sector Frontier 14  | https://github.com/Lua-Frontier/sector-frontier-14                   | AGPL 3.0  |
+| `_ADT`           | AdventureTimeSS14   | https://github.com/AdventureTimeSS14/space_station_ADT               | AGPL 3.0  |
+| `_Nuclear14`     | Nuclear 14          | https://github.com/Vault-Overseers/nuclear-14                        | AGPL 3.0  |
+| `_RMC14`         | RMC-14              | https://github.com/RMC-14/RMC-14                                     | MIT       |
+| `_Backman`       | Rxup                | https://github.com/Rxup/space-station-14                             | AGPL 3.0  |
+| `_DeadSpace`     | Мёртвый Космос      | https://github.com/dead-space-server/space-station-14-fobos          | Custom    |
+| `_Mono`          | Monolith            | https://github.com/Monolith-Station/Monolith                         | AGPL 3.0  |
+| `_Theta`         | ThetaStation        | https://github.com/ThetaStation/ThetaStation                         | AGPL 3.0  |
+| `Sirena`         | Sirena              | https://github.com/EvgenRP99/SS14-Sirena                             | MIT       |
+| `_Erida`         | Erida               | https://github.com/SS14Backmen/space-station-14-Erida                | AGPL 3.0  |
+| `ShibaStation`   | ShibaStation        | https://github.com/AstroDogeDX/ShibaStation-GS                       | AGPL 3.0  |
+| `Imperial`       | Imperial            | https://github.com/imperial-space/SS14-public                        | MIT       |
+| `_Wega`          | Wega                | https://github.com/wega-team/ss14-wega                               | —         |
+| `_Lust`          | Lust Station        | https://github.com/makura-games/lust-station                         | —         |
+| `_Fire`          | Project Fire        | https://github.com/makura-games/project-fire                         | —         |
 
-## Документация / Вики
+## Документация
 
-На [вики](https://frontierstation.wiki.gg/) есть документация по контенту Frontier.
+- [Официальная документация Space Station 14](https://docs.spacestation14.com/)
+- [Документация по настройке окружения разработки](https://docs.spacestation14.com/en/general-development/setup.html)
+- [Goob Station Docs](https://docs.goobstation.com/)
+- [Space Wizards Development Wiki](https://docs.spacestation14.com/)
 
-Так же есть [вики](https://wiki.deadspace14.net/%D0%A4%D1%80%D0%BE%D0%BD%D1%82%D0%B8%D1%80:%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0) Sector Frontier.
+## Сборка проекта
 
-## Участие в разработке
+1. Клонируйте репозиторий:
+   ```bash
+   git clone https://github.com/Project-Horizon-Nova-SS14/Project-Horizon-Nova-SS14.git
+   cd Project-Horizon-Nova-SS14
+   ```
 
-Мы рады принимать вклад от всех желающих. Заходите в Discord, если хотите помочь. У нас есть [список идей](https://discord.com/channels/1030160796401016883/1278737130411261982), которые можно реализовать, и любой может взять их в работу. Не стесняйтесь просить о помощи!
+2. Инициализируйте подмодули и загрузите движок:
+   ```bash
+   python RUN_THIS.py
+   ```
 
-Если вы вносите изменения, пожалуйста, ознакомьтесь с разделом маркеров в [MARKERS.md](https://github.com/Lua-Frontier/sector-frontier-14/blob/master/MARKERS.md)
-Любые изменения в файлах, принадлежащих нашему основному источнику, должны быть должным образом помечены в соответствии с указанными там правилами.
+3. Соберите решение:
+   ```bash
+   dotnet build
+   ```
 
-## Сборка
+Подробная инструкция: [Setting up a Development Environment](https://docs.spacestation14.com/en/general-development/setup.html)
 
-1. Клонируйте этот репозиторий.
-2. Запустите `RUN_THIS.py` для инициализации подмодулей и загрузки движка.
-3. Скомпилируйте решение.
+## Структура веток
 
-[Более подробные инструкции по сборке проекта.](https://docs.spacestation14.com/en/general-development/setup.html)
+```
+main
+├── CodeFix     — исправление ошибок и мелкие правки
+└── Develop     — разработка нового контента (может быть несколько параллельных веток)
+    ├── Feature — отдельные функции / механики
+    └── Release — доработка и объединение Feature-веток перед влитием в main
+```
+
+### Правила вливания изменений
+
+- **Feature → чужая Feature**  
+  Требуется разрешение владельца целевой Feature-ветки.
+
+- **Feature → Develop**  
+  Требуется разрешение ответственного за данную Develop-ветку.  
+  В ветку `Release` новый функционал не добавляется.
+
+- **CodeFix → main** и **Develop → main**  
+  Только после разрешения одного из основных разработчиков.
+
+Любой член команды разработки может создавать Feature-ветки.
+
+## Контакты
+
+По вопросам разработки:
+
+| Роль                  | Ник                | Discord     |
+|-----------------------|--------------------|-------------|
+| Основной разработчик  | Portal_Slime       | Portal_Slime|
+| Глава проекта         | Zscreeper          | Zscreeper   |
+| Заместитель главы     | Kanelorra          | Kanelorra   |
 
 ## Лицензия
 
-Контент, добавленный в этот репозиторий после коммита 2fca06eaba205ae6fe3aceb8ae2a0594f0effee0, распространяется под лицензией GNU Affero General Public License версии 3.0, если не указано иное (см. раздел "Атрибуция" ниже). См. `LICENSE-AGPLv3.txt`.
-Контент, добавленный до коммита 2fca06eaba205ae6fe3aceb8ae2a0594f0effee0, распространяется под лицензией MIT, если не указано иное. См. `LICENSE-MIT.txt`.
+Код, добавленный в этот репозиторий, распространяется под лицензией **GNU Affero General Public License версии 3.0**, если не указано иное.  
+Полный текст лицензии: `LICENSE-AGPLv3.txt`.
 
-[2fca06eaba205ae6fe3aceb8ae2a0594f0effee0](https://github.com/new-frontiers-14/frontier-station-14/commit/2fca06eaba205ae6fe3aceb8ae2a0594f0effee0) был загружен 1 июля 2024 года в 16:04 UTC.
+Большинство ассетов лицензированы под [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), если не указано иное в метаданных файлов.
 
-Большинство ассетов лицензированы по [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), если не указано иное. Лицензия и авторские права указаны в метаданных файлов. [Пример](https://github.com/space-wizards/space-station-14/blob/master/Resources/Textures/Objects/Tools/crowbar.rsi/meta.json).
+Некоторые ассеты могут иметь некоммерческие лицензии (CC-BY-NC-SA и аналогичные). Их необходимо удалить при коммерческом использовании проекта.
 
-Обратите внимание, что некоторые ассеты лицензированы по некоммерческой лицензии [CC-BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) или аналогичным некоммерческим лицензиям и должны быть удалены, если вы планируете использовать этот проект в коммерческих целях.
-## Ребрендинг
-
-Проект **Sector Frontier 14** является результатом ребрендинга и дальнейшего развития проекта,
-ранее известного как **LuaWorld**.
-С **01.01.2026** название **LuaWorld** более не используется но всё еще действительно.
-Все права, авторство и дальнейшая разработка продолжаются под именем **LuaCorp** без смены правообладателя.
-
-## Атрибуция
-
-При заимствовании контента из других форков мы организуем его в соответствующие подкаталоги для удобства отслеживания авторства и минимизации конфликтов при слиянии.
-
-Контент в этих подкаталогах происходит из соответствующих форков и может содержать изменения. Эти изменения обозначены комментариями вокруг измененных строк.
-
-| Подкаталог | Название форка | Репозиторий форка | Лицензия |
-|--------------|-----------|-----------------|---------|
-| `_NF` | Frontier Station | https://github.com/new-frontiers-14/frontier-station-14 | AGPL 3.0 |
-| `_CD` | Cosmatic Drift | https://github.com/cosmatic-drift-14/cosmatic-drift | MIT |
-| `_Corvax` | Corvax | https://github.com/space-syndicate/space-station-14 | MIT |
-| `_Corvax` | Corvax Frontier | https://github.com/Corvax-Frontier/Frontier | AGPL 3.0 |
-| `_DV` | Delta-V | https://github.com/DeltaV-Station/Delta-v | AGPL 3.0 |
-| `_EE` | Einstein Engines | https://github.com/Simple-Station/Einstein-Engines | AGPL 3.0 |
-| `_Emberfall` | Emberfall | https://github.com/emberfall-14/emberfall | [MIT](https://github.com/new-frontiers-14/frontier-station-14/pull/3607) |
-| `_EstacaoPirata` | Estacao Pirata | https://github.com/Day-OS/estacao-pirata-14 | AGPL 3.0 |
-| `_Goobstation` | Goob Station | https://github.com/Goob-Station/Goob-Station | AGPL 3.0 |
-| `_Impstation` | Impstation | https://github.com/impstation/imp-station-14 | AGPL 3.0 |
-| `_NC14` | Nuclear 14 | https://github.com/Vault-Overseers/nuclear-14 | AGPL 3.0 |
-| `Nyanotrasen` | Nyanotrasen | https://github.com/Nyanotrasen/Nyanotrasen | MIT |
-
-### Добавления LuaCorp
-
-| Подкаталог | Название форка | Репозиторий форка | Лицензия |
-|--------------|-----------|-----------------|---------|
-| `_Lua` | LuaCorp | https://github.com/Lua-Frontier/sector-frontier-14 | AGPL 3.0 |
-| `_ADT` | AdventureTimeSS14 | https://github.com/AdventureTimeSS14/space_station_ADT | AGPL 3.0 |
-| `_Nuclear14` | Nuclear 14 | https://github.com/Vault-Overseers/nuclear-14 | AGPL 3.0 |
-| `_RMC14` | RMC-14 | https://github.com/RMC-14/RMC-14 | MIT |
-| `_Backman` | Rxup | https://github.com/Rxup/space-station-14 | AGPL 3.0 |
-| `_DeadSpace` | Мёртвый Космос | https://github.com/dead-space-server/space-station-14-fobos | Custom |
-| `_Mono` | Monolith | https://github.com/Monolith-Station/Monolith | AGPL 3.0 |
-| `_Theta` | ThetaStation | https://github.com/ThetaStation/ThetaStation | AGPL 3.0 |
-| `Sirena` | Sirena | https://github.com/EvgenRP99/SS14-Sirena | MIT |
-| `_Erida` | Erida | https://github.com/SS14Backmen/space-station-14-Erida | AGPL 3.0 |
-| `ShibaStation` | _ShibaStation | https://github.com/AstroDogeDX/ShibaStation-GS | AGPL 3.0 |
-| `Imperial` | _Imperial | https://github.com/imperial-space/SS14-public | MIT |
-
-
-Дополнительные репозитории, из которых мы перенесли функции без создания подкаталогов, перечислены ниже.
-
-| Название форка | Репозиторий форка | Лицензия |
-|-----------|-----------------|---------|
-| Monolith | https://github.com/Monolith-Station/Monolith | AGPL 3.0 |
-| Space Station 14 | https://github.com/space-wizards/space-station-14 | MIT |
-| White Dream | https://github.com/WWhiteDreamProject/wwdpublic | AGPL 3.0 |
