@@ -1,0 +1,135 @@
+using Content.Server.Fluids.EntitySystems;
+using Content.Server.Power.EntitySystems;
+using Content.Shared.Audio;
+using Content.Shared.Chemistry;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reaction;
+using Content.Shared.DirtVisuals;
+using Content.Shared.Verbs;
+using Robust.Shared.Audio.Systems;
+
+namespace Content.Server.Shower
+{
+    public sealed partial class ShowerSystem : EntitySystem
+    {
+        /// <summary>
+        /// Name of the solution the shower sprays from. Must match the prototype.
+        /// </summary>
+        private const string ShowerSolutionName = "shower";
+
+        [Dependency] private SharedAmbientSoundSystem _ambient = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
+        [Dependency] private SharedAudioSystem _audio = default!;
+        [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+        [Dependency] private PuddleSystem _puddle = default!;
+        [Dependency] private EntityLookupSystem _lookup = default!;
+        [Dependency] private ReactiveSystem _reactive = default!;
+
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            SubscribeLocalEvent<ShowerComponent, GetVerbsEvent<AlternativeVerb>>(AddShowerVerb);
+        }
+
+        public override void Update(float frameTime)
+        {
+            base.Update(frameTime);
+
+            var query = EntityQueryEnumerator<ShowerComponent>();
+            while (query.MoveNext(out var uid, out var shower))
+            {
+                if (!shower.IsSpraying)
+                    continue;
+
+                shower.RemainingTime -= frameTime;
+                if (shower.RemainingTime <= 0)
+                {
+                    SprayWater(uid, shower);
+                    shower.RemainingTime = shower.SprayTime;
+                }
+            }
+        }
+
+        private void AddShowerVerb(EntityUid uid, ShowerComponent component, GetVerbsEvent<AlternativeVerb> args)
+        {
+            if (!args.CanAccess || !args.CanInteract || !this.IsPowered(uid, EntityManager))
+                return;
+
+            AlternativeVerb verb = new()
+            {
+                Act = () => ToggleSpraying(uid, component),
+                Text = component.IsSpraying
+                    ? Loc.GetString("shower-verb-stop")
+                    : Loc.GetString("shower-verb-start"),
+                Priority = 2
+            };
+
+            args.Verbs.Add(verb);
+        }
+
+        public void ToggleSpraying(EntityUid uid, ShowerComponent component)
+        {
+            if (component.IsSpraying)
+                StopSpraying(uid, component);
+            else
+                StartSpraying(uid, component);
+        }
+
+        public void StartSpraying(EntityUid uid, ShowerComponent component)
+        {
+            if (component.IsSpraying)
+                return;
+
+            component.IsSpraying = true;
+            component.RemainingTime = component.SprayTime;
+
+            _audio.PlayPvs(component.SprayStartSound, uid);
+            _ambient.SetAmbience(uid, true);
+
+            _appearance.SetData(uid, ShowerVisuals.Spraying, true);
+        }
+
+        private void StopSpraying(EntityUid uid, ShowerComponent component)
+        {
+            if (!component.IsSpraying)
+                return;
+
+            component.IsSpraying = false;
+
+            _audio.PlayPvs(component.SprayEndSound, uid);
+            _ambient.SetAmbience(uid, false);
+
+            _appearance.SetData(uid, ShowerVisuals.Spraying, false);
+        }
+
+        private void SprayWater(EntityUid uid, ShowerComponent component)
+        {
+            if (!_solutionContainer.TryGetSolution(uid, ShowerSolutionName, out var showerSol, out var solution))
+            {
+                StopSpraying(uid, component);
+                return;
+            }
+
+            if (solution.Volume == 0)
+            {
+                StopSpraying(uid, component);
+                return;
+            }
+
+            var coordinates = Transform(uid).Coordinates;
+            var mobsInRange = _lookup.GetEntitiesInRange<ReactiveComponent>(coordinates, 0.5f);
+            var amountPerTarget = component.WaterAmount / (mobsInRange.Count + 1);
+
+            foreach (var mob in mobsInRange)
+            {
+                var splitSolution = _solutionContainer.SplitSolution(showerSol.Value, FixedPoint2.New(amountPerTarget));
+                _reactive.DoEntityReaction(mob, splitSolution, ReactionMethod.Touch);
+            }
+
+            var floorSolution = _solutionContainer.SplitSolution(showerSol.Value, FixedPoint2.New(amountPerTarget));
+            _puddle.TrySpillAt(coordinates, floorSolution, out _);
+        }
+    }
+}

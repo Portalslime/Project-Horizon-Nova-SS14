@@ -37,7 +37,7 @@
 | `_Erida`         | Erida               | https://github.com/SS14Backmen/space-station-14-Erida                | AGPL 3.0  |
 | `ShibaStation`   | ShibaStation        | https://github.com/AstroDogeDX/ShibaStation-GS                       | AGPL 3.0  |
 | `Imperial`       | Imperial            | https://github.com/imperial-space/SS14-public                        | MIT       |
-| `_Wega`          | Wega                | https://github.com/wega-team/ss14-wega                               | —         |
+| `_Wega`          | Wega                | https://github.com/wega-team/ss14-wega                               | GPL 3.0   |
 | `_Lust`          | Lust Station        | https://github.com/makura-games/lust-station                         | —         |
 | `_Fire`          | Project Fire        | https://github.com/makura-games/project-fire                         | —         |
 
