@@ -6,6 +6,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.DirtVisuals;
+using Content.Shared.FixedPoint;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 
