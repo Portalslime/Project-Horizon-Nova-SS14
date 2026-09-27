@@ -162,6 +162,7 @@ public sealed class FloorTileSystem : EntitySystem
                     return;
 
                 var grid = _mapManager.CreateGridEntity(locationMap.MapId);
+                EnsureComp<PlayerBuiltGridComponent>(grid);
                 var gridXform = Transform(grid);
                 _transform.SetWorldPosition((grid, gridXform), locationMap.Position);
                 location = new EntityCoordinates(grid, Vector2.Zero);

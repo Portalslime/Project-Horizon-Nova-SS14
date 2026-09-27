@@ -3,6 +3,7 @@ using Content.Server.Power.Components;
 using Content.Shared._Mono.CCVar;
 using Content.Shared.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
+using Content.Shared.Tiles;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
@@ -30,6 +31,7 @@ public sealed class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
 
     private EntityQuery<BatteryComponent> _batteryQuery;
     private EntityQuery<CleanupImmuneComponent> _immuneQuery;
+    private EntityQuery<PlayerBuiltGridComponent> _playerBuiltQuery;
 
     public override void Initialize()
     {
@@ -37,6 +39,7 @@ public sealed class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
 
         _batteryQuery = GetEntityQuery<BatteryComponent>();
         _immuneQuery = GetEntityQuery<CleanupImmuneComponent>();
+        _playerBuiltQuery = GetEntityQuery<PlayerBuiltGridComponent>();
 
         Subs.CVar(_cfg, MonoCVars.GridCleanupDistance, val => _maxDistance = val, true);
         Subs.CVar(_cfg, MonoCVars.GridCleanupMaxValue, val => _maxValue = val, true);
@@ -61,6 +64,7 @@ public sealed class GridCleanupSystem : BaseCleanupSystem<MapGridComponent>
         if (HasComp<MapComponent>(uid) // if we're a planetmap ignore
             || HasComp<MapGridComponent>(parent) // do not delete anything on planetmaps either
             || _immuneQuery.HasComp(uid)
+            || _playerBuiltQuery.HasComp(uid) // player built this from an empty grid, never sweep it
             || !state.IgnoreIFF && TryComp<IFFComponent>(uid, out var iff) && (iff.Flags & IFFFlags.HideLabel) == 0 // delete only if IFF off
             || _cleanup.HasNearbyPlayers(xform.Coordinates, state.DistanceOverride ?? _maxDistance * scale * scale) // square it
             || !state.IgnorePowered && HasPoweredAPC((uid, xform)) // don't delete if it has powered APCs

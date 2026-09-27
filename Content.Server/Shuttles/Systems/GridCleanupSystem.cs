@@ -177,6 +177,9 @@ public sealed class GridCleanupSystem : EntitySystem
         if (HasComp<GatewayGeneratorDestinationComponent>(gridUid) || HasComp<MapperGridComponent>(gridUid))
             return true;
 
+        if (HasComp<PlayerBuiltGridComponent>(gridUid))
+            return true;
+
         if (HasComp<ExpeditionMapComponent>(gridUid) || HasComp<ExpeditionPlanetComponent>(gridUid))
             return true;
 
