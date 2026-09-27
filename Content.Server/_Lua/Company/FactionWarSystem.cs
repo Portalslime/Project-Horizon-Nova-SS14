@@ -75,7 +75,9 @@ public sealed class FactionWarSystem : EntitySystem
         base.Update(frameTime);
 
         var now = DateTimeOffset.Now;
-        UpdateWarPrimeStationProtection(now);
+        // Frontier: factions removed on this server; no longer toggling station grid
+        // protection on/off by time of day.
+        // UpdateWarPrimeStationProtection(now);
 
         if (_activeWars.Count == 0)
             return;

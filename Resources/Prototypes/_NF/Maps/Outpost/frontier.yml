@@ -17,15 +17,11 @@
         description: "Хотя бы здесь вы можете почувствовать себя в безопасности."
       # Lua add end
       components:
-        - type: FactionCapture
-          captureWholeStation: true
         - type: FrontierParking # Lua
         - type: RadarBlipIcon
           icon: /Textures/_Lua/Interface/Radar/space-station.png
           scale: 1.2
           allowWhenHidden: true
-        - type: FactionOwnedStation
-          mainBase: true
         - type: StationNameSetup
           mapNameTemplate: 'Станция Фронтир'
 #          nameGenerator:
@@ -36,7 +32,6 @@
           stationSubtext: 'frontier-lobby-frontier-subtext'
           stationDescription: 'frontier-lobby-frontier-description'
           lobbySortOrder: 1
-          requiredCompany: Nanotrasen
         - type: StationJobs
           availableJobs:
             Pilot: [ -1, -1 ]
