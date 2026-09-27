@@ -87,7 +87,7 @@ WeaponRackPistolBaseSecurity: StructurePistolRackNfsd
 WeaponRackPistolWallmountedSecurity: StructurePistolRackWallmountedNfsd
 
 # 2024-10-09 Frontier: Fixups
-SpawnPointDetectiveNF: NFSpawnPointDetective
+SpawnPointDetectiveNF: null # target role removed
 
 # 2024-11-09
 WarpPointShip: WarpPoint
@@ -205,9 +205,9 @@ PoweredlightColoredFrostyBlue: PoweredlightCyan
 PoweredlightColoredBlack: PoweredlightUltraviolet
 
 # 2025-01-18 Pirate rename
-SpawnPointPirate: SpawnPointNFPirate
-SpawnPointPirateFirstMate: SpawnPointNFPirateFirstMate
-SpawnPointPirateCaptain: SpawnPointNFPirateCaptain
+SpawnPointPirate: null # target role removed
+SpawnPointPirateFirstMate: null # target role removed
+SpawnPointPirateCaptain: null # target role removed
 
 # 2025-02-01 MEMP
 M_Emp: MobileEmpGenerator
