@@ -16178,62 +16178,6 @@ entities:
     - type: Transform
       pos: -24.5,28.5
       parent: 2
-- proto: ComputerShipyard
-  entities:
-  - uid: 3
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -5.5,10.5
-      parent: 2
-  - uid: 407
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 4.5,10.5
-      parent: 2
-  - uid: 756
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -1.5,8.5
-      parent: 2
-  - uid: 757
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 0.5,8.5
-      parent: 2
-  - uid: 758
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -51.5,1.5
-      parent: 2
-  - uid: 759
-    components:
-    - type: Transform
-      pos: 46.5,6.5
-      parent: 2
-  - uid: 760
-    components:
-    - type: Transform
-      pos: 48.5,26.5
-      parent: 2
-- proto: ComputerShipyardExpedition
-  entities:
-  - uid: 4
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 4.5,12.5
-      parent: 2
-  - uid: 374
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -5.5,12.5
-      parent: 2
 - proto: ComputerShipyardParking
   entities:
   - uid: 372
@@ -16296,21 +16240,6 @@ entities:
     components:
     - type: Transform
       pos: -25.5,28.5
-      parent: 2
-- proto: ComputerShipyardScrap
-  entities:
-  - uid: 761
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.5,8.5
-      parent: 2
-- proto: ComputerShipyardSr
-  entities:
-  - uid: 2226
-    components:
-    - type: Transform
-      pos: 2.5,28.5
       parent: 2
 - proto: ComputerStationRecords
   entities:

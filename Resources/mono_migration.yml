@@ -1,4 +1,36 @@
 CrescentMothershipComputer: null # missing from map
+ComputerShipyard: null # shuttle purchasing removed
+ComputerShipyardSecurity: null # shuttle purchasing removed
+ComputerShipyardNfsd: null # shuttle purchasing removed
+ComputerShipyardSyndicate: null # shuttle purchasing removed
+ComputerShipyardBlackMarket: null # shuttle purchasing removed
+ComputerShipyardBlackMarketBroken: null # shuttle purchasing removed
+ComputerShipyardExpedition: null # shuttle purchasing removed
+ComputerShipyardScrap: null # shuttle purchasing removed
+ComputerShipyardMedical: null # shuttle purchasing removed
+ComputerShipyardSr: null # shuttle purchasing removed
+ComputerShipyardBASBlackMarket: null # shuttle purchasing removed
+ComputerShipyardLarge: null # shuttle purchasing removed
+ComputerShipyardAnarchyScrapExp: null # shuttle purchasing removed
+ComputerShipyardTypan: null # shuttle purchasing removed
+ComputerShipyardLuatech: null # shuttle purchasing removed
+MercyShipComputer: null # shuttle purchasing removed
+SauronCarrierComputer: null # shuttle purchasing removed
+SellOnlyMothershipComputer: null # shuttle purchasing removed
+EmpressMothershipComputer: null # shuttle purchasing removed
+McCargoMothershipComputer: null # shuttle purchasing removed
+CaladriusMothershipComputer: null # shuttle purchasing removed
+GasbenderMothershipComputer: null # shuttle purchasing removed
+EdisonMothershipComputer: null # shuttle purchasing removed
+PirateCarrierComputer: null # shuttle purchasing removed
+MiningCarrierComputer: null # shuttle purchasing removed
+HiveCarrierComputer: null # shuttle purchasing removed
+ComputerTabletopShipyard: null # shuttle purchasing removed
+ComputerTabletopShipyardSecurity: null # shuttle purchasing removed
+ComputerTabletopShipyardNfsd: null # shuttle purchasing removed
+ComputerTabletopShipyardBlackMarket: null # shuttle purchasing removed
+ComputerTabletopShipyardExpedition: null # shuttle purchasing removed
+ComputerTabletopShipyardScrap: null # shuttle purchasing removed
 ShipyardLiquidatorInfo: null # missing from map
 ShipyardCeresInfo: null
 StationEfficiencyCircuitBoard : null # item removed by wizden
