@@ -1,9 +1,0 @@
-- type: loadout
-  id: NFPirateEarsClothingHeadsetFreelance
-  equipment:
-    ears: ClothingHeadsetFreelance
-
-- type: loadout
-  id: NFPirateCaptainEarsClothingHeadsetAltFreelancer
-  equipment:
-    ears: ClothingHeadsetAltFreelancer

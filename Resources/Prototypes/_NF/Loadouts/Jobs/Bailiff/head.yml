@@ -1,7 +1,0 @@
-- type: loadout
-  id: BailiffClothingHeadHatBailiff
-  hideEffects:
-  - !type:GroupLoadoutEffect
-    proto: NFHeadwearCapable
-  equipment:
-    head: ClothingHeadHatNfsdBeretBrown

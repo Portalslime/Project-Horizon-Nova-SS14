@@ -786,19 +786,6 @@
   - type: StaticPrice # these are infinitely producible.
     price: 0
 
-- type: entity
-  parent: CentcomIDCard
-  id: CBURNIDcard
-  name: CBURN ID card
-  suffix: CBURN
-  components:
-  - type: Sprite
-    layers:
-    - state: centcom
-  - type: Item
-    heldPrefix: blue
-  - type: PresetIdCard
-    job: CBURN
 
 - type: entity
   parent: IDCardStandard

@@ -10,10 +10,7 @@ public abstract class SharedJobTrackingSystem : EntitySystem
 {
     public static readonly ProtoId<JobPrototype>[] ReopenExceptions =
     {
-        "Contractor",
-        "Pilot",
-        "Mercenary",
-        "Borg"
+        "Pilot"
     };
 
     public static bool JobShouldBeReopened(ProtoId<JobPrototype> job)

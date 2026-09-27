@@ -1,9 +1,9 @@
 - type: constructionGraph
-  id: ComputerShipyardBlackMarket
+  id: ComputerPirateBounty
   start: start
   graph:
   - node: start
-    entity: ComputerShipyardBlackMarketBroken
+    entity: ComputerPirateBountyBroken
     edges:
     - to: repaired
       steps: &pirateRepairToolboxSteps
@@ -13,19 +13,6 @@
           sprite: "Objects/Misc/module.rsi"
           state: "id_mod"
         doAfter: 10.0
-
-  - node: repaired
-    entity: ComputerShipyardBlackMarket
-
-- type: constructionGraph
-  id: ComputerPirateBounty
-  start: start
-  graph:
-  - node: start
-    entity: ComputerPirateBountyBroken
-    edges:
-    - to: repaired
-      steps: *pirateRepairToolboxSteps
 
   - node: repaired
     entity: ComputerPirateBounty

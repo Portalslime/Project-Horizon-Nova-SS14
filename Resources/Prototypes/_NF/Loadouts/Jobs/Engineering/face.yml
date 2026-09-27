@@ -1,6 +1,0 @@
-- type: loadout
-  id: EngineeringClothingMaskGasAtmos
-  price: 0
-  storage:
-    back:
-    - ClothingMaskGasAtmos

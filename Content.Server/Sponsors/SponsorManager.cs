@@ -20,8 +20,6 @@ public sealed class SponsorManager : IPostInjectInit
     private ISawmill _sawmill = default!;
     private static readonly ProtoId<JobPrototype>[] ShareholderJobIds =
     {
-        "Vip",
-        "OutpostSyndicateShareholder"
     };
     private readonly Dictionary<NetUserId, Sponsor> _activeSponsors = new();
     private readonly Dictionary<NetUserId, List<Sponsor>> _allActiveSponsors = new();
