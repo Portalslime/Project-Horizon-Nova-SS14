@@ -23,7 +23,7 @@ namespace Content.Shared.GameTicking
         //TODO: Move these, they really belong in StationJobsSystem or a cvar.
         public static readonly ProtoId<JobPrototype> FallbackOverflowJob = "Pilot"; // Frontier: Passenger<Contractor<Pilot
 
-        public const string FallbackOverflowJobName = "job-name-contractor"; // Frontier: job-name-passenger<job-name-contractor
+        public const string FallbackOverflowJobName = "job-name-pilot"; // Frontier: job-name-passenger<job-name-contractor<job-name-pilot
 
         // TODO network.
         // Probably most useful for replays, round end info, and probably things like lobby menus.
