@@ -3,15 +3,6 @@
 # See AGPLv3.txt for details.
 
 - type: gamePreset
-  id: ShipVsShip
-  name: Режим бой на кораблях
-  description: Выбирайте команду и уничтожте все подкрепления противника
-  showInVote: true
-  supportedMaps: ShipVsShip
-  rules:
-    - ShipVsShip
-
-- type: gamePreset
   id: LuaAdventure
   alias:
     - luaadventure

@@ -18,11 +18,3 @@
           stationSubtext: 'frontier-lobby-centcom-subtext'
           stationDescription: 'frontier-lobby-centcom-description'
           lobbySortOrder: 2
-        - type: StationJobs
-          availableJobs:
-            CentralCommandOperator: [ 1, 1]
-            BlueShieldOfficer: [ 1, 1]
-            CentralCommandOfficial: [ 1, 1]
-            CentralCommandSpecialOperationsOfficer: [ 1, 1]
-            CentralCommandCargo: [ 1, 1]
-            CentralCommandAssistant: [ 1, 1]
