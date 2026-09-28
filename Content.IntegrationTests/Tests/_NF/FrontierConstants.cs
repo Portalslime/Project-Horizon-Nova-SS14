@@ -5,12 +5,11 @@ public sealed class FrontierConstants
     public static readonly string[] GameMapPrototypes =
 #if DEBUG
     {
-        "NFDev"
+        "Frontier"
     };
 #else
     {
-        "Frontier",
-        "NFDev"
+        "Frontier"
     };
 #endif
 }
