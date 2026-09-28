@@ -1,0 +1,20 @@
+# LuaWorld - This file is licensed under AGPLv3
+# Copyright (c) 2025 LuaWorld Contributors
+# See AGPLv3.txt for details.
+
+- type: gameMap
+  id: Beacon
+  mapName: 'Маяк'
+  mapPath: /Maps/_Lua/Maps/beacon.yml
+  isGrid: true
+  minPlayers: 0
+  stations:
+    Beacon:
+      stationProto: StandardAsteroidSector
+      components:
+      - type: RadarBlipIcon
+        icon: /Textures/_Lua/Interface/Radar/beacon.png
+        scale: 1.2
+        allowWhenHidden: true
+      - type: StationNameSetup
+        mapNameTemplate: 'Маяк'

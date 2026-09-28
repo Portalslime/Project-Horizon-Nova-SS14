@@ -24,5 +24,25 @@
       visibleCompanies: [ CentComm, LuaTech ]
       excludeFromGlobalUnlock: true
 
+    - id: AsteroidSectorDefault
+      name: "Поле Астероидов"
+      position: "3, 4.8"
+      starType: sector
+      color: "#c3cf18"
+      station: Beacon
+      worldgenConfigs:
+        - AsteroidSectorDefault
+        - NebulaSpace
+        - CelestialBodySpace
+        - BackgroundPlanetSpace
+      autoStart: true
+      defaultGamePreset: LuaAdventure
+      requiredGamePresets: [ LuaAdventure ]
+      parallaxPool: [ MercenaryPlanet, LuaDarkSpace, LuaSpace, AspidParallax, BagelStation, CoreStation, OriginStation, TrainStation, KettleStation, Sky, Asteroids, Default]
+      deadDropEnabled: true
+      deadDropCount: 8
+      visibleToAll: true
+
   hyperlanes:
     - [ CentCom, FrontierSector ]
+    - [ FrontierSector, AsteroidSectorDefault ]

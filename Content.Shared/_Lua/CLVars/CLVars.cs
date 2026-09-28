@@ -102,7 +102,7 @@ namespace Content.Shared.Lua.CLVar
             CVarDef.Create("lua.worldgen.typan_cargo_depots", 1, CVar.SERVERONLY);
 
         public static readonly CVarDef<bool> AsteroidSectorEnabled =
-            CVarDef.Create("game.asteroid_sector_enabled", false, CVar.SERVERONLY); // Frontier: true<false - only Frontier station exists, extra auto-start sectors (Asteroid/Typan/Pirate) reference deleted stations
+            CVarDef.Create("game.asteroid_sector_enabled", true, CVar.SERVERONLY); // Frontier: true<false<true - re-enabled for the minimal restored Asteroid sector; Typan/Pirate sectors stay removed from starmap_data.yml so this doesn't revive them
 
         /// <summary>
         /// Интервал автоматической выдачи зарплаты в секундах 3600 = 1 час.
