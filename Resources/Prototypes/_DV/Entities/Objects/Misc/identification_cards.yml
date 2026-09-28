@@ -8,5 +8,3 @@
     - state: default
     - sprite: _NF/Objects/Misc/id_cards.rsi # Frontier - _DV/Objects/Misc/id_cards.rsi<_NF/Objects/Misc/id_cards.rsi
       state: idmailcarrier # Frontier - nyanomailcarrier<idmailcarrier
-  - type: PresetIdCard
-    job: MailCarrier # Frontier - Courier<MailCarrier

@@ -60,7 +60,6 @@
     - state: default
     - state: idpassenger
   - type: PresetIdCard
-    job: Passenger
 
 - type: entity
   parent: PassengerIDCard
@@ -68,7 +67,6 @@
   name: technical assistant ID card
   components:
   - type: PresetIdCard
-    job: TechnicalAssistant
   - type: Sprite
     layers:
     - state: default
@@ -80,7 +78,6 @@
   name: medical intern ID card
   components:
   - type: PresetIdCard
-    job: MedicalIntern
   - type: Sprite
     layers:
     - state: default
@@ -92,7 +89,6 @@
   name: research assistant ID card
   components:
   - type: PresetIdCard
-    job: ResearchAssistant
   - type: Sprite
     layers:
     - state: default
@@ -104,7 +100,6 @@
   name: security cadet ID card
   components:
   - type: PresetIdCard
-    job: SecurityCadet
   - type: Sprite
     layers:
     - state: default
@@ -116,7 +111,6 @@
   name: service worker ID card
   components:
   - type: PresetIdCard
-    job: ServiceWorker
   - type: Sprite
     layers:
     - state: default
@@ -134,7 +128,6 @@
   - type: Item
     heldPrefix: gold
   - type: PresetIdCard
-    job: Captain
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -154,7 +147,6 @@
     - state: default
     - state: idsecurityofficer
   - type: PresetIdCard
-    job: SecurityOfficer
 
 - type: entity
   parent: IDCardStandard
@@ -166,7 +158,6 @@
         - state: default
         - state: idwarden
     - type: PresetIdCard
-      job: Warden
 
 - type: entity
   parent: IDCardStandard
@@ -178,7 +169,6 @@
     - state: default
     - state: idstationengineer
   - type: PresetIdCard
-    job: StationEngineer
 
 - type: entity
   parent: IDCardStandard
@@ -190,7 +180,6 @@
     - state: default
     - state: idmedicaldoctor
   - type: PresetIdCard
-    job: MedicalDoctor
 
 - type: entity
   parent: IDCardStandard
@@ -202,7 +191,6 @@
     - state: default
     - state: idparamedic
   - type: PresetIdCard
-    job: Paramedic
 
 - type: entity
   parent: IDCardStandard
@@ -214,7 +202,6 @@
     - state: default
     - state: idchemist
   - type: PresetIdCard
-    job: Chemist
 
 - type: entity
   parent: IDCardStandard
@@ -226,7 +213,6 @@
     - state: default
     - state: idcargotechnician
   - type: PresetIdCard
-    job: CargoTechnician
 
 - type: entity
   parent: IDCardStandard
@@ -238,7 +224,6 @@
     - state: default
     - state: idshaftminer
   - type: PresetIdCard
-    job: SalvageSpecialist
 
 - type: entity
   parent: IDCardStandard
@@ -252,7 +237,6 @@
     - type: Item
       heldPrefix: silver
     - type: PresetIdCard
-      job: Quartermaster
 
 - type: entity
   parent: IDCardStandard
@@ -264,7 +248,6 @@
     - state: default
     - state: idscientist
   - type: PresetIdCard
-    job: Scientist
 
 - type: entity
   parent: IDCardStandard
@@ -276,7 +259,6 @@
     - state: default
     - state: idclown
   - type: PresetIdCard
-    job: Clown
 
 - type: entity
   parent: IDCardStandard
@@ -288,7 +270,6 @@
     - state: default
     - state: idmime
   - type: PresetIdCard
-    job: Mime
 
 - type: entity
   parent: IDCardStandard
@@ -300,7 +281,6 @@
         - state: default
         - state: idchaplain
     - type: PresetIdCard
-      job: Chaplain
 
 - type: entity
   parent: IDCardStandard
@@ -313,7 +293,6 @@
     - state: default
     - state: idjanitor
   - type: PresetIdCard
-    job: Janitor
 
 - type: entity
   parent: IDCardStandard
@@ -325,7 +304,6 @@
     - state: default
     - state: idbartender
   - type: PresetIdCard
-    job: Bartender
 
 - type: entity
   parent: IDCardStandard
@@ -337,7 +315,6 @@
         - state: default
         - state: idbartender
     - type: PresetIdCard
-      job: Bartender
       name: Pun Pun
     - type: Tag #  Ignore Chameleon tags
       tags:
@@ -353,7 +330,6 @@
     - state: default
     - state: idcook
   - type: PresetIdCard
-    job: Chef
 
 - type: entity
   parent: IDCardStandard
@@ -365,7 +341,6 @@
         - state: default
         - state: idbotanist
     - type: PresetIdCard
-      job: Botanist
 
 - type: entity
   parent: IDCardStandard
@@ -377,7 +352,6 @@
         - state: default
         - state: idcurator
     - type: PresetIdCard
-      job: Librarian
 
 - type: entity
   parent: IDCardStandard
@@ -389,7 +363,6 @@
         - state: default
         - state: idlawyer
     - type: PresetIdCard
-      job: Lawyer
 
 - type: entity
   parent: IDCardStandard
@@ -403,7 +376,6 @@
   - type: Item
     heldPrefix: silver
   - type: PresetIdCard
-    job: HeadOfPersonnel
 
 - type: entity
   parent: IDCardStandard
@@ -417,7 +389,6 @@
   - type: Item
     heldPrefix: silver
   - type: PresetIdCard
-    job: ChiefEngineer
 
 - type: entity
   parent: IDCardStandard
@@ -431,7 +402,6 @@
   - type: Item
     heldPrefix: silver
   - type: PresetIdCard
-    job: ChiefMedicalOfficer
 
 - type: entity
   parent: IDCardStandard
@@ -445,7 +415,6 @@
   - type: Item
     heldPrefix: silver
   - type: PresetIdCard
-    job: ResearchDirector
 
 - type: entity
   parent: IDCardStandard
@@ -459,7 +428,6 @@
   - type: Item
     heldPrefix: silver
   - type: PresetIdCard
-    job: HeadOfSecurity
 
 - type: entity
   parent: IDCardStandard
@@ -474,7 +442,6 @@
     jobTitle: job-title-visitor
     jobIcon: JobIconVisitor
   - type: PresetIdCard
-    job: Visitor
 
 - type: entity
   parent: IDCardStandard
@@ -486,7 +453,6 @@
     - state: default
     - state: idbrigmedic
   - type: PresetIdCard # Frontier
-    job: Brigmedic # Frontier
 
 # - type: entity
 #   parent: IDCardStandard
@@ -588,7 +554,6 @@
         - state: default
         - state: idmusician
     - type: PresetIdCard
-      job: Musician
 
 - type: entity
   parent: IDCardStandard
@@ -601,7 +566,6 @@
   - type: Item
     heldPrefix: blue
   - type: PresetIdCard
-    job: DeathSquad
 
 - type: entity
   name: contractor ID card # Frontier: passenger<contractor
@@ -610,7 +574,6 @@
   suffix: Agent
   components:
   - type: PresetIdCard
-    job: Contractor # Frontier: Passenger<Contractor
   - type: Access
     tags:
     - Maintenance
@@ -662,7 +625,6 @@
     - state: orange
     - state: idatmospherictechnician
   - type: PresetIdCard
-    job: AtmosphericTechnician
 
 - type: entity
   parent: [BaseC3SyndicateContraband, IDCardStandard] # Frontier: BaseSyndicateContraband<BaseC3SyndicateContraband 
@@ -701,7 +663,6 @@
     - state: default
     - state: idpsychologist
   - type: PresetIdCard
-    job: Psychologist
 
 - type: entity
   parent: IDCardStandard
@@ -713,7 +674,6 @@
     - state: default
     - state: idreporter
   - type: PresetIdCard
-    job: Reporter
 
 - type: entity
   parent: IDCardStandard
@@ -725,7 +685,6 @@
     - state: default
     - state: idboxer
   - type: PresetIdCard
-    job: Boxer
 
 - type: entity
   parent: IDCardStandard
@@ -737,7 +696,6 @@
     - state: default
     - state: idzookeeper
   - type: PresetIdCard
-    job: Zookeeper
 
 - type: entity
   parent: IDCardStandard
@@ -749,7 +707,6 @@
     - state: default
     - state: iddetective
   - type: PresetIdCard
-    job: Detective
 
 - type: entity
   parent: IDCardStandard
@@ -842,7 +799,6 @@
     - state: default
     - state: idseniorofficer
   - type: PresetIdCard
-    job: SeniorOfficer
 
 - type: entity
   parent: IDCardStandard
