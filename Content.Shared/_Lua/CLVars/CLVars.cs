@@ -102,7 +102,7 @@ namespace Content.Shared.Lua.CLVar
             CVarDef.Create("lua.worldgen.typan_cargo_depots", 1, CVar.SERVERONLY);
 
         public static readonly CVarDef<bool> AsteroidSectorEnabled =
-            CVarDef.Create("game.asteroid_sector_enabled", true, CVar.SERVERONLY);
+            CVarDef.Create("game.asteroid_sector_enabled", false, CVar.SERVERONLY); // Frontier: true<false - only Frontier station exists, extra auto-start sectors (Asteroid/Typan/Pirate) reference deleted stations
 
         /// <summary>
         /// Интервал автоматической выдачи зарплаты в секундах 3600 = 1 час.
