@@ -44,8 +44,11 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Server.Preferences.Managers;
+#if false
+// BOOSTY: Lua sponsor ghost colouring disabled on this branch.
 using Content.Server.Sponsors;
 using Content.Shared._Lua.SponsorLoadout;
+#endif
 using Robust.Shared.Network;
 
 namespace Content.Server.Ghost
@@ -80,7 +83,10 @@ namespace Content.Server.Ghost
         [Dependency] private readonly IAdminManager _admin = default!; // Frontier
         [Dependency] private readonly CryoSleepSystem _cryo = default!; // Frontier
         [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
+#if false
+        // BOOSTY: Lua sponsor ghost colouring disabled on this branch.
         [Dependency] private readonly SponsorManager _sponsorManager = default!;
+#endif
 
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -666,6 +672,8 @@ namespace Content.Server.Ghost
             {
                 color = prefs.AdminOOCColor;
             }
+#if false
+            // BOOSTY: Lua sponsor ghost colouring disabled on this branch.
             else if (_sponsorManager.TryGetActiveSponsor(session.UserId, out var sponsor))
             {
                 color = sponsor.Role switch
@@ -677,6 +685,7 @@ namespace Content.Server.Ghost
                     _ => (Color?) null
                 };
             }
+#endif
 
             if (color == null)
                 return;

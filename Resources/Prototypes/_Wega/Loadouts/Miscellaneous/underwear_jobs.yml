@@ -1,0 +1,390 @@
+# Ported from wega-team/ss14-wega (job/special underwear loadouts)
+
+- type: loadout
+  id: ClothingUnderBottomFBso
+  equipment:
+    underwearb: ClothingUnderBottomFBso
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+- type: loadout
+  id: ClothingUnderBottomFCaptain
+  equipment:
+    underwearb: ClothingUnderBottomFCaptain
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegaCaC"
+
+- type: loadout
+  id: ClothingUnderBottomFCaptainS
+  equipment:
+    underwearb: ClothingUnderBottomFCaptainS
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegaCaS"
+
+- type: loadout
+  id: ClothingUnderBottomFCaptainW
+  equipment:
+    underwearb: ClothingUnderBottomFCaptainW
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegaCaW"
+
+#Socks
+
+- type: loadout
+  id: ClothingUnderBottomFCe
+  equipment:
+    underwearb: ClothingUnderBottomFCe
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+#Socks
+
+- type: loadout
+  id: ClothingUnderBottomFCmo
+  equipment:
+    underwearb: ClothingUnderBottomFCmo
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+#Socks
+
+- type: loadout
+  id: ClothingUnderBottomFHop
+  equipment:
+    underwearb: ClothingUnderBottomFHop
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+#Socks
+
+- type: loadout
+  id: ClothingUnderBottomFHos
+  equipment:
+    underwearb: ClothingUnderBottomFHos
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+#Socks
+
+- type: loadout
+  id: ClothingUnderBottomFQm
+  equipment:
+    underwearb: ClothingUnderBottomFQm
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+#Socks
+
+- type: loadout
+  id: ClothingUnderBottomFRd
+  equipment:
+    underwearb: ClothingUnderBottomFRd
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+#Socks
+
+- type: loadout
+  id: ClothingUnderBottomMCaptainS
+  equipment:
+    underwearb: ClothingUnderBottomMCaptainS
+  groupBy: "wegaCaS"
+
+- type: loadout
+  id: ClothingUnderBottomMCaptainW
+  equipment:
+    underwearb: ClothingUnderBottomMCaptainW
+  groupBy: "wegaCaW"
+
+- type: loadout
+  id: ClothingUnderSocksCapKnee
+  equipment:
+    socks: ClothingUnderSocksCapKnee
+
+- type: loadout
+  id: ClothingUnderSocksCapNorm
+  equipment:
+    socks: ClothingUnderSocksCapNorm
+
+- type: loadout
+  id: ClothingUnderSocksCapShort
+  equipment:
+    socks: ClothingUnderSocksCapShort
+
+- type: loadout
+  id: ClothingUnderSocksCapThigh
+  equipment:
+    socks: ClothingUnderSocksCapThigh
+
+- type: loadout
+  id: ClothingUnderSocksCeKnee
+  equipment:
+    socks: ClothingUnderSocksCeKnee
+
+- type: loadout
+  id: ClothingUnderSocksCeNorm
+  equipment:
+    socks: ClothingUnderSocksCeNorm
+
+- type: loadout
+  id: ClothingUnderSocksCeShort
+  equipment:
+    socks: ClothingUnderSocksCeShort
+
+- type: loadout
+  id: ClothingUnderSocksCeThigh
+  equipment:
+    socks: ClothingUnderSocksCeThigh
+
+- type: loadout
+  id: ClothingUnderSocksCmoKnee
+  equipment:
+    socks: ClothingUnderSocksCmoKnee
+
+- type: loadout
+  id: ClothingUnderSocksCmoNorm
+  equipment:
+    socks: ClothingUnderSocksCmoNorm
+
+- type: loadout
+  id: ClothingUnderSocksCmoShort
+  equipment:
+    socks: ClothingUnderSocksCmoShort
+
+- type: loadout
+  id: ClothingUnderSocksCmoThigh
+  equipment:
+    socks: ClothingUnderSocksCmoThigh
+
+- type: loadout
+  id: ClothingUnderSocksHopKnee
+  equipment:
+    socks: ClothingUnderSocksHopKnee
+
+- type: loadout
+  id: ClothingUnderSocksHopNorm
+  equipment:
+    socks: ClothingUnderSocksHopNorm
+
+- type: loadout
+  id: ClothingUnderSocksHopShort
+  equipment:
+    socks: ClothingUnderSocksHopShort
+
+- type: loadout
+  id: ClothingUnderSocksHopThigh
+  equipment:
+    socks: ClothingUnderSocksHopThigh
+
+- type: loadout
+  id: ClothingUnderSocksHosKnee
+  equipment:
+    socks: ClothingUnderSocksHosKnee
+
+- type: loadout
+  id: ClothingUnderSocksHosNorm
+  equipment:
+    socks: ClothingUnderSocksHosNorm
+
+- type: loadout
+  id: ClothingUnderSocksHosShort
+  equipment:
+    socks: ClothingUnderSocksHosShort
+
+- type: loadout
+  id: ClothingUnderSocksHosThigh
+  equipment:
+    socks: ClothingUnderSocksHosThigh
+
+- type: loadout
+  id: ClothingUnderSocksQmKnee
+  equipment:
+    socks: ClothingUnderSocksQmKnee
+
+- type: loadout
+  id: ClothingUnderSocksQmNorm
+  equipment:
+    socks: ClothingUnderSocksQmNorm
+
+- type: loadout
+  id: ClothingUnderSocksQmShort
+  equipment:
+    socks: ClothingUnderSocksQmShort
+
+- type: loadout
+  id: ClothingUnderSocksQmThigh
+  equipment:
+    socks: ClothingUnderSocksQmThigh
+
+- type: loadout
+  id: ClothingUnderSocksRdKnee
+  equipment:
+    socks: ClothingUnderSocksRdKnee
+
+- type: loadout
+  id: ClothingUnderSocksRdNorm
+  equipment:
+    socks: ClothingUnderSocksRdNorm
+
+- type: loadout
+  id: ClothingUnderSocksRdShort
+  equipment:
+    socks: ClothingUnderSocksRdShort
+
+- type: loadout
+  id: ClothingUnderSocksRdThigh
+  equipment:
+    socks: ClothingUnderSocksRdThigh
+
+- type: loadout
+  id: ClothingUnderTopBraCapS
+  equipment:
+    underweart: ClothingUnderTopBraCapS
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegaCaS"
+
+- type: loadout
+  id: ClothingUnderTopBraCapW
+  equipment:
+    underweart: ClothingUnderTopBraCapW
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegaCaW"
+
+#Bottom
+
+- type: loadout
+  id: ClothingUnderBottomMBso
+  equipment:
+    underwearb: ClothingUnderBottomMBso
+
+- type: loadout
+  id: ClothingUnderBottomMCaptain
+  equipment:
+    underwearb: ClothingUnderBottomMCaptain
+  groupBy: "wegaCaC"
+
+- type: loadout
+  id: ClothingUnderBottomMCe
+  equipment:
+    underwearb: ClothingUnderBottomMCe
+
+- type: loadout
+  id: ClothingUnderBottomMCmo
+  equipment:
+    underwearb: ClothingUnderBottomMCmo
+
+- type: loadout
+  id: ClothingUnderBottomMHop
+  equipment:
+    underwearb: ClothingUnderBottomMHop
+
+- type: loadout
+  id: ClothingUnderBottomMHos
+  equipment:
+    underwearb: ClothingUnderBottomMHos
+
+- type: loadout
+  id: ClothingUnderBottomMQm
+  equipment:
+    underwearb: ClothingUnderBottomMQm
+
+- type: loadout
+  id: ClothingUnderBottomMRd
+  equipment:
+    underwearb: ClothingUnderBottomMRd
+
+- type: loadout
+  id: ClothingUnderTopBraBso
+  equipment:
+    underweart: ClothingUnderTopBraBso
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+#Bottom
+
+- type: loadout
+  id: ClothingUnderTopBraCap
+  equipment:
+    underweart: ClothingUnderTopBraCap
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegaCaC"
+
+- type: loadout
+  id: ClothingUnderTopBraCe
+  equipment:
+    underweart: ClothingUnderTopBraCe
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+#Bottom
+
+- type: loadout
+  id: ClothingUnderTopBraCmo
+  equipment:
+    underweart: ClothingUnderTopBraCmo
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+#Bottom
+
+- type: loadout
+  id: ClothingUnderTopBraHop
+  equipment:
+    underweart: ClothingUnderTopBraHop
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+#Bottom
+
+- type: loadout
+  id: ClothingUnderTopBraHos
+  equipment:
+    underweart: ClothingUnderTopBraHos
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+#Bottom
+
+- type: loadout
+  id: ClothingUnderTopBraQm
+  equipment:
+    underweart: ClothingUnderTopBraQm
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+#Bottom
+
+- type: loadout
+  id: ClothingUnderTopBraRd
+  equipment:
+    underweart: ClothingUnderTopBraRd
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+#Bottom

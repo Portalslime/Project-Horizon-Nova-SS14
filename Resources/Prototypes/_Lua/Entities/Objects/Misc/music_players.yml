@@ -77,33 +77,10 @@
 - type: entity
   id: SponsorMusicPlayer
   name: Плеер
-  parent: BaseItem
+  parent: [ MpplayerBase, BaseItem, PowerCellSlotSmallItem]
+  # BOOSTY: personal sponsor music (external API) removed. Kept as a regular music player
+  # so the item still exists for the sponsor vending machine.
   description: Особый плеер с личной музыкой.
   components:
-  - type: Item
-    size: Small
-  - type: Sprite
-    scale: 0.45, 0.45
-    sprite: _Lua/MPPlayer/mpplayer.rsi
-    layers:
-      - state: MP3player-base
-        map: [ "enum.JukeboxVisualLayers.Base" ]
-      - state: MP3player-on-overlay
-        shader: unshaded
-        visible: true
-        map: [ "enum.JukeboxVisualLayers.OverlayStatic" ]
-      - state: MP3player-off-overlay
-        shader: unshaded
-        visible: true
-        map: [ "enum.JukeboxVisualLayers.OverlayDynamic" ]
-  - type: SponsorPlayer
-    range: 7.0
-  - type: ActivatableUI
-    key: enum.SponsorPlayerUiKey.Key
-    singleUser: true
-  - type: UserInterface
-    interfaces:
-      enum.SponsorPlayerUiKey.Key:
-        type: SponsorPlayerBoundUserInterface
-  - type: StaticPrice
-    price: 20
+  - type: Jukebox
+    menuTitle: mpplayer-menu-title

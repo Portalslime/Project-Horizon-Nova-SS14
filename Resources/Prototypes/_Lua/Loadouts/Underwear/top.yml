@@ -1,15 +1,13 @@
 - type: loadoutGroup
   id: TopUnderwear
   name: loadout-top-name
-  minLimit: 0
+  minLimit: 1
   hidden: false
   loadouts:
     - LoadoutClothingUnderwearTopBraWhite
     - LoadoutClothingUnderwearTopBraSports
     - LoadoutClothingUnderwearTopBraSportsAlternative
-    - LoadoutClothingUnderwearTopBraNuclearOperative
     - LoadoutClothingUnderwearTopBraPirate
-    - LoadoutClothingUnderwearTopBraSyndicateAgent
     - LoadoutClothingUnderwearTopBraCargoTechnician
     - LoadoutClothingUnderwearTopBraQuartermaster
     - LoadoutClothingUnderwearTopBraSalvageSpecialist
@@ -29,8 +27,8 @@
     - LoadoutClothingUnderwearTopBraZoo
     - LoadoutClothingUnderwearTopBraCaptain
     - LoadoutClothingUnderwearTopBraCBURN
-    #- LoadoutClothingUnderwearTopBraCentcomm
-    #- LoadoutClothingUnderwearTopBraDeathSquad
+    - LoadoutClothingUnderwearTopBraCentcomm
+    - LoadoutClothingUnderwearTopBraDeathSquad
     - LoadoutClothingUnderwearTopBraERT
     - LoadoutClothingUnderwearTopBraBlueShieldOfficer
     - LoadoutClothingUnderwearTopBraAtmosphericTechnician
@@ -60,339 +58,757 @@
     - LoadoutClothingUnderwearTopBraSecurityOfficer
     - LoadoutClothingUnderwearTopBraSeniorOfficer
     - LoadoutClothingUnderwearTopBraWarden
+  fallbacks:
+  - LoadoutClothingUnderwearTopBraWhite
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraWhite
-  price: 200
+  hideEffects:
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraWhite
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraSports
-  price: 200
+  hideEffects:
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraSports
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraSportsAlternative
-  price: 200
+  hideEffects:
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraSportsAlternative
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraNuclearOperative
-  price: 200
+  hideEffects:
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraNuclearOperative
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraPirate
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobNFPirate
+    - JobNFPirateCaptain
+    - JobNFPirateFirstMate
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraPirate
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraSyndicateAgent
-  price: 200
+  hideEffects:
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraSyndicateAgent
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraCargoTechnician
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobCargoTechnician
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraCargoTechnician
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraQuartermaster
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobQuartermaster
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraQuartermaster
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraSalvageSpecialist
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobSalvageSpecialist
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraSalvageSpecialist
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraBartender
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobBartender
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraBartender
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraBotanist
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobBotanist
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraBotanist
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraBoxer
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobBoxer
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraBoxer
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraChaplain
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobChaplain
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraChaplain
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraChef
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobChef
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraChef
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraClown
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobClown
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraClown
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraHeadofPersonnel
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobHeadOfPersonnel
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraHeadofPersonnel
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraJanitor
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobJanitor
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraJanitor
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraLibrarian
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobLibrarian
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraLibrarian
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraMime
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobMime
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraMime
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraMusician
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobMusician
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraMusician
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraReporter
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobReporter
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraReporter
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraService
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobServiceWorker
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraService
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraZoo
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobZookeeper
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraZoo
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraCaptain
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobCaptain
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraCaptain
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraCBURN
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobCBURN
+    - JobCBURNAgent
+    - JobCBURNLeader
+    - JobCBURNSierraAgent
+    - JobCBURNSierraLeader
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraCBURN
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraCentcomm
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobCentralCommandAssistant
+    - JobCentralCommandCargo
+    - JobCentralCommandOfficial
+    - JobCentralCommandOperator
+    - JobCentralCommandSpecialOperationsOfficer
+    - JobCentralCommandAdministrator
+    - JobCentralCommandOfficer
+    - JobCentralCommandSecOfficer
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraCentcomm
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraDeathSquad
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobDeathSquad
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraDeathSquad
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraERT
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobERTChaplain
+    - JobERTEngineer
+    - JobERTJanitor
+    - JobERTLeader
+    - JobERTMedical
+    - JobERTSecurity
+    - JobERTMailCarrier
+    - JobERTEngineerAmber
+    - JobERTEngineerRed
+    - JobERTEngineerGamma
+    - JobERTJanitorAmber
+    - JobERTJanitorRed
+    - JobERTJanitorGamma
+    - JobERTLeaderAmber
+    - JobERTLeaderRed
+    - JobERTLeaderGamma
+    - JobERTMedicalAmber
+    - JobERTMedicalRed
+    - JobERTMedicalGamma
+    - JobERTSecurityAmber
+    - JobERTSecurityRed
+    - JobERTSecurityGamma
+    - JobFSFCommanderBravo
+    - JobFSFCommanderCharlie
+    - JobFSFSpecialistBravo
+    - JobFSFSpecialistCharlie
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraERT
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraBlueShieldOfficer
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobBlueShieldOfficer
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraBlueShieldOfficer
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraAtmosphericTechnician
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobAtmosphericTechnician
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraAtmosphericTechnician
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraChiefEngineer
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobChiefEngineer
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraChiefEngineer
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraEngineer
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobStationEngineer
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraEngineer
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraSeniorEngineer
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobSeniorEngineer
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraSeniorEngineer
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraTechnicalAssistant
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobTechnicalAssistant
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraTechnicalAssistant
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraIAA
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobIAA
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraIAA
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraLawyer
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobLawyer
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraLawyer
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraMagistrat
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobMagistrat
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraMagistrat
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraChemist
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobChemist
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraChemist
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraCMO
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobChiefMedicalOfficer
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraCMO
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraDoctor
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobMedicalDoctor
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraDoctor
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraIntern
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobMedicalIntern
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraIntern
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraParamedic
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobParamedic
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraParamedic
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraPsychologist
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobPsychologist
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraPsychologist
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraSeniorPhysician
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobSeniorPhysician
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraSeniorPhysician
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraPathologist
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobPathologist
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraPathologist
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraResearchAssistant
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobResearchAssistant
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraResearchAssistant
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraResearchDirector
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobResearchDirector
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraResearchDirector
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraScientist
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobScientist
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraScientist
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraSeniorResearcher
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobSeniorResearcher
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraSeniorResearcher
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraBrigmedic
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobBrigmedic
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraBrigmedic
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraCadet
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobSecurityCadet
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraCadet
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraDetective
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobDetective
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraDetective
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraHeadofSecurity
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobHeadOfSecurity
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraHeadofSecurity
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraSecurityOfficer
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobSecurityOfficer
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraSecurityOfficer
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraSeniorOfficer
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobSeniorOfficer
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraSeniorOfficer
 
 - type: loadout
   id: LoadoutClothingUnderwearTopBraWarden
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobWarden
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
   equipment:
     underweart: ClothingUnderwearTopBraWarden
+

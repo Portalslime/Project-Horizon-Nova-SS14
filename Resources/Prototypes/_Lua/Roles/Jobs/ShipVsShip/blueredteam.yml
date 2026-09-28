@@ -138,6 +138,9 @@
   id: JobBlueTeamPilot
   groups:
   - NFSpeciesSpecific
+  - Top
+  - Bottom
+  - Socks
 
 - type: playTimeTracker
   id: JobBlueTeamPilot
@@ -184,6 +187,9 @@
   id: JobBlueTeamGunner
   groups:
   - NFSpeciesSpecific
+  - Top
+  - Bottom
+  - Socks
 
 - type: playTimeTracker
   id: JobBlueTeamGunner
@@ -230,6 +236,9 @@
   id: JobBlueTeamSpecialist
   groups:
   - NFSpeciesSpecific
+  - Top
+  - Bottom
+  - Socks
 
 - type: playTimeTracker
   id: JobBlueTeamSpecialist
@@ -334,6 +343,9 @@
   id: JobBlueTeamCaptain
   groups:
   - NFSpeciesSpecific
+  - Top
+  - Bottom
+  - Socks
 
 - type: playTimeTracker
   id: JobBlueTeamCaptain
@@ -609,6 +621,9 @@
   id: JobRedTeamPilot
   groups:
   - NFSpeciesSpecific
+  - Top
+  - Bottom
+  - Socks
 
 - type: playTimeTracker
   id: JobRedTeamPilot
@@ -655,6 +670,9 @@
   id: JobRedTeamGunner
   groups:
   - NFSpeciesSpecific
+  - Top
+  - Bottom
+  - Socks
 
 - type: playTimeTracker
   id: JobRedTeamGunner
@@ -701,6 +719,9 @@
   id: JobRedTeamSpecialist
   groups:
   - NFSpeciesSpecific
+  - Top
+  - Bottom
+  - Socks
 
 - type: playTimeTracker
   id: JobRedTeamSpecialist
@@ -806,6 +827,9 @@
   id: JobRedTeamCaptain
   groups:
   - NFSpeciesSpecific
+  - Top
+  - Bottom
+  - Socks
 
 - type: playTimeTracker
   id: JobRedTeamCaptain

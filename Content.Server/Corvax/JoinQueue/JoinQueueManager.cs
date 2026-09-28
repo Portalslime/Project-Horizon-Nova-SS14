@@ -2,7 +2,10 @@ using System.Linq;
 using Content.Server.Administration.Managers;
 using Content.Server.Connection;
 using Content.Server.Corvax.DiscordAuth;
+#if false
+// BOOSTY: Lua sponsor queue bypass disabled on this branch.
 using Content.Server.Sponsors;
+#endif
 using Content.Shared.CCVar;
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.Corvax.JoinQueue;
@@ -44,7 +47,10 @@ public sealed class JoinQueueManager
     [Dependency] private readonly IServerNetManager _netManager = default!;
     [Dependency] private readonly DiscordAuthManager _discordAuthManager = default!;
     [Dependency] private readonly IAdminManager _adminManager = default!;
+#if false
+    // BOOSTY: Lua sponsor queue bypass disabled on this branch.
     [Dependency] private readonly SponsorManager _sponsorManager = default!;
+#endif
 
     /// <summary>
     ///     Queue of active player sessions
@@ -90,8 +96,13 @@ public sealed class JoinQueueManager
         }
 
         var isPrivilegedAdmin = await _connectionManager.HavePrivilegedJoin(session.UserId);
+#if false
+        // BOOSTY: Lua sponsor queue bypass disabled on this branch.
         var sponsor = await _sponsorManager.GetActiveSponsorAsync(session.UserId);
         var isPrivilegedSponsor = sponsor != null;
+#else
+        const bool isPrivilegedSponsor = false;
+#endif
 
         var isPrivileged = isPrivilegedAdmin || isPrivilegedSponsor;
         var players = GetPlayersCount() - 1;
