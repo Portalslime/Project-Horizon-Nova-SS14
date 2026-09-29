@@ -1,0 +1,20 @@
+# Lua - vending machine for generic underwear and socks.
+# Only common (non-unique) items that already exist in LuaGit are sold here.
+- type: vendingMachineInventory
+  id: UnderwearInventory
+  startingInventory:
+    # Bras
+    ClothingUnderwearTopBraWhite: 10
+    ClothingUnderwearTopBraSports: 10
+    ClothingUnderwearTopBraSportsAlternative: 10
+    # Bottoms
+    ClothingUnderwearBottomBoxersWhite: 10
+    ClothingUnderwearBottomPantiesWhite: 10
+    # Socks
+    ClothingUnderwearSocksNormal: 10
+    ClothingUnderwearSocksHigh: 10
+    ClothingUnderwearSocksShort: 10
+    ClothingUnderwearSocksThigh: 10
+    ClothingUnderwearSocksStockings: 5
+    ClothingUnderSocksBee: 3
+    ClothingUnderSocksCoder: 3

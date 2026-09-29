@@ -1,6 +1,6 @@
 {
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from https://github.com/SPLURT-Station/S.P.L.U.R.T-Station-13",
+  "copyright": "Taken from https://github.com/Bubberstation/Bubberstation",
   "version": 1,
   "size": {
     "x": 32,
@@ -11,8 +11,12 @@
       "name": "equipped-SOCKS",
       "directions": 4
     },
-	{
-		"name": "icon"
-	}
+    {
+      "name": "equipped-SOCKS-reptilian",
+      "directions": 4
+    },
+    {
+      "name": "icon"
+    }
   ]
 }

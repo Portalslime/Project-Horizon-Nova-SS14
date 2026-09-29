@@ -37,6 +37,8 @@
   components:
   - type: Sprite
     sprite: Sirena/Clothing/Underwear/Bottom/boxers.rsi
+  - type: StaticPrice # Lua: vending price
+    vendPrice: 200
 
 - type: entity
   parent: ClothingUnderwearBottomBase
@@ -47,7 +49,11 @@
   - type: Sprite
     sprite: Sirena/Clothing/Underwear/Bottom/panties.rsi
 
+  - type: StaticPrice # Lua: vending price
+    vendPrice: 200
+
 ## Antags
+
 - type: entity
   parent: ClothingUnderwearBottomBase
   id: ClothingUnderwearBottomBoxersNuclearOperative

@@ -23,9 +23,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobPilot
@@ -51,9 +51,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobMercenary
@@ -79,9 +79,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 # region Frontier
 - type: roleLoadout
@@ -105,9 +105,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobNFJanitor
@@ -129,9 +129,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobMailCarrier
@@ -153,9 +153,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobStationTrafficController
@@ -179,9 +179,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobStationRepresentative
@@ -206,9 +206,9 @@
   - StationRepBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobSecurityGuard
@@ -232,9 +232,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 # region Misc
 - type: roleLoadout
@@ -261,9 +261,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobPlantManager
@@ -289,6 +289,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobPlantTechnician
@@ -313,6 +316,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
+  - Top
+  - Bottom
+  - Socks
 
 # region NFSD
 - type: roleLoadout
@@ -339,9 +345,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NfsdSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobDeputy
@@ -367,9 +373,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NfsdSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobBrigmedic
@@ -395,9 +401,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NfsdSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - TopSecurity
+  - BottomSecurity
+  - Socks
 
 - type: roleLoadout
   id: JobNFDetective
@@ -423,9 +429,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NfsdSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobSDEngineer
@@ -451,9 +457,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NfsdSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobPublicAffairsLiaison
@@ -478,9 +484,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific # Explicitly civilian variant
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 # - type: roleLoadout # Fix when this is actully used
   # id: JobPrisonGuard
@@ -506,9 +512,9 @@
   # - ContractorBackpackItems
   # - ContractorHandItems
   # - NfsdSpeciesSpecific
-  # - TopUnderwear
-  # - PantsUnderwear
-  # - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobBailiff
@@ -534,9 +540,9 @@
   - SeniorOfficerBackpackItems
   - ContractorHandItems
   - NfsdSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobSeniorOfficer
@@ -562,9 +568,9 @@
   - SeniorOfficerBackpackItems
   - ContractorHandItems
   - NfsdSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - TopSecurity
+  - BottomSecurity
+  - Socks
 
 - type: roleLoadout
   id: JobSheriff
@@ -589,9 +595,9 @@
   - SeniorOfficerBackpackItems
   - ContractorHandItems
   - NfsdSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 # region NFPirate
 
@@ -613,9 +619,9 @@
   - PirateBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
   canCustomizeName: true # pseudonym?
 
 - type: roleLoadout
@@ -637,9 +643,9 @@
   - PirateBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
   canCustomizeName: true # pseudonym?
 
 - type: roleLoadout
@@ -661,9 +667,9 @@
   - PirateCaptainBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
   canCustomizeName: true # pseudonym?
 
 # region Prisoner
@@ -685,6 +691,6 @@
   - PrisonerPDA
   - PrisonerWallet
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks

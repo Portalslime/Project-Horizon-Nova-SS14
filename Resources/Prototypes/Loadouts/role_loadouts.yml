@@ -10,6 +10,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - CaptainTop
+  - CaptainBottom
+  - CaptainSocks
 
 - type: roleLoadout
   id: JobHeadOfPersonnel
@@ -24,6 +27,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - HoPTop
+  - HoPBottom
+  - HoPSocks
 
 # Silicons
 - type: roleLoadout
@@ -52,6 +58,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobBartender
@@ -65,6 +74,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobServiceWorker
@@ -76,6 +88,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobChef
@@ -90,6 +105,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobLibrarian
@@ -101,6 +119,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobLawyer
@@ -113,6 +134,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobChaplain
@@ -129,6 +153,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobJanitor
@@ -144,6 +171,9 @@
   - Trinkets
   - JanitorPlunger
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobBotanist
@@ -157,6 +187,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobClown
@@ -171,6 +204,9 @@
   - Glasses
   - SurvivalClown
   - Trinkets
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobMime
@@ -186,6 +222,9 @@
   - Glasses
   - SurvivalMime
   - Trinkets
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobMusician
@@ -199,6 +238,9 @@
   - Trinkets
   - Instruments
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 # Cargo
 - type: roleLoadout
@@ -215,6 +257,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - QuartermasterTop
+  - QuartermasterBottom
+  - QuartermasterSocks
 
 - type: roleLoadout
   id: JobCargoTechnician
@@ -229,6 +274,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobSalvageSpecialist
@@ -241,6 +289,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 # Engineering
 - type: roleLoadout
@@ -256,6 +307,9 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
+  - ChiefEngineerTop
+  - ChiefEngineerBottom
+  - ChiefEngineerSocks
 
 - type: roleLoadout
   id: JobTechnicalAssistant
@@ -266,6 +320,9 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobStationEngineer
@@ -280,6 +337,9 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobAtmosphericTechnician
@@ -292,6 +352,9 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 # Science
 - type: roleLoadout
@@ -309,6 +372,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - ResearchDirectorTop
+  - ResearchDirectorBottom
+  - ResearchDirectorSocks
 
 - type: roleLoadout
   id: JobScientist
@@ -326,6 +392,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobResearchAssistant
@@ -337,6 +406,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 # Security
 - type: roleLoadout
@@ -353,6 +425,9 @@
   - Trinkets
   - SecurityStar
   - GroupSpeciesBreathToolSecurity
+  - HeadofSecurityTop
+  - HeadofSecurityBottom
+  - HeadofSecuritySocks
 
 - type: roleLoadout
   id: JobWarden
@@ -367,6 +442,9 @@
   - Trinkets
   - SecurityStar
   - GroupSpeciesBreathToolSecurity
+  - TopSecurity
+  - BottomSecurity
+  - Socks
 
 - type: roleLoadout
   id: JobSecurityOfficer
@@ -382,6 +460,9 @@
   - Trinkets
   - SecurityStar
   - GroupSpeciesBreathToolSecurity
+  - TopSecurity
+  - BottomSecurity
+  - Socks
 
 - type: roleLoadout
   id: JobDetective
@@ -396,6 +477,9 @@
   - Trinkets
   - SecurityStar
   - GroupSpeciesBreathToolSecurity
+  - TopSecurity
+  - BottomSecurity
+  - Socks
 
 - type: roleLoadout
   id: JobSecurityCadet
@@ -405,6 +489,9 @@
   - SurvivalSecurity
   - Trinkets
   - GroupSpeciesBreathToolSecurity
+  - TopSecurity
+  - BottomSecurity
+  - Socks
 
 # Medical
 - type: roleLoadout
@@ -423,6 +510,9 @@
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
+  - ChiefMedicalOfficerTop
+  - ChiefMedicalOfficerBottom
+  - ChiefMedicalOfficerSocks
   
 # moved to Lua
 # - type: roleLoadout
@@ -452,6 +542,9 @@
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
+  - Top
+  - Bottom
+  - Socks
 
 # moved to Lua
 # - type: roleLoadout
@@ -495,6 +588,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobReporter
@@ -506,6 +602,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobPsychologist
@@ -517,6 +616,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobBoxer
@@ -529,6 +631,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
 
 # These loadouts are used for non-crew spawns, like off-station antags and event mobs
 # They will be used without player configuration, thus they will only ever apply what is forced by MinLimit

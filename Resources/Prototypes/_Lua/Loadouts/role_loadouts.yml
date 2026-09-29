@@ -13,9 +13,9 @@
   - MedicalShoes
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
   # Lua start Added contractor groups (extension)
   - ChemistHead
   - ContractorNeck
@@ -43,9 +43,9 @@
   - MedicalEyewear
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
   # Lua start Added contractor groups (extension)
   - ContractorHead
   - ContractorNeck
@@ -76,9 +76,9 @@
   - MedicalEyewear
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
   # Lua start Added contractor groups (extension)
   - ContractorHead
   - ContractorNeck
@@ -99,54 +99,54 @@
   groups:
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobCentralCommandOfficial
   groups:
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobCentralCommandSpecialOperationsOfficer
   groups:
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobCentralCommandAssistant
   groups:
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobCentralCommandOperator
   groups:
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobBlueShieldOfficer
   groups:
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - BlueShieldTop
+  - BlueShieldBottom
+  - BlueShieldSocks
 
 - type: roleLoadout
   id: JobMercenaryBase
@@ -171,90 +171,90 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobOutpostTypanResearcher
   groups:
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobOutpostTypanAtmosTech
   groups:
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobOutpostTypanBotanist
   groups:
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobOutpostTypanCargotech
   groups:
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobOutpostTypanChef
   groups:
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobOutpostTypanMedic
   groups:
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobOutpostTypanRD
   groups:
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobOutpostTypanScience
   groups:
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobOutpostTypanTelecommunicationsOfficer
   groups:
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobOutpostSyndicateShareholder
@@ -280,18 +280,18 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobOpsLuaTech
   groups:
   - NFSpeciesSpecific
   - ContractorWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 - type: roleLoadout
   id: JobVip
@@ -317,9 +317,9 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
 
 # Storm Creed
 - type: roleLoadout
@@ -327,9 +327,9 @@
   groups:
   - NFSpeciesSpecific
   - PirateCaptainWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
   - LGStormCreedPDA
   - SCJumpsuit
   - SCOuterClothing
@@ -356,9 +356,9 @@
   groups:
   - NFSpeciesSpecific
   - PirateCaptainWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
   - LGSCFirstmatePDA
   - SCJumpsuit
   - SCOuterClothing
@@ -385,9 +385,9 @@
   groups:
   - NFSpeciesSpecific
   - PirateCaptainWallet
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  - Top
+  - Bottom
+  - Socks
   - LGSCCaptainPDA
   - SCJumpsuit
   - SCOuterClothing
@@ -432,3 +432,6 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
+  - Top
+  - Bottom
+  - Socks

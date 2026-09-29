@@ -1,0 +1,373 @@
+# Lua: underwear loadouts for roles that had none.
+# Generated automatically; add other groups here when needed.
+
+- type: roleLoadout
+  id: JobAdjutant
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobCBURN
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobCBURNAgent
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobCBURNLeader
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobCBURNSierraAgent
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobCBURNSierraLeader
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobCentralCommandAdministrator
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobCentralCommandOfficer
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobCentralCommandSecOfficer
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobClownSponsor
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobContractorInterview
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobDeathSquad
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTChaplain
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTEngineer
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTEngineerAmber
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTEngineerGamma
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTEngineerRed
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTJanitor
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTJanitorAmber
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTJanitorGamma
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTJanitorRed
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTLeader
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTLeaderAmber
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTLeaderGamma
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTLeaderRed
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTMailCarrier
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTMedical
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTMedicalAmber
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTMedicalGamma
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTMedicalRed
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTSecurity
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTSecurityAmber
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTSecurityGamma
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobERTSecurityRed
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobFSFCommanderBravo
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobFSFCommanderCharlie
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobFSFSpecialistBravo
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobFSFSpecialistCharlie
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobMedicalSurgeon
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobMercenaryInterview
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobOverall
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobPilotInterview
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobPrisonGuard
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobSeniorAdministrator
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobVisitor
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobSeniorEngineer
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobSeniorResearcher
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobSeniorPhysician
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobPathologist
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobSecurityPilot
+  groups:
+  - TopSecurity
+  - BottomSecurity
+  - Socks
+
+- type: roleLoadout
+  id: JobSeniorSalvageSpecialist
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobIAA
+  groups:
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobMagistrat
+  groups:
+  - Top
+  - Bottom
+  - Socks

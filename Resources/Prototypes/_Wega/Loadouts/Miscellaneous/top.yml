@@ -1,0 +1,1119 @@
+- type: loadout
+  id: ClothingUnderTopBraGrey
+  equipment:
+    underweart: ClothingUnderTopBraGrey
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+- type: loadout
+  id: ClothingUnderTopBraSecurity
+  equipment:
+    underweart: ClothingUnderTopBraSecurity
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+- type: loadout
+  id: ClothingUnderTopBraAssblastusa
+  equipment:
+    underweart: ClothingUnderTopBraAssblastusa
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+# bikini
+
+- type: loadout
+  id: ClothingUnderTopBikini
+  equipment:
+    underweart: ClothingUnderTopBikini
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegabikini"
+
+- type: loadout
+  id: ClothingUnderTopBikiniGrey
+  equipment:
+    underweart: ClothingUnderTopBikiniGrey
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegabikini"
+
+- type: loadout
+  id: ClothingUnderTopBikiniBlack
+  equipment:
+    underweart: ClothingUnderTopBikiniBlack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegabikini"
+
+- type: loadout
+  id: ClothingUnderTopBikiniBlue
+  equipment:
+    underweart: ClothingUnderTopBikiniBlue
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegabikini"
+
+- type: loadout
+  id: ClothingUnderTopBikiniDarkBlue
+  equipment:
+    underweart: ClothingUnderTopBikiniDarkBlue
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegabikini"
+
+- type: loadout
+  id: ClothingUnderTopBikiniBrown
+  equipment:
+    underweart: ClothingUnderTopBikiniBrown
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegabikini"
+
+- type: loadout
+  id: ClothingUnderTopBikiniDarkGreen
+  equipment:
+    underweart: ClothingUnderTopBikiniDarkGreen
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegabikini"
+
+- type: loadout
+  id: ClothingUnderTopBikiniGreen
+  equipment:
+    underweart: ClothingUnderTopBikiniGreen
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegabikini"
+
+- type: loadout
+  id: ClothingUnderTopBikiniLightBrown
+  equipment:
+    underweart: ClothingUnderTopBikiniLightBrown
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegabikini"
+
+- type: loadout
+  id: ClothingUnderTopBikiniMaroon
+  equipment:
+    underweart: ClothingUnderTopBikiniMaroon
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegabikini"
+
+- type: loadout
+  id: ClothingUnderTopBikiniOrange
+  equipment:
+    underweart: ClothingUnderTopBikiniOrange
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegabikini"
+
+- type: loadout
+  id: ClothingUnderTopBikiniPink
+  equipment:
+    underweart: ClothingUnderTopBikiniPink
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegabikini"
+
+- type: loadout
+  id: ClothingUnderTopBikiniPurple
+  equipment:
+    underweart: ClothingUnderTopBikiniPurple
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegabikini"
+
+- type: loadout
+  id: ClothingUnderTopBikiniRed
+  equipment:
+    underweart: ClothingUnderTopBikiniRed
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegabikini"
+
+- type: loadout
+  id: ClothingUnderTopBikiniTeal
+  equipment:
+    underweart: ClothingUnderTopBikiniTeal
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegabikini"
+
+- type: loadout
+  id: ClothingUnderTopBikiniYellow
+  equipment:
+    underweart: ClothingUnderTopBikiniYellow
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegabikini"
+
+# bikini end 
+
+- type: loadout
+  id: ClothingUnderTopBraChast
+  equipment:
+    underweart: ClothingUnderTopBraChast
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+- type: loadout
+  id: ClothingUnderTopBraLatex
+  equipment:
+    underweart: ClothingUnderTopBraLatex
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+- type: loadout
+  id: ClothingUnderTopBraStripped
+  equipment:
+    underweart: ClothingUnderTopBraStripped
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+- type: loadout
+  id: ClothingUnderTopBraCommie
+  equipment:
+    underweart: ClothingUnderTopBraCommie
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+# Corset
+
+- type: loadout
+  id: ClothingUnderTopCorset
+  equipment:
+    underweart: ClothingUnderTopCorset
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegacorset"
+
+- type: loadout
+  id: ClothingUnderTopCorsetGrey
+  equipment:
+    underweart: ClothingUnderTopCorsetGrey
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegacorset"
+
+- type: loadout
+  id: ClothingUnderTopCorsetBlack
+  equipment:
+    underweart: ClothingUnderTopCorsetBlack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegacorset"
+
+- type: loadout
+  id: ClothingUnderTopCorsetBlue
+  equipment:
+    underweart: ClothingUnderTopCorsetBlue
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegacorset"
+
+- type: loadout
+  id: ClothingUnderTopCorsetDarkBlue
+  equipment:
+    underweart: ClothingUnderTopCorsetDarkBlue
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegacorset"
+
+- type: loadout
+  id: ClothingUnderTopCorsetBrown
+  equipment:
+    underweart: ClothingUnderTopCorsetBrown
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegacorset"
+
+- type: loadout
+  id: ClothingUnderTopCorsetDarkGreen
+  equipment:
+    underweart: ClothingUnderTopCorsetDarkGreen
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegacorset"
+
+- type: loadout
+  id: ClothingUnderTopCorsetGreen
+  equipment:
+    underweart: ClothingUnderTopCorsetGreen
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegacorset"
+
+- type: loadout
+  id: ClothingUnderTopCorsetLightBrown
+  equipment:
+    underweart: ClothingUnderTopCorsetLightBrown
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegacorset"
+
+- type: loadout
+  id: ClothingUnderTopCorsetMaroon
+  equipment:
+    underweart: ClothingUnderTopCorsetMaroon
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegacorset"
+
+- type: loadout
+  id: ClothingUnderTopCorsetOrange
+  equipment:
+    underweart: ClothingUnderTopCorsetOrange
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegacorset"
+
+- type: loadout
+  id: ClothingUnderTopCorsetPink
+  equipment:
+    underweart: ClothingUnderTopCorsetPink
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegacorset"
+
+- type: loadout
+  id: ClothingUnderTopCorsetPurple
+  equipment:
+    underweart: ClothingUnderTopCorsetPurple
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegacorset"
+
+- type: loadout
+  id: ClothingUnderTopCorsetRed
+  equipment:
+    underweart: ClothingUnderTopCorsetRed
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegacorset"
+
+- type: loadout
+  id: ClothingUnderTopCorsetTeal
+  equipment:
+    underweart: ClothingUnderTopCorsetTeal
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegacorset"
+
+- type: loadout
+  id: ClothingUnderTopCorsetYellow
+  equipment:
+    underweart: ClothingUnderTopCorsetYellow
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegacorset"
+
+# Corset end
+
+# Fishnet
+- type: loadout
+  id: ClothingUnderTopBraFishnet
+  equipment:
+    underweart: ClothingUnderTopBraFishnet
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegafishnet"
+
+- type: loadout
+  id: ClothingUnderTopBraFishnetGrey
+  equipment:
+    underweart: ClothingUnderTopBraFishnetGrey
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegafishnet"
+
+- type: loadout
+  id: ClothingUnderTopBraFishnetBlack
+  equipment:
+    underweart: ClothingUnderTopBraFishnetBlack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegafishnet"
+
+- type: loadout
+  id: ClothingUnderTopBraFishnetBlue
+  equipment:
+    underweart: ClothingUnderTopBraFishnetBlue
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegafishnet"
+
+- type: loadout
+  id: ClothingUnderTopBraFishnetDarkBlue
+  equipment:
+    underweart: ClothingUnderTopBraFishnetDarkBlue
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegafishnet"
+
+- type: loadout
+  id: ClothingUnderTopBraFishnetBrown
+  equipment:
+    underweart: ClothingUnderTopBraFishnetBrown
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegafishnet"
+
+- type: loadout
+  id: ClothingUnderTopBraFishnetDarkGreen
+  equipment:
+    underweart: ClothingUnderTopBraFishnetDarkGreen
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegafishnet"
+
+- type: loadout
+  id: ClothingUnderTopBraFishnetGreen
+  equipment:
+    underweart: ClothingUnderTopBraFishnetGreen
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegafishnet"
+
+- type: loadout
+  id: ClothingUnderTopBraFishnetLightBrown
+  equipment:
+    underweart: ClothingUnderTopBraFishnetLightBrown
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegafishnet"
+
+- type: loadout
+  id: ClothingUnderTopBraFishnetMaroon
+  equipment:
+    underweart: ClothingUnderTopBraFishnetMaroon
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegafishnet"
+
+- type: loadout
+  id: ClothingUnderTopBraFishnetOrange
+  equipment:
+    underweart: ClothingUnderTopBraFishnetOrange
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegafishnet"
+
+- type: loadout
+  id: ClothingUnderTopBraFishnetPink
+  equipment:
+    underweart: ClothingUnderTopBraFishnetPink
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegafishnet"
+  
+- type: loadout
+  id: ClothingUnderTopBraFishnetPurple
+  equipment:
+    underweart: ClothingUnderTopBraFishnetPurple
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegafishnet"
+
+- type: loadout
+  id: ClothingUnderTopBraFishnetRed
+  equipment:
+    underweart: ClothingUnderTopBraFishnetRed
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegafishnet"
+
+- type: loadout
+  id: ClothingUnderTopBraFishnetTeal
+  equipment:
+    underweart: ClothingUnderTopBraFishnetTeal
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegafishnet"
+
+- type: loadout
+  id: ClothingUnderTopBraFishnetYellow
+  equipment:
+    underweart: ClothingUnderTopBraFishnetYellow
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegafishnet"
+
+# Fishnet end
+
+- type: loadout
+  id: ClothingUnderTopBraKinky
+  equipment:
+    underweart: ClothingUnderTopBraKinky
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+- type: loadout
+  id: ClothingUnderTopBraLace
+  equipment:
+    underweart: ClothingUnderTopBraLace
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+- type: loadout
+  id: ClothingUnderTopBraLizard
+  equipment:
+    underweart: ClothingUnderTopBraLizard
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+- type: loadout
+  id: ClothingUnderTopBraNekoBlack
+  equipment:
+    underweart: ClothingUnderTopBraNekoBlack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "weganeko"
+
+# Neko
+
+- type: loadout
+  id: ClothingUnderTopBraNekoWhite
+  equipment:
+    underweart: ClothingUnderTopBraNekoWhite
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "weganeko"
+
+- type: loadout
+  id: ClothingUnderTopBraNekoGrey
+  equipment:
+    underweart: ClothingUnderTopBraNekoGrey
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "weganeko"
+
+- type: loadout
+  id: ClothingUnderTopBraNekoBlue
+  equipment:
+    underweart: ClothingUnderTopBraNekoBlue
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "weganeko"
+
+- type: loadout
+  id: ClothingUnderTopBraNekoDarkBlue
+  equipment:
+    underweart: ClothingUnderTopBraNekoDarkBlue
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "weganeko"
+
+- type: loadout
+  id: ClothingUnderTopBraNekoBrown
+  equipment:
+    underweart: ClothingUnderTopBraNekoBrown
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "weganeko"
+
+- type: loadout
+  id: ClothingUnderTopBraNekoDarkGreen
+  equipment:
+    underweart: ClothingUnderTopBraNekoDarkGreen
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "weganeko"
+
+- type: loadout
+  id: ClothingUnderTopBraNekoGreen
+  equipment:
+    underweart: ClothingUnderTopBraNekoGreen
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "weganeko"
+
+- type: loadout
+  id: ClothingUnderTopBraNekoLightBrown
+  equipment:
+    underweart: ClothingUnderTopBraNekoLightBrown
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "weganeko"
+
+- type: loadout
+  id: ClothingUnderTopBraNekoMaroon
+  equipment:
+    underweart: ClothingUnderTopBraNekoMaroon
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "weganeko"
+
+- type: loadout
+  id: ClothingUnderTopBraNekoOrange
+  equipment:
+    underweart: ClothingUnderTopBraNekoOrange
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "weganeko"
+
+- type: loadout
+  id: ClothingUnderTopBraNekoPink
+  equipment:
+    underweart: ClothingUnderTopBraNekoPink
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "weganeko"
+
+- type: loadout
+  id: ClothingUnderTopBraNekoPurple
+  equipment:
+    underweart: ClothingUnderTopBraNekoPurple
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "weganeko"
+
+- type: loadout
+  id: ClothingUnderTopBraNekoRed
+  equipment:
+    underweart: ClothingUnderTopBraNekoRed
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "weganeko"
+
+- type: loadout
+  id: ClothingUnderTopBraNekoTeal
+  equipment:
+    underweart: ClothingUnderTopBraNekoTeal
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "weganeko"
+
+- type: loadout
+  id: ClothingUnderTopBraNekoYellow
+  equipment:
+    underweart: ClothingUnderTopBraNekoYellow
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "weganeko"
+
+# Neko end
+
+- type: loadout
+  id: ClothingUnderTopBraPasties
+  equipment:
+    underweart: ClothingUnderTopBraPasties
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+
+# Sport
+- type: loadout
+  id: ClothingUnderTopBraSport
+  equipment:
+    underweart: ClothingUnderTopBraSport
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegasport"
+
+- type: loadout
+  id: ClothingUnderTopBraSportGrey
+  equipment:
+    underweart: ClothingUnderTopBraSportGrey
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegasport"
+
+- type: loadout
+  id: ClothingUnderTopBraSportBlack
+  equipment:
+    underweart: ClothingUnderTopBraSportBlack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegasport"
+
+- type: loadout
+  id: ClothingUnderTopBraSportBlue
+  equipment:
+    underweart: ClothingUnderTopBraSportBlue
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegasport"
+
+- type: loadout
+  id: ClothingUnderTopBraSportDarkBlue
+  equipment:
+    underweart: ClothingUnderTopBraSportDarkBlue
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegasport"
+
+- type: loadout
+  id: ClothingUnderTopBraSportBrown
+  equipment:
+    underweart: ClothingUnderTopBraSportBrown
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegasport"
+
+- type: loadout
+  id: ClothingUnderTopBraSportDarkGreen
+  equipment:
+    underweart: ClothingUnderTopBraSportDarkGreen
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegasport"
+
+- type: loadout
+  id: ClothingUnderTopBraSportGreen
+  equipment:
+    underweart: ClothingUnderTopBraSportGreen
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegasport"
+
+- type: loadout
+  id: ClothingUnderTopBraSportLightBrown
+  equipment:
+    underweart: ClothingUnderTopBraSportLightBrown
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegasport"
+
+- type: loadout
+  id: ClothingUnderTopBraSportMaroon
+  equipment:
+    underweart: ClothingUnderTopBraSportMaroon
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegasport"
+
+- type: loadout
+  id: ClothingUnderTopBraSportOrange
+  equipment:
+    underweart: ClothingUnderTopBraSportOrange
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegasport"
+
+- type: loadout
+  id: ClothingUnderTopBraSportPink
+  equipment:
+    underweart: ClothingUnderTopBraSportPink
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegasport"
+
+- type: loadout
+  id: ClothingUnderTopBraSportPurple
+  equipment:
+    underweart: ClothingUnderTopBraSportPurple
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegasport"
+
+- type: loadout
+  id: ClothingUnderTopBraSportRed
+  equipment:
+    underweart: ClothingUnderTopBraSportRed
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegasport"
+
+- type: loadout
+  id: ClothingUnderTopBraSportTeal
+  equipment:
+    underweart: ClothingUnderTopBraSportTeal
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegasport"
+
+- type: loadout
+  id: ClothingUnderTopBraSportYellow
+  equipment:
+    underweart: ClothingUnderTopBraSportYellow
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegasport"
+
+
+# sport end
+
+# Starap
+
+- type: loadout
+  id: ClothingUnderTopBraStrapless
+  equipment:
+    underweart: ClothingUnderTopBraStrapless
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegastrap"
+
+- type: loadout
+  id: ClothingUnderTopBraStraplessGrey
+  equipment:
+    underweart: ClothingUnderTopBraStraplessGrey
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegastrap"
+
+- type: loadout
+  id: ClothingUnderTopBraStraplessBlack
+  equipment:
+    underweart: ClothingUnderTopBraStraplessBlack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegastrap"
+
+- type: loadout
+  id: ClothingUnderTopBraStraplessBlue
+  equipment:
+    underweart: ClothingUnderTopBraStraplessBlue
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegastrap"
+
+- type: loadout
+  id: ClothingUnderTopBraStraplessDarkBlue
+  equipment:
+    underweart: ClothingUnderTopBraStraplessDarkBlue
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegastrap"
+
+- type: loadout
+  id: ClothingUnderTopBraStraplessBrown
+  equipment:
+    underweart: ClothingUnderTopBraStraplessBrown
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegastrap"
+
+- type: loadout
+  id: ClothingUnderTopBraStraplessDarkGreen
+  equipment:
+    underweart: ClothingUnderTopBraStraplessDarkGreen
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegastrap"
+
+- type: loadout
+  id: ClothingUnderTopBraStraplessGreen
+  equipment:
+    underweart: ClothingUnderTopBraStraplessGreen
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegastrap"
+
+- type: loadout
+  id: ClothingUnderTopBraStraplessLightBrown
+  equipment:
+    underweart: ClothingUnderTopBraStraplessLightBrown
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegastrap"
+
+- type: loadout
+  id: ClothingUnderTopBraStraplessMaroon
+  equipment:
+    underweart: ClothingUnderTopBraStraplessMaroon
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegastrap"
+
+- type: loadout
+  id: ClothingUnderTopBraStraplessOrange
+  equipment:
+    underweart: ClothingUnderTopBraStraplessOrange
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegastrap"
+
+- type: loadout
+  id: ClothingUnderTopBraStraplessPink
+  equipment:
+    underweart: ClothingUnderTopBraStraplessPink
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegastrap"
+
+- type: loadout
+  id: ClothingUnderTopBraStraplessPurple
+  equipment:
+    underweart: ClothingUnderTopBraStraplessPurple
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegastrap"
+
+- type: loadout
+  id: ClothingUnderTopBraStraplessRed
+  equipment:
+    underweart: ClothingUnderTopBraStraplessRed
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegastrap"
+
+- type: loadout
+  id: ClothingUnderTopBraStraplessTeal
+  equipment:
+    underweart: ClothingUnderTopBraStraplessTeal
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegastrap"
+
+- type: loadout
+  id: ClothingUnderTopBraStraplessYellow
+  equipment:
+    underweart: ClothingUnderTopBraStraplessYellow
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegastrap"
+
+# Starap end 
+
+# Thong
+- type: loadout
+  id: ClothingUnderTopBraThong
+  equipment:
+    underweart: ClothingUnderTopBraThong
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegathong"
+
+- type: loadout
+  id: ClothingUnderTopBraThongGrey
+  equipment:
+    underweart: ClothingUnderTopBraThongGrey
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegathong"
+
+- type: loadout
+  id: ClothingUnderTopBraThongBlack
+  equipment:
+    underweart: ClothingUnderTopBraThongBlack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegathong"
+
+- type: loadout
+  id: ClothingUnderTopBraThongBlue
+  equipment:
+    underweart: ClothingUnderTopBraThongBlue
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegathong"
+
+- type: loadout
+  id: ClothingUnderTopBraThongDarkBlue
+  equipment:
+    underweart: ClothingUnderTopBraThongDarkBlue
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegathong"
+
+- type: loadout
+  id: ClothingUnderTopBraThongBrown
+  equipment:
+    underweart: ClothingUnderTopBraThongBrown
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegathong"
+
+- type: loadout
+  id: ClothingUnderTopBraThongDarkGreen
+  equipment:
+    underweart: ClothingUnderTopBraThongDarkGreen
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegathong"
+
+- type: loadout
+  id: ClothingUnderTopBraThongGreen
+  equipment:
+    underweart: ClothingUnderTopBraThongGreen
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegathong"
+
+- type: loadout
+  id: ClothingUnderTopBraThongLightBrown
+  equipment:
+    underweart: ClothingUnderTopBraThongLightBrown
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegathong"
+
+- type: loadout
+  id: ClothingUnderTopBraThongMaroon
+  equipment:
+    underweart: ClothingUnderTopBraThongMaroon
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegathong"
+
+- type: loadout
+  id: ClothingUnderTopBraThongOrange
+  equipment:
+    underweart: ClothingUnderTopBraThongOrange
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegathong"
+
+- type: loadout
+  id: ClothingUnderTopBraThongPink
+  equipment:
+    underweart: ClothingUnderTopBraThongPink
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegathong"
+
+- type: loadout
+  id: ClothingUnderTopBraThongPurple
+  equipment:
+    underweart: ClothingUnderTopBraThongPurple
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegathong"
+
+- type: loadout
+  id: ClothingUnderTopBraThongRed
+  equipment:
+    underweart: ClothingUnderTopBraThongRed
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegathong"
+
+- type: loadout
+  id: ClothingUnderTopBraThongTeal
+  equipment:
+    underweart: ClothingUnderTopBraThongTeal
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegathong"
+
+- type: loadout
+  id: ClothingUnderTopBraThongYellow
+  equipment:
+    underweart: ClothingUnderTopBraThongYellow
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleRequired
+  groupBy: "wegathong"
