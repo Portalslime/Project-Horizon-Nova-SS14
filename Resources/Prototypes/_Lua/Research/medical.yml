@@ -131,6 +131,7 @@
   recipeUnlocks:
   - ChemMasterMachineCircuitboard
   - ChemDispenserMachineCircuitboard
+  - MedicalTechFabCircuitboard
   technologyPrerequisites:
   - NFReinforcedJug
   position: 2.792, 17.759

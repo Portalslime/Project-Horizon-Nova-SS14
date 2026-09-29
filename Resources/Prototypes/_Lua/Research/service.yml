@@ -39,25 +39,6 @@
       technologyPrerequisites:
       - NFAdvancedCleaning
 - type: technology
-  id: NFHardsuitBotanist
-  name: lua-research-technology-botanist-hardsuit
-  entityIcon: ClothingOuterHardsuitBotanist
-  discipline: NFService
-  factions:
-  - Nanotrasen
-  tier: 2
-  cost: 10000
-  recipeUnlocks:
-  - ClothingOuterHardsuitBotanist
-  position: -8.002, 6.116
-  technologyPrerequisites:
-  - NFAdvancedHydroponicsEquipment
-  factionOverrides:
-    Nanotrasen:
-      position: -2.133, -1.067
-      technologyPrerequisites:
-      - LuaDisciplinePlaceholderService
-- type: technology
   id: NFFauxAstroTiles
   name: nf-research-technology-faux-astro-tiles
   entityIcon: FloorTileItemAstroIce
@@ -376,25 +357,6 @@
       technologyPrerequisites:
       - NFMechanizedTreatment
 - type: technology
-  id: NFSelectiveDropper
-  name: nf-research-technology-food-filtration
-  entityIcon: ServiceSelectiveDropper
-  discipline: NFService
-  factions:
-  - Nanotrasen
-  tier: 1
-  cost: 1000
-  recipeUnlocks:
-  - ServiceSelectiveDropper
-  technologyPrerequisites:
-  - NFAdvancedHydroponicsEquipment
-  position: -8.961, 9.491
-  factionOverrides:
-    Nanotrasen:
-      position: -4.267, -1.067
-      technologyPrerequisites:
-      - NFAdvancedHydroponicsEquipment
-- type: technology
   id: NFAdvancedHydroponicsEquipment
   name: nf-research-technology-advanced-botanical-equipment
   entityIcon: PlantAnalyzer
@@ -405,14 +367,15 @@
   cost: 2500
   recipeUnlocks:
   - PlantAnalyzer
+  - ServiceSelectiveDropper
   position: -6.002, 7.116
   technologyPrerequisites:
   - NFSuperParts
   factionOverrides:
     Nanotrasen:
-      position: -3.2, -1.067
+      position: -4.267, -1.067
       technologyPrerequisites:
-      - NFHardsuitBotanist
+      - NFSeedExtractor
 - type: technology
   id: NFHydroponics
   name: nf-research-technology-basic-hydroponics
@@ -429,9 +392,9 @@
   position: -10.764, 6.402
   factionOverrides:
     Nanotrasen:
-      position: -6.4, -1.067
+      position: -2.133, -1.067
       technologyPrerequisites:
-      - NFSeedExtractor
+      - LuaDisciplinePlaceholderService
 - type: technology
   id: NFAdvancedHydroponicsStorge
   name: nf-research-technology-advanced-botanical-storage
@@ -449,9 +412,9 @@
   position: -7.719, 9.231
   factionOverrides:
     Nanotrasen:
-      position: -7.467, -1.067
+      position: -5.333, -1.067
       technologyPrerequisites:
-      - NFHydroponics
+      - NFAdvancedHydroponicsEquipment
 - type: technology
   id: NFFoodService
   name: nf-research-technology-food-service
@@ -493,9 +456,9 @@
   position: -10.856, 7.511
   factionOverrides:
     Nanotrasen:
-      position: -5.333, -1.067
+      position: -3.2, -1.067
       technologyPrerequisites:
-      - NFSelectiveDropper
+      - NFHydroponics
 - type: technology
   id: NFDeepFryer
   name: nf-research-technology-deep-fryer

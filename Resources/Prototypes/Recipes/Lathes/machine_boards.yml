@@ -202,6 +202,11 @@
   id: ChemDispenserMachineCircuitboard
   result: ChemDispenserMachineCircuitboard
 
+- type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseMedicalMachineRecipeCategory ]
+  id: MedicalTechFabCircuitboard
+  result: MedicalTechFabCircuitboard
+
 # Treatment
 - type: latheRecipe
   parent: [ BaseGoldCircuitboardRecipe, BaseMedicalMachineRecipeCategory ]
