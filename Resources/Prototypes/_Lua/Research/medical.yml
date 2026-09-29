@@ -213,6 +213,7 @@
   cost: 7500
   recipeUnlocks:
   - StasisBedMachineCircuitboard
+  - StasisOperatingTableCircuitboard
   - CryoPodMachineCircuitboard
   technologyPrerequisites:
   - NFEngineeringMedicine
