@@ -713,6 +713,9 @@
     board: BiogeneratorMachineCircuitboard
   - type: MaterialStorage
   - type: ProduceMaterialExtractor
+    extractionReagents:
+    - Nutriment
+    - Feces
   - type: ItemSlots
     slots:
       beaker_slot:

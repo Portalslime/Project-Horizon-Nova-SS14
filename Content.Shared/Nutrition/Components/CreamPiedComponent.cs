@@ -9,11 +9,15 @@ namespace Content.Shared.Nutrition.Components
     {
         [ViewVariables]
         public bool CreamPied { get; set; } = false;
+
+        [ViewVariables]
+        public Color Color { get; set; } = Color.White;
     }
 
     [Serializable, NetSerializable]
     public enum CreamPiedVisuals
     {
         Creamed,
+        Color,
     }
 }

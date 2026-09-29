@@ -1,0 +1,100 @@
+# Alerts
+- type: alertCategory
+  id: Defecation
+
+- type: alert
+  id: DefecationUrge
+  category: Defecation
+  icons:
+  - sprite: /Textures/_Horizon/Interface/Alerts/defecation.rsi
+    state: urge
+  name: alerts-defecation-urge-name
+  description: alerts-defecation-urge-desc
+
+- type: alert
+  id: DefecationCritical
+  category: Defecation
+  icons:
+  - sprite: /Textures/_Horizon/Interface/Alerts/defecation.rsi
+    state: critical
+  name: alerts-defecation-critical-name
+  description: alerts-defecation-critical-desc
+
+# Action
+- type: entity
+  id: ActionDefecate
+  name: Defecate
+  description: Relieve yourself.
+  components:
+  - type: Action
+    icon:
+      sprite: /Textures/_Horizon/Objects/Misc/feces.rsi
+      state: icon
+    useDelay: 10
+  - type: InstantAction
+    event: !type:DefecateActionEvent
+
+# Reagent
+- type: reagent
+  id: Feces
+  name: reagent-name-feces
+  group: Toxins
+  desc: reagent-desc-feces
+  flavor: bitter
+  color: "#5b3a1e"
+  physicalDesc: reagent-physical-desc-putrid
+  plantMetabolism:
+  - !type:PlantAdjustNutrition
+    amount: 4
+  metabolisms:
+    Poison:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 1
+      - !type:ChemVomit
+        conditions:
+        - !type:ReagentThreshold
+          min: 5
+        probability: 0.2
+
+# Item
+- type: entity
+  parent: [ BaseItem, FoodBaseNorot ]
+  id: Feces
+  name: human feces
+  description: Someone really couldn't hold it in.
+  components:
+  - type: Sprite
+    sprite: _Horizon/Objects/Misc/feces.rsi
+    state: icon
+  - type: FlavorProfile
+    flavors:
+    - bitter
+  - type: Tag
+    tags:
+    - Trash
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Feces
+          Quantity: 20
+  - type: Produce
+  # Thrown like a cream pie: splats on hit or landing, paralyzes and smears the target.
+  - type: CreamPie
+    color: "#5b3a1e"
+  # CreamPie looks up its payload slot, so the component has to exist (it stays empty).
+  - type: ItemSlots
+  - type: ThrowingAngle
+    angle: 180
+  - type: LandAtCursor
+  - type: Extractable
+    grindableSolutionName: food
+  # Emits until the item is removed. Rare, jittered updates keep the atmos/tick cost low.
+  - type: GasEmitter
+    updateRate: 10
+    gases:
+      Ammonia: 0.02
