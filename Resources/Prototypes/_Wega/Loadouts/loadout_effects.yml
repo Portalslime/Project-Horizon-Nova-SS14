@@ -1,0 +1,16 @@
+# Ported from wega-team/ss14-wega (uses LuaGit SexLoadoutEffect)
+- type: loadoutEffectGroup
+  id: FemaleRequired
+  effects:
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+    - Unsexed
+
+- type: loadoutEffectGroup
+  id: MaleRequired
+  effects:
+  - !type:SexLoadoutEffect
+    sex:
+    - Male
+    - Unsexed

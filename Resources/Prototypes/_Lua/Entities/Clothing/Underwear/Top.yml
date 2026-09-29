@@ -37,6 +37,8 @@
   components:
   - type: Sprite
     sprite: Sirena/Clothing/Underwear/Top/bra.rsi
+  - type: StaticPrice # Lua: vending price
+    vendPrice: 200
 
 - type: entity
   parent: ClothingUnderwearTopBase
@@ -46,6 +48,8 @@
   components:
   - type: Sprite
     sprite: Sirena/Clothing/Underwear/Top/sportsbra.rsi
+  - type: StaticPrice # Lua: vending price
+    vendPrice: 200
 
 - type: entity
   parent: ClothingUnderwearTopBase
@@ -56,7 +60,11 @@
   - type: Sprite
     sprite: Sirena/Clothing/Underwear/Top/sportsbraalt.rsi
 
+  - type: StaticPrice # Lua: vending price
+    vendPrice: 200
+
 ## Antags
+
 - type: entity
   parent: ClothingUnderwearTopBase
   id: ClothingUnderwearTopBraNuclearOperative

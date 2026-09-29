@@ -206,17 +206,8 @@ namespace Content.Shared.Lua.CLVar
         public static readonly CVarDef<float> NpcSmartDespawnCheckInterval =
             CVarDef.Create("npc.smart_despawn_check_interval", 10f, CVar.SERVERONLY);
 
-        public static readonly CVarDef<string> SponsorMusicApiUrl =
-            CVarDef.Create("sponsor_music.api_url", "", CVar.SERVERONLY | CVar.ARCHIVE);
-        public static readonly CVarDef<string> SponsorMusicApiToken =
-            CVarDef.Create("sponsor_music.api_token", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
-
-        public static readonly CVarDef<string> LunaCoinApiUrl =
-            CVarDef.Create("lunacoin.api_url", "", CVar.SERVERONLY | CVar.ARCHIVE);
-        public static readonly CVarDef<string> LunaCoinApiToken =
-            CVarDef.Create("lunacoin.api_token", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
-        public static readonly CVarDef<string> LunaCoinServerName =
-            CVarDef.Create("lunacoin.server_name", "luna", CVar.SERVERONLY | CVar.ARCHIVE);
+        // BOOSTY: sponsor music and LunaCoin external API CVars removed on this branch.
+        // Restore them here if the Boosty integration is re-implemented.
 
         public static readonly CVarDef<bool> FactionWarEnabled =
             CVarDef.Create("lua.faction_war.enabled", true, CVar.SERVERONLY | CVar.ARCHIVE);

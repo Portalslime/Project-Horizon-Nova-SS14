@@ -2,7 +2,6 @@ using Content.Server._Lua.ChatFilter; // Lua
 using Content.Server._Lua.Info; // Lua
 using Content.Server._Lua.Networking; // Lua
 using Content.Shared._Lua.Info; // Lua
-using Content.Server._Lua.SponsorPlayer; // Lua
 using Content.Server._NF.Auth;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
@@ -79,7 +78,6 @@ internal static class ServerContentIoC
         deps.Register<UserDbDataManager>();
         deps.Register<JoinQueueManager>(); // Corvax-Queue
         deps.Register<TTSManager>(); // Corvax-TTS
-        deps.Register<SponsorMusicManager>(); // Lua SponsorPlayer
         deps.Register<DiscordAuthManager>(); // Corvax-DiscordAuth
         deps.Register<ServerInfoManager>();
         deps.Register<PoissonDiskSampler>();

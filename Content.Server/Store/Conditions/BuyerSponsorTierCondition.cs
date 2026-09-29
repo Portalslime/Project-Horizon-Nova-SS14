@@ -1,15 +1,41 @@
-// LuaCorp - This file is licensed under AGPLv3
-// Copyright (c) 2026 LuaCorp
-// See AGPLv3.txt for details.
+// BOOSTY (Lua) integration.
+// Subscription/tier check for store listings is TEMPORARILY DISABLED on this branch.
+//
+// What this file is:
+//   * The active condition below no longer checks the sponsor tier and always returns
+//     true, so VIP listings are effectively unrestricted.
+//   * The original Lua/Boosty tier check is preserved verbatim inside "#if false" at
+//     the bottom of the file so it can be restored later by ourselves.
+//
+// How to re-enable: remove the "#if false" / "#endif" markers around the preserved
+// class and delete the stub class above.
+using Content.Shared.Store;
 
+namespace Content.Server.Store.Conditions;
+
+public sealed partial class BuyerSponsorTierCondition : ListingCondition
+{
+    [DataField("whitelist")]
+    public HashSet<string>? Whitelist;
+    [DataField("blacklist")]
+    public HashSet<string>? Blacklist;
+
+    public override bool Condition(ListingConditionArgs args)
+    {
+        // BOOSTY: sponsor-tier check disabled - listing is available to everyone.
+        return true;
+    }
+}
+
+#if false
+// ============================================================================
+// BOOSTY: original sponsor-tier check below. Disabled on this branch.
+// ============================================================================
 using Content.Server.Sponsors;
 using Content.Shared._Lua.SponsorLoadout;
 using Content.Shared.Mind;
-using Content.Shared.Store;
 using Robust.Shared.IoC;
 using System.Linq;
-
-namespace Content.Server.Store.Conditions;
 
 public sealed partial class BuyerSponsorTierCondition : ListingCondition
 {
@@ -34,3 +60,4 @@ public sealed partial class BuyerSponsorTierCondition : ListingCondition
         return true;
     }
 }
+#endif

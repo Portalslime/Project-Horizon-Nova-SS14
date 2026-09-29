@@ -119,6 +119,7 @@
   - type: VendingMachineRestock
     canRestock:
     - ClothesMateInventory
+    - UnderwearInventory # Lua
     - AtmosDrobeInventory
     - BarDrobeInventory
     - CargoDrobeInventory

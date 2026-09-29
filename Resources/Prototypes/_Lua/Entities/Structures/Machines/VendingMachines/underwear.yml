@@ -1,0 +1,31 @@
+# Lua - underwear vending machine. Sprite taken from wega-team/ss14-wega (CosinessMat).
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineUnderwear
+  name: Underwear-O-Mat
+  description: A vending machine for fast shopping of underwear and socks.
+  components:
+  - type: VendingMachine
+    pack: UnderwearInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    denyState: normal-unshaded
+  - type: DatasetVocalizer
+    dataset: ClothesMateAds
+  - type: SpeakOnUIClosed
+    pack: GenericVendGoodbyes
+  - type: Sprite
+    sprite: _Wega/Structures/Machines/VendingMachines/cosinessmat.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.8
+    energy: 1.6
+    color: "#e590b9"

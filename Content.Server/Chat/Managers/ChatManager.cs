@@ -6,8 +6,11 @@ using Content.Server.Administration.Systems;
 using Content.Server.Discord.DiscordLink;
 using Content.Server.Players.RateLimiting;
 using Content.Server.Preferences.Managers;
+#if false
+// BOOSTY: Lua sponsor OOC colouring disabled on this branch.
 using Content.Server.Sponsors;
 using Content.Shared._Lua.SponsorLoadout;
+#endif
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -50,7 +53,10 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly DiscordChatLink _discordLink = default!;
     [Dependency] private readonly ChatFilterManager _chatFilter = default!; // Lua
+#if false
+    // BOOSTY: Lua sponsor OOC colouring disabled on this branch.
     [Dependency] private readonly SponsorManager _sponsorManager = default!; // Lua
+#endif
 
     /// <summary>
     /// The maximum length a player-sent message can be sent
@@ -287,6 +293,8 @@ internal sealed partial class ChatManager : IChatManager
 
         Color? colorOverride = null;
         var displayName = player.Name;
+#if false
+        // BOOSTY: Lua sponsor OOC colouring disabled on this branch.
         if (_sponsorManager.TryGetActiveSponsor(player.UserId, out var sponsor))
         {
             string? donorHex = sponsor.Role switch
@@ -299,6 +307,7 @@ internal sealed partial class ChatManager : IChatManager
             if (donorHex != null)
                 displayName = $"[color={donorHex}]{player.Name}[/color]";
         }
+#endif
 
         var wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message",
             ("playerName", displayName),

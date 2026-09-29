@@ -1,0 +1,113 @@
+# Ported from wega-team/ss14-wega, adapted to LuaGit slots/API.
+
+- type: entity
+  abstract: true
+  parent: Clothing
+  id: ClothingUnderBottomBase
+  name: based underwearb
+  description: You should not see this.
+  components:
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: Small
+  - type: Clothing
+    equipDelay: 2
+    unequipDelay: 2
+    quickEquip: false
+    slots: [underwearb]
+  - type: Storage
+    grid:
+    - 0,0,0,1
+    maxItemSize: Tiny
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: UseDelay
+    delay: 0.5
+  - type: ToolRefinable
+    refineResult:
+    - id: MaterialCloth1
+      amount: 2
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+  - type: Tag
+    tags:
+    - ClothMade
+
+- type: entity
+  abstract: true
+  parent: Clothing
+  id: ClothingUnderSocksBase
+  name: based socks
+  description: You should not see this.
+  components:
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: Small
+  - type: Clothing
+    quickEquip: false
+    slots: [socks]
+  - type: ToolRefinable
+    refineResult:
+    - id: MaterialCloth1
+      amount: 2
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+  - type: Tag
+    tags:
+    - ClothMade
+
+- type: entity
+  abstract: true
+  parent: Clothing
+  id: ClothingUnderTopBase
+  name: based underweart
+  description: You should not see this.
+  components:
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: Small
+  - type: Clothing
+    equipSound: /Audio/Items/jumpsuit_equip.ogg
+    equipDelay: 2
+    unequipDelay: 2
+    quickEquip: false
+    slots: [underweart]
+  - type: ToolRefinable
+    refineResult:
+    - id: MaterialCloth1
+      amount: 2
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+  - type: Tag
+    tags:
+    - ClothMade

@@ -1,0 +1,33 @@
+# Sponsor vending machine ("спонсормат").
+# Sells every item that was previously restricted to sponsors/subscribers (Boosty).
+# The subscription check is disabled on this branch, so the machine is available to everyone.
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineSponsor
+  name: Спонсор-О-Мат
+  description: Автомат со спонсорскими вещами. Теперь доступен всем.
+  components:
+  - type: VendingMachine
+    pack: SponsorInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    denyState: deny-unshaded
+  - type: DatasetVocalizer
+    dataset: ClothesMateAds
+  - type: SpeakOnUIClosed
+    pack: GenericVendGoodbyes
+  - type: Sprite
+    sprite: Structures/Machines/VendingMachines/clothing.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.8
+    energy: 3.0
+    color: "#b83bb8"

@@ -1,3 +1,17 @@
+// BOOSTY (Lua) integration.
+// Runtime sponsor/subscription check is TEMPORARILY DISABLED on this branch.
+//
+// What this file is:
+//   * The upper (active) part is a no-op stub. It keeps the public API intact so that
+//     the rest of the codebase still compiles, but it always reports "no active sponsor",
+//     therefore no subscription/Boosty check is performed anywhere.
+//   * The original Lua/Boosty implementation is preserved verbatim inside "#if false"
+//     at the bottom of the file so it can be restored later by ourselves.
+//
+// How to re-enable:
+//   1. Delete the stub members below (keep the class declaration if you prefer).
+//   2. Remove the "#if false" / "#endif" markers around the preserved class at the bottom.
+//   3. Restore the IoC registration if it was removed.
 using Content.Server.Database;
 using Content.Server.Players.JobWhitelist;
 using Content.Shared.Roles;
@@ -10,6 +24,65 @@ using System.Threading.Tasks;
 
 namespace Content.Server.Sponsors;
 
+public sealed class SponsorManager : IPostInjectInit
+{
+    void IPostInjectInit.PostInject()
+    {
+        // BOOSTY: intentionally empty - sponsor loading is disabled.
+    }
+
+    // BOOSTY: disabled stubs. Always report "no sponsor" / do nothing.
+    public Task AddSponsorAsync(NetUserId userId, string playerName, string role, DateTimeOffset? plannedEnd)
+    {
+        return Task.CompletedTask;
+    }
+
+    public Task RemoveSponsorAsync(NetUserId userId, string role, DateTimeOffset endDate)
+    {
+        return Task.CompletedTask;
+    }
+
+    public Task RemoveSponsorAsync(NetUserId userId)
+    {
+        return Task.CompletedTask;
+    }
+
+    public bool TryGetActiveSponsor(NetUserId userId, out Sponsor sponsor)
+    {
+        sponsor = null!;
+        return false;
+    }
+
+    public bool TryGetAllActiveSponsors(NetUserId userId, out List<Sponsor> sponsors)
+    {
+        sponsors = null!;
+        return false;
+    }
+
+    public void CacheActiveSponsor(NetUserId userId, Sponsor sponsor)
+    {
+    }
+
+    public void CacheAllActiveSponsors(NetUserId userId, List<Sponsor> sponsors)
+    {
+    }
+
+    public Task<Sponsor?> GetActiveSponsorAsync(NetUserId userId)
+    {
+        return Task.FromResult<Sponsor?>(null);
+    }
+
+    public Task<List<Sponsor>> GetAllActiveSponsorsAsync(NetUserId userId)
+    {
+        return Task.FromResult(new List<Sponsor>());
+    }
+}
+
+#if false
+// ============================================================================
+// BOOSTY: original sponsor/subscription check below. Disabled on this branch.
+// Do not delete - restore by removing the "#if false" / "#endif" markers.
+// ============================================================================
 public sealed class SponsorManager : IPostInjectInit
 {
     [Dependency] private readonly IServerDbManager _db = default!;
@@ -127,5 +200,4 @@ public sealed class SponsorManager : IPostInjectInit
     public async Task<List<Sponsor>> GetAllActiveSponsorsAsync(NetUserId userId)
     { return await _db.GetAllActiveSponsors(userId.UserId); }
 }
-
-
+#endif

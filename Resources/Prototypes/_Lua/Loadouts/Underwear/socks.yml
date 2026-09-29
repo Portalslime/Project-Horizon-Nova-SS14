@@ -2,6 +2,7 @@
   id: SocksUnderwear
   name: loadout-socks-name
   hidden: false
+  minLimit: 1
   loadouts:
     - LoadoutClothingUnderwearSocksNormal
     - LoadoutClothingUnderwearSocksHigh
@@ -70,8 +71,8 @@
     - LoadoutClothingUnderwearSocksThighGreen
     - LoadoutClothingUnderwearSocksThighSR
     - LoadoutClothingUnderwearSocksStockings
-
-
+    - LoadoutClothingUnderwearLongSocksStandard
+    - LoadoutClothingUnderwearSocksWomanDetective
   fallbacks:
   - LoadoutClothingUnderwearSocksNormal
 
@@ -83,396 +84,612 @@
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksHigh
-  price: 200
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksHigh
 
 - type: loadout
   id: LoadoutClothingUnderSocksBee
-  price: 200
+  price: 0
   equipment:
     socks: ClothingUnderSocksBee
 
 - type: loadout
   id: LoadoutClothingUnderSocksCoder
-  price: 200
+  price: 0
   equipment:
     socks: ClothingUnderSocksCoder
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksShort
-  price: 200
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksShort
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksThigh
-  price: 200
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksThigh
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksQuartermaster
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobQuartermaster
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksQuartermaster
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksCargoTech
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobCargoTechnician
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksCargoTech
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksSalvage
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobSalvageSpecialist
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksSalvage
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksSeniorSalvage
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobSeniorSalvageSpecialist
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksSeniorSalvage
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksHeadofPersonnel
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobHeadOfPersonnel
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksHeadofPersonnel
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksService
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobServiceWorker
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksService
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksBartender
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobBartender
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksBartender
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksBotanist
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobBotanist
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksBotanist
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksBoxer
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobBoxer
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksBoxer
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksChaplain
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobChaplain
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksChaplain
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksChef
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobChef
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksChef
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksClown
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobClown
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksClown
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksJanitor
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobJanitor
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksJanitor
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksLibrarian
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobLibrarian
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksLibrarian
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksMime
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobMime
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksMime
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksMusician
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobMusician
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksMusician
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksCurator
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobLibrarian
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksCurator
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksReporter
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobReporter
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksReporter
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksZoo
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobZookeeper
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksZoo
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksCaptain
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobCaptain
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksCaptain
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksChiefEngineer
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobChiefEngineer
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksChiefEngineer
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksEngineer
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobStationEngineer
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksEngineer
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksAtmos
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobAtmosphericTechnician
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksAtmos
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksSeniorEngineer
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobSeniorEngineer
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksSeniorEngineer
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksBlueshield
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobBlueShieldOfficer
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksBlueshield
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksTechnicalAssistant
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobTechnicalAssistant
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksTechnicalAssistant
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksCMO
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobChiefMedicalOfficer
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksCMO
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksPathologist
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobPathologist
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksPathologist
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksChemist
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobChemist
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksChemist
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksIntern
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobMedicalIntern
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksIntern
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksDoctor
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobMedicalDoctor
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksDoctor
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksParamedic
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobParamedic
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksParamedic
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksPsychologist
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobPsychologist
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksPsychologist
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksSeniorPhysician
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobSeniorPhysician
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksSeniorPhysician
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksResearchDirector
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobResearchDirector
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksResearchDirector
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksScientist
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobScientist
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksScientist
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksResearchAssistant
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobResearchAssistant
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksResearchAssistant
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksSeniorResearcher
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobSeniorResearcher
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksSeniorResearcher
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksHeadOfSecurity
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobHeadOfSecurity
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksHeadOfSecurity
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksBrigmedic
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobBrigmedic
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksBrigmedic
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksCadet
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobSecurityCadet
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksCadet
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksDetective
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobDetective
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksDetective
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksSecurityOfficer
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobSecurityOfficer
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksSecurityOfficer
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksSecurityPilot
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobSecurityPilot
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksSecurityPilot
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksSeniorOfficer
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobSeniorOfficer
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksSeniorOfficer
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksWarden
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobWarden
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksWarden
 
 - type: loadout
   id: LoadoutClothingUnderwearSockIAA
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobIAA
+  price: 0
   equipment:
     socks: ClothingUnderwearSockIAA
 
 - type: loadout
   id: LoadoutClothingUnderwearSockLawyer
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobLawyer
+  price: 0
   equipment:
     socks: ClothingUnderwearSockLawyer
 
 - type: loadout
   id: LoadoutClothingUnderwearSockMagistrat
-  price: 200
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobMagistrat
+  price: 0
   equipment:
     socks: ClothingUnderwearSockMagistrat
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksThighXmas
-  price: 200
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksThighXmas
 
 - type: loadout
   id: LoadoutClothingUnderwearLongSocksGreen
-  price: 200
+  price: 0
   equipment:
     socks: ClothingUnderwearLongSocksGreen
 
 - type: loadout
   id: LoadoutClothingUnderwearLongSocksLightBlue
-  price: 200
+  price: 0
   equipment:
     socks: ClothingUnderwearLongSocksLightBlue
 
 - type: loadout
   id: LoadoutClothingUnderwearLongSocksLightViolet
-  price: 200
+  price: 0
   equipment:
     socks: ClothingUnderwearLongSocksLightViolet
 
 - type: loadout
   id: LoadoutClothingUnderwearLongSocksOrange
-  price: 200
+  price: 0
   equipment:
     socks: ClothingUnderwearLongSocksOrange
 
 - type: loadout
   id: LoadoutClothingUnderwearLongSocksRed
-  price: 200
+  price: 0
   equipment:
     socks: ClothingUnderwearLongSocksRed
 
 - type: loadout
   id: LoadoutClothingUnderwearLongSocksYellow
-  price: 200
+  price: 0
   equipment:
     socks: ClothingUnderwearLongSocksYellow
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksThighDarkRed
-  price: 200
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksThighDarkRed
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksThighExpensive
-  price: 3000
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksThighExpensive
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksThighGreen
-  price: 200
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksThighGreen
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksThighSR
-  price: 200
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksThighSR
 
 - type: loadout
   id: LoadoutClothingUnderwearSocksStockings
-  price: 200
+  price: 0
   equipment:
     socks: ClothingUnderwearSocksStockings
+
+- type: loadout
+  id: LoadoutClothingUnderwearLongSocksStandard
+  price: 0
+  equipment:
+    socks: ClothingUnderwearLongSocksStandard
+
+- type: loadout
+  id: LoadoutClothingUnderwearSocksWomanDetective
+  hideEffects:
+  - !type:RoleWhitelistLoadoutEffect
+    whitelist:
+    - JobDetective
+  - !type:SexLoadoutEffect
+    sex:
+    - Female
+  price: 0
+  equipment:
+    socks: ClothingUnderwearSocksWomanDetective
+
