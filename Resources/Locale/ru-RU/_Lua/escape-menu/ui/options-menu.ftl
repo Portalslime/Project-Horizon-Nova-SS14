@@ -123,8 +123,6 @@ ui-options-auto-fill-highlights = Авто-добавлять информаци
 ui-options-highlights-color = Цвет подсветки:
 ui-options-highlights-color-example = Это предложение с подсветкой!
 
-ui-options-censor-nudity = Цензура обнажённых персонажей
-
 ## Админ
 
 ui-options-tab-admin = Админ

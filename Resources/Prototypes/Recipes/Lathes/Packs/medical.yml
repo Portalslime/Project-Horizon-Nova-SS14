@@ -106,5 +106,6 @@
   id: MedicalBoards
   recipes:
   - StasisBedMachineCircuitboard
+  - StasisOperatingTableCircuitboard
   - CryoPodMachineCircuitboard
   - BiomassReclaimerMachineCircuitboard

@@ -1,5 +1,4 @@
 using Content.Client.DisplacementMap;
-using Content.Shared.CCVar;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
@@ -7,7 +6,6 @@ using Content.Shared.Inventory;
 using Content.Shared.Preferences;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics; //Lua
-using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Numerics;
@@ -18,7 +16,6 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly MarkingManager _markingManager = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
     [Dependency] private readonly DisplacementMapSystem _displacement = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
@@ -27,22 +24,11 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         base.Initialize();
 
         SubscribeLocalEvent<HumanoidAppearanceComponent, AfterAutoHandleStateEvent>(OnHandleState);
-        Subs.CVar(_configurationManager, CCVars.AccessibilityClientCensorNudity, OnCvarChanged, true);
-        Subs.CVar(_configurationManager, CCVars.AccessibilityServerCensorNudity, OnCvarChanged, true);
     }
 
     private void OnHandleState(EntityUid uid, HumanoidAppearanceComponent component, ref AfterAutoHandleStateEvent args)
     {
         UpdateSprite((uid, component, Comp<SpriteComponent>(uid)));
-    }
-
-    private void OnCvarChanged(bool value)
-    {
-        var humanoidQuery = AllEntityQuery<HumanoidAppearanceComponent, SpriteComponent>();
-        while (humanoidQuery.MoveNext(out var uid, out var humanoidComp, out var spriteComp))
-        {
-            UpdateSprite((uid, humanoidComp, spriteComp));
-        }
     }
 
     private void UpdateSprite(Entity<HumanoidAppearanceComponent, SpriteComponent> entity)
@@ -260,17 +246,10 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
     private void ApplyMarkingSet(Entity<HumanoidAppearanceComponent, SpriteComponent> entity)
     {
         var humanoid = entity.Comp1;
-        var sprite = entity.Comp2;
 
         // I am lazy and I CBF resolving the previous mess, so I'm just going to nuke the markings.
         // Really, markings should probably be a separate component altogether.
         ClearAllMarkings(entity);
-
-        var censorNudity = _configurationManager.GetCVar(CCVars.AccessibilityClientCensorNudity) ||
-                           _configurationManager.GetCVar(CCVars.AccessibilityServerCensorNudity);
-        // The reason we're splitting this up is in case the character already has undergarment equipped in that slot.
-        var applyUndergarmentTop = censorNudity;
-        var applyUndergarmentBottom = censorNudity;
 
         foreach (var markingList in humanoid.MarkingSet.Markings.Values)
         {
@@ -279,17 +258,11 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
                 if (_markingManager.TryGetMarking(marking, out var markingPrototype))
                 {
                     ApplyMarking(markingPrototype, marking.MarkingColors, marking.Visible, entity);
-                    if (markingPrototype.BodyPart == HumanoidVisualLayers.UndergarmentTop)
-                        applyUndergarmentTop = false;
-                    else if (markingPrototype.BodyPart == HumanoidVisualLayers.UndergarmentBottom)
-                        applyUndergarmentBottom = false;
                 }
             }
         }
 
         humanoid.ClientOldMarkings = new MarkingSet(humanoid.MarkingSet);
-
-        AddUndergarments(entity, applyUndergarmentTop, applyUndergarmentBottom);
     }
 
     private void ClearAllMarkings(Entity<HumanoidAppearanceComponent, SpriteComponent> entity)
@@ -372,32 +345,6 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         inst.SetParameter("color1", new Vector3(color1.R, color1.G, color1.B));
         inst.SetParameter("color2", new Vector3(color2.R, color2.G, color2.B));
         inst.SetParameter("direction", (float) direction);
-    }
-
-    private void AddUndergarments(Entity<HumanoidAppearanceComponent, SpriteComponent> entity, bool undergarmentTop, bool undergarmentBottom)
-    {
-        var humanoid = entity.Comp1;
-
-        if (undergarmentTop && humanoid.UndergarmentTop != null)
-        {
-            var marking = new Marking(humanoid.UndergarmentTop, new List<Color> { new Color() });
-            if (_markingManager.TryGetMarking(marking, out var prototype))
-            {
-                // Markings are added to ClientOldMarkings because otherwise it causes issues when toggling the feature on/off.
-                humanoid.ClientOldMarkings.Markings.Add(MarkingCategories.UndergarmentTop, new List<Marking> { marking });
-                ApplyMarking(prototype, null, true, entity);
-            }
-        }
-
-        if (undergarmentBottom && humanoid.UndergarmentBottom != null)
-        {
-            var marking = new Marking(humanoid.UndergarmentBottom, new List<Color> { new Color() });
-            if (_markingManager.TryGetMarking(marking, out var prototype))
-            {
-                humanoid.ClientOldMarkings.Markings.Add(MarkingCategories.UndergarmentBottom, new List<Marking> { marking });
-                ApplyMarking(prototype, null, true, entity);
-            }
-        }
     }
 
     private void ApplyMarking(MarkingPrototype markingPrototype,
