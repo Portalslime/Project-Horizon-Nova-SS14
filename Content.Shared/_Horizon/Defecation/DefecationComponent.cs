@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -81,6 +82,18 @@ public sealed partial class DefecationComponent : Component
 
     [DataField]
     public EntProtoId Action = "ActionDefecate";
+
+    /// <summary>
+    /// Played when relieving themselves on the floor, by choice or by accident.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg");
+
+    /// <summary>
+    /// Played when relieving themselves on a toilet.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier SeatSound = new SoundPathSpecifier("/Audio/Effects/Fluids/splash.ogg");
 
     [DataField]
     public EntityUid? ActionEntity;

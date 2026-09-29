@@ -1,0 +1,73 @@
+# Plumbing devices. Pumps and gauges work without electricity.
+
+- type: entity
+  parent: PlumbingPipeBase
+  id: PlumbingPump
+  name: liquid pump
+  description: Pushes liquid from the pipe network on its inlet side into the one on its outlet side. Use it to switch it on and off.
+  components:
+  - type: NodeContainer
+    nodes:
+      inlet:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: North
+        volume: 10
+      outlet:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: South
+        volume: 10
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: SubFloorHide
+    blockInteractions: false
+    blockAmbience: false
+    visibleLayers:
+    - enum.SubfloorLayers.FirstLayer
+  - type: Sprite
+    sprite: Structures/Piping/Atmospherics/pump.rsi
+    layers:
+    - sprite: Structures/Piping/Atmospherics/pipe.rsi
+      state: pipeStraight
+      color: "#8a5a2b"
+      scale: 1.35, 1.35
+    - state: pumpPressureOn
+      map: [ "enum.SubfloorLayers.FirstLayer" ]
+  - type: PlumbingPump
+  - type: Construction
+    graph: PlumbingDevice
+    node: pump
+
+- type: entity
+  parent: PlumbingPipeBase
+  id: PlumbingPressureGauge
+  name: liquid pressure gauge
+  description: Shows how full the attached pipe network is. Examine it to read it.
+  components:
+  - type: NodeContainer
+    nodes:
+      plumbing:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: Longitudinal
+        volume: 10
+  - type: Sprite
+    sprite: Structures/Piping/Atmospherics/gas_pipe_sensor.rsi
+    drawdepth: ThickPipe
+    layers:
+    - sprite: Structures/Piping/Atmospherics/pipe.rsi
+      state: pipeStraight
+      color: "#8a5a2b"
+      scale: 1.35, 1.35
+    - state: base
+  - type: SubFloorHide
+    blockInteractions: false
+    blockAmbience: false
+    visibleLayers:
+    - enum.SubfloorLayers.FirstLayer
+  - type: PlumbingGauge
+  - type: Construction
+    graph: PlumbingDevice
+    node: gauge

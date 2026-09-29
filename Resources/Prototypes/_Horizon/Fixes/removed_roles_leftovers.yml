@@ -1,0 +1,31 @@
+# Restored from before commit 1ec3e852ea ("only the pilot role is left"): several prototypes still
+# reference ContractorPDA (loadouts, chameleon default), and a missing entity made the client crash
+# in the admin spawn menu when it built a preview of a mob that equips it.
+- type: entity
+  parent: PassengerPDA
+  id: ContractorPDA
+  name: contractor PDA
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda
+
+# Same cleanup (commit 1ec3e852ea removed the Mime job file): MimePowersComponent still adds this action on init,
+# and the missing prototype crashed the client while the admin spawn menu was building previews.
+- type: entity
+  parent: BaseAction
+  id: ActionMimeInvisibleWall
+  name: Create Invisible Wall
+  description: Create an invisible wall in front of you, if placeable there.
+  components:
+  - type: Action
+    priority: -1
+    useDelay: 30
+    icon:
+      sprite: _NF/Structures/Walls/solid.rsi
+      state: full
+  - type: InstantAction
+    event: !type:InvisibleWallActionEvent

@@ -1,0 +1,108 @@
+# A sink meant for emptying things out, not for filling containers: it only has a sewage drain.
+- type: entity
+  name: drain sink
+  id: SinkDrain
+  description: A sink for pouring things away, not for filling anything. Whatever goes in is sent down the sewage pipes.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: Structures/Furniture/sink.rsi
+    layers:
+      - state: sink_stem
+      - map: [ "enum.SolutionContainerLayers.Fill" ]
+        state: sink-fill-1
+        visible: false
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    fillBaseName: sink-fill-
+    solutionName: drainBuffer
+  - type: SolutionContainerManager
+    solutions:
+      drainBuffer:
+        maxVol: 200
+  - type: NodeContainer
+    nodes:
+      plumbing:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        connectSameTile: true
+        volume: 10
+  # Backs up instead of spilling when the pipes are full, like the floor drain.
+  - type: PlumbingInlet
+    rate: 30
+    spillWhenBlocked: false
+  - type: Drain
+    autoDrain: false
+    unitsDestroyedPerSecond: 0
+  - type: DumpableSolution
+    solution: drainBuffer
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 80
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+      - trigger:
+          !type:DamageTrigger
+          damage: 40
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+          - !type:PlaySoundBehavior
+            sound:
+              collection: MetalBreak
+  - type: AmbientSound
+    enabled: false
+    volume: -8
+    range: 8
+    sound:
+      path: /Audio/Ambience/Objects/drain.ogg
+  - type: Construction
+    graph: SinkDrainGraph
+    node: SinkDrainNode
+
+- type: constructionGraph
+  id: SinkDrainGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: SinkDrainNode
+      steps:
+      - material: Steel
+        amount: 5
+        doAfter: 3
+
+  - node: SinkDrainNode
+    entity: SinkDrain
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 5
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 5
+
+- type: construction
+  id: SinkDrainConstruction
+  graph: SinkDrainGraph
+  startNode: start
+  targetNode: SinkDrainNode
+  category: construction-category-plumbing
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false

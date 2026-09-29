@@ -7,7 +7,7 @@
   graph: SinkGraph
   startNode: start
   targetNode: SinkNode
-  category: construction-category-structures
+  category: construction-category-plumbing
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -17,7 +17,7 @@
   graph: SinkGraph
   startNode: start
   targetNode: SinkWideNode
-  category: construction-category-structures
+  category: construction-category-plumbing
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false

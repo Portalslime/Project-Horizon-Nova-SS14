@@ -29,7 +29,7 @@
   graph: FloorDrain
   startNode: start
   targetNode: FloorDrain
-  category: construction-category-utilities
+  category: construction-category-plumbing
   placementMode: SnapgridCenter
   canBuildInImpassable: false
 

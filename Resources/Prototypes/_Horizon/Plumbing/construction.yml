@@ -1,0 +1,223 @@
+- type: constructionGraph
+  id: PlumbingPipe
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: half
+      steps:
+      - material: Steel
+        amount: 1
+        doAfter: 1
+    - to: straight
+      steps:
+      - material: Steel
+        amount: 1
+        doAfter: 1
+    - to: bend
+      steps:
+      - material: Steel
+        amount: 1
+        doAfter: 1
+    - to: tjunction
+      steps:
+      - material: Steel
+        amount: 1
+        doAfter: 1
+    - to: fourway
+      steps:
+      - material: Steel
+        amount: 1
+        doAfter: 1
+
+  - node: half
+    entity: PlumbingPipeHalf
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: straight
+    entity: PlumbingPipeStraight
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: bend
+    entity: PlumbingPipeBend
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: tjunction
+    entity: PlumbingPipeTJunction
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: fourway
+    entity: PlumbingPipeFourway
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+- type: constructionGraph
+  id: PlumbingDevice
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: pump
+      steps:
+      - material: Steel
+        amount: 4
+        doAfter: 2
+    - to: gauge
+      steps:
+      - material: Steel
+        amount: 2
+        doAfter: 1
+
+  - node: pump
+    entity: PlumbingPump
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 4
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 2
+
+  - node: gauge
+    entity: PlumbingPressureGauge
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+- type: construction
+  id: PlumbingPipeHalf
+  graph: PlumbingPipe
+  startNode: start
+  targetNode: half
+  category: construction-category-plumbing
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
+  id: PlumbingPipeStraight
+  graph: PlumbingPipe
+  startNode: start
+  targetNode: straight
+  category: construction-category-plumbing
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
+  id: PlumbingPipeBend
+  graph: PlumbingPipe
+  startNode: start
+  targetNode: bend
+  category: construction-category-plumbing
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
+  id: PlumbingPipeTJunction
+  graph: PlumbingPipe
+  startNode: start
+  targetNode: tjunction
+  category: construction-category-plumbing
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
+  id: PlumbingPipeFourway
+  graph: PlumbingPipe
+  startNode: start
+  targetNode: fourway
+  category: construction-category-plumbing
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
+  id: PlumbingPump
+  graph: PlumbingDevice
+  startNode: start
+  targetNode: pump
+  category: construction-category-plumbing
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
+  id: PlumbingPressureGauge
+  graph: PlumbingDevice
+  startNode: start
+  targetNode: gauge
+  category: construction-category-plumbing
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true

@@ -437,7 +437,7 @@
   graph: Toilet
   startNode: start
   targetNode: toilet
-  category: construction-category-furniture
+  category: construction-category-plumbing
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false

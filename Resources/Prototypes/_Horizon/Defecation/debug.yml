@@ -1,0 +1,10 @@
+# For testing: a human that is already at the third stage (critical) and reaches an accident in about a minute.
+- type: entity
+  parent: MobHuman
+  id: MobHumanDefecationCritical
+  suffix: Defecation Critical
+  components:
+  - type: Defecation
+    value: 85
+    baseFillRate: 0.3
+    updateRate: 5

@@ -1,0 +1,162 @@
+# Liquid plumbing pipes. They reuse the gas pipe sprites with a tint until dedicated art exists.
+# Note: the PlumbingNode direction is the south-facing (unrotated) one, like for gas pipes.
+
+- type: entity
+  abstract: true
+  parent: [ RecyclableItemSteelSmall, BaseItem ]
+  id: PlumbingPipeBase
+  name: plumbing pipe
+  description: Carries liquids.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Item
+    size: Normal
+  - type: Transform
+    anchored: true
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: SubFloorHide
+  - type: CollideOnAnchor
+  - type: Anchorable
+  - type: Rotatable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -8
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Sprite
+    sprite: Structures/Piping/Atmospherics/pipe.rsi
+    # Wider than the gas pipes and drawn underneath them.
+    drawdepth: ThickPipe
+    color: "#8a5a2b"
+  - type: NodeContainer
+  - type: Physics
+    canCollide: false
+    bodyType: static
+  - type: StaticPrice
+    price: 12
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/wrench_pickup.ogg
+      params:
+        volume: -2
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/wrench_drop.ogg
+      params:
+        volume: -2
+  - type: EmitSoundOnLand
+    sound:
+      collection: PipeDrop
+
+- type: entity
+  parent: PlumbingPipeBase
+  id: PlumbingPipeHalf
+  suffix: Half
+  components:
+  - type: NodeContainer
+    nodes:
+      plumbing:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: South
+        volume: 25
+  - type: Sprite
+    layers:
+    - state: pipeHalf
+      scale: 1.35, 1.35
+  - type: Construction
+    graph: PlumbingPipe
+    node: half
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: PlumbingPipeBase
+  id: PlumbingPipeStraight
+  suffix: Straight
+  components:
+  - type: NodeContainer
+    nodes:
+      plumbing:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: Longitudinal
+        volume: 50
+  - type: Sprite
+    layers:
+    - state: pipeStraight
+      scale: 1.35, 1.35
+  - type: Construction
+    graph: PlumbingPipe
+    node: straight
+
+- type: entity
+  parent: PlumbingPipeBase
+  id: PlumbingPipeBend
+  suffix: Bend
+  components:
+  - type: NodeContainer
+    nodes:
+      plumbing:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: SWBend
+        volume: 50
+  - type: Sprite
+    layers:
+    - state: pipeBend
+      scale: 1.35, 1.35
+  - type: Construction
+    graph: PlumbingPipe
+    node: bend
+
+- type: entity
+  parent: PlumbingPipeBase
+  id: PlumbingPipeTJunction
+  suffix: TJunction
+  components:
+  - type: NodeContainer
+    nodes:
+      plumbing:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: TSouth
+        volume: 50
+  - type: Sprite
+    layers:
+    - state: pipeTJunction
+      scale: 1.35, 1.35
+  - type: Construction
+    graph: PlumbingPipe
+    node: tjunction
+
+- type: entity
+  parent: PlumbingPipeBase
+  id: PlumbingPipeFourway
+  suffix: Fourway
+  components:
+  - type: NodeContainer
+    nodes:
+      plumbing:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: Fourway
+        volume: 50
+  - type: Sprite
+    layers:
+    - state: pipeFourway
+      scale: 1.35, 1.35
+  - type: Construction
+    graph: PlumbingPipe
+    node: fourway

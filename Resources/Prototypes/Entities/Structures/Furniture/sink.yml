@@ -26,12 +26,17 @@
         maxVol: 200 # Lua: 100 < 200
       tank:
         maxVol: 300 # Lua: 500 < 300
-  - type: SolutionRegeneration
+  # Horizon: the tank is filled from the plumbing supply line (whatever liquid it carries) instead of
+  # regenerating water out of thin air. Only an intake, the sink has no sewage connection.
+  - type: NodeContainer
+    nodes:
+      plumbing:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        connectSameTile: true
+        volume: 10
+  - type: PlumbingOutlet
     solution: tank
-    generated:
-      reagents:
-      - ReagentId: Water
-        Quantity: 1
   - type: DrainableSolution
     solution: tank
   - type: ReagentTank

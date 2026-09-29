@@ -1,12 +1,18 @@
 using Content.Server._Horizon.Atmos;
 using Content.Server.Actions;
+using Content.Server.Fluids.EntitySystems;
 using Content.Shared._Horizon.Defecation;
 using Content.Shared.Alert;
+using Content.Shared.Buckle.Components;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -17,12 +23,15 @@ public sealed class DefecationSystem : EntitySystem
 {
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly GasEmitterSystem _gasEmitter = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly PuddleSystem _puddle = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
 
     public override void Initialize()
     {
@@ -114,8 +123,13 @@ public sealed class DefecationSystem : EntitySystem
     /// </summary>
     public void Defecate(Entity<DefecationComponent> ent, bool accident)
     {
+        // On a toilet the waste goes into its buffer, no item and no accident.
+        if (TryDepositInSeat(ent))
+            return;
+
         var comp = ent.Comp;
         Spawn(comp.Product, Transform(ent).Coordinates);
+        _audio.PlayPvs(comp.Sound, ent);
         SetValue(ent, 0f);
 
         if (accident)
@@ -131,6 +145,41 @@ public sealed class DefecationSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("defecation-others", ("entity", ent)), ent,
                 Filter.PvsExcept(ent), true);
         }
+    }
+
+    /// <summary>
+    /// If the entity is buckled to a <see cref="DefecationSeatComponent"/>, adds the waste to the seat's solution
+    /// (spilling what does not fit) and resets the need.
+    /// </summary>
+    private bool TryDepositInSeat(Entity<DefecationComponent> ent)
+    {
+        if (!TryComp<BuckleComponent>(ent, out var buckle) ||
+            buckle.BuckledTo is not { } seat ||
+            !TryComp<DefecationSeatComponent>(seat, out var receiver))
+            return false;
+
+        SetValue(ent, 0f);
+        _audio.PlayPvs(ent.Comp.SeatSound, ent);
+
+        var waste = new Solution(receiver.Reagent, receiver.Amount);
+        if (_solutions.TryGetSolution(seat, receiver.Solution, out var soln, out var solution))
+        {
+            var fits = FixedPoint2.Min(waste.Volume, solution.AvailableVolume);
+            if (fits > 0)
+                _solutions.TryAddSolution(soln.Value, waste.SplitSolution(fits));
+        }
+
+        _popup.PopupEntity(Loc.GetString("defecation-self"), ent, ent);
+        _popup.PopupEntity(Loc.GetString("defecation-others", ("entity", ent)), ent, Filter.PvsExcept(ent), true);
+
+        // The buffer was full: the rest goes on the floor.
+        if (waste.Volume > 0)
+        {
+            _puddle.TrySpillAt(seat, waste, out _);
+            _popup.PopupEntity(Loc.GetString("defecation-seat-overflow", ("seat", seat)), seat, ent, PopupType.MediumCaution);
+        }
+
+        return true;
     }
 
     public override void Update(float frameTime)
