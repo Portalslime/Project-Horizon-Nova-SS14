@@ -43,6 +43,27 @@
       - EncryptionKeyOutpostTypan
 
 - type: entity
+  parent: [ClothingHeadset, BaseC3CentCommContraband]
+  id: ClothingHeadsetDeathSquad
+  name: мастер гарнитура
+  description: Уникальный образец гарнитуры c доступом во все каналы.
+  suffix: Эскадрон смерти
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyKSO
+      - EncryptionKeyCentCom
+      - EncryptionKeyStationMaster
+      - EncryptionKeyFreelance
+      - EncryptionKeyDeathSquad
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/base.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/base.rsi
+  - type: Headset
+
+- type: entity
   parent: ClothingHeadsetAlt
   id: ClothingHeadsetAltVip
   name: vip over-ear headset

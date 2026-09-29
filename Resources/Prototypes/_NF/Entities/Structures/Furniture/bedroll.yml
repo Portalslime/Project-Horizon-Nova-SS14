@@ -4,9 +4,6 @@
   name: bedroll
   description: When there's nowhere else to sleep, you'll want to bring at least one thing of comfort. The tag on it states to unfold it before rest, but who needs rules anyway, right?
   components:
-  - type: PlaceableSurface # For bedsheets
-    placeCentered: true
-    positionOffset: 0, -0.001 # Make sure the bed is placed behind the blanket
   - type: HealOnBuckle # Regular bed values, plus bonus cold recovery
     damage:
       types:
