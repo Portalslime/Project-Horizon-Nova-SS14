@@ -1,7 +1,8 @@
 - type: gameMap
   id: Frontier
   mapName: 'Сектор Фронтир'
-  mapPath: /Maps/_Lua/Outpost/frontier.yml
+  mapPath: /Maps/_ZS/Hotizont_Point.yml.yml
+  isGrid: true # Horizont Point is a plain grid, not a map
   minPlayers: 0
   maxPlayers: 100
   randomRotation: false

@@ -152,6 +152,7 @@ public sealed class StargatePlanetGeneratorSystem : EntitySystem
         var distMax = preset.DungeonDistanceMax;
         if (distMax > (int) maxCenterDist) distMax = Math.Max(48, (int) maxCenterDist);
         if (distMin > distMax) distMin = Math.Max(48, distMax / 2);
+        var relBounds = EstimateDungeonBounds(dungeonConfig);
         var baseAngle = random.NextDouble() * 2 * Math.PI;
         var angleStep = dungeonCount > 1 ? 2 * Math.PI / dungeonCount : 0;
 
@@ -176,8 +177,14 @@ public sealed class StargatePlanetGeneratorSystem : EntitySystem
                 dungeonPosition = origin + offset;
 
                 if (OverlapsExisting(dungeonPosition, placedBounds)) continue;
+                if (CoversGate(dungeonPosition, relBounds, origin)) continue;
                 placed = true;
                 break;
+            }
+            if (!placed && TryFindClearPosition(origin, relBounds, placedBounds, baseAngle + d * angleStep, distMin, (int) maxCenterDist, out var clearPosition))
+            {
+                dungeonPosition = clearPosition;
+                placed = true;
             }
             if (!placed)
             {
@@ -229,6 +236,71 @@ public sealed class StargatePlanetGeneratorSystem : EntitySystem
     {
         if (TryComp<RestrictedRangeComponent>(mapUid, out var restricted)) return MathF.Max(96f, restricted.Range * 0.92f);
         return float.MaxValue;
+    }
+
+    /// <summary>
+    /// Union of all room pack boxes of every prefab preset in the config, relative to the dungeon position.
+    /// </summary>
+    private (int MinX, int MinY, int MaxX, int MaxY)? EstimateDungeonBounds(DungeonConfig dungeonConfig)
+    {
+        var minX = int.MaxValue;
+        var minY = int.MaxValue;
+        var maxX = int.MinValue;
+        var maxY = int.MinValue;
+        foreach (var layer in dungeonConfig.Layers)
+        {
+            if (layer is not PrefabDunGen prefab) continue;
+            foreach (var presetId in prefab.Presets)
+            {
+                if (!_protoManager.TryIndex(presetId, out DungeonPresetPrototype? preset)) continue;
+                foreach (var pack in preset.RoomPacks)
+                {
+                    minX = Math.Min(minX, pack.Left);
+                    minY = Math.Min(minY, pack.Bottom);
+                    maxX = Math.Max(maxX, pack.Right);
+                    maxY = Math.Max(maxY, pack.Top);
+                }
+            }
+        }
+        if (minX > maxX) return null;
+        return (minX, minY, maxX, maxY);
+    }
+
+    /// <summary>
+    /// True if the dungeon (plus a margin) placed at this position would cover the stargate.
+    /// </summary>
+    private static bool CoversGate(Vector2i position, (int MinX, int MinY, int MaxX, int MaxY)? rel, Vector2i gate)
+    {
+        if (rel is not { } b) return false;
+        var margin = StargateSafeRadiusTiles + DungeonOverlapPadding;
+        return gate.X >= position.X + b.MinX - margin && gate.X <= position.X + b.MaxX + margin
+            && gate.Y >= position.Y + b.MinY - margin && gate.Y <= position.Y + b.MaxY + margin;
+    }
+
+    private static bool TryFindClearPosition(
+        Vector2i origin,
+        (int MinX, int MinY, int MaxX, int MaxY)? rel,
+        List<(int MinX, int MinY, int MaxX, int MaxY)> placedBounds,
+        double startAngle,
+        int distMin,
+        int distMaxLimit,
+        out Vector2i position)
+    {
+        const int angleSteps = 24;
+        for (var dist = Math.Max(distMin, 48); dist <= distMaxLimit; dist += 16)
+        {
+            for (var i = 0; i < angleSteps; i++)
+            {
+                var angle = startAngle + i * 2 * Math.PI / angleSteps;
+                var candidate = origin + new Vector2i((int) (Math.Cos(angle) * dist), (int) (Math.Sin(angle) * dist));
+                if (OverlapsExisting(candidate, placedBounds) || CoversGate(candidate, rel, origin))
+                    continue;
+                position = candidate;
+                return true;
+            }
+        }
+        position = default;
+        return false;
     }
 
     private float EstimateDungeonRadius(DungeonConfig dungeonConfig)
