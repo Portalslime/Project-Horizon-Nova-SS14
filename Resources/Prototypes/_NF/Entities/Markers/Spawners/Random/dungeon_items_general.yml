@@ -783,27 +783,27 @@
         color: red
   - type: RandomSpawner
     prototypes:
-    - SheetSteel
-    - SheetSteel
-    - SheetGlass
-    - SheetGlass
-    - SheetPlastic
-    - SheetPlastic
-    - SheetPGlass
-    - SheetUGlass
-    - SheetPlasma
-    - SheetUranium
-    - MaterialCloth
+    - SheetSteelDungeon5
+    - SheetSteelDungeon5
+    - SheetGlassDungeon5
+    - SheetGlassDungeon5
+    - SheetPlasticDungeon5
+    - SheetPlasticDungeon5
+    - SheetPGlassDungeon5
+    - SheetUGlassDungeon5
+    - SheetPlasmaDungeon5
+    - SheetUraniumDungeon5
+    - MaterialClothDungeon5
     chance: 0.4
     offset: 0.0
     rarePrototypes:
-    - SheetPaper
-    - MaterialWoodPlank
-    - PartRodMetal
-    - CableHVStack
-    - CableMVStack
-    - CableApcStack
-    - SheetRGlass
+    - SheetPaperDungeon5
+    - MaterialWoodPlankDungeon5
+    - PartRodMetalDungeon5
+    - CableHVStackDungeon5
+    - CableMVStackDungeon5
+    - CableApcStackDungeon5
+    - SheetRGlassDungeon5
     rareChance: 0.025
 
 - type: entity
@@ -822,12 +822,12 @@
         color: red
   - type: RandomSpawner
     prototypes:
-    - IngotGold
-    - IngotSilver
-    - SheetRPGlass
-    - SheetRUGlass
-    - SheetPlasteel
-    - MaterialDurathread
+    - IngotGoldDungeon5
+    - IngotSilverDungeon5
+    - SheetRPGlassDungeon5
+    - SheetRUGlassDungeon5
+    - SheetPlasteelDungeon5
+    - MaterialDurathreadDungeon5
     chance: 0.4
     offset: 0.0
     rarePrototypes:

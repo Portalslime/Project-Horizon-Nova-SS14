@@ -899,6 +899,7 @@
   - ShuttleConsoleCircuitboard
   - MiniGravityGeneratorCircuitboard
   - MiniStationAnchorCircuitboard
+  - MachineFTLDrive600Circuitboard
   technologyPrerequisites:
   - NFSpaceScanning
   position: -12.672, 0.999

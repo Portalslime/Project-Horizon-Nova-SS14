@@ -41,19 +41,3 @@
     - id: SpawnMobSlimeGate
       amount: 1
       weight: 1
-
-    - id: LuaExpDragonFaunaSpawner
-      amount: 1
-      weight: 1
-    - id: LuaExpXenoFaunaSpawner
-      amount: 1
-      weight: 1
-    - id: LuaExpMercFaunaSpawner
-      amount: 1
-      weight: 1
-    - id: LuaExpSyndieFaunaSpawner
-      amount: 1
-      weight: 1
-    - id: LuaExpSalvFaunaSpawner
-      amount: 1
-      weight: 1

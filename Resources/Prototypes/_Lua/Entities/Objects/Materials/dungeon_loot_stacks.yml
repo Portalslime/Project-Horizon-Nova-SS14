@@ -1,0 +1,175 @@
+# LuaWorld - This file is licensed under AGPLv3
+# Copyright (c) 2026 LuaWorld Contributors
+# See AGPLv3.txt for details.
+
+# Reduced-size material stacks used by expedition dungeon loot spawners
+# (SpawnDungeonLootMaterialsBasicFull / SpawnDungeonLootMaterialsValuableFull),
+# so complexes drop small piles instead of full 30-unit stacks.
+
+- type: entity
+  parent: SheetSteel1
+  id: SheetSteelDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SheetGlass1
+  id: SheetGlassDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SheetPlastic1
+  id: SheetPlasticDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SheetPGlass1
+  id: SheetPGlassDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SheetUGlass1
+  id: SheetUGlassDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SheetPlasma1
+  id: SheetPlasmaDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SheetUranium1
+  id: SheetUraniumDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: MaterialCloth1
+  id: MaterialClothDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SheetPaper1
+  id: SheetPaperDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: MaterialWoodPlank1
+  id: MaterialWoodPlankDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: PartRodMetal1
+  id: PartRodMetalDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: CableHVStack1
+  id: CableHVStackDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: CableMVStack1
+  id: CableMVStackDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: CableApcStack1
+  id: CableApcStackDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SheetRGlass1
+  id: SheetRGlassDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: IngotGold1
+  id: IngotGoldDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: IngotSilver1
+  id: IngotSilverDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SheetRPGlass1
+  id: SheetRPGlassDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SheetRUGlass1
+  id: SheetRUGlassDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SheetPlasteel1
+  id: SheetPlasteelDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: MaterialDurathread1
+  id: MaterialDurathreadDungeon5
+  suffix: Dungeon, 5
+  components:
+  - type: Stack
+    count: 5

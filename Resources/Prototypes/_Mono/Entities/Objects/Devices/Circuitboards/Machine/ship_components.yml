@@ -11,14 +11,11 @@
     requirements:
       Capacitor: 4
       Manipulator: 2
-    componentRequirements:
-      AmeFuelContainer:
-        amount: 3
-        defaultPrototype: AmeJar
     stackRequirements:
       Glass: 10
       Steel: 10
       Uranium: 30
+      Plasma: 30
 
 - type: entity
   id: MachineDriveCTLA25Circuitboard

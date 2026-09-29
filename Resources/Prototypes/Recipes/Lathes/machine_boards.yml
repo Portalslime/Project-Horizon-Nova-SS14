@@ -306,6 +306,12 @@
 
 # Shuttle
 - type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseSupplyMachineRecipeCategory ]
+  id: MachineFTLDrive600Circuitboard
+  result: MachineFTLDrive600Circuitboard
+  completetime: 6
+
+- type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseSupplyMachineRecipeCategory ]
   id: ThrusterMachineCircuitboard
   result: ThrusterMachineCircuitboard

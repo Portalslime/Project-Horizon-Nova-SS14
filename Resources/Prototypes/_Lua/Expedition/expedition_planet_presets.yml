@@ -13,7 +13,7 @@
   dungeonDistanceMax: 220
   worldRadiusMin: 620
   worldRadiusMax: 760
-  dungeonMobCap: 220
+  dungeonMobCap: 90
   dungeonMobDensity: 12
   mobSpawnMode: DungeonOnly
   mobLayerCount: 0
@@ -57,7 +57,7 @@
   dungeonDistanceMax: 220
   worldRadiusMin: 600
   worldRadiusMax: 740
-  dungeonMobCap: 228
+  dungeonMobCap: 95
   dungeonMobDensity: 13
   mobSpawnMode: DungeonOnly
   mobLayerCount: 0
@@ -99,7 +99,7 @@
   dungeonDistanceMax: 220
   worldRadiusMin: 580
   worldRadiusMax: 720
-  dungeonMobCap: 236
+  dungeonMobCap: 100
   dungeonMobDensity: 13
   mobSpawnMode: DungeonOnly
   mobLayerCount: 0

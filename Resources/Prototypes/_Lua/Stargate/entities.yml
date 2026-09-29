@@ -286,5 +286,29 @@
     - state: datadisk_label
     - state: datadisk_stargate
   - type: StargateAddressDisk
-  - type: StaticPrice 
+  - type: StaticPrice
     price: 3500
+
+- type: entity
+  name: Gate Disk Spawner
+  id: GateDiskSpawner
+  parent: MarkerBasePlaceFree
+  suffix: Mapping, x1
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+      scale: 0.7, 0.7
+    - sprite: Objects/Misc/module.rsi
+      state: datadisk_base
+      color: "#4488cc"
+    - sprite: Objects/Misc/module.rsi
+      state: datadisk_label
+    - sprite: Objects/Misc/module.rsi
+      state: datadisk_stargate
+  - type: EntityTableSpawner
+    offset: 0.0
+    table: !type:GroupSelector
+      children:
+      - id: StargateAddressDisk
+        amount: 1
