@@ -1,7 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server._Horizon.Plumbing.NodeGroups;
 using Content.Server.Fluids.EntitySystems;
+using Content.Shared._Horizon.Plumbing;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
 using Content.Shared.NodeContainer;
 using Robust.Shared.Prototypes;
@@ -14,14 +16,66 @@ namespace Content.Server._Horizon.Plumbing.Systems;
 /// </summary>
 public sealed class PlumbingSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    public static readonly EntProtoId NetSolutionPrototype = "PlumbingNetSolution";
+
     [Dependency] private readonly PuddleSystem _puddle = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
 
     /// <summary>
     /// Networks that were pushed into while full since the overflow devices last looked, see
     /// <see cref="PlumbingNet.Rejected"/>.
     /// </summary>
     public readonly HashSet<PlumbingNet> BlockedNets = new();
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<PlumbingNetSolutionComponent, SolutionOverflowEvent>(OnNetOverflow);
+    }
+
+    private void OnNetOverflow(Entity<PlumbingNetSolutionComponent> ent, ref SolutionOverflowEvent args)
+    {
+        // A reaction can make more liquid than its ingredients were, and the pipes have no room for it.
+        Spill(ent, args.Solution.Comp.Solution.SplitSolution(args.Overflow));
+        args.Handled = true;
+    }
+
+    /// <summary>
+    /// Creates the entity that holds the liquid of a new network, where the node that started the network is.
+    /// </summary>
+    public Entity<SolutionComponent> SpawnNetSolution(EntityUid at)
+    {
+        var uid = Spawn(NetSolutionPrototype, Transform(at).Coordinates);
+        return (uid, Comp<SolutionComponent>(uid));
+    }
+
+    public void DeleteNetSolution(Entity<SolutionComponent> solution)
+    {
+        QueueDel(solution);
+    }
+
+    /// <summary>
+    /// The tanks and barrels connected to a network, with the liquid they hold. It is not part of the network's own
+    /// liquid: tanks share it with the pipes gradually, see PlumbingTankSystem.
+    /// </summary>
+    public List<(EntityUid Tank, Solution Contents)> GetTanks(PlumbingNet net)
+    {
+        var tanks = new List<(EntityUid, Solution)>();
+        var seen = new HashSet<EntityUid>();
+
+        foreach (var node in net.Nodes)
+        {
+            if (!seen.Add(node.Owner) ||
+                !TryComp(node.Owner, out PlumbingTankComponent? tank) ||
+                !_solutions.TryGetSolution(node.Owner, tank.Solution, out _, out var contents))
+                continue;
+
+            tanks.Add((node.Owner, contents));
+        }
+
+        return tanks;
+    }
 
     /// <summary>
     /// Finds the plumbing network connected to the named node of an entity.
@@ -52,11 +106,12 @@ public sealed class PlumbingSystem : EntitySystem
     }
 
     /// <summary>
-    /// Adds liquid to a network. The caller is responsible for checking the free space first.
+    /// Adds liquid to a network and lets it react with what is already there. The caller is responsible for checking
+    /// the free space first; whatever a reaction makes beyond the capacity spills out of the pipes.
     /// </summary>
     public void Deposit(PlumbingNet net, Solution solution)
     {
-        net.Fluid.AddSolution(solution, _prototype);
+        _solutions.ForceAddSolution(net.FluidEntity, solution);
     }
 
     /// <summary>

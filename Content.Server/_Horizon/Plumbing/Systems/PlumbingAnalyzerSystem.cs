@@ -20,6 +20,7 @@ public sealed class PlumbingAnalyzerSystem : EntitySystem
 {
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly PlumbingSystem _plumbing = default!;
 
     public override void Initialize()
     {
@@ -57,29 +58,42 @@ public sealed class PlumbingAnalyzerSystem : EntitySystem
             var key = reports.Count == 1 ? "plumbing-analyzer-network-single" : "plumbing-analyzer-network";
             message.Append('\n').Append(Loc.GetString(key,
                 ("side", Loc.TryGetString("plumbing-node-" + name, out var side) ? side : name),
-                ("percent", (int) MathF.Round(net.FillRatio * 100f)),
                 ("volume", net.Fluid.Volume),
                 ("capacity", net.Capacity)));
+            AppendContents(message, net.Fluid);
 
-            if (net.Fluid.Volume <= 0)
+            // Tanks keep their own liquid and only trade it with the pipes, so each one is listed by itself.
+            foreach (var (tank, contents) in _plumbing.GetTanks(net))
             {
-                message.Append('\n').Append(Loc.GetString("plumbing-analyzer-empty"));
-                continue;
-            }
-
-            foreach (var (reagentId, quantity) in net.Fluid.Contents)
-            {
-                var name2 = _prototype.TryIndex<ReagentPrototype>(reagentId.Prototype, out var proto)
-                    ? proto.LocalizedName
-                    : reagentId.Prototype;
-                message.Append('\n').Append(Loc.GetString("plumbing-analyzer-reagent",
-                    ("reagent", name2),
-                    ("quantity", quantity),
-                    ("percent", (int) MathF.Round(quantity.Float() / net.Fluid.Volume.Float() * 100f))));
+                message.Append('\n').Append(Loc.GetString("plumbing-analyzer-tank",
+                    ("tank", Name(tank)),
+                    ("volume", contents.Volume),
+                    ("capacity", contents.MaxVolume)));
+                AppendContents(message, contents);
             }
         }
 
         var text = message.ToString();
         _chat.ChatMessageToOne(ChatChannel.Notifications, text, text, default, false, actor.PlayerSession.Channel);
+    }
+
+    private void AppendContents(StringBuilder message, Solution solution)
+    {
+        if (solution.Volume <= 0)
+        {
+            message.Append('\n').Append(Loc.GetString("plumbing-analyzer-empty"));
+            return;
+        }
+
+        foreach (var (reagentId, quantity) in solution.Contents)
+        {
+            var name = _prototype.TryIndex<ReagentPrototype>(reagentId.Prototype, out var proto)
+                ? proto.LocalizedName
+                : reagentId.Prototype;
+            message.Append('\n').Append(Loc.GetString("plumbing-analyzer-reagent",
+                ("reagent", name),
+                ("quantity", quantity),
+                ("percent", (int) MathF.Round(quantity.Float() / solution.Volume.Float() * 100f))));
+        }
     }
 }

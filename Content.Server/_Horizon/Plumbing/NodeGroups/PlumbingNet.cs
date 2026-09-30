@@ -6,7 +6,6 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.NodeContainer;
 using Content.Shared.NodeContainer.NodeGroups;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server._Horizon.Plumbing.NodeGroups;
 
@@ -15,17 +14,24 @@ namespace Content.Server._Horizon.Plumbing.NodeGroups;
 /// capacity of the nodes, so every node effectively holds the same fill percentage.
 /// </summary>
 /// <remarks>
-/// Liquid is never created or destroyed by re-shaping the network: it is split between the new networks by capacity,
-/// and whatever belongs to a pipe that is deleted or detached is spilled where the pipe was.
+/// The liquid lives in the solution of an entity of its own (<see cref="FluidEntity"/>), so it reacts like the contents
+/// of any container. Liquid is never created or destroyed by re-shaping the network: it is split between the new
+/// networks by capacity, and whatever belongs to a pipe that is deleted or detached is spilled where the pipe was.
 /// </remarks>
 [NodeGroup(NodeGroupID.Plumbing)]
 public sealed class PlumbingNet : BaseNodeGroup
 {
     /// <summary>
-    /// The liquid in the network. Its MaxVolume is the network capacity.
+    /// The entity holding the liquid of the network. Always add liquid through <see cref="PlumbingSystem.Deposit"/>,
+    /// which makes it react.
     /// </summary>
     [ViewVariables]
-    public Solution Fluid { get; } = new();
+    public Entity<SolutionComponent> FluidEntity { get; private set; }
+
+    /// <summary>
+    /// The liquid in the network. Its MaxVolume is the network capacity.
+    /// </summary>
+    public Solution Fluid => FluidEntity.Comp.Solution;
 
     [ViewVariables]
     public FixedPoint2 Capacity => Fluid.MaxVolume;
@@ -47,14 +53,13 @@ public sealed class PlumbingNet : BaseNodeGroup
     public FixedPoint2 Rejected;
 
     private PlumbingSystem _plumbing = default!;
-    private IPrototypeManager _prototype = default!;
 
     public override void Initialize(Node sourceNode, IEntityManager entMan)
     {
         base.Initialize(sourceNode, entMan);
 
         _plumbing = entMan.System<PlumbingSystem>();
-        _prototype = IoCManager.Resolve<IPrototypeManager>();
+        FluidEntity = _plumbing.SpawnNetSolution(sourceNode.Owner);
     }
 
     public override void LoadNodes(List<Node> groupNodes)
@@ -85,6 +90,14 @@ public sealed class PlumbingNet : BaseNodeGroup
 
     public override void AfterRemake(IEnumerable<IGrouping<INodeGroup?, Node>> newGroups)
     {
+        HandOver(newGroups);
+
+        // This network is gone, its liquid is now in the new ones.
+        _plumbing.DeleteNetSolution(FluidEntity);
+    }
+
+    private void HandOver(IEnumerable<IGrouping<INodeGroup?, Node>> newGroups)
+    {
         var total = Fluid.Volume;
         var capacity = Capacity;
         if (total <= 0 || capacity <= 0)
@@ -110,7 +123,7 @@ public sealed class PlumbingNet : BaseNodeGroup
 
                 var share = ShareOf(total, volume, capacity);
                 if (share > 0)
-                    net.Fluid.AddSolution(Fluid.SplitSolution(share), _prototype);
+                    _plumbing.Deposit(net, Fluid.SplitSolution(share));
 
                 firstNet ??= net;
                 continue;
@@ -134,7 +147,7 @@ public sealed class PlumbingNet : BaseNodeGroup
             return;
 
         if (firstNet != null)
-            firstNet.Fluid.AddSolution(Fluid.SplitSolution(Fluid.Volume), _prototype);
+            _plumbing.Deposit(firstNet, Fluid.SplitSolution(Fluid.Volume));
         else if (anyNode != null)
             _plumbing.Spill(anyNode.Owner, Fluid.SplitSolution(Fluid.Volume));
     }

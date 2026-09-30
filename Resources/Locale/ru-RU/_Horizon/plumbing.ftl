@@ -8,8 +8,9 @@ flushable-overflow = { CAPITALIZE($entity) } переполняется, всё 
 defecation-seat-overflow = { CAPITALIZE($seat) } переполнен, всё выливается на пол!
 
 plumbing-analyzer-header = [bold]Анализ труб: { $target }[/bold]
-plumbing-analyzer-network = { $side }: заполнена на [color=yellow]{ $percent }%[/color] ({ $volume }/{ $capacity } ед.)
-plumbing-analyzer-network-single = Сеть труб: заполнена на [color=yellow]{ $percent }%[/color] ({ $volume }/{ $capacity } ед.)
+plumbing-analyzer-network = { $side }, трубы: [color=yellow]{ $volume }/{ $capacity }[/color] ед.
+plumbing-analyzer-network-single = Трубы: [color=yellow]{ $volume }/{ $capacity }[/color] ед.
+plumbing-analyzer-tank = Ёмкость «{ $tank }»: [color=yellow]{ $volume }/{ $capacity }[/color] ед.
 plumbing-node-inlet = Сторона входа
 plumbing-node-outlet = Сторона выхода
 plumbing-node-filtered = Сторона фильтрата

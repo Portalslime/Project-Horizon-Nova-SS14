@@ -8,8 +8,9 @@ flushable-overflow = { CAPITALIZE(THE($entity)) } overflows onto the floor!
 defecation-seat-overflow = { CAPITALIZE(THE($seat)) } is full and overflows onto the floor!
 
 plumbing-analyzer-header = [bold]Pipe analysis of { THE($target) }[/bold]
-plumbing-analyzer-network = { $side }: [color=yellow]{ $percent }%[/color] full ({ $volume }/{ $capacity } units)
-plumbing-analyzer-network-single = Pipe network: [color=yellow]{ $percent }%[/color] full ({ $volume }/{ $capacity } units)
+plumbing-analyzer-network = { $side }, pipes: [color=yellow]{ $volume }/{ $capacity }[/color] units
+plumbing-analyzer-network-single = Pipes: [color=yellow]{ $volume }/{ $capacity }[/color] units
+plumbing-analyzer-tank = Tank "{ $tank }": [color=yellow]{ $volume }/{ $capacity }[/color] units
 plumbing-node-inlet = Inlet side
 plumbing-node-outlet = Outlet side
 plumbing-node-filtered = Filtered side
