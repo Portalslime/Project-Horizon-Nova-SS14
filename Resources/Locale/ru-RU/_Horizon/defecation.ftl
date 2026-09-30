@@ -18,3 +18,6 @@ ent-ActionDefecate = Сходить в туалет
     .desc = Справить нужду.
 ent-Feces = какашка
     .desc = Продукт жизнедеятельности вашего соседа.
+
+ent-MobHumanDefecationCritical = МакУрист Засранец
+    .suffix = Критическая потребность

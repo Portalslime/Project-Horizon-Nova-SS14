@@ -2,6 +2,7 @@
 - type: entity
   parent: MobHuman
   id: MobHumanDefecationCritical
+  name: MakUrist Zasranets
   suffix: Defecation Critical
   components:
   - type: Defecation

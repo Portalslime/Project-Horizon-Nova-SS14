@@ -11,6 +11,7 @@
     state: full
   - type: Thirst
   - type: Defecation
+    baseFillRate: 0.01 # component default is 0.025
   - type: Butcherable
     butcheringType: Spike
     spawned:
