@@ -98,7 +98,7 @@
   parent: PlumbingPipeBase
   id: PlumbingPort
   name: liquid port
-  description: A connection for liquid barrels. Anchor a barrel on it to join the barrel to the pipe network.
+  description: The connection point of the pipe network. Connect a pipe to its open side and put a sink, toilet, shower, drain or barrel on top of it to join that device to the network. Rotate it to choose the side.
   components:
   - type: NodeContainer
     nodes:

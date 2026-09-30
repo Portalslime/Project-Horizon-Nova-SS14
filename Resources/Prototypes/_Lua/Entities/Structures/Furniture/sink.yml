@@ -11,10 +11,6 @@
   - type: Sprite
     sprite: Structures/Furniture/sink.rsi
     layers:
-      # Horizon: the supply pipe sticks out of the sink on its south side.
-      - sprite: _Horizon/Structures/Plumbing/pipe.rsi
-        state: pipeHalf
-        color: "#8a5a2b"
       - state: sink_wide
       - map: [ "enum.SolutionContainerLayers.Fill" ]
         state: sink_wide-fill-1

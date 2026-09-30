@@ -8,7 +8,16 @@ flushable-overflow = { CAPITALIZE($entity) } переполняется, всё 
 defecation-seat-overflow = { CAPITALIZE($seat) } переполнен, всё выливается на пол!
 
 plumbing-analyzer-header = [bold]Анализ труб: { $target }[/bold]
-plumbing-analyzer-network = Сеть у отверстия «{ $node }»: заполнена на [color=yellow]{ $percent }%[/color] ({ $volume }/{ $capacity } ед.)
+plumbing-analyzer-network = { $side }: заполнена на [color=yellow]{ $percent }%[/color] ({ $volume }/{ $capacity } ед.)
+plumbing-analyzer-network-single = Сеть труб: заполнена на [color=yellow]{ $percent }%[/color] ({ $volume }/{ $capacity } ед.)
+plumbing-node-inlet = Сторона входа
+plumbing-node-outlet = Сторона выхода
+plumbing-node-filtered = Сторона фильтрата
+plumbing-node-port = Порт
+
+plumbing-examine-connected = Он [color=green]подключён[/color] к сети труб.
+plumbing-examine-disconnected = Он [color=red]не подключён[/color] к сети труб.
+shower-no-water = В душе нет воды.
 plumbing-analyzer-empty =   Пусто.
 plumbing-analyzer-reagent =   { $reagent }: { $quantity } ед. ({ $percent }%)
 
@@ -40,10 +49,19 @@ ent-PlumbingPump = жидкостный насос
 ent-PlumbingFilter = жидкостный фильтр
     .desc = Отправляет выбранную жидкость в боковое отверстие, а всё остальное пропускает дальше. Используйте, чтобы выбрать жидкость.
 ent-PlumbingPort = жидкостный порт
-    .desc = Подключение для бочек. Закрепите на нём бочку, чтобы подключить её к сети труб.
+    .desc = Точка подключения сети труб. Подсоедините трубу к открытой стороне и поставьте сверху раковину, унитаз, душ, слив или бочку, чтобы подключить их к сети. Поверните, чтобы выбрать сторону.
 ent-PlumbingBarrel = бочка для жидкостей
     .desc = Бочка для жидкостей. Закрепите её на жидкостном порту, чтобы подключить к сети труб.
 ent-PlumbingAnalyzer = анализатор жидкостных труб
     .desc = Ручной сканер. Используйте на трубе или устройстве, чтобы узнать давление и содержимое их сети.
 ent-SinkDrain = сливная раковина
     .desc = Раковина для слива, а не для набора жидкости. Всё, что в неё вылито, уходит в канализацию.
+
+plumbing-composter-examine-stored = Накоплено биомассы: { $amount }.
+plumbing-composter-empty = Биомассы пока нет.
+plumbing-composter-collected = Вы забираете биомассу: { $amount }.
+
+ent-PlumbingComposter = компостер
+    .desc = Превращает жидкие фекалии из сети труб в биомассу. Должен стоять на жидкостном порту и быть подключён к питанию. Используйте, чтобы забрать накопленную биомассу.
+ent-PlumbingComposterMachineCircuitboard = машинная плата компостера
+    .desc = Печатная плата для компостера.

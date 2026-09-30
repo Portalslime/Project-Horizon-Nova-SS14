@@ -9,10 +9,6 @@
       drawdepth: FloorObjects
       sprite: Objects/Specific/Janitorial/drain.rsi
       layers:
-      # Horizon: the sewage pipe sticks out of the drain on its south side.
-      - sprite: _Horizon/Structures/Plumbing/pipe.rsi
-        state: pipeHalf
-        color: "#8a5a2b"
       - state: icon
       - map: [ "enum.SolutionContainerLayers.Fill" ]
         state: fill-1
@@ -39,12 +35,13 @@
         plumbing:
           !type:PlumbingNode
           nodeGroupID: Plumbing
-          pipeDirection: South
-          rotationsEnabled: false # the sprite does not rotate
+          portable: true
           volume: 10
     - type: PlumbingInlet
       rate: 30
       spillWhenBlocked: false
+    # If the pipes are full and being pushed into, the drain overflows onto the floor to make room.
+    - type: PlumbingOverflow
     - type: DumpableSolution
       solution: drainBuffer
     - type: Appearance

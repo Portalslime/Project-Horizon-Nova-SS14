@@ -8,13 +8,13 @@
   components:
   - type: Clickable
   - type: InteractionOutline
+  # Horizon: a sink has to be anchored to join the plumbing network (an unanchored node never connects).
+  - type: Transform
+    anchored: true
+  - type: Anchorable
   - type: Sprite
     sprite: Structures/Furniture/sink.rsi
     layers:
-      # Horizon: the supply pipe sticks out of the sink on its south side, like the cryo pod's.
-      - sprite: _Horizon/Structures/Plumbing/pipe.rsi
-        state: pipeHalf
-        color: "#8a5a2b"
       - state: sink_stem
       - map: [ "enum.SolutionContainerLayers.Fill" ]
         state: sink-fill-1
@@ -37,7 +37,7 @@
       plumbing:
         !type:PlumbingNode
         nodeGroupID: Plumbing
-        pipeDirection: South
+        portable: true
         volume: 10
   - type: PlumbingOutlet
     solution: tank
@@ -125,9 +125,6 @@
   - type: Sprite
     sprite: Structures/Furniture/sink.rsi
     layers:
-      - sprite: _Horizon/Structures/Plumbing/pipe.rsi
-        state: pipeHalf
-        color: "#8a5a2b"
       - state: sink
       - map: [ "enum.SolutionContainerLayers.Fill" ]
         state: sink-fill-1

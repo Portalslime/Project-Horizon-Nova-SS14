@@ -18,6 +18,12 @@ public sealed class PlumbingSystem : EntitySystem
     [Dependency] private readonly PuddleSystem _puddle = default!;
 
     /// <summary>
+    /// Networks that were pushed into while full since the overflow devices last looked, see
+    /// <see cref="PlumbingNet.Rejected"/>.
+    /// </summary>
+    public readonly HashSet<PlumbingNet> BlockedNets = new();
+
+    /// <summary>
     /// Finds the plumbing network connected to the named node of an entity.
     /// </summary>
     public bool TryGetNet(EntityUid uid, string nodeName, [NotNullWhen(true)] out PlumbingNet? net,
@@ -55,14 +61,23 @@ public sealed class PlumbingSystem : EntitySystem
 
     /// <summary>
     /// Moves up to <paramref name="amount"/> from one network to another, limited by what the source holds and
-    /// the free space at the destination. Returns how much was actually moved.
+    /// the free space at the destination. What did not fit is noted on the destination, so that its overflow devices
+    /// can make room. Returns how much was actually moved.
     /// </summary>
     public FixedPoint2 Transfer(PlumbingNet from, PlumbingNet to, FixedPoint2 amount)
     {
         if (ReferenceEquals(from, to))
             return FixedPoint2.Zero;
 
-        var moved = FixedPoint2.Min(amount, FixedPoint2.Min(from.Fluid.Volume, to.FreeSpace));
+        var wanted = FixedPoint2.Min(amount, from.Fluid.Volume);
+        var moved = FixedPoint2.Min(wanted, to.FreeSpace);
+
+        if (wanted > moved)
+        {
+            to.Rejected += wanted - moved;
+            BlockedNets.Add(to);
+        }
+
         if (moved <= 0)
             return FixedPoint2.Zero;
 

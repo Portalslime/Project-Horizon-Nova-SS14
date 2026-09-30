@@ -13,9 +13,6 @@
   - type: Sprite
     sprite: Structures/Furniture/sink.rsi
     layers:
-      - sprite: _Horizon/Structures/Plumbing/pipe.rsi
-        state: pipeHalf
-        color: "#8a5a2b"
       - state: sink_stem
       - map: [ "enum.SolutionContainerLayers.Fill" ]
         state: sink-fill-1
@@ -34,12 +31,14 @@
       plumbing:
         !type:PlumbingNode
         nodeGroupID: Plumbing
-        pipeDirection: South
+        portable: true
         volume: 10
   # Backs up instead of spilling when the pipes are full, like the floor drain.
   - type: PlumbingInlet
     rate: 30
     spillWhenBlocked: false
+  # If the pipes are full and being pushed into, the sink overflows onto the floor to make room.
+  - type: PlumbingOverflow
   - type: Drain
     autoDrain: false
     unitsDestroyedPerSecond: 0

@@ -1,5 +1,6 @@
 using Content.Shared._Horizon.Plumbing;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.NodeContainer;
 using Robust.Shared.Random;
@@ -22,6 +23,13 @@ public sealed class PlumbingOutletSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<PlumbingOutletComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<PlumbingOutletComponent, ExaminedEvent>(OnExamined);
+    }
+
+    private void OnExamined(Entity<PlumbingOutletComponent> ent, ref ExaminedEvent args)
+    {
+        var connected = _plumbing.TryGetNet(ent, ent.Comp.NodeName, out _);
+        args.PushMarkup(Loc.GetString(connected ? "plumbing-examine-connected" : "plumbing-examine-disconnected"));
     }
 
     private void OnMapInit(Entity<PlumbingOutletComponent> ent, ref MapInitEvent args)

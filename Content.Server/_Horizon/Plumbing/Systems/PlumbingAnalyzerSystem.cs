@@ -53,8 +53,10 @@ public sealed class PlumbingAnalyzerSystem : EntitySystem
         var message = new StringBuilder(Loc.GetString("plumbing-analyzer-header", ("target", target)));
         foreach (var (name, net) in reports)
         {
-            message.Append('\n').Append(Loc.GetString("plumbing-analyzer-network",
-                ("node", name),
+            // A device with several openings says which side each network is on.
+            var key = reports.Count == 1 ? "plumbing-analyzer-network-single" : "plumbing-analyzer-network";
+            message.Append('\n').Append(Loc.GetString(key,
+                ("side", Loc.TryGetString("plumbing-node-" + name, out var side) ? side : name),
                 ("percent", (int) MathF.Round(net.FillRatio * 100f)),
                 ("volume", net.Fluid.Volume),
                 ("capacity", net.Capacity)));

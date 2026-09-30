@@ -9,10 +9,6 @@
   - type: Sprite
     sprite: Structures/Furniture/toilet.rsi
     layers:
-    # The sewage pipe sticks out of the toilet on its south side (rotates with it).
-    - sprite: _Horizon/Structures/Plumbing/pipe.rsi
-      state: pipeHalf
-      color: "#8a5a2b"
     - state: disposal
       map: [ "enum.DisposalUnitVisualLayers.Base" ]
     - map: [ "ToolOpenableVisualState.StashOpen" ] # Frontier
@@ -33,9 +29,11 @@
       plumbing:
         !type:PlumbingNode
         nodeGroupID: Plumbing
-        pipeDirection: South
+        portable: true
         volume: 10
   - type: Flushable
+  # If the pipes are full and being pushed into, the toilet overflows onto the floor to make room.
+  - type: PlumbingOverflow
   - type: DefecationSeat
   - type: ContainerContainer
     containers:

@@ -39,6 +39,13 @@ public sealed class PlumbingNet : BaseNodeGroup
     [ViewVariables]
     public float FillRatio => Capacity > 0 ? Math.Clamp(Fluid.Volume.Float() / Capacity.Float(), 0f, 1f) : 0f;
 
+    /// <summary>
+    /// Liquid that pumps tried to push into this network during the current step but that did not fit.
+    /// Overflow devices spill that much out of the network. Handled by PlumbingOverflowSystem.
+    /// </summary>
+    [ViewVariables]
+    public FixedPoint2 Rejected;
+
     private PlumbingSystem _plumbing = default!;
     private IPrototypeManager _prototype = default!;
 

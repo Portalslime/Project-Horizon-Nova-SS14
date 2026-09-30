@@ -30,6 +30,7 @@
 - type: latheRecipePack
   id: ServiceBoardsStatic
   recipes:
+  - PlumbingComposterMachineCircuitboard # Horizon
   # - BiogeneratorMachineCircuitboard # Frontier: dynamic
   - UniformPrinterMachineCircuitboard
   # - MicrowaveMachineCircuitboard # Frontier: dynamic
