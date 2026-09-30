@@ -63,6 +63,15 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 4.5
     baseRunningSpeed: 8
+  # The horse stays heavy, but while somebody drags it it weighs like a mob, otherwise it cannot be moved.
+  - type: PullMass
+    density: 50
+  # It is led head first, not dragged backwards.
+  - type: PullFacing
+  # It walks along routes in straight lines (see AnimalWalker), for strolls and on the way to food and water.
+  - type: AnimalWalker
+  # It stands around and now and then goes for a stroll in the open (see HorseIdleCompound).
+  - type: AnimalWander
   - type: Body
     prototype: AnimalRuminant
   - type: NpcFactionMember
@@ -71,6 +80,9 @@
   - type: HTN
     rootTask:
       task: HorseCompound
+    # The AI of this server stops when no player is within 32 tiles (npc.player_pause_distance), a horse keeps going
+    # from further away, it eats, drinks and walks about for the sake of a farm far from the players.
+    sleepPlayerCheckRangeOverride: 100
   # Eats what grows. The human feces also count as produce, hence the trash.
   - type: Diet
     whitelist:
@@ -84,9 +96,9 @@
     eatDelay: 2
     eatSound:
       collection: HorseEat
+  # A piece of manure for every point of nutrition, the stage scales it (see Growth).
   - type: ManureProducer
     product: HorseManure
-    nutritionPerDrop: 50
   - type: Growth
     meat: FoodMeatHorse
     stages:
@@ -99,6 +111,9 @@
       maxHealth: 80
       meatCount: 2
       price: 300
+      satietySeekBelow: 50
+      satietyDecayPerMinute: 1
+      manureUnitsPerNutrition: 0.25
     - id: Young
       duration: 1800
       names:
@@ -108,6 +123,9 @@
       maxHealth: 140
       meatCount: 4
       price: 700
+      satietySeekBelow: 50
+      satietyDecayPerMinute: 1.5
+      manureUnitsPerNutrition: 0.5
     - id: Adult
       names:
         Male: horse-name-adult-male
@@ -116,6 +134,10 @@
       maxHealth: 200
       meatCount: 6
       price: 1500
+      # A big animal gets hungry sooner, burns more and so eats more, and leaves more manure for it.
+      satietySeekBelow: 90
+      satietyDecayPerMinute: 2.5
+      manureUnitsPerNutrition: 1
       components:
       # Only a grown animal can be saddled and ridden.
       # Same as for vehicles: a rider moving with the animal must not get unbuckled over tiny differences in position

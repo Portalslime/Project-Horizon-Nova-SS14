@@ -8,6 +8,8 @@ debug-analyzer-section-health = Здоровье
 debug-analyzer-section-hunger = Голод
 debug-analyzer-section-thirst = Жажда
 debug-analyzer-section-needs = Нужды животного
+debug-analyzer-section-defecation = Туалет
+debug-analyzer-section-manure = Навоз
 debug-analyzer-section-growth = Рост
 debug-analyzer-section-rideable = Езда верхом
 
@@ -36,6 +38,14 @@ debug-analyzer-hydration-value = Гидратация
 debug-analyzer-hydration-level = Уровень гидратации
 debug-analyzer-hydration-decay = Расход гидратации в минуту
 debug-analyzer-hydration-seek = Ищет воду ниже
+
+debug-analyzer-defecation-value = Желание сходить в туалет
+debug-analyzer-defecation-urge = Позывы с
+debug-analyzer-defecation-fill = Базовый рост в минуту
+
+debug-analyzer-manure-yield = Кусков на единицу питательности
+debug-analyzer-manure-progress = До следующего куска
+debug-analyzer-manure-product = Оставляет
 
 debug-analyzer-growth-stage = Стадия
 debug-analyzer-growth-next = До следующей стадии

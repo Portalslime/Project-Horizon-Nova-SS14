@@ -13,6 +13,9 @@ animal-needs-hydration-satisfied = { CAPITALIZE(SUBJECT($entity)) } is not thirs
 animal-needs-hydration-low = { CAPITALIZE(SUBJECT($entity)) } looks thirsty.
 animal-needs-hydration-empty = [color=red]{ CAPITALIZE(SUBJECT($entity)) } is dying of thirst![/color]
 
+# Name of the manure stack
+stack-horse-manure = horse manure
+
 # Riding
 rideable-saddle-slot = Saddle
 rideable-no-saddle = { CAPITALIZE(THE($animal)) } has no saddle.

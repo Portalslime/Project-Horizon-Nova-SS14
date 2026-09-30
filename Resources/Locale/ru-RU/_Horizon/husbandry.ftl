@@ -13,6 +13,9 @@ animal-needs-hydration-satisfied = { CAPITALIZE(SUBJECT($entity)) } не хоч�
 animal-needs-hydration-low = { CAPITALIZE(SUBJECT($entity)) } хочет пить.
 animal-needs-hydration-empty = [color=red]{ CAPITALIZE(SUBJECT($entity)) } умирает от жажды![/color]
 
+# Название стака навоза
+stack-horse-manure = конский навоз
+
 # Езда верхом
 rideable-saddle-slot = Седло
 rideable-no-saddle = На { THE($animal) } нет седла.
@@ -41,7 +44,7 @@ ent-FoodMeatHorse = сырая конина
 ent-FoodMeatHorseCooked = конский стейк
     .desc = Приготовленный кусок конины. Постный и сладковатый.
 ent-HorseManure = конский навоз
-    .desc = Большая куча конского навоза. Растения его обожают.
+    .desc = Куча конского навоза. Растения его любят, но не слишком.
 ent-HorseSaddle = седло
     .desc = Наденьте на лошадь, чтобы ездить на ней верхом.
 ent-AnimalTrough = поилка для животных

@@ -9,17 +9,20 @@ namespace Content.Shared._Horizon.Husbandry.Production;
 [RegisterComponent]
 public sealed partial class ManureProducerComponent : Component
 {
+    /// <summary>
+    /// What is left behind. Should be a stackable entity: the pieces are spawned as stacks.
+    /// </summary>
     [DataField(required: true)]
     public EntProtoId Product;
 
     /// <summary>
-    /// How much nutrition the animal has to eat for one piece of <see cref="Product"/>.
+    /// How many pieces of <see cref="Product"/> the animal leaves for each point of nutrition it ate.
     /// </summary>
     [DataField]
-    public float NutritionPerDrop = 50f;
+    public float UnitsPerNutrition = 1f;
 
     /// <summary>
-    /// What has been eaten and not turned into a product yet.
+    /// The part of a piece that is not enough for one yet, it is kept for the next meal.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public float Accumulated;

@@ -8,6 +8,8 @@ debug-analyzer-section-health = Health
 debug-analyzer-section-hunger = Hunger
 debug-analyzer-section-thirst = Thirst
 debug-analyzer-section-needs = Animal needs
+debug-analyzer-section-defecation = Toilet
+debug-analyzer-section-manure = Manure
 debug-analyzer-section-growth = Growth
 debug-analyzer-section-rideable = Riding
 
@@ -36,6 +38,14 @@ debug-analyzer-hydration-value = Hydration
 debug-analyzer-hydration-level = Hydration level
 debug-analyzer-hydration-decay = Hydration drain per minute
 debug-analyzer-hydration-seek = Looks for water below
+
+debug-analyzer-defecation-value = Urge to go
+debug-analyzer-defecation-urge = Urge starts at
+debug-analyzer-defecation-fill = Base fill per minute
+
+debug-analyzer-manure-yield = Pieces per nutrition
+debug-analyzer-manure-progress = Until next piece
+debug-analyzer-manure-product = Leaves behind
 
 debug-analyzer-growth-stage = Stage
 debug-analyzer-growth-next = Next stage in

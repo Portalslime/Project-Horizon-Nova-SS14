@@ -75,14 +75,24 @@
   - node: horse steak
     entity: FoodMeatHorseCooked
 
-# What a horse leaves behind. It is not food (no Food component), nothing eats it, but it is produce, so
-# the biogenerator and the grinder take it. Three times the feces of a human.
+# What a horse leaves behind, one piece for every point of nutrition (less for young animals). It stacks, up to
+# a hundred pieces. The solution is per piece: a stack of a hundred holds a hundred times as much, the grinder
+# counts it that way. It is not food (no Food component), nothing eats it, but it is produce.
+- type: stack
+  id: HorseManure
+  name: stack-horse-manure
+  spawn: HorseManure
+  maxCount: 100
+
 - type: entity
   parent: BaseItem
   id: HorseManure
   name: horse manure
-  description: A big pile of horse manure. Plants love it.
+  description: A pile of horse manure. Plants like it, but not too much.
   components:
+  - type: Stack
+    stackType: HorseManure
+    count: 1
   - type: Sprite
     sprite: _Horizon/Objects/Misc/feces.rsi
     state: icon
@@ -92,10 +102,10 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 60
+        maxVol: 1
         reagents:
         - ReagentId: Feces
-          Quantity: 60
+          Quantity: 0.5
   - type: Produce
   - type: Extractable
     grindableSolutionName: food

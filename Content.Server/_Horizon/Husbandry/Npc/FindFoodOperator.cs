@@ -32,8 +32,17 @@ public sealed partial class FindFoodOperator : HTNOperator
     [DataField]
     public string KeyCoordinates = "TargetCoordinates";
 
+    /// <summary>
+    /// The way to the target for <c>AnimalGoToOperator</c>: the tiles of the path and then the target itself.
+    /// </summary>
     [DataField]
-    public float Range = 10f;
+    public string KeyRoute = "TargetRoute";
+
+    /// <summary>
+    /// How far the animal looks for food, in tiles.
+    /// </summary>
+    [DataField]
+    public float Range = 30f;
 
     /// <summary>
     /// How many of the closest foods are checked for a path before giving up.
@@ -81,10 +90,20 @@ public sealed partial class FindFoodOperator : HTNOperator
             if (path.Result == PathResult.NoPath)
                 continue;
 
+            var target = new EntityCoordinates(food, Vector2.Zero);
+            var route = new List<EntityCoordinates>(path.Path.Count + 1);
+            foreach (var poly in path.Path)
+            {
+                route.Add(new EntityCoordinates(poly.GraphUid, poly.Box.Center));
+            }
+
+            route.Add(target);
+
             return (true, new Dictionary<string, object>
             {
                 { Key, food },
-                { KeyCoordinates, new EntityCoordinates(food, Vector2.Zero) },
+                { KeyCoordinates, target },
+                { KeyRoute, route },
             });
         }
 

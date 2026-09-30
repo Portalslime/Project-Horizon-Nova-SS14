@@ -51,6 +51,16 @@ public sealed class RideableSystem : EntitySystem
         SubscribeLocalEvent<RideableComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<RideableComponent, GetAdditionalAccessEvent>(OnGetAdditionalAccess);
         SubscribeLocalEvent<RiderComponent, PullAttemptEvent>(OnRiderPullAttempt);
+        SubscribeLocalEvent<RiderComponent, AttemptMobTargetCollideEvent>(OnRiderTargetCollide);
+    }
+
+    /// <summary>
+    /// Mobs push each other apart. The rider sits exactly where the animal is, so without this the animal would shove
+    /// and slow itself down on the server, which the client that predicts the ride knows nothing about.
+    /// </summary>
+    private void OnRiderTargetCollide(Entity<RiderComponent> ent, ref AttemptMobTargetCollideEvent args)
+    {
+        args.Cancelled = true;
     }
 
     private void OnStartup(Entity<RideableComponent> ent, ref ComponentStartup args)

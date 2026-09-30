@@ -1,5 +1,5 @@
 # A horse looks for food and water before it gets desperate, unlike the usual FoodCompound.
-# Reaching the target, eating and drinking are done by the Husbandry operators.
+# Finding the target, walking to it, eating and drinking are done by the Husbandry operators.
 - type: htnCompound
   id: HorseCompound
   branches:
@@ -11,13 +11,10 @@
               need: Satiety
           operator: !type:FindFoodOperator
 
+        # The way is walked by the AnimalWalker, not by the usual steering of the AI, which twitches.
         - !type:HTNPrimitiveTask
-          operator: !type:MoveToOperator
-            pathfindInPlanning: true
-            removeKeyOnFinish: false
-            targetKey: TargetCoordinates
-            pathfindKey: TargetPathfind
-            rangeKey: MeleeRange
+          operator: !type:AnimalGoToOperator
+            arriveDistance: 1.5
 
         - !type:HTNPrimitiveTask
           preconditions:
@@ -41,12 +38,8 @@
           operator: !type:FindWaterOperator
 
         - !type:HTNPrimitiveTask
-          operator: !type:MoveToOperator
-            pathfindInPlanning: true
-            removeKeyOnFinish: false
-            targetKey: TargetCoordinates
-            pathfindKey: TargetPathfind
-            rangeKey: MeleeRange
+          operator: !type:AnimalGoToOperator
+            arriveDistance: 1.5
 
         - !type:HTNPrimitiveTask
           preconditions:
@@ -63,4 +56,35 @@
 
     - tasks:
         - !type:HTNCompoundTask
-          task: IdleCompound
+          task: HorseIdleCompound
+
+# Stands around, and now and then walks to a random place in the open. The walking is not the usual steering of the
+# AI (which twitches against walls), see AnimalWander.
+- type: htnCompound
+  id: HorseIdleCompound
+  branches:
+    # Still standing around from the last time.
+    - tasks:
+        - !type:HTNPrimitiveTask
+          operator: !type:WaitOperator
+            key: IdleTime
+          preconditions:
+            - !type:KeyExistsPrecondition
+              key: IdleTime
+
+    # Walk somewhere or stay, then stand around for a while.
+    - preconditions:
+        - !type:BuckledPrecondition
+          isBuckled: false
+        - !type:PulledPrecondition
+          isPulled: false
+      tasks:
+        - !type:HTNPrimitiveTask
+          operator: !type:AnimalWanderOperator
+
+        - !type:HTNPrimitiveTask
+          operator: !type:WaitOperator
+            key: IdleTime
+          preconditions:
+            - !type:KeyExistsPrecondition
+              key: IdleTime

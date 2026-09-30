@@ -2,7 +2,7 @@
 
 Автономный модуль: нужды (сытость и жажда), пол, рост по стадиям, питание и питьё, навоз, езда верхом. Первое животное — лошадь (`MobHorse`). Новые животные делаются от `BaseHusbandryAnimal` (см. раздел 9).
 
-Модуль не правит ни одного апстримного файла и не зависит от ванильных `Hunger`, `Thirst`, `Reproductive`, `Vehicle`, `Defecation`. Он использует только публичные системы и события движка (раздел 6). Поэтому его можно вынуть папками и перенести.
+Модуль почти не правит апстримные файлы (исключение: две правки для стаков навоза, см. раздел 10) и не зависит от ванильных `Hunger`, `Thirst`, `Reproductive`, `Vehicle`, `Defecation`. Он использует только публичные системы и события движка (раздел 6). Поэтому его можно вынуть папками и перенести.
 
 Статус: собирается, YAML-линтер прототипов модуля проходит, интеграционные тесты `Content.IntegrationTests/Tests/_Horizon/HorseRideTest.cs` проходят (езда, снятие седла, жеребёнок и молодая, здоровье по стадиям), в игре проверено частично. Спрайты и звуки — плейсхолдеры (раздел 10).
 
@@ -16,22 +16,26 @@ AnimalNeedsSystem (раз в секунду)
   значение <= SeekBelow  ──► NeedPrecondition выполняется
   значение <= 0          ──► раз в DamageInterval урон (DeprivationDamage × минуты на нуле)
 
-HTN HorseCompound (ветка еды, ветка воды, иначе Idle)
-  NeedPrecondition ─► FindFoodOperator / FindWaterOperator ─► MoveToOperator ─► AnimalEatOperator / AnimalDrinkOperator ─► WaitOperator
+HTN HorseCompound (ветка еды, ветка воды, иначе HorseIdleCompound)
+  HorseIdleCompound: AnimalWanderOperator ─► AnimalWanderSystem (прогулка из нескольких отрезков, каждый — маршрут для AnimalWalkerSystem)
+                     ─► WaitOperator (время стоянки)
+  NeedPrecondition ─► FindFoodOperator / FindWaterOperator ─► AnimalGoToOperator ─► AnimalEatOperator / AnimalDrinkOperator ─► WaitOperator
+                      (цель + путь тайлов, 30 тайлов)           (AnimalWalkerSystem: путь срезается по прямым, ходьба без рулёжки)
                       (ищет цель, проверяет путь)              (идёт)            (запускает AnimalFeedingSystem.TryEat/TryDrink)
 
 AnimalFeedingSystem
   TryEat / TryDrink ─► DoAfter ─► по завершении:
      AnimalNeedsSystem.ModifySatiety / ModifyHydration
      Appearance AnimalVisuals.Eating (true на время DoAfter) ─► GenericVisualizer меняет состояние слоёв
-     событие AnimalAteEvent  ─► ManureProducerSystem: копит питательность, по порогу спавнит Product
+     событие AnimalAteEvent  ─► ManureProducerSystem: питательность × UnitsPerNutrition = куски Product (стак), остаток копится
      событие AnimalDrankEvent (пока никто не слушает)
 
 GrowthSystem
   MapInit: AnimalSexSystem.EnsureRolled, выбор начальной стадии ─► SetStage
   Update: по таймеру переход на следующую стадию ─► SetStage
   SetStage: добавляет ComponentRegistry стадии, поднимает GrowthStageChangedEvent
-     GrowthEffectsSystem: имя (по стадии и полу), масштаб спрайта, Butcherable (мясо), MobPrice (цена)
+     GrowthEffectsSystem: имя (по стадии и полу), масштаб спрайта, Butcherable (мясо), MobPrice (цена),
+                          порог поиска еды и расход сытости в AnimalNeeds, выход навоза в ManureProducer
 
 RideableSystem (Shared, предсказывается)
   Strap включён, только пока в слоте есть седло
@@ -69,7 +73,11 @@ RideableSystem (Shared, предсказывается)
 | `Feeding/DietComponent.cs` | 42 | что ест животное | `EntityWhitelist` |
 | `Feeding/WaterSourceComponent.cs` | 31 | из чего пьёт животное | нет |
 | `Feeding/FeedingEvents.cs` | 22 | `AnimalAteEvent`, `AnimalDrankEvent`, DoAfter-события | `DoAfterEvent` |
-| `Production/ManureProducerComponent.cs` | 29 | продукт и порог | нет |
+| `Production/ManureProducerComponent.cs` | 32 | продукт и кусков на единицу питательности | нет |
+| `Walking/AnimalWalkerComponent.cs` | 115 | настройки ходьбы (допуски, зазор, замедление, застревание), маршрут и статус | нет |
+| `Wander/AnimalWanderComponent.cs` | 125 | настройки прогулок: шанс, время стоянки, отрезки, дистанции, повороты, паузы | нет |
+| `Pulling/PullFacingComponent.cs` | 21 | скорость поворота и минимальная дистанция | нет |
+| `Pulling/PullMassComponent.cs` | 26 | плотность фикстур, пока животное тащат | нет |
 | `Rideable/RideableComponent.cs` | 48 | слот седла, руки, редирект урона, оффсеты, текущий всадник | сетевой компонент |
 | `Rideable/SaddleComponent.cs` | 9 | маркер седла | нет |
 | `Rideable/RiderComponent.cs` | 13 | на всаднике, ссылка на животное | нет |
@@ -86,12 +94,18 @@ RideableSystem (Shared, предсказывается)
 | `Growth/GrowthSystem.cs` | 84 | стадии по времени | MobState, `AddComponents` |
 | `Growth/GrowthEffectsSystem.cs` | 46 | применяет стадию к имени, размеру, мясу, цене | MetaData, ScaleVisuals, `Butcherable`, `MobPrice` (`_NF`) |
 | `Feeding/AnimalFeedingSystem.cs` | 180 | `CanEat`, `TryEat`, `CanDrink`, `TryDrink`, обработка DoAfter | DoAfter, Appearance, Audio, SolutionContainer, Whitelist, Container, `FoodComponent` |
-| `Production/ManureProducerSystem.cs` | 36 | навоз по `AnimalAteEvent` | Audio |
+| `Production/ManureProducerSystem.cs` | 37 | навоз по `AnimalAteEvent` | Audio, `StackSystem` (стаки) |
 | `Npc/NeedPrecondition.cs` | 32 | предусловие HTN «нужда ниже порога» | HTN |
 | `Npc/FindFoodOperator.cs` | 93 | ищет ближайшую съедобную и достижимую еду | HTN, EntityLookup, Pathfinding |
 | `Npc/FindWaterOperator.cs` | 89 | то же для воды | HTN, EntityLookup, Pathfinding |
 | `Npc/AnimalEatOperator.cs` | 43 | запускает еду, ставит `IdleTime` | HTN |
 | `Npc/AnimalDrinkOperator.cs` | 43 | запускает питьё, ставит `IdleTime` | HTN |
+| `Walking/AnimalWalkerSystem.cs` | 270 | ходьба по маршруту (ввод в `InputMover` раз в тик), срезание пути по прямым, проверки свободного места | `SharedPhysicsSystem` (лучи), `SharedMapSystem`, `TurfSystem`, `InputMoverComponent`, `PullableComponent` |
+| `Wander/AnimalWanderSystem.cs` | 200 | прогулки: выбор места, отрезки, паузы | `AnimalWalkerSystem` |
+| `Npc/AnimalWanderOperator.cs` | 65 | запускает прогулку из HTN, задаёт время стоянки | HTN |
+| `Npc/AnimalGoToOperator.cs` | 95 | ведёт к цели по маршруту из блэкборда | HTN, `AnimalWalkerSystem` |
+| `Pulling/PullFacingSystem.cs` | 36 | пока животное тащат, плавно поворачивает его мордой к тянущему | `PullableComponent`, `RotateToFaceSystem` |
+| `Pulling/PullMassSystem.cs` | 70 | облегчает тащимое животное, потом возвращает массу | `PullStartedMessage`/`PullStoppedMessage`, `SharedPhysicsSystem.SetDensity` |
 | `Rideable/RideableNpcSystem.cs` | 36 | включает/выключает HTN по событиям езды | `HTNSystem.SetHTNEnabled` |
 | `Rideable/RiderDamageRedirectSystem.cs` | 40 | урон всаднику → животному | `BeforeDamageChangedEvent`, Damageable |
 
@@ -129,14 +143,18 @@ RideableSystem (Shared, предсказывается)
 | `Growth` | `stages`, `initialStage` (последняя, если не задана), `meat` `FoodMeat` | `GrowthSystem`, `GrowthEffectsSystem` |
 | `Diet` | `whitelist`, `blacklist`, `solution` `food`, `nutritionPerUnit` 1, `eatDelay` 2 с, `eatSound` | `AnimalFeedingSystem`, операторы HTN |
 | `WaterSource` | `solution` `tank`, `amountPerDrink` 15, `hydrationPerUnit` 1, `delay` 2 с, `drinkSound` | `AnimalFeedingSystem` |
-| `ManureProducer` | `product` (обязательно), `nutritionPerDrop` 50, `sound` | `ManureProducerSystem` |
+| `ManureProducer` | `product` (обязательно, стакающаяся сущность), `unitsPerNutrition` 1, `sound` | `ManureProducerSystem` |
+| `AnimalWalker` | `waypointTolerance` 0.4, `slowDistance` 1.5, `minSpeedFraction` 0.35, `clearance` 0.45 (половина ширины коридора), `stuckTime` 1.5 с, `stuckDistance` 0.2, `maxRouteTime` 90 с, `smoothLookahead` 15 | `AnimalWalkerSystem` |
+| `AnimalWander` | `walkChance` 0.85, `standTime` 4–12 с, `retryTime` 2–5 с (если места нет), `legs` 2–4 (отрезков за прогулку), `minDistance` 4 и `maxDistance` 10 (желаемая длина отрезка, короче там, где тесно), `minLegDistance` 2, `turnAngle` 70°, `legPause` 0.5–2.5 с, `probes` 10, `minClearProbes` 3, `arriveDistance` 0.3, `maxWalkTime` 120 с | `AnimalWanderSystem`, `AnimalWanderOperator` |
+| `PullMass` | `density` 50 | `PullMassSystem` |
+| `PullFacing` | `rotationSpeed` 8, `minDistance` 0.4 | `PullFacingSystem` |
 | `Rideable` | `saddleSlot` `saddle_slot`, `requiredHands` 1, `redirectDamage` true, `riderOpensDoors` true, `south/north/east/westOffset` | `RideableSystem`, `RideableNpcSystem`, `RiderDamageRedirectSystem`, `RideableVisualsSystem` |
 | `Saddle` | маркер | белый список слота |
 | `Rider` | `mount` | ставится и снимается `RideableSystem` |
 
 `NeedState` (вложенные `satiety` и `hydration`): `value` (−1 = бросить из `startingRange`), `max` 100, `startingRange` 70–100, `decayPerMinute`, `seekBelow` 50, `deprivationDamage` (урон в минуту при нуле). По умолчанию сытость убывает на 2 в минуту, жажда на 1.
 
-`GrowthStageDef`: `id`, `duration` (секунды, пусто у последней), `names` (пол → ключ локализации), `scale`, `maxHealth` (порог смерти, 0 — не менять), `meatCount`, `price`, `components` (добавляются при входе в стадию; порядок в списке важен: `Strap` и слот идут раньше `Rideable`).
+`GrowthStageDef`: `id`, `duration` (секунды, пусто у последней), `names` (пол → ключ локализации), `scale`, `maxHealth` (порог смерти, 0 — не менять), `meatCount`, `price`, `satietySeekBelow` (порог поиска еды, пусто — не менять), `satietyDecayPerMinute` (расход сытости, то есть сколько животное ест, пусто — не менять), `manureUnitsPerNutrition` (кусков навоза на единицу питательности, пусто — не менять), `components` (добавляются при входе в стадию; порядок в списке важен: `Strap` и слот идут раньше `Rideable`).
 
 ---
 
@@ -173,10 +191,11 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 |---|---|
 | Здоровье | задаётся стадией (`maxHealth`): жеребёнок 80, молодая 140, взрослая 200 (порог `Dead` в `MobThresholds`), замедление от урона с 120 и 160 |
 | Скорость | ходьба 4.5, бег 8 |
-| Сытость | 100, −2/мин, искать еду при ≤ 50, 5 урона/мин при 0 |
+| Масса | плотность 600 (~380 кг); пока лошадь тащат, `PullMass` на время опускает плотность фикстур до 50 (как у моба), иначе подвижный сустав перетаскивания не сдвигает такую массу |
+| Сытость | 100; расход и порог поиска еды задаёт стадия: жеребёнок −1/мин и ≤ 50, молодая −1.5/мин и ≤ 50, взрослая −2.5/мин и ≤ 90; 5 урона/мин при 0. Чем животное больше, тем больше оно ест |
 | Жажда | 100, −1/мин, искать воду при ≤ 50, 5 урона/мин при 0 |
 | Рацион | `Produce`, без тегов `Meat` и `Trash` (человеческий `Feces` тоже `Produce`) |
-| Навоз | `HorseManure` за каждые 50 питательности, в нём 60u `Feces` |
+| Навоз | `HorseManure`, стак до 100 (стак `HorseManure`); кусков на единицу съеденной питательности: жеребёнок 0.25, молодая 0.5, взрослая 1; в каждом куске 0.5u `Feces` (раньше было 1.2u на единицу питательности) |
 | Стадии | жеребёнок 15 мин / масштаб 0.6 / 2 мяса / цена 300; молодая 30 мин / 0.85 / 4 / 700; взрослая / 1.0 / 6 / 1500 |
 | Езда | только у взрослой: `Strap`, `ItemSlots` (слот седла), `ItemMapper` и `Rideable` добавляет стадия `Adult` (у жеребёнка и молодой слота седла нет), одна рука на поводья. `Strap` с `unbuckleDistanceSquared: 0.09` и `maintainSpriteLayers: true`, как у транспорта |
 | Цены мяса | сырое 40, готовое 60 (`StaticPrice`) |
@@ -193,7 +212,7 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 | Еда | `FoodComponent` как маркер «съедобно», раствор `food` (его объём = питательность), `SharedSolutionContainerSystem`, `EntityWhitelist` | `AnimalFeedingSystem`, `FindFoodOperator`, `DietComponent` | свой «предмет-еда» со значением питательности |
 | Вода | `SolutionContainerManager` раствор `tank`, `SplitSolution` | `AnimalFeedingSystem` | запас воды источника |
 | Действие с задержкой | `SharedDoAfterSystem`, `DoAfterArgs`, `SimpleDoAfterEvent` | `AnimalFeedingSystem`, `FeedingEvents` | таймер действия с отменой при движении и уроне |
-| ИИ | HTN: `HTNOperator`, `HTNPrecondition`, `NPCBlackboard`, `PathfindingSystem.GetPath`, `MoveToOperator`, `WaitOperator`, `KeyExistsPrecondition`, `IdleCompound`, `HTNSystem.SetHTNEnabled` | `Npc/*`, `RideableNpcSystem`, `horse_npc.yml` | поведение ИИ: «проголодался → найти достижимую еду → дойти → съесть» |
+| ИИ | HTN: `HTNOperator`, `HTNPrecondition`, `NPCBlackboard`, `PathfindingSystem.GetPath`, `PathPoly`, `InputMoverComponent.CurTick*Movement`, `WaitOperator`, `KeyExistsPrecondition`, `IdleCompound`, `HTNSystem.SetHTNEnabled` | `Npc/*`, `RideableNpcSystem`, `horse_npc.yml` | поведение ИИ: «проголодался → найти достижимую еду → дойти → съесть» |
 | Езда | `SharedBuckleSystem`/`StrapComponent`, `SharedMoverController.SetRelay`, `RelayInputMoverComponent`, `SharedVirtualItemSystem`, `ItemSlotsSystem`, `SharedHandsSystem`, `PullerComponent`/`PullAttemptEvent`, `ActionBlockerSystem` | `RideableSystem` | посадка, перенаправление управления, занятая рука, слот предмета |
 | Визуал | `SharedAppearanceSystem`, `GenericVisualizer`, `SpriteMovement`, `ItemMapper`, `SharedScaleVisualsSystem`, RSI | `AnimalFeedingSystem`, `GrowthEffectsSystem`, `horse.yml` | анимации и слои спрайта |
 | Разделка и цена | `ButcherableComponent.SpawnedEntities`, `MobPriceComponent` (`Content.Server._NF`), `StaticPrice` | `GrowthEffectsSystem`, `horse_food.yml` | данные «сколько мяса» и «сколько стоит» |
@@ -244,7 +263,7 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 3. Добавь `Diet` (белый и чёрный список) и, если нужно, `ManureProducer`.
 4. Добавь `Growth` со стадиями, если животное растёт. Названия по полу и стадии — в `Locale`.
 5. Сделай спрайты и слои, при необходимости `SpriteMovement` и `GenericVisualizer` для `enum.AnimalVisuals.Eating` (как у лошади).
-6. ИИ: скопируй `HorseCompound` (или собери свою ветку из тех же операторов) и укажи `rootTask` в `HTN`.
+6. ИИ: скопируй `HorseCompound` (или собери свою ветку из тех же операторов) и укажи `rootTask` в `HTN`. Прогулки (`AnimalWander`) у лошади свои: чтобы новое животное ходило так же, добавь ему компонент `AnimalWander` и используй `HorseIdleCompound` (или свою ветку с `AnimalWanderOperator`), иначе оно ходит по-ванильному.
 7. Если на животном можно ездить: слот `saddle_slot` с белым списком по компоненту `Saddle`, `Strap` с `enabled: false`, `Rideable` (в `Growth.stages[].components` для взрослой стадии, если оно растёт).
 8. Мясо: свои `Food...` и граф приготовления; `Growth.meat` указывает прототип сырого мяса.
 
@@ -257,7 +276,13 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 - **Отрисовка всадника простая:** на юг он под лошадью целиком, в остальных сторонах над ней. Нормальная посадка (голова лошади поверх всадника, ноги позади) требует разделить спрайт лошади на слои, это работа с артом.
 - **Тесты** запускаются в Release (`dotnet test -c Release`): в Debug отладочная проверка в чужом `Content.Client/_Mono/Audio/AudioEffectSystem` роняет тестовый клиент при любом звуке.
 - **Нет сообщения**, почему нельзя сесть на жеребёнка или молодую лошадь (`Strap` выключен, `Rideable` появляется только на взрослой стадии).
-- **Питательность** пока равна объёму раствора `food` × `nutritionPerUnit`. Значения для разных продуктов различаются слабо, подбирается в игре.
+- **Питательность** равна объёму раствора `food` × `nutritionPerUnit`, считается весь объём, а не только питательные вещества (яблоко 14, морковь 12). Сытость ограничена 100, лишнее пропадает, а навоз считается от всей съеденной питательности. Значения для разных продуктов различаются слабо, подбирается в игре.
+- **Правки вне модуля** (две, помечены `Horizon`), без них стак навоза не работает: `Content.Server/Materials/ProduceMaterialExtractorSystem.cs` (биогенератор считает раствор × размер стака) и `Content.Server/Botany/Systems/PlantHolderSystem.cs` (`CompostStack`: в грядку идёт столько кусков стака, сколько влезет, остальное остаётся в руке). Обе правки общие для любого стакающегося `Produce`.
+- **Баланс навоза:** в куске 0.5u `Feces`. Биогенератор: 1u = 1 биомасса, значит 0.5 за кусок, стак из 100 даёт 50; взрослая лошадь ≈ 75 биомассы в час (150 питательности × 1 кусок × 0.5), ящик почвы стоит 1600, то есть лошадь не заменяет покупку почвы. Путь «яблоко → лошадь → биомасса» всегда хуже прямого (яблоко 14 объёма: 7 против 10). Грядка: 1u `Feces` даёт 4 питательности, кусок 2, около 50 кусков заполняют пустую грядку, взрослая лошадь набирает их примерно за 20 минут.
+- **Прогулки (`AnimalWander`):** случайные перемещения лошади не используют штатный `NPCSteeringSystem`, который каждый тик пересчитывает направление из 16 и дёргает животных у стен. Прогулка состоит из нескольких отрезков (2–4): лошадь проверяет лучами коридор шириной с тело, идёт по прямой шагом и замедляется у цели, короткая пауза, и следующий отрезок с поворотом не более 70° от прошлого. Ограничения: нет привязки к «дому» (бродит где угодно), не проверяются опасные тайлы (лава, шипы), закрытые двери считаются стеной. Дорога к еде и воде тоже идёт через `AnimalWalker`: путь, найденный `FindFoodOperator`/`FindWaterOperator`, срезается по прямым там, где свободен коридор шириной с тело; при застревании маршрут проваливается и ИИ переплановывает (может выбрать ту же цель снова).
+- **Засыпание ИИ:** сервер (Mono) останавливает ИИ, когда в радиусе `npc.player_pause_distance` (32 тайла) нет игроков, и такие лошади стоят. Лошади переопределяют радиус: `HTN.sleepPlayerCheckRangeOverride: 100`.
+- **Навоз не сливается в стаки сам:** каждый приём пищи оставляет отдельный стак (до 100 кусков), сливать их приходится руками.
+- **Рывки при езде:** всадник и лошадь стоят в одной точке, и толчок мобов друг от друга (`MobCollision`) мог сдвигать и замедлять лошадь на сервере, о чём клиент не знал. `RideableSystem` отключает толчок всадника (`AttemptMobTargetCollideEvent`). В игре не проверено.
 - **Кулинарные рецепты**, принимающие `FoodMeat`, конину не принимают. Стейк готовится своим графом, нарезка даёт обычные котлеты.
 - **Поилка** не проверяет, что именно течёт по трубам: лошадь выпьет любую жидкость.
 - **Плейсхолдеры:**

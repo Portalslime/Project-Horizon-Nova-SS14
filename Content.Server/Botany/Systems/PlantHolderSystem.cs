@@ -29,6 +29,9 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.Labels.Components;
 using Content.Server.Station.Systems; // Frontier
+using Content.Server.Stack; // Horizon
+using Content.Shared.Chemistry.Components; // Horizon
+using Content.Shared.Stacks; // Horizon
 using Content.Server._Lua.Botany;
 
 namespace Content.Server.Botany.Systems;
@@ -51,6 +54,7 @@ public sealed class PlantHolderSystem : EntitySystem
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly StationSystem _station = default!; // Frontier
+    [Dependency] private readonly StackSystem _stack = default!; // Horizon
 
     public const float HydroponicsSpeedMultiplier = 1f;
     public const float HydroponicsConsumptionMultiplier = 2f;
@@ -360,6 +364,13 @@ public sealed class PlantHolderSystem : EntitySystem
                 ("usingItem", args.Used),
                 ("owner", uid)), uid, Filter.PvsExcept(args.User), true);
 
+            // Horizon: a stack is composted piece by piece, what does not fit stays in the hand.
+            if (TryComp<StackComponent>(args.Used, out var stack))
+            {
+                CompostStack(uid, component, args.Used, stack, produce);
+                return;
+            }
+
             if (_solutionContainerSystem.TryGetSolution(args.Used, produce.SolutionName, out var soln2, out var solution2))
             {
                 if (_solutionContainerSystem.ResolveSolution(uid, component.SoilSolutionName, ref component.SoilSolution, out var solution1))
@@ -382,6 +393,39 @@ public sealed class PlantHolderSystem : EntitySystem
             QueueDel(args.Used);
         }
     }
+
+    // Horizon start
+    /// <summary>
+    /// Composts a stack of produce (manure): the solution belongs to one piece, so as many pieces go into the tray
+    /// as it has room for and the rest stays in the stack.
+    /// </summary>
+    private void CompostStack(EntityUid uid, PlantHolderComponent component, EntityUid used, StackComponent stack, ProduceComponent produce)
+    {
+        if (!_solutionContainerSystem.TryGetSolution(used, produce.SolutionName, out _, out var pieceSolution) ||
+            !_solutionContainerSystem.ResolveSolution(uid, component.SoilSolutionName, ref component.SoilSolution, out var soil))
+        {
+            return;
+        }
+
+        var pieces = stack.Count;
+        if (pieceSolution.Volume > FixedPoint2.Zero)
+            pieces = Math.Min(pieces, (int) (soil.AvailableVolume / pieceSolution.Volume));
+
+        if (pieces <= 0)
+            return;
+
+        // A copy, the solution of the stack itself stays as it is.
+        var scaled = new Solution(pieceSolution);
+        scaled.ScaleSolution(pieces);
+        _solutionContainerSystem.TryAddSolution(component.SoilSolution.Value, scaled);
+
+        if (produce.Seed is { } seed)
+            AdjustNutrient(uid, seed.Potency / 2.5f * pieces, component);
+
+        ForceUpdateByExternalCause(uid, component);
+        _stack.Use(used, pieces, stack);
+    }
+    // Horizon end
 
     private void OnSolutionTransferred(Entity<PlantHolderComponent> ent, ref SolutionTransferredEvent args)
     {

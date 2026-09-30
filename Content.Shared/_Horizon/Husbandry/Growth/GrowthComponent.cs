@@ -78,6 +78,24 @@ public sealed partial class GrowthStageDef
     public double Price;
 
     /// <summary>
+    /// The satiety at which the animal starts looking for food in this stage. Null leaves it as it is.
+    /// </summary>
+    [DataField]
+    public float? SatietySeekBelow;
+
+    /// <summary>
+    /// How much satiety the animal loses per minute in this stage, so how much it has to eat. Null leaves it as it is.
+    /// </summary>
+    [DataField]
+    public float? SatietyDecayPerMinute;
+
+    /// <summary>
+    /// How many pieces of manure the animal leaves for each point of nutrition in this stage. Null leaves it as it is.
+    /// </summary>
+    [DataField]
+    public float? ManureUnitsPerNutrition;
+
+    /// <summary>
     /// Added to the animal when it enters the stage.
     /// </summary>
     [DataField]

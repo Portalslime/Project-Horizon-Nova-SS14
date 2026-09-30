@@ -4,6 +4,7 @@ using Content.Server.Materials.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Stacks; // Horizon
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Popups;
@@ -60,11 +61,14 @@ public sealed class ProduceMaterialExtractorSystem : EntitySystem
         if (!_solutionContainer.TryGetSolution(used, produce.SolutionName, out var solution))
             return false;
 
+        // Horizon: the solution belongs to one piece, a stack holds as many pieces as it counts.
+        var pieces = TryComp<StackComponent>(used, out var stack) ? stack.Count : 1;
+
         // Can produce even have fractional amounts? Does it matter if they do?
         // Questions man was never meant to answer.
         var matAmount = solution.Value.Comp.Solution.Contents
             .Where(r => ent.Comp.ExtractionReagents.Contains(r.Reagent.Prototype))
-            .Sum(r => r.Quantity.Float());
+            .Sum(r => r.Quantity.Float()) * pieces;
 
         var changed = (int)matAmount;
 

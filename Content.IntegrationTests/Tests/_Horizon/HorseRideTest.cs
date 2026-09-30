@@ -3,6 +3,11 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using Content.IntegrationTests.Tests.Movement;
+using Content.Server._Horizon.Husbandry.Wander;
+using Content.Server.NPC.HTN;
+using Content.Shared._Horizon.Husbandry.Needs;
+using Content.Shared._Horizon.Husbandry.Wander;
+using Content.Shared._Horizon.Husbandry.Production;
 using Content.Shared._Horizon.Husbandry.Rideable;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
@@ -15,6 +20,9 @@ using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Input;
@@ -93,6 +101,141 @@ public sealed class HorseRideTest : MovementTest
         Assert.That(moved, Is.GreaterThan(3f), "horse barely moved");
         Assert.That(reversals, Is.EqualTo(0), "horse went backwards");
         Assert.That(maxGap, Is.LessThan(0.5f), "client and server disagree");
+    }
+
+    [Test]
+    public async Task PullingLightensTheHorse()
+    {
+        await SpawnTarget("MobHorse");
+        var horse = STarget!.Value;
+        var pulling = SEntMan.System<PullingSystem>();
+        var physics = SEntMan.GetComponent<PhysicsComponent>(horse);
+        var heavy = physics.Mass;
+
+        await Server.WaitAssertion(() => Assert.That(pulling.TryStartPull(SPlayer, horse), Is.True, "could not pull the horse"));
+        await RunTicks(2);
+        Assert.That(physics.Mass, Is.LessThan(heavy / 2f), "the horse is as heavy as before");
+
+        await Server.WaitAssertion(() => Assert.That(pulling.TryStopPull(horse, SEntMan.GetComponent<PullableComponent>(horse)), Is.True));
+        await RunTicks(2);
+        Assert.That(physics.Mass, Is.EqualTo(heavy).Within(0.01f), "the horse did not get its weight back");
+    }
+
+    [Test]
+    public async Task HorseWalksToAPlaceInOneGo()
+    {
+        await SpawnTarget("MobHorse");
+        var horse = STarget!.Value;
+        var xform = Transform;
+        var wander = SEntMan.System<AnimalWanderSystem>();
+
+        // Its own brain stays out of this, only the walk itself is looked at.
+        await Server.WaitPost(() =>
+        {
+            SEntMan.System<HTNSystem>().SetHTNEnabled((horse, SEntMan.GetComponent<HTNComponent>(horse)), false);
+            var comp = SEntMan.GetComponent<AnimalWanderComponent>(horse);
+            comp.WalkChance = 1f;
+            wander.StartOrStand((horse, comp));
+        });
+        Assert.That(wander.IsWalking((horse, SEntMan.GetComponent<AnimalWanderComponent>(horse))), Is.True,
+            "the horse found no place to walk to in an empty room");
+
+        var start = xform.GetWorldPosition(horse);
+        var last = start;
+        var lastStep = Vector2.Zero;
+        var reversals = 0;
+        var travelled = 0f;
+
+        for (var i = 0; i < 3000 && wander.IsWalking((horse, SEntMan.GetComponent<AnimalWanderComponent>(horse))); i++)
+        {
+            await RunTicks(1);
+            var now = xform.GetWorldPosition(horse);
+            var step = now - last;
+
+            // The legs turn a bit, but the horse never turns around.
+            if (step.Length() > 0.01f)
+            {
+                if (lastStep != Vector2.Zero && Vector2.Dot(step, lastStep) < 0f)
+                    reversals++;
+                lastStep = step;
+            }
+
+            travelled += step.Length();
+            last = now;
+        }
+
+        Assert.That(wander.IsWalking((horse, SEntMan.GetComponent<AnimalWanderComponent>(horse))), Is.False, "the stroll never ended");
+        Assert.That(reversals, Is.EqualTo(0), "the horse went back and forth");
+        Assert.That(travelled, Is.GreaterThan(6f), "the horse barely walked, a stroll is several legs");
+    }
+
+    [Test]
+    public async Task HungryHorseWalksToFoodAndEatsIt()
+    {
+        await SpawnTarget("MobHorse");
+        var horse = STarget!.Value;
+        var xform = Transform;
+        var apple = EntityUid.Invalid;
+        var start = Vector2.Zero;
+
+        await Server.WaitPost(() =>
+        {
+            var position = xform.GetMapCoordinates(horse);
+            start = position.Position;
+            apple = SEntMan.SpawnEntity("FoodApple", new MapCoordinates(position.Position + new Vector2(6f, 0f), position.MapId));
+
+            // Hungry enough to look for food, the rest of the brain is the usual one.
+            SEntMan.GetComponent<AnimalNeedsComponent>(horse).Satiety.Value = 10f;
+        });
+
+        // The way there is walked by the horse itself and then it eats, a minute of game time is plenty.
+        for (var i = 0; i < 3600 && !SEntMan.Deleted(apple); i++)
+        {
+            await RunTicks(1);
+        }
+
+        Assert.That(SEntMan.Deleted(apple), Is.True, "the horse never ate the apple");
+        Assert.That(Vector2.Distance(start, xform.GetWorldPosition(horse)), Is.GreaterThan(3f), "the horse did not walk to it");
+    }
+
+    [Test]
+    public async Task PulledHorseFacesThePuller()
+    {
+        await SpawnTarget("MobHorse");
+        var horse = STarget!.Value;
+        var xform = Transform;
+        var pulling = SEntMan.System<PullingSystem>();
+
+        // Start with the horse turned away from the player.
+        await Server.WaitPost(() =>
+        {
+            var toPlayer = Angle.FromWorldVec(xform.GetWorldPosition(SPlayer) - xform.GetWorldPosition(horse));
+            xform.SetWorldRotation(horse, toPlayer + Angle.FromDegrees(180));
+            Assert.That(pulling.TryStartPull(SPlayer, horse), Is.True, "could not pull the horse");
+        });
+        await RunTicks(60);
+
+        var expected = Angle.FromWorldVec(xform.GetWorldPosition(SPlayer) - xform.GetWorldPosition(horse));
+        var diff = Math.Abs(Angle.ShortestDistance(xform.GetWorldRotation(horse), expected).Degrees);
+        Assert.That(diff, Is.LessThan(15), "the horse does not face the one who pulls it");
+    }
+
+    [Test]
+    public async Task RiderDoesNotPushTheHorse()
+    {
+        var horse = await Mount();
+        var pushed = 0;
+
+        await SetMovementKey(DirectionFlag.East, BoundKeyState.Down);
+        for (var i = 0; i < 60; i++)
+        {
+            await RunTicks(1);
+            if (SEntMan.GetComponent<MobCollisionComponent>(horse).Colliding)
+                pushed++;
+        }
+        await SetMovementKey(DirectionFlag.East, BoundKeyState.Up);
+
+        Assert.That(pushed, Is.EqualTo(0), "the horse was pushed by its own rider for this many ticks");
     }
 
     [Test]
@@ -191,7 +334,12 @@ public sealed class HorseRideTest : MovementTest
     [Test]
     public async Task FoalAndYoung()
     {
-        foreach (var (proto, health, rideable) in new[] { ("MobHorseFoal", 80, false), ("MobHorseYoung", 140, false), ("MobHorse", 200, true) })
+        foreach (var (proto, health, rideable, seekBelow, decay, manure) in new[]
+                 {
+                     ("MobHorseFoal", 80, false, 50f, 1f, 0.25f),
+                     ("MobHorseYoung", 140, false, 50f, 1.5f, 0.5f),
+                     ("MobHorse", 200, true, 90f, 2.5f, 1f),
+                 })
         {
             var horse = EntityUid.Invalid;
             await Server.WaitPost(() => horse = SEntMan.SpawnEntity(proto, Transform.GetMapCoordinates(SPlayer)));
@@ -205,6 +353,12 @@ public sealed class HorseRideTest : MovementTest
                 Assert.That(SEntMan.HasComponent<RideableComponent>(horse), Is.EqualTo(rideable), proto);
                 Assert.That(SEntMan.HasComponent<ItemSlotsComponent>(horse), Is.EqualTo(rideable), proto);
                 Assert.That(SEntMan.HasComponent<StrapComponent>(horse), Is.EqualTo(rideable), proto);
+
+                // A grown horse looks for food sooner, eats more and leaves more manure for it.
+                var satiety = SEntMan.GetComponent<AnimalNeedsComponent>(horse).Satiety;
+                Assert.That(satiety.SeekBelow, Is.EqualTo(seekBelow), proto);
+                Assert.That(satiety.DecayPerMinute, Is.EqualTo(decay), proto);
+                Assert.That(SEntMan.GetComponent<ManureProducerComponent>(horse).UnitsPerNutrition, Is.EqualTo(manure), proto);
             });
         }
     }

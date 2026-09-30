@@ -1,6 +1,8 @@
 using Content.Server._NF.Cargo.Components;
 using Content.Shared._Horizon.Husbandry.Core;
 using Content.Shared._Horizon.Husbandry.Growth;
+using Content.Shared._Horizon.Husbandry.Needs;
+using Content.Shared._Horizon.Husbandry.Production;
 using Content.Shared._Horizon.Husbandry.Sex;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
@@ -12,7 +14,8 @@ using Content.Shared.Storage;
 namespace Content.Server._Horizon.Husbandry.Growth;
 
 /// <summary>
-/// Applies what a growth stage means to an animal: its name, size, health, price and how much meat it gives.
+/// Applies what a growth stage means to an animal: its name, size, health, price, how much meat it gives,
+/// when it gets hungry, how much it eats and how much manure it leaves.
 /// </summary>
 public sealed class GrowthEffectsSystem : EntitySystem
 {
@@ -49,5 +52,17 @@ public sealed class GrowthEffectsSystem : EntitySystem
 
         if (TryComp<MobPriceComponent>(ent, out var price))
             price.Price = stage.Price;
+
+        if (TryComp<AnimalNeedsComponent>(ent, out var needs))
+        {
+            if (stage.SatietySeekBelow is { } seekBelow)
+                needs.Satiety.SeekBelow = seekBelow;
+
+            if (stage.SatietyDecayPerMinute is { } decay)
+                needs.Satiety.DecayPerMinute = decay;
+        }
+
+        if (stage.ManureUnitsPerNutrition is { } units && TryComp<ManureProducerComponent>(ent, out var manure))
+            manure.UnitsPerNutrition = units;
     }
 }

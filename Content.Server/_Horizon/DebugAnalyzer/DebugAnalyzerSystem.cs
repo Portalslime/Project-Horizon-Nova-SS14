@@ -1,8 +1,10 @@
 using System.Globalization;
 using Content.Server.Temperature.Components;
 using Content.Shared._Horizon.DebugAnalyzer;
+using Content.Shared._Horizon.Defecation;
 using Content.Shared._Horizon.Husbandry.Growth;
 using Content.Shared._Horizon.Husbandry.Needs;
+using Content.Shared._Horizon.Husbandry.Production;
 using Content.Shared._Horizon.Husbandry.Rideable;
 using Content.Shared._Horizon.Husbandry.Sex;
 using Content.Shared.Atmos;
@@ -120,6 +122,8 @@ public sealed class DebugAnalyzerSystem : EntitySystem
         TryAdd(sections, BuildHunger(target));
         TryAdd(sections, BuildThirst(target));
         TryAdd(sections, BuildNeeds(target));
+        TryAdd(sections, BuildDefecation(target));
+        TryAdd(sections, BuildManure(target));
         TryAdd(sections, BuildGrowth(target));
         TryAdd(sections, BuildRideable(target));
 
@@ -308,6 +312,51 @@ public sealed class DebugAnalyzerSystem : EntitySystem
         rows.Add(new DebugAnalyzerRow(L($"{name}-level"), level.ToString(), severity: severity));
         rows.Add(new DebugAnalyzerRow(L($"{name}-decay"), Fmt(need.DecayPerMinute)));
         rows.Add(new DebugAnalyzerRow(L($"{name}-seek"), Fmt(need.SeekBelow)));
+    }
+
+    private DebugAnalyzerSection? BuildDefecation(EntityUid target)
+    {
+        if (!TryComp<DefecationComponent>(target, out var defecation))
+            return null;
+
+        var value = defecation.Value;
+        var threshold = defecation.CurrentThreshold;
+        var severity = threshold switch
+        {
+            DefecationThreshold.Urge => DebugAnalyzerSeverity.Warning,
+            DefecationThreshold.Critical or DefecationThreshold.Accident => DebugAnalyzerSeverity.Critical,
+            _ => DebugAnalyzerSeverity.Normal,
+        };
+
+        var rows = new List<DebugAnalyzerRow>();
+        if (defecation.Thresholds.TryGetValue(DefecationThreshold.Accident, out var max))
+            rows.Add(new DebugAnalyzerRow(L("defecation-value"), $"{Fmt(value)} / {Fmt(max)}", Fraction(value, max), severity));
+        else
+            rows.Add(new DebugAnalyzerRow(L("defecation-value"), Fmt(value), severity: severity));
+
+        rows.Add(new DebugAnalyzerRow(L("threshold"), threshold.ToString(), severity: severity));
+
+        if (defecation.Thresholds.TryGetValue(DefecationThreshold.Urge, out var urge))
+            rows.Add(new DebugAnalyzerRow(L("defecation-urge"), Fmt(urge)));
+
+        rows.Add(new DebugAnalyzerRow(L("defecation-fill"), Fmt(defecation.BaseFillRate * 60f)));
+
+        return new DebugAnalyzerSection(L("section-defecation"), rows);
+    }
+
+    private DebugAnalyzerSection? BuildManure(EntityUid target)
+    {
+        if (!TryComp<ManureProducerComponent>(target, out var manure))
+            return null;
+
+        var rows = new List<DebugAnalyzerRow>
+        {
+            new(L("manure-yield"), Fmt(manure.UnitsPerNutrition)),
+            new(L("manure-progress"), $"{Fmt(manure.Accumulated)} / 1", Fraction(manure.Accumulated, 1f)),
+            new(L("manure-product"), manure.Product.Id),
+        };
+
+        return new DebugAnalyzerSection(L("section-manure"), rows);
     }
 
     private DebugAnalyzerSection? BuildGrowth(EntityUid target)
