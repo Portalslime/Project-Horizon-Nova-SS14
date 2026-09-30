@@ -29,7 +29,7 @@ public sealed partial class PlumbingPortableComponent : Component
 /// Handled by PlumbingTankSystem.
 /// </summary>
 [RegisterComponent, AutoGenerateComponentPause]
-public sealed partial class PlumbingTankComponent : Component
+public sealed partial class PlumbingTankComponent : Component, IPlumbingTimed
 {
     [DataField]
     public string Solution = "barrel";
@@ -44,8 +44,8 @@ public sealed partial class PlumbingTankComponent : Component
     public FixedPoint2 Rate = 50;
 
     [DataField]
-    public TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
+    public TimeSpan UpdateInterval { get; set; } = TimeSpan.FromSeconds(1);
 
     [DataField, AutoPausedField]
-    public TimeSpan NextUpdate;
+    public TimeSpan NextUpdate { get; set; }
 }

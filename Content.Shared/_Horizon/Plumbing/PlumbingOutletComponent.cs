@@ -7,7 +7,7 @@ namespace Content.Shared._Horizon.Plumbing;
 /// feeds sinks and showers from a supply line. Handled by PlumbingOutletSystem.
 /// </summary>
 [RegisterComponent, AutoGenerateComponentPause]
-public sealed partial class PlumbingOutletComponent : Component
+public sealed partial class PlumbingOutletComponent : Component, IPlumbingTimed
 {
     /// <summary>
     /// The solution that gets filled from the network.
@@ -28,8 +28,8 @@ public sealed partial class PlumbingOutletComponent : Component
     public FixedPoint2 Rate = 20;
 
     [DataField]
-    public TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
+    public TimeSpan UpdateInterval { get; set; } = TimeSpan.FromSeconds(1);
 
     [DataField, AutoPausedField]
-    public TimeSpan NextUpdate;
+    public TimeSpan NextUpdate { get; set; }
 }

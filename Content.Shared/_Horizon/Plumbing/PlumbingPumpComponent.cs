@@ -8,7 +8,7 @@ namespace Content.Shared._Horizon.Plumbing;
 /// side. Needs no power. Handled by PlumbingPumpSystem.
 /// </summary>
 [RegisterComponent, AutoGenerateComponentPause]
-public sealed partial class PlumbingPumpComponent : Component
+public sealed partial class PlumbingPumpComponent : Component, IPlumbingTimed
 {
     [DataField]
     public string InletNodeName = "inlet";
@@ -26,8 +26,8 @@ public sealed partial class PlumbingPumpComponent : Component
     public bool Enabled = true;
 
     [DataField]
-    public TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
+    public TimeSpan UpdateInterval { get; set; } = TimeSpan.FromSeconds(1);
 
     [DataField, AutoPausedField]
-    public TimeSpan NextUpdate;
+    public TimeSpan NextUpdate { get; set; }
 }

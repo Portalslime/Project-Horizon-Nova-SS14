@@ -33,3 +33,5 @@ plumbing-filter-ui-none = Nothing
 plumbing-composter-examine-stored = Biomass stored: { $amount }.
 plumbing-composter-empty = There is no biomass yet.
 plumbing-composter-collected = You collect { $amount } biomass.
+
+plumbing-port-occupied = Remove whatever is connected to the port first: { THE($other) }.

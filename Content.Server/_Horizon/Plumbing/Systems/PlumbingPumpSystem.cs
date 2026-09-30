@@ -3,18 +3,14 @@ using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.NodeContainer;
 using Content.Shared.Popups;
-using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Server._Horizon.Plumbing.Systems;
 
 /// <summary>
 /// Moves liquid from the network at the inlet of a <see cref="PlumbingPumpComponent"/> to the one at its outlet.
 /// </summary>
-public sealed class PlumbingPumpSystem : EntitySystem
+public sealed class PlumbingPumpSystem : PlumbingTimedSystem<PlumbingPumpComponent>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly PlumbingSystem _plumbing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
@@ -22,14 +18,8 @@ public sealed class PlumbingPumpSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<PlumbingPumpComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<PlumbingPumpComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<PlumbingPumpComponent, ActivateInWorldEvent>(OnActivated);
-    }
-
-    private void OnMapInit(Entity<PlumbingPumpComponent> ent, ref MapInitEvent args)
-    {
-        ent.Comp.NextUpdate = _timing.CurTime + ent.Comp.UpdateInterval * _random.NextFloat();
     }
 
     private void OnExamined(Entity<PlumbingPumpComponent> ent, ref ExaminedEvent args)
@@ -48,25 +38,14 @@ public sealed class PlumbingPumpSystem : EntitySystem
         args.Handled = true;
     }
 
-    public override void Update(float frameTime)
+    protected override void Tick(EntityUid uid, PlumbingPumpComponent pump, NodeContainerComponent container,
+        float seconds)
     {
-        base.Update(frameTime);
+        if (!pump.Enabled ||
+            !_plumbing.TryGetNet(uid, pump.InletNodeName, out var from, container) ||
+            !_plumbing.TryGetNet(uid, pump.OutletNodeName, out var to, container))
+            return;
 
-        var curTime = _timing.CurTime;
-        var query = EntityQueryEnumerator<PlumbingPumpComponent, NodeContainerComponent>();
-        while (query.MoveNext(out var uid, out var pump, out var container))
-        {
-            if (curTime < pump.NextUpdate)
-                continue;
-
-            pump.NextUpdate = curTime + pump.UpdateInterval;
-
-            if (!pump.Enabled ||
-                !_plumbing.TryGetNet(uid, pump.InletNodeName, out var from, container) ||
-                !_plumbing.TryGetNet(uid, pump.OutletNodeName, out var to, container))
-                continue;
-
-            _plumbing.Transfer(from, to, pump.Rate * (float) pump.UpdateInterval.TotalSeconds);
-        }
+        _plumbing.Transfer(from, to, pump.Rate * seconds);
     }
 }

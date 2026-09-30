@@ -1,9 +1,7 @@
-using Content.Shared._Horizon.Plumbing;
+﻿using Content.Shared._Horizon.Plumbing;
 using Content.Shared.FixedPoint;
 using Content.Shared.NodeContainer;
 using Robust.Server.GameObjects;
-using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Server._Horizon.Plumbing.Systems;
 
@@ -11,10 +9,8 @@ namespace Content.Server._Horizon.Plumbing.Systems;
 /// Splits the liquid at the inlet of a <see cref="PlumbingFilterComponent"/>: the chosen reagent goes to the
 /// filtered side, everything else to the outlet. Also serves the window that chooses the reagent.
 /// </summary>
-public sealed class PlumbingFilterSystem : EntitySystem
+public sealed class PlumbingFilterSystem : PlumbingTimedSystem<PlumbingFilterComponent>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly PlumbingSystem _plumbing = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
@@ -22,15 +18,9 @@ public sealed class PlumbingFilterSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<PlumbingFilterComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<PlumbingFilterComponent, BoundUIOpenedEvent>(OnUiOpened);
         SubscribeLocalEvent<PlumbingFilterComponent, PlumbingFilterSelectReagentMessage>(OnSelectReagent);
         SubscribeLocalEvent<PlumbingFilterComponent, PlumbingFilterToggleMessage>(OnToggle);
-    }
-
-    private void OnMapInit(Entity<PlumbingFilterComponent> ent, ref MapInitEvent args)
-    {
-        ent.Comp.NextUpdate = _timing.CurTime + ent.Comp.UpdateInterval * _random.NextFloat();
     }
 
     private void OnUiOpened(Entity<PlumbingFilterComponent> ent, ref BoundUIOpenedEvent args)
@@ -56,27 +46,11 @@ public sealed class PlumbingFilterSystem : EntitySystem
             new PlumbingFilterBoundUserInterfaceState(ent.Comp.Enabled, ent.Comp.Reagent));
     }
 
-    public override void Update(float frameTime)
+    protected override void Tick(EntityUid uid, PlumbingFilterComponent filter, NodeContainerComponent container,
+        float seconds)
     {
-        base.Update(frameTime);
-
-        var curTime = _timing.CurTime;
-        var query = EntityQueryEnumerator<PlumbingFilterComponent, NodeContainerComponent>();
-        while (query.MoveNext(out var uid, out var filter, out var container))
-        {
-            if (curTime < filter.NextUpdate)
-                continue;
-
-            filter.NextUpdate = curTime + filter.UpdateInterval;
-
-            if (filter.Enabled)
-                Split((uid, filter, container), (float) filter.UpdateInterval.TotalSeconds);
-        }
-    }
-
-    private void Split(Entity<PlumbingFilterComponent, NodeContainerComponent> ent, float seconds)
-    {
-        var (uid, filter, container) = ent;
+        if (!filter.Enabled)
+            return;
 
         if (!_plumbing.TryGetNet(uid, filter.InletNodeName, out var inlet, container) || inlet.Fluid.Volume <= 0)
             return;

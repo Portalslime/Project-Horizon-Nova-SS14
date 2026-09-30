@@ -11,7 +11,7 @@ namespace Content.Shared._Horizon.Plumbing;
 /// Handled by PlumbingComposterSystem.
 /// </summary>
 [RegisterComponent, AutoGenerateComponentPause]
-public sealed partial class PlumbingComposterComponent : Component
+public sealed partial class PlumbingComposterComponent : Component, IPlumbingTimed
 {
     /// <summary>
     /// The plumbing node of the NodeContainer the machine is connected through.
@@ -50,8 +50,8 @@ public sealed partial class PlumbingComposterComponent : Component
     public float Progress;
 
     [DataField]
-    public TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
+    public TimeSpan UpdateInterval { get; set; } = TimeSpan.FromSeconds(1);
 
     [DataField, AutoPausedField]
-    public TimeSpan NextUpdate;
+    public TimeSpan NextUpdate { get; set; }
 }

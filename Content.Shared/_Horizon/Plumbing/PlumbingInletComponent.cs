@@ -7,7 +7,7 @@ namespace Content.Shared._Horizon.Plumbing;
 /// network at its node. Handled by PlumbingInletSystem.
 /// </summary>
 [RegisterComponent, AutoGenerateComponentPause]
-public sealed partial class PlumbingInletComponent : Component
+public sealed partial class PlumbingInletComponent : Component, IPlumbingTimed
 {
     /// <summary>
     /// The solution that gets drained into the network.
@@ -34,8 +34,8 @@ public sealed partial class PlumbingInletComponent : Component
     public bool SpillWhenBlocked = true;
 
     [DataField]
-    public TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
+    public TimeSpan UpdateInterval { get; set; } = TimeSpan.FromSeconds(1);
 
     [DataField, AutoPausedField]
-    public TimeSpan NextUpdate;
+    public TimeSpan NextUpdate { get; set; }
 }

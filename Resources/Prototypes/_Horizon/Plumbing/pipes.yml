@@ -38,7 +38,10 @@
     sprite: _Horizon/Structures/Plumbing/pipe.rsi
     # Drawn underneath the gas pipes.
     drawdepth: ThickPipe
-    color: "#8a5a2b"
+  # Pipes can be repainted with a spray painter, like gas pipes.
+  - type: Appearance
+  - type: PipeColorVisuals
+  - type: AtmosPipeColor
   - type: NodeContainer
   # Two pieces can't be anchored together if they open in the same direction.
   - type: PlumbingRestrictOverlap
@@ -76,6 +79,7 @@
   - type: Sprite
     layers:
     - state: pipeHalf
+      map: [ "enum.PipeVisualLayers.Pipe" ]
   - type: Construction
     graph: PlumbingPipe
     node: half
@@ -97,6 +101,7 @@
   - type: Sprite
     layers:
     - state: pipeStraight
+      map: [ "enum.PipeVisualLayers.Pipe" ]
   - type: Construction
     graph: PlumbingPipe
     node: straight
@@ -116,6 +121,7 @@
   - type: Sprite
     layers:
     - state: pipeBend
+      map: [ "enum.PipeVisualLayers.Pipe" ]
   - type: Construction
     graph: PlumbingPipe
     node: bend
@@ -135,6 +141,7 @@
   - type: Sprite
     layers:
     - state: pipeTJunction
+      map: [ "enum.PipeVisualLayers.Pipe" ]
   - type: Construction
     graph: PlumbingPipe
     node: tjunction
@@ -154,6 +161,7 @@
   - type: Sprite
     layers:
     - state: pipeFourway
+      map: [ "enum.PipeVisualLayers.Pipe" ]
   - type: Construction
     graph: PlumbingPipe
     node: fourway

@@ -32,7 +32,7 @@
     layers:
     - sprite: _Horizon/Structures/Plumbing/pipe.rsi
       state: pipeStraight
-      color: "#8a5a2b"
+      map: [ "enum.PipeVisualLayers.Pipe" ]
     - state: pumpPressureOn
       map: [ "enum.SubfloorLayers.FirstLayer" ]
   - type: PlumbingPump
@@ -78,7 +78,7 @@
     layers:
     - sprite: _Horizon/Structures/Plumbing/pipe.rsi
       state: pipeTrinaryConnectors
-      color: "#8a5a2b"
+      map: [ "enum.PipeVisualLayers.Pipe" ]
     - state: gasFilterOn
       map: [ "enum.SubfloorLayers.FirstLayer" ]
   - type: PlumbingFilter
@@ -122,7 +122,7 @@
     layers:
     - sprite: _Horizon/Structures/Plumbing/pipe.rsi
       state: pipeHalf
-      color: "#8a5a2b"
+      map: [ "enum.PipeVisualLayers.Pipe" ]
     - state: gasCanisterPort
       map: [ "enum.SubfloorLayers.FirstLayer" ]
   - type: PlumbingPort

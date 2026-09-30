@@ -3,18 +3,14 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.NodeContainer;
-using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Server._Horizon.Plumbing.Systems;
 
 /// <summary>
 /// Keeps the solution of <see cref="PlumbingOutletComponent"/> owners topped up from their plumbing network.
 /// </summary>
-public sealed class PlumbingOutletSystem : EntitySystem
+public sealed class PlumbingOutletSystem : PlumbingTimedSystem<PlumbingOutletComponent>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly PlumbingSystem _plumbing = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
 
@@ -22,7 +18,6 @@ public sealed class PlumbingOutletSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<PlumbingOutletComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<PlumbingOutletComponent, ExaminedEvent>(OnExamined);
     }
 
@@ -32,31 +27,9 @@ public sealed class PlumbingOutletSystem : EntitySystem
         args.PushMarkup(Loc.GetString(connected ? "plumbing-examine-connected" : "plumbing-examine-disconnected"));
     }
 
-    private void OnMapInit(Entity<PlumbingOutletComponent> ent, ref MapInitEvent args)
+    protected override void Tick(EntityUid uid, PlumbingOutletComponent outlet, NodeContainerComponent container,
+        float seconds)
     {
-        ent.Comp.NextUpdate = _timing.CurTime + ent.Comp.UpdateInterval * _random.NextFloat();
-    }
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var curTime = _timing.CurTime;
-        var query = EntityQueryEnumerator<PlumbingOutletComponent, NodeContainerComponent>();
-        while (query.MoveNext(out var uid, out var outlet, out var container))
-        {
-            if (curTime < outlet.NextUpdate)
-                continue;
-
-            outlet.NextUpdate = curTime + outlet.UpdateInterval;
-            Fill((uid, outlet, container), (float) outlet.UpdateInterval.TotalSeconds);
-        }
-    }
-
-    private void Fill(Entity<PlumbingOutletComponent, NodeContainerComponent> ent, float seconds)
-    {
-        var (uid, outlet, container) = ent;
-
         if (!_solutions.TryGetSolution(uid, outlet.Solution, out var soln, out var solution))
             return;
 

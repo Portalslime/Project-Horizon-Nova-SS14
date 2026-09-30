@@ -16,10 +16,8 @@ namespace Content.Server._Horizon.Plumbing.Systems;
 /// Turns the reagent of the plumbing network of a <see cref="PlumbingComposterComponent"/> into material in its
 /// storage. Using the machine takes the stored material out. There is no window: it is a counter, not entities.
 /// </summary>
-public sealed class PlumbingComposterSystem : EntitySystem
+public sealed class PlumbingComposterSystem : PlumbingTimedSystem<PlumbingComposterComponent>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly MaterialStorageSystem _materials = default!;
     [Dependency] private readonly PlumbingSystem _plumbing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -28,14 +26,8 @@ public sealed class PlumbingComposterSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<PlumbingComposterComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<PlumbingComposterComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<PlumbingComposterComponent, ActivateInWorldEvent>(OnActivated);
-    }
-
-    private void OnMapInit(Entity<PlumbingComposterComponent> ent, ref MapInitEvent args)
-    {
-        ent.Comp.NextUpdate = _timing.CurTime + ent.Comp.UpdateInterval * _random.NextFloat();
     }
 
     private void OnExamined(Entity<PlumbingComposterComponent> ent, ref ExaminedEvent args)
@@ -69,26 +61,9 @@ public sealed class PlumbingComposterSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("plumbing-composter-collected", ("amount", amount)), ent, args.User);
     }
 
-    public override void Update(float frameTime)
+    protected override void Tick(EntityUid uid, PlumbingComposterComponent composter,
+        NodeContainerComponent container, float seconds)
     {
-        base.Update(frameTime);
-
-        var curTime = _timing.CurTime;
-        var query = EntityQueryEnumerator<PlumbingComposterComponent, NodeContainerComponent>();
-        while (query.MoveNext(out var uid, out var composter, out var container))
-        {
-            if (curTime < composter.NextUpdate)
-                continue;
-
-            composter.NextUpdate = curTime + composter.UpdateInterval;
-            Compost((uid, composter, container), (float) composter.UpdateInterval.TotalSeconds);
-        }
-    }
-
-    private void Compost(Entity<PlumbingComposterComponent, NodeContainerComponent> ent, float seconds)
-    {
-        var (uid, composter, container) = ent;
-
         if (!this.IsPowered(uid, EntityManager) ||
             !_plumbing.TryGetNet(uid, composter.NodeName, out var net, container))
             return;
