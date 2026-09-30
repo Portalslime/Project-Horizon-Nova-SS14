@@ -7,6 +7,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.DirtVisuals;
 using Content.Shared.FixedPoint;
+using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 
@@ -26,6 +27,7 @@ namespace Content.Server.Shower
         [Dependency] private PuddleSystem _puddle = default!;
         [Dependency] private EntityLookupSystem _lookup = default!;
         [Dependency] private ReactiveSystem _reactive = default!;
+        [Dependency] private SharedPopupSystem _popup = default!;
 
         public override void Initialize()
         {
@@ -82,6 +84,14 @@ namespace Content.Server.Shower
         {
             if (component.IsSpraying)
                 return;
+
+            // Horizon: the shower is fed from the plumbing supply line, so it can be empty. No water, no spray.
+            if (!_solutionContainer.TryGetSolution(uid, ShowerSolutionName, out _, out var solution) ||
+                solution.Volume <= 0)
+            {
+                _popup.PopupEntity(Loc.GetString("shower-no-water"), uid);
+                return;
+            }
 
             component.IsSpraying = true;
             component.RemainingTime = component.SprayTime;

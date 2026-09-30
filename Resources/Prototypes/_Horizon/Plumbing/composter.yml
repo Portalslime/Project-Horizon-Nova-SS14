@@ -1,0 +1,64 @@
+# A machine (built from a board on a machine frame) that sits on a liquid port and turns the liquid feces of the
+# pipe network into biomass. Using it takes the collected biomass out. Needs power.
+- type: entity
+  id: PlumbingComposter
+  name: composter
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  description: Turns liquid feces from the pipe network into biomass. It must stand on a liquid port and be powered. Use it to take the collected biomass.
+  components:
+  - type: Sprite
+    sprite: _Horizon/Structures/Plumbing/composter.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+    - state: unlit
+      shader: unshaded
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Machine
+    board: PlumbingComposterMachineCircuitboard
+  # The biomass is only a counter in the storage, nothing is spawned until somebody takes it.
+  - type: MaterialStorage
+    insertOnInteract: false
+    canEjectStoredMaterials: false
+    materialWhiteList:
+    - Biomass
+    storageLimit: 5000
+  - type: NodeContainer
+    nodes:
+      port:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        portable: true
+        connectionsEnabled: false
+        volume: 10
+  - type: PlumbingPortable
+  - type: PlumbingComposter
+
+- type: entity
+  id: PlumbingComposterMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: composter machine board
+  description: A machine printed circuit board for a composter.
+  components:
+  - type: Sprite
+    state: service
+  - type: MachineBoard
+    prototype: PlumbingComposter
+    requirements:
+      Manipulator: 2
+      Capacitor: 1
+    stackRequirements:
+      Glass: 1
+      Cable: 2
+
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
+  id: PlumbingComposterMachineCircuitboard
+  result: PlumbingComposterMachineCircuitboard

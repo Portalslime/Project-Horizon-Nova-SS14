@@ -13,6 +13,12 @@ namespace Content.Shared.Nutrition.Components
         [DataField("sound")]
         public SoundSpecifier Sound { get; private set; } = new SoundCollectionSpecifier("desecration");
 
+        /// <summary>
+        /// Tint of the smear left on whoever gets hit by this.
+        /// </summary>
+        [DataField]
+        public Color Color { get; private set; } = Color.White;
+
         [ViewVariables]
         public bool Splatted { get; set; } = false;
 

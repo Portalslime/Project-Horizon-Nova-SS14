@@ -12,6 +12,8 @@
     species: Arachnid
   - type: Hunger
   - type: Thirst
+  - type: Defecation
+    baseFillRate: 0.01 # component default is 0.025
   - type: Sericulture
     productionLength: 2
     entityProduced: MaterialWebSilk1

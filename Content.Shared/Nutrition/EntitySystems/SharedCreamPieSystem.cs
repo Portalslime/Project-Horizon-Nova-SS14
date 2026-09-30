@@ -33,16 +33,19 @@ namespace Content.Shared.Nutrition.EntitySystems
 
         protected virtual void SplattedCreamPie(EntityUid uid, CreamPieComponent creamPie) {}
 
-        public void SetCreamPied(EntityUid uid, CreamPiedComponent creamPied, bool value)
+        public void SetCreamPied(EntityUid uid, CreamPiedComponent creamPied, bool value, Color? color = null)
         {
-            if (value == creamPied.CreamPied)
+            var newColor = value ? color ?? Color.White : Color.White;
+            if (value == creamPied.CreamPied && newColor == creamPied.Color)
                 return;
 
             creamPied.CreamPied = value;
+            creamPied.Color = newColor;
 
             if (TryComp(uid, out AppearanceComponent? appearance))
             {
                 _appearance.SetData(uid, CreamPiedVisuals.Creamed, value, appearance);
+                _appearance.SetData(uid, CreamPiedVisuals.Color, newColor, appearance);
             }
         }
 
@@ -60,7 +63,7 @@ namespace Content.Shared.Nutrition.EntitySystems
         {
             if (!Exists(args.Thrown) || !TryComp(args.Thrown, out CreamPieComponent? creamPie)) return;
 
-            SetCreamPied(uid, creamPied, true);
+            SetCreamPied(uid, creamPied, true, creamPie.Color);
 
             CreamedEntity(uid, creamPied, args);
 

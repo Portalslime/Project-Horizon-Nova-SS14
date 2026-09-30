@@ -1,0 +1,9 @@
+# The liquid of one plumbing network. Spawned and deleted by the network itself, never placed by hand or saved on maps.
+- type: entity
+  id: PlumbingNetSolution
+  name: plumbing network
+  categories: [ HideSpawnMenu ]
+  save: false
+  components:
+  - type: PlumbingNetSolution
+  - type: Solution

@@ -67,6 +67,20 @@
   - type: ReagentTank
   - type: Transform
     noRot: true
+  # Horizon: every tank and barrel can be anchored on a liquid port, which joins it to the plumbing network.
+  # Until then it stays a plain movable tank (it cannot be anchored anywhere but on a port).
+  - type: Anchorable
+  - type: NodeContainer
+    nodes:
+      port:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        portable: true
+        connectionsEnabled: false
+        volume: 10
+  - type: PlumbingPortable
+  - type: PlumbingTank
+    solution: tank
 
 # For highcap tanks
 - type: entity

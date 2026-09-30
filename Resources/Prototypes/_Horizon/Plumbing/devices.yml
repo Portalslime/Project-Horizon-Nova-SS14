@@ -1,0 +1,175 @@
+# Plumbing devices. Pumps and filters work without electricity.
+# Directions are for the south-facing (unrotated) device, like for gas devices.
+
+- type: entity
+  parent: PlumbingPipeBase
+  id: PlumbingPump
+  name: liquid pump
+  description: Pushes liquid from the pipe network on its inlet side into the one on its outlet side. Use it to switch it on and off.
+  components:
+  - type: NodeContainer
+    nodes:
+      inlet:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: North
+        volume: 10
+      outlet:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: South
+        volume: 10
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: SubFloorHide
+    blockInteractions: false
+    blockAmbience: false
+    visibleLayers:
+    - enum.SubfloorLayers.FirstLayer
+  - type: Sprite
+    sprite: _Horizon/Structures/Plumbing/pump.rsi
+    layers:
+    - sprite: _Horizon/Structures/Plumbing/pipe.rsi
+      state: pipeStraight
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+    - state: pumpPressureOn
+      map: [ "enum.SubfloorLayers.FirstLayer" ]
+  - type: PlumbingPump
+  - type: Construction
+    graph: PlumbingDevice
+    node: pump
+
+# One inlet, two outlets: the chosen reagent leaves through the side (west) opening, everything else continues
+# through the south one.
+- type: entity
+  parent: PlumbingPipeBase
+  id: PlumbingFilter
+  name: liquid filter
+  description: Sends the chosen liquid out of its side opening and lets everything else through. Use it to choose the liquid.
+  components:
+  - type: NodeContainer
+    nodes:
+      inlet:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: North
+        volume: 10
+      filtered:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: West
+        volume: 10
+      outlet:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: South
+        volume: 10
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: SubFloorHide
+    blockInteractions: false
+    blockAmbience: false
+    visibleLayers:
+    - enum.SubfloorLayers.FirstLayer
+  - type: Sprite
+    sprite: _Horizon/Structures/Plumbing/filter.rsi
+    layers:
+    - sprite: _Horizon/Structures/Plumbing/pipe.rsi
+      state: pipeTrinaryConnectors
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+    - state: gasFilterOn
+      map: [ "enum.SubfloorLayers.FirstLayer" ]
+  - type: PlumbingFilter
+  - type: ActivatableUI
+    key: enum.PlumbingFilterUiKey.Key
+  - type: ActivatableUIRequiresAnchor
+  - type: UserInterface
+    interfaces:
+      enum.PlumbingFilterUiKey.Key:
+        type: PlumbingFilterBoundUserInterface
+  - type: Construction
+    graph: PlumbingDevice
+    node: filter
+
+# A fixture on the pipe network that barrels are anchored onto.
+- type: entity
+  parent: PlumbingPipeBase
+  id: PlumbingPort
+  name: liquid port
+  description: The connection point of the pipe network. Connect a pipe to its open side and put a sink, toilet, shower, drain or barrel on top of it to join that device to the network. Rotate it to choose the side.
+  components:
+  - type: NodeContainer
+    nodes:
+      port:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        pipeDirection: South
+        port: true
+        volume: 10
+  - type: Transform
+    anchored: true
+    noRot: false
+  # The port itself stays visible above the floor, the pipe stub under it is hidden with the pipes.
+  - type: SubFloorHide
+    blockInteractions: false
+    blockAmbience: false
+    visibleLayers:
+    - enum.SubfloorLayers.FirstLayer
+  - type: Sprite
+    sprite: _Horizon/Structures/Plumbing/port.rsi
+    layers:
+    - sprite: _Horizon/Structures/Plumbing/pipe.rsi
+      state: pipeHalf
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+    - state: gasCanisterPort
+      map: [ "enum.SubfloorLayers.FirstLayer" ]
+  - type: PlumbingPort
+  - type: Construction
+    graph: PlumbingDevice
+    node: port
+
+# A barrel for liquids, made by players. It works exactly like the existing tanks and barrels: it only connects to
+# the network while anchored on a port, and then it shares its contents with the network. It can also be filled and
+# emptied by hand and looked into with a solution scanner.
+- type: entity
+  id: PlumbingBarrel
+  parent: [ StorageTank, StructureWheeled ]
+  name: liquid barrel
+  description: A barrel for liquids. Anchor it on a liquid port to join it to the pipe network.
+  components:
+  - type: Sprite
+    sprite: _Horizon/Structures/Plumbing/barrel.rsi
+    layers:
+    - state: watertank-2
+    - state: watertank-2-1
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+      visible: false
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: watertank-2-
+  - type: ExaminableSolution
+    solution: tank
+  - type: RefillableSolution
+    solution: tank
+  # The port connection (anchoring, node and tank) comes from StorageTank.
+  - type: Construction
+    graph: PlumbingDevice
+    node: barrel
+
+# Reports the pressure and the contents of the pipe network of whatever it is used on.
+- type: entity
+  parent: BaseItem
+  id: PlumbingAnalyzer
+  name: liquid pipe analyzer
+  description: A hand-held scanner. Use it on a pipe or a plumbing device to read the pressure and the contents of its network.
+  components:
+  - type: Sprite
+    sprite: _Horizon/Structures/Plumbing/analyzer.rsi
+    layers:
+    - state: icon
+  - type: PlumbingAnalyzer
+  - type: StaticPrice
+    price: 80

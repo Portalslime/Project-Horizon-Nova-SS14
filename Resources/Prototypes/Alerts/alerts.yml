@@ -23,6 +23,7 @@
     - category: Temperature
     - category: Hunger
     - category: Thirst
+    - category: Defecation
     - alertType: Magboots
     - alertType: Rooted
     - alertType: Pacified

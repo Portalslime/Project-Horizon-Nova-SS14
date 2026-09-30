@@ -1,0 +1,2373 @@
+# PDAs and ID cards whose definitions were removed together with the roles (commit 1ec3e852ea), but which
+# are still referenced by loadouts, starting gear and other prototypes. Restored WITHOUT any role data:
+# references to removed jobs, job icons, departments and access levels were dropped.
+
+# from Entities/Objects/Misc/identification_cards.yml
+- type: entity
+  parent: CentcomIDCard
+  id: CBURNIDcard
+  name: CBURN ID card
+  suffix: CBURN
+  components:
+  - type: Sprite
+    layers:
+    - state: centcom
+  - type: Item
+    heldPrefix: blue
+  - type: PresetIdCard
+
+# from Nyanotrasen/Entities/Objects/Devices/Misc/identification_cards.yml
+- type: entity
+  parent: IDCardStandard
+  id: MailCarrierIDCard
+  categories: [ HideSpawnMenu ] # Frontier
+  name: mail carrier ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - sprite: _DV/Objects/Misc/id_cards.rsi
+      state: nyanomailcarrier
+  - type: PresetIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: NFPrisonerIDCard # Frontier: move to NF
+  name: prisoner ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: orange
+    - sprite: _DV/Objects/Misc/id_cards.rsi
+      state: nyanoprisoner
+  - type: PresetIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: PrisonGuardIDCard
+  name: prison guard ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - sprite: _DV/Objects/Misc/id_cards.rsi
+      state: nyanoprisonguard
+  - type: PresetIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: ValetIDCard
+  categories: [ HideSpawnMenu ] # Frontier
+  name: valet ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idintern-service
+  - type: PresetIdCard
+
+# from _Backmen/Roles/Jobs/CentCom/cargotech.yml
+- type: entity
+  parent: OrdenPDA
+  id: CCCargoPDA
+  name: Centcom Cargo PDA
+  description: Light green sign of walking bureaucracy.
+  components:
+    - type: Appearance
+      appearanceDataInit:
+        enum.PdaVisuals.PdaType:
+          !type:String
+          pda-centcomcargo
+    - type: Pda
+      id: IDCardCentComCargoBackmen
+      penSlot:
+        startingItem: PenCentcom
+        whitelist:
+          tags:
+            - Write
+    - type: PdaBorderColor
+      borderColor: "#00842e"
+    - type: Icon
+      sprite: Backmen/Objects/Devices/pda.rsi
+      state: pda-centcomcargo
+
+- type: entity
+  parent: CentcomIDCardDeathsquad
+  id: IDCardCentComCargoBackmen
+  name: ID карта ЦК Грузчика
+  components:
+    - type: Sprite
+      sprite: Backmen/Objects/Misc/id_cards.rsi
+      layers:
+        - state: card_centcom # Backmen
+        - state: sub_department # Backmen
+          color: "#b18644"
+        - state: frame_default # Backmen
+          color: "#b18644"
+        - state: idcargotechnician
+    - type: PresetIdCard
+    - type: Access
+      tags:
+        - CCCargo
+        - CentralCommand
+        - Cargo
+        - Maintenance
+        - Salvage
+
+# from _Backmen/Roles/Jobs/CentCom/centcom_official.yml
+- type: entity
+  parent: BasePDA
+  id: CentcomPDABackmen
+  name: CentCom PDA
+  description: Light green sign of walking bureaucracy.
+  components:
+    - type: Appearance
+      appearanceDataInit:
+        enum.PdaVisuals.PdaType:
+          !type:String
+          pda-centcom
+    - type: Pda
+      id: IDCardCentComOfficialCorvax
+      penSlot:
+        startingItem: PenCentcom
+        whitelist:
+          tags:
+            - Write
+    - type: PdaBorderColor
+      borderColor: "#00842e"
+    - type: Icon
+      state: pda-centcom
+
+- type: entity
+  parent: CentcomIDCardDeathsquad
+  id: IDCardCentComOfficialCorvax
+  name: ID карта ПЦК
+  components:
+    - type: Sprite
+      sprite: Backmen/Objects/Misc/id_cards.rsi
+      layers:
+      - state: card_silver # Backmen
+      - state: sub_department # Backmen
+        color: "#1b67a5"
+      - state: frame_head # Backmen
+        color: "#1b67a5"
+      - state: idcentcom
+    - type: Item
+      heldPrefix: silver
+    - type: PresetIdCard
+    - type: Access
+      tags:
+        - CCCargo
+        - CCSecurity
+        - CentralCommand
+        - CCOfficer
+      groups:
+        - AllAccess
+
+# from _Backmen/Roles/Jobs/CentCom/intern.yml
+- type: entity
+  parent: BasePDA
+  id: CentcomInternPDABackmen
+  name: CentCom Assistant PDA
+  description: Light green sign of walking bureaucracy.
+  components:
+    - type: Appearance
+      appearanceDataInit:
+        enum.PdaVisuals.PdaType:
+          !type:String
+          pda-centcom
+    - type: Pda
+      id: IDCardCentComIntern
+      penSlot:
+        startingItem: PenCentcom
+        whitelist:
+          tags:
+            - Write
+    - type: PdaBorderColor
+      borderColor: "#00842e"
+    - type: Icon
+      state: pda-centcom
+
+- type: entity
+  parent: CentcomIDCardDeathsquad
+  id: IDCardCentComIntern
+  name: ID карта Ассистента ЦК
+  components:
+    - type: Sprite
+      sprite: Backmen/Objects/Misc/id_cards.rsi
+      layers:
+      - state: card_centcom # Backmen
+      - state: sub_department # Backmen
+        color: "#0F4162"
+      - state: frame_head # Backmen
+        color: "#0F4162"
+      - state: idintern-service
+    - type: PresetIdCard
+    - type: Access
+      tags:
+        - CentralCommand
+        - Service
+        - Maintenance
+        - Bar
+        - Kitchen
+        - Hydroponics
+
+# from _Backmen/Roles/Jobs/CentCom/officer.yml
+- type: entity
+  parent: OrdenPDA
+  id: CentComPrivateOfficerPDA
+  name: Centcom Private Officer PDA
+  description: Black with green lines, sign of the walking protection of the bureaucracy.
+  components:
+    - type: Appearance
+      appearanceDataInit:
+        enum.PdaVisuals.PdaType:
+          !type:String
+          pda-centcomsec
+    - type: Pda
+      id: IDCardCentComPrivateOfficer
+      penSlot:
+        startingItem: PenCentcom
+        whitelist:
+          tags:
+            - Write
+    - type: PdaBorderColor
+      borderColor: "#5B5B5B"
+    - type: Icon
+      state: pda-centcomsec
+
+- type: entity
+  parent: CentcomIDCardDeathsquad
+  id: IDCardCentComPrivateOfficer
+  name: ID карта охраны ЦК
+  components:
+    - type: Sprite
+      sprite: Backmen/Objects/Misc/id_cards.rsi
+      layers:
+      - state: card_centcom # Backmen
+      - state: sub_department # Backmen
+        color: "#0F4162"
+      - state: frame_head # Backmen
+        color: "#0F4162"
+      - state: idsecurityofficer
+    - type: PresetIdCard
+    - type: Access
+      tags:
+        - CCSecurity
+        - CentralCommand
+        - Security
+        - Brig
+        - Maintenance
+        - Service
+        - External
+        - Armory
+        - Detective
+
+# from _Backmen/Roles/Jobs/CentCom/operator.yml
+- type: entity
+  parent: CentcomPDABackmen
+  id: CCOperatorPDA
+  name: Centcom Operator PDA
+  description: Light green sign of walking bureaucracy.
+  components:
+    - type: Appearance
+      appearanceDataInit:
+        enum.PdaVisuals.PdaType:
+          !type:String
+          pda-centcom
+    - type: Pda
+      id: IDCardCentComCCOperator
+      penSlot:
+        startingItem: PenCentcom
+        whitelist:
+          tags:
+            - Write
+    - type: PdaBorderColor
+      borderColor: "#00842e"
+    - type: Icon
+      state: pda-centcom
+
+- type: entity
+  parent: CentcomIDCard
+  id: IDCardCentComCCOperator
+  name: ID карта оператора ЦК
+  components:
+    - type: PresetIdCard
+    - type: Access
+      tags:
+        - CCCargo
+        - CCSecurity
+        - CentralCommand
+        - CCOfficer
+      groups:
+        - AllAccess
+
+# from _Lua/Entities/Objects/Devices/pda.yml
+- type: entity
+  parent: BasePDA
+  id: AdjutantPDA
+  name: adjutant PDA
+  description: Ink and coffee stains are seen on its surface.
+  components:
+  - type: Pda
+    id: AdjutantIDCard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+      !type:String
+        adj-pda
+  - type: Sprite
+    sprite: _Lua/Objects/Devices/pda.rsi
+    layers:
+    - state: "adj-pda"
+      map: [ "enum.PdaVisualLayers.Base" ]
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: "unshaded"
+      visible: false
+  - type: PdaBorderColor
+    borderColor: "#999875"
+    accentHColor: "#274d5f"
+    accentVColor: "#274d5f"
+  - type: Icon
+    sprite: _Lua/Objects/Devices/pda.rsi
+    state: adj-pda
+
+# StormCreed
+
+- type: entity
+  parent: [BasePDA, BaseItem, StorePresetUplink, BaseC2SyndicateContrabandNoValue] # Lua-changes: added BaseC2SyndicateContrabandNoValue
+  id: BaseTypanPDA
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Lua/Objects/Devices/typan_pda.rsi
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: "unshaded"
+      visible: false
+  - type: Icon
+    sprite: /Textures/_Lua/Objects/Devices/typan_pda.rsi
+    state: pda
+
+- type: entity
+  parent: CBURNPDA
+  id: CBURNLeaderPDA
+  components:
+  - type: Pda
+    id: CBURNLeaderIDcard
+
+- type: entity
+  parent: CBURNPDA
+  id: CBURNSierraLeaderPDA
+  components:
+  - type: Pda
+    id: CBURNSierraLeaderIDcard
+
+- type: entity
+  parent: CBURNPDA
+  id: CBURNSierraPDA
+  components:
+  - type: Pda
+    id: CBURNSierraIDcard
+
+- type: entity
+  parent: CentcomPDA
+  id: CentcomAdministratorPDA
+  components:
+  - type: Pda
+    id: CentcomAdministratorIDCard
+
+- type: entity
+  parent: CentcomPDA
+  id: CentcomOfficialPDA
+  components:
+  - type: Pda
+    id: CentcomOfficialIDCard
+
+- type: entity
+  parent: CentcomPDA
+  id: CentcomOperatorPDA
+  components:
+  - type: Pda
+    id: CentcomOperatorIDCard
+
+- type: entity
+  parent: CentcomPDA
+  id: CentcomSpecialOperationsOfficerPDA
+  components:
+  - type: Pda
+    id: CentcomSpecialOperationsOfficerIDCard
+
+- type: entity
+  parent: ERTLeaderPDA
+  id: ERTLeaderGammaPDA
+  components:
+  - type: Pda
+    id: ERTLeaderGammaIDCard
+
+- type: entity
+  parent: ERTLeaderPDA
+  id: ERTLeaderRedPDA
+  components:
+  - type: Pda
+    id: ERTLeaderRedIDCard
+
+- type: entity
+  parent: ERTLeaderPDA
+  id: FSFCommanderBravoPDA
+  components:
+  - type: Pda
+    id: FSFCommanderBravoIDCard
+
+- type: entity
+  parent: ERTLeaderPDA
+  id: FSFCommanderCharliePDA
+  components:
+  - type: Pda
+    id: FSFCommanderCharlieIDCard
+
+- type: entity
+  parent: BasePDA
+  id: FrontierEngineerPDA
+  name: КПК Инженера ЭИК
+  description: Rugged and well-worn.
+  components:
+  - type: Pda
+    id: FrontierEngineerIDCard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-engineer
+  - type: PdaBorderColor
+    borderColor: "#949137"
+    accentVColor: "#A32D26"
+  - type: Icon
+    state: pda-engineer
+
+- type: entity
+  parent: HacksPDA
+  id: LuaPDAOps
+  name: КПК Оперативника "Lua Technologies"
+  description: Оснащён всеми средствами и возможностями для получения приказов.
+  components:
+  - type: Pda
+    id: OpsLuaTechIDCard
+  - type: PdaBorderColor
+    borderColor: "#35a5da"
+
+- type: entity
+  parent: BaseTypanPDA
+  id: MedicalPDASyndi
+  name: КПК Врача Синдиката
+  description: Ходят легенды, что на нём отображается пульс главы НТ.
+  components:
+  - type: Pda
+    id: OutpostTypanIDCardMed
+  - type: PdaBorderColor
+    borderColor: "#891417"
+  - type: Icon
+    state: pda-syndi-med
+  - type: CartridgeLoader
+    uiKey: enum.PdaUiKey.Key
+    preinstalled:
+      - CrewManifestCartridge
+      - NotekeeperCartridge
+      - YupiTransferCartridge
+      - NanoChatCartridge # Lua
+      - NewsReaderCartridge
+      - MedTekCartridge
+  - type: GuideHelp
+    guides:
+    - MedicalDoctor
+
+- type: entity
+  parent: BasePDA
+  id: PathologistPDA
+  name: pathologist PDA
+  description: I wonder whose pulse is on the screen? I hope he doesn't stop...
+  components:
+  - type: Pda
+    id: PathologistIDCard
+  - type: PdaBorderColor
+    borderColor: "#212121"
+    accentHColor: "#EAEAEA"
+    accentVColor: "#EAEAEA"
+  - type: Icon
+    sprite: Objects/Devices/pda.rsi
+    state: pda-pathologist
+
+- type: entity
+  parent: BasePDA
+  id: SCCaptainPDA
+  name: Напульсник Командира Кодекса
+  components:
+  - type: Clothing
+    sprite: _Lua/Objects/Devices/StormCreedPDA.rsi
+  - type: Sprite
+    layers:
+    - sprite: _Lua/Objects/Devices/StormCreedPDA.rsi
+      map: [ "enum.PdaVisualLayers.Base" ]
+      state: "icon"
+    - sprite: _NF/Objects/Devices/pda.rsi
+      state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - sprite: _NF/Objects/Devices/pda.rsi
+      state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: "unshaded"
+      visible: false
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       icon
+  - type: Pda
+    id: SCCaptainIDCard
+  - type: PdaBorderColor
+    borderColor: "#171511"
+    accentVColor: "#948471"
+  - type: Icon
+    sprite: _Lua/Objects/Devices/StormCreedPDA.rsi
+    state: icon
+
+- type: entity
+  parent: BasePDA
+  id: SCFirstmatePDA
+  name: Напульсник Штурмана Кодекса
+  components:
+  - type: Clothing
+    sprite: _Lua/Objects/Devices/StormCreedPDA.rsi
+  - type: Sprite
+    layers:
+    - sprite: _Lua/Objects/Devices/StormCreedPDA.rsi
+      map: [ "enum.PdaVisualLayers.Base" ]
+      state: "icon"
+    - sprite: _NF/Objects/Devices/pda.rsi
+      state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - sprite: _NF/Objects/Devices/pda.rsi
+      state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: "unshaded"
+      visible: false
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       icon
+  - type: Pda
+    id: SCFirstmateIDCard
+  - type: PdaBorderColor
+    borderColor: "#171511"
+    accentVColor: "#948471"
+  - type: Icon
+    sprite: _Lua/Objects/Devices/StormCreedPDA.rsi
+    state: icon
+
+- type: entity
+  parent: [BasePDA, BaseNanotrasenContrabandT1]
+  id: SecurityPilotPDA
+  name: security pilot PDA
+  description: Smells like space shuttles.
+  components:
+  - type: Pda
+    id: SecurityPilotIDCard
+  - type: PdaBorderColor
+    borderColor: "#772d32"
+  - type: Icon
+    state: pda-security
+
+- type: entity
+  parent: BasePDA
+  id: SeniorSalvagePDA
+  name: senior salvage PDA
+  description: Smells like ash.
+  components:
+  - type: Pda
+    id: SeniorSalvageIDCard
+  - type: PdaBorderColor
+    borderColor: "#735321"
+    accentHColor: "#62237F"
+    accentVColor: "#62237F"
+  # - type: IconSeniorSalvagePDA
+  #   state: pda-seniorminer
+
+- type: entity
+  parent: BasePDA
+  id: SeniorServicePDA
+  name: senior service PDA
+  description: Smells like service dep.
+  components:
+  - type: Pda
+    id: SeniorServiceIDCard
+  - type: PdaBorderColor
+    borderColor: "#789876"
+    accentHColor: "#CEC155"
+  - type: Icon
+    sprite: Objects/Devices/pda.rsi
+    state: pda-seniorservice
+
+- type: entity
+  parent: BasePDA
+  id: StormCreedPDA
+  name: Напульсник пустынника
+  components:
+  - type: Clothing
+    sprite: _Lua/Objects/Devices/StormCreedPDA.rsi
+  - type: Sprite
+    layers:
+    - sprite: _Lua/Objects/Devices/StormCreedPDA.rsi
+      map: [ "enum.PdaVisualLayers.Base" ]
+      state: "icon"
+    - sprite: _NF/Objects/Devices/pda.rsi
+      state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - sprite: _NF/Objects/Devices/pda.rsi
+      state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: "unshaded"
+      visible: false
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       icon
+  - type: Pda
+    id: SCSoldierIDCard
+  - type: PdaBorderColor
+    borderColor: "#171511"
+    accentVColor: "#948471"
+  - type: Icon
+    sprite: _Lua/Objects/Devices/StormCreedPDA.rsi
+    state: icon
+
+- type: entity
+  parent: BaseTypanPDA
+  id: SyndiPDABotan
+  name: КПК Ботаника Синдиката
+  description: Весь разъеден ядами растительного происхождения.
+  components:
+  - type: Pda
+    id: OutpostTypanIDCardBotanist
+  - type: PdaBorderColor
+    borderColor: "#891417"
+  - type: Icon
+    state: pda-syndi-botan
+
+- type: entity
+  parent: BaseTypanPDA
+  id: SyndiPDACargo
+  name: КПК Карготехника Синдиката
+  description: В слоту для ручки застрял зуб карпоакулы.
+  components:
+  - type: Pda
+    id: OutpostTypanIDCardCargo
+  - type: PdaBorderColor
+    borderColor: "#891417"
+  - type: Icon
+    state: pda-syndi-cargo
+
+- type: entity
+  parent: BaseTypanPDA
+  id: SyndiPDAChef
+  name: КПК Повара Синдиката
+  description: Ну так как оно будет? С кишками или без кишок?
+  components:
+  - type: Pda
+    id: OutpostTypanIDCardChef
+  - type: PdaBorderColor
+    borderColor: "#891417"
+  - type: Icon
+    state: pda-syndi-chef
+
+- type: entity
+  parent: BaseTypanPDA
+  id: SyndiPDACom
+  name: КПК Офицера Телекомуникаций Синдиката
+  description: Оснащён всеми средствами и возможностями для получения наизлейших приказов.
+  components:
+  - type: Pda
+    id: OutpostTypanIDCardCom
+  - type: PdaBorderColor
+    borderColor: "#891417"
+  - type: Icon
+    state: pda-syndi-com
+
+- type: entity
+  parent: BaseTypanPDA
+  id: SyndiPDAEng
+  name: КПК Атмосферного Инженера Синдиката
+  description: Крепкий КПК мастера на все руки.
+  components:
+  - type: Pda
+    id: OutpostTypanIDCardEng
+  - type: PdaBorderColor
+    borderColor: "#891417"
+  - type: Icon
+    state: pda-syndi-eng
+
+- type: entity
+  parent: BaseTypanPDA
+  id: SyndiPDARD
+  name: КПК Директора Исследований Синдиката
+  description: Сосредоточение наизлейших технологий! Пахнет дешёвым пластиком...
+  components:
+  - type: Pda
+    id: OutpostTypanIDCardRd
+  - type: PdaBorderColor
+    borderColor: "#891417"
+  - type: Icon
+    state: pda-syndi-science
+
+- type: entity
+  parent: BaseTypanPDA
+  id: SyndiPDAResearcher
+  name: КПК Исследователя
+  description: Крепкий КПК исследователя из далеких краёв.
+  components:
+  - type: Pda
+    id: OutpostTypanIDResearcher
+  - type: PdaBorderColor
+    borderColor: "#891417"
+  - type: Icon
+    state: pda-syndi-researcher
+
+- type: entity
+  parent: BaseTypanPDA
+  id: SyndiPDAScience
+  name: КПК Учёного Синдиката
+  description: Похоже этот КПК был взломан.
+  components:
+  - type: Pda
+    id: OutpostTypanIDCardScience
+  - type: PdaBorderColor
+    borderColor: "#891417"
+  - type: Icon
+    state: pda-syndi-science
+
+- type: entity
+  parent: [BasePDA, BaseC2SyndicateContrabandNoValue]
+  id: SyndieShareholderPDA
+  name: shareholder PDA
+  description: Why isn't it not gray?
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _Lua/Objects/Devices/pda.rsi
+      map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda_shareholder_syndicate"
+    - sprite: _NF/Objects/Devices/pda.rsi
+      state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - sprite: _NF/Objects/Devices/pda.rsi
+      state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: "unshaded"
+      visible: false
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda_shareholder_syndicate
+  - type: Pda
+    id: SynShareholderIDCard
+  - type: PdaBorderColor
+    borderColor: "#171511"
+    accentVColor: "#b0a813"
+  - type: Icon
+    sprite: _Lua/Objects/Devices/pda.rsi
+    state: pda_shareholder_syndicate
+
+- type: entity
+  parent: BasePDA
+  id: VipPDA
+  name: vip PDA
+  description: Why isn't it not gray?
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _Lua/Objects/Devices/pda.rsi
+      map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda_vip"
+    - sprite: _NF/Objects/Devices/pda.rsi
+      state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - sprite: _NF/Objects/Devices/pda.rsi
+      state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: "unshaded"
+      visible: false
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda_vip
+  - type: Pda
+    id: VipIDCard
+  - type: PdaBorderColor
+    borderColor: "#171511"
+    accentVColor: "#b0a813"
+  - type: Icon
+    sprite: _Lua/Objects/Devices/pda.rsi
+    state: pda_vip
+
+# from _Lua/Entities/Objects/Misc/identification_cards.yml
+- type: entity
+  parent: IDCardStandard
+  id: AdjutantIDCard
+  name: adjutant ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _Lua/Objects/Misc/id_cards.rsi
+    layers:
+    - state: silver
+    - state: idadjutant
+  - type: Clothing
+    sprite: _Lua/Objects/Misc/id_cards.rsi
+
+- type: entity
+  parent: CentcomIDCard
+  id: CBURNLeaderIDcard
+  components:
+  - type: Sprite
+    layers:
+    - state: gold
+    - state: idcentcom
+  - type: Item
+    heldPrefix: gold
+  - type: PresetIdCard
+
+- type: entity
+  parent: CBURNIDcard
+  id: CBURNSierraIDcard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: CBURNLeaderIDcard
+  id: CBURNSierraLeaderIDcard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: CentcomIDCard
+  id: CentcomAdministratorIDCard
+  components:
+  - type: Sprite
+    layers:
+    - state: gold
+    - state: idcentcom
+  - type: PresetIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: CentcomIDCard
+  name: command officer ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: centcom
+    - state: idcentcom
+  - type: Item
+    heldPrefix: blue
+  - type: PresetIdCard
+
+- type: entity
+  parent: CentcomIDCard
+  id: CentcomOfficialIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: CentcomIDCard
+  id: CentcomOperatorIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: CentcomIDCard
+  id: CentcomSpecialOperationsOfficerIDCard
+  components:
+  - type: Sprite
+    layers:
+    - state: silver
+    - state: idcentcom
+  - type: PresetIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: ERTChaplainIDCard
+  name: ERT chaplain ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: gold
+    - state: ert_chaplain # we have the sprite for the id but dont have chaplain ERT equipment for now.
+  - type: PresetIdCard
+  - type: Item
+    heldPrefix: blue
+
+- type: entity
+  parent: ERTEngineerIDCard
+  id: ERTEngineerGammaIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: ERTEngineerIDCard
+  name: ERT engineer ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: gold
+    - state: ert_engineer
+  - type: PresetIdCard
+
+- type: entity
+  parent: ERTEngineerIDCard
+  id: ERTEngineerRedIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: ERTJanitorIDCard
+  id: ERTJanitorGammaIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: ERTJanitorIDCard
+  name: ERT janitor ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: gold
+    - state: ert_janitor
+  - type: PresetIdCard
+
+- type: entity
+  parent: ERTJanitorIDCard
+  id: ERTJanitorRedIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: ERTLeaderIDCard
+  id: ERTLeaderGammaIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: ERTLeaderIDCard
+  name: ERT leader ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: gold
+    - state: ert_commander
+  - type: PresetIdCard
+  - type: Item
+    heldPrefix: gold
+
+- type: entity
+  parent: ERTLeaderIDCard
+  id: ERTLeaderRedIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: ERTMedicIDCard
+  id: ERTMedicGammaIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: ERTMedicIDCard
+  name: ERT medic ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: gold
+    - state: ert_medic
+  - type: PresetIdCard
+
+- type: entity
+  parent: ERTMedicIDCard
+  id: ERTMedicRedIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: ERTSecurityIDCard
+  id: ERTSecurityGammaIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: ERTSecurityIDCard
+  name: ERT security ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: gold
+    - state: ert_security
+  - type: PresetIdCard
+
+- type: entity
+  parent: ERTSecurityIDCard
+  id: ERTSecurityRedIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: ERTSecurityIDCard
+  id: FSFCommanderBravoIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: ERTSecurityIDCard
+  id: FSFCommanderCharlieIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: ERTSecurityIDCard
+  id: FSFSpecialistBravoIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: ERTSecurityIDCard
+  id: FSFSpecialistCharlieIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: FrontierEngineerIDCard
+  name: ID карта Инженера ЭИК
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idstationengineer
+  - type: PresetIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: OpsLuaTechIDCard
+  name: ID карта
+  description: Карта, необходимая для доступа в различные отделы станции
+  components:
+  - type: AgentIDCard
+  - type: Sprite
+    sprite: _Lua/Objects/Misc/opsluatech.rsi
+    layers:
+    - state: opsluatech
+  - type: PresetIdCard
+
+- type: entity
+  parent: [IDCardStandard, BaseC3SyndicateContraband]
+  id: OutpostTypanIDCardBotanist
+  name: ID карта
+  components:
+  - type: Sprite
+    sprite: _Lua/Objects/Misc/typanbotan.rsi
+    layers:
+    - state: typancardbotanist
+  - type: PresetIdCard
+  - type: Access
+    tags:
+    - SyndicateAgent
+    - NuclearOperative
+    groups:
+    - AllAccess
+
+- type: entity
+  parent: [IDCardStandard, BaseC3SyndicateContraband]
+  id: OutpostTypanIDCardCargo
+  name: ID карта
+  description: Карта, необходимая для доступа в различные отделы станции
+  components:
+  - type: Sprite
+    sprite: _Lua/Objects/Misc/typancargo.rsi
+    layers:
+    - state: typancardcargo
+  - type: PresetIdCard
+  - type: Access
+    tags:
+    - SyndicateAgent
+    - NuclearOperative
+
+- type: entity
+  parent: [IDCardStandard, BaseC3SyndicateContraband]
+  id: OutpostTypanIDCardChef
+  name: ID карта
+  components:
+  - type: Sprite
+    sprite: _Lua/Objects/Misc/typanchef.rsi
+    layers:
+    - state: typancardchef
+  - type: PresetIdCard
+  - type: Access
+    tags:
+    - SyndicateAgent
+    - NuclearOperative
+    groups:
+    - AllAccess
+
+- type: entity
+  parent: [IDCardStandard, BaseC3SyndicateContraband]
+  id: OutpostTypanIDCardCom
+  name: ID карта
+  description: Карта, необходимая для доступа в различные отделы станции
+  components:
+  - type: Sprite
+    sprite: _Lua/Objects/Misc/typansec.rsi
+    layers:
+    - state: typancardcom
+  - type: PresetIdCard
+  - type: Access
+    tags:
+    - Armory
+    - Cargo
+    - Medical
+    - Engineering
+    - Research
+    - Service
+    - SyndicateAgent
+    - Quartermaster
+    - ResearchDirector
+    - NuclearOperative
+
+- type: entity
+  parent: [IDCardStandard, BaseC3SyndicateContraband]
+  id: OutpostTypanIDCardEng
+  name: ID карта
+  description: Карта, необходимая для доступа в различные отделы станции
+  components:
+  - type: Sprite
+    sprite: _Lua/Objects/Misc/typaneng.rsi
+    layers:
+    - state: typancardeng
+  - type: PresetIdCard
+  - type: Access
+    tags:
+    - Engineering
+    - SyndicateAgent
+    - NuclearOperative
+    groups:
+    - AllAccess
+
+- type: entity
+  parent: [IDCardStandard, BaseC3SyndicateContraband]
+  id: OutpostTypanIDCardMed
+  name: ID карта
+  description: Карта, необходимая для доступа в различные отделы станции
+  components:
+  - type: Sprite
+    sprite: _Lua/Objects/Misc/typanmed.rsi
+    layers:
+    - state: typancardmed
+  - type: PresetIdCard
+  - type: Access
+    tags:
+    - SyndicateAgent
+    - NuclearOperative
+    groups:
+    - AllAccess
+
+- type: entity
+  parent: [IDCardStandard, BaseC3SyndicateContraband]
+  id: OutpostTypanIDCardRd
+  name: ID карта
+  description: Карта, необходимая для доступа в различные отделы станции
+  components:
+  - type: Sprite
+    sprite: _Lua/Objects/Misc/typanrd.rsi
+    layers:
+    - state: typancardrd
+  - type: PresetIdCard
+  - type: Access
+    tags:
+    - SyndicateAgent
+    - NuclearOperative
+    groups:
+    - AllAccess
+
+- type: entity
+  parent: [IDCardStandard, BaseC3SyndicateContraband]
+  id: OutpostTypanIDCardScience
+  name: ID карта
+  description: Карта, необходимая для доступа в различные отделы станции
+  components:
+  - type: Sprite
+    sprite: _Lua/Objects/Misc/typanscien.rsi
+    layers:
+    - state: typancardscience
+  - type: PresetIdCard
+  - type: Access
+    tags:
+    - SyndicateAgent
+    - NuclearOperative
+    groups:
+    - AllAccess
+
+- type: entity
+  parent: [IDCardStandard, BaseC3SyndicateContraband]
+  id: OutpostTypanIDResearcher
+  name: ID карта
+  components:
+  - type: Sprite
+    sprite: _Lua/Objects/Misc/typanresearcher.rsi
+    layers:
+    - state: typancardresearcher
+  - type: PresetIdCard
+  - type: Access
+    tags:
+    - SyndicateAgent
+    - NuclearOperative
+    groups:
+    - AllAccess
+
+- type: entity
+  parent: IDCardStandard
+  id: PathologistIDCard
+  name: pathologist ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idpathologist
+  - type: PresetIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: SCCaptainIDCard
+  name: ID карта Командира Кодекса
+  suffix: Need balance test
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _Lua/Objects/Misc/id_cards.rsi
+    layers:
+    - state: synsharehold
+    - state: idsynsharehold
+  - type: Clothing
+    sprite: _NF/Objects/Misc/id_cards.rsi
+
+- type: entity
+  parent: IDCardStandard
+  id: SCFirstmateIDCard
+  name: ID карта Штурмана Кодекса
+  suffix: Need balance test
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _Lua/Objects/Misc/id_cards.rsi
+    layers:
+    - state: synsharehold
+    - state: idsynsharehold
+  - type: Clothing
+    sprite: _NF/Objects/Misc/id_cards.rsi
+
+- type: entity
+  parent: IDCardStandard
+  id: SCSoldierIDCard
+  name: ID карта Солдата Кодекса
+  suffix: Need balance test
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _Lua/Objects/Misc/id_cards.rsi
+    layers:
+    - state: synsharehold
+    - state: idsynsharehold
+  - type: Clothing
+    sprite: _NF/Objects/Misc/id_cards.rsi
+
+- type: entity
+  parent: IDCardStandard
+  id: SecurityPilotIDCard
+  name: pathologist ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idsecuritypilot
+  - type: PresetIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: SeniorSalvageIDCard
+  name: pathologist ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idseniorcargo
+  - type: PresetIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: SeniorServiceIDCard
+  name: pathologist ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idseniorservice
+  - type: PresetIdCard
+
+- type: entity
+  parent: MedicalIDCard
+  id: SurgeonIDCard
+  name: surgeon ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idsurgeon
+  - type: PresetIdCard
+
+- type: entity
+  parent: [IDCardStandard, BaseC3SyndicateContraband]
+  id: SynShareholderIDCard
+  name: shareholder ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _Lua/Objects/Misc/id_cards.rsi
+    layers:
+    - state: synsharehold
+    - state: idsynsharehold
+  - type: Clothing
+    sprite: _NF/Objects/Misc/id_cards.rsi
+
+- type: entity
+  parent: IDCardStandard
+  id: VipIDCard
+  name: vip ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _Lua/Objects/Misc/id_cards.rsi
+    layers:
+    - state: vip
+    - state: idvip
+  - type: Clothing
+    sprite: _NF/Objects/Misc/id_cards.rsi
+
+# from _Lua/Roles/Jobs/Command/officer_blueshield.yml
+- type: entity
+  parent: IDCardStandard
+  id: BlueShieldOfficerIDCard
+  components:
+    - type: Sprite
+      layers:
+        - state: default
+        - state: ert_security
+    - type: PresetIdCard
+    - type: Access
+      tags:
+        - CCSecurity
+        - CentralCommand
+      groups:
+        - AllAccess
+
+- type: entity
+  parent: BasePDA
+  id: BlueShieldOfficerPDA
+  components:
+    - type: Pda
+      id: BlueShieldOfficerIDCard
+    - type: PdaBorderColor
+      borderColor: "#12445b"
+      accentHColor: "#772d32"
+      accentVColor: "#772d32"
+    - type: Icon
+      state: pda-ert
+    - type: HealthAnalyzer
+      scanDelay: 1
+
+# from _Lua/Roles/Jobs/Law/magistrate.yml
+- type: entity
+  parent: IDCardStandard
+  id: MagistratIDCard
+  name: magistrat ID card
+  description: magistrat ID card
+  components:
+    - type: Sprite
+      layers:
+        - state: default
+        - state: idlawyer
+    - type: PresetIdCard
+
+- type: entity
+  parent: BasePDA
+  id: MagistratPDA
+  name: magistrat PDA
+  description: magistrat PDA
+  components:
+  - type: Pda
+    id: MagistratIDCard
+  - type: Icon
+    state: pda-lawyer
+
+# from _Lua/Roles/Jobs/ShipVsShip/blueredteam.yml
+- type: entity
+  parent: ERTSecurityIDCard
+  id: BlueTeamCaptainIDCard
+  name: ID карта капитана команды синих
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: ERTSecurityIDCard
+  id: BlueTeamSpecialistIDCard
+  name: ID карта специалиста команды синих
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: ERTSecurityIDCard
+  id: RedTeamCaptainIDCard
+  name: ID карта капитана команды красных
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: ERTSecurityIDCard
+  id: RedTeamSpecialistIDCard
+  name: ID карта специалиста команды красных
+  components:
+  - type: PresetIdCard
+
+# from _NF/Entities/Objects/Devices/Misc/identification_cards.yml
+- type: entity
+  parent: CadetIDCard
+  id: BailiffIDCard
+  name: NFSD bailiff ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: nfsd
+    - state: idnfsdbailiff
+
+- type: entity
+  parent: CadetIDCard
+  id: BrigmedicNFIDCard
+  name: NFSD brigmedic ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: nfsd
+    - state: idnfsdbrigmed
+
+- type: entity
+  parent: [IDCardStandard, BaseNanotrasenContrabandT1]
+  id: CadetIDCard
+  name: NFSD cadet ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: nfsd
+    - state: idnfsdcadet
+  - type: Clothing
+    sprite: _NF/Objects/Misc/id_cards.rsi
+  - type: Item
+    heldPrefix: nfsd
+
+- type: entity
+  parent: DeputyIDCard
+  id: CappyIDCard
+  name: cappy ID card
+  components:
+  - type: PresetIdCard
+    name: Cappy
+
+- type: entity
+  parent: NFPirateFirstMateIDCard
+  id: ClarpyIDCard
+  name: clarpy ID card
+  components:
+  - type: PresetIdCard
+    name: Clarpy
+
+- type: entity
+  parent: PassengerIDCard
+  id: ContractorIDCard
+  name: contractor ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: default
+    - state: idcontractor
+
+- type: entity
+  parent: PlantTechnicianIDCard
+  id: CurieIDCard
+  name: curie ID card
+  components:
+  - type: PresetIdCard
+    name: Curie
+
+- type: entity
+  parent: CadetIDCard
+  id: DeputyIDCard
+  name: NFSD deputy ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: nfsd
+    - state: idnfsddeputy
+
+- type: entity
+  parent: [IDCardStandard, BaseCommandContraband]
+  id: DocIDCard
+  name: director of care ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: silver
+    - state: idmedicdoc
+  - type: Clothing
+    sprite: _NF/Objects/Misc/id_cards.rsi
+  - type: Item
+    heldPrefix: silver
+
+- type: entity
+  parent: ERTChaplainIDCard
+  id: ERTMailCarrierIDCard
+  name: ERT mail carrier ID card
+  components:
+  - type: IdCard
+    jobTitle: job-title-ert-mail-carrier
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: gold
+    - state: ert_mailcarrier
+
+- type: entity
+  parent: IDCardStandard
+  id: MercenaryIDCard
+  name: mercenary ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: default
+    - state: idmercenary
+  - type: Clothing
+    sprite: _NF/Objects/Misc/id_cards.rsi
+
+- type: entity
+  parent: CadetIDCard
+  id: NFDetectiveIDCard
+  name: NFSD detective ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: nfsd
+    - state: idnfsddetective
+
+- type: entity
+  parent: JanitorIDCard
+  id: NFJanitorIDCard
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: NFPirateIDCard
+  id: NFPirateCaptainIDCard
+  name: pirate captain ID card
+  description: Ahoy, see how it glistens!
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: pirate
+    - state: idpiratecaptain
+
+- type: entity
+  parent: NFPirateIDCard
+  id: NFPirateFirstMateIDCard
+  name: pirate first mate ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: pirate
+    - state: idpiratefirstmate
+
+- type: entity
+  parent: PirateIDCard
+  id: NFPirateIDCard
+  name: pirate ID card
+  description: Garr, be this wood?
+  suffix: Frontier
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: pirate
+    - state: idpirate
+  - type: Item
+    heldPrefix: pirate
+
+- type: entity
+  parent: [IDCardStandard, BaseCommandContraband]
+  id: PlantManagerIDCard
+  name: plant manager ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: silver
+    - state: idplantmanager
+  - type: Clothing
+    sprite: _NF/Objects/Misc/id_cards.rsi
+  - type: Item
+    heldPrefix: silver
+
+# Cats
+
+- type: entity
+  parent: IDCardStandard
+  id: PlantTechnicianIDCard
+  name: plant technician ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: default
+    - state: idplanttechnician
+  - type: Clothing
+    sprite: _NF/Objects/Misc/id_cards.rsi
+
+- type: entity
+  parent: IDCardStandard
+  id: PublicAffairsIDCard
+  name: public affairs liaison ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: nfsd
+    - state: idpublicaffairsliaison
+
+- type: entity #from _Lua
+  parent: CadetIDCard
+  id: SDEngineerIDCard
+  name: ID-карта Инженера СРБС
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: nfsd
+    - state: idnfsdengineer
+
+- type: entity
+  parent: SecurityIDCard
+  id: SecurityGuardIDCard
+  name: security guard ID card
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: CadetIDCard
+  id: SergeantIDCard
+  name: NFSD sergeant ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: nfsd
+    - state: idnfsdsergeant
+
+- type: entity
+  parent: [CadetIDCard, BaseCommandContraband]
+  id: ShriffIDCard
+  name: NFSD sheriff ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: silver
+    - state: idnfsdsheriff
+  - type: Item
+    heldPrefix: silver
+
+- type: entity
+  parent: [HoPIDCard, BaseCommandContraband]
+  id: SrIDCard
+  name: station representative ID card
+  components:
+  - type: PresetIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: StcIDCard
+  name: station traffic controller ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: silver
+    - state: idstationtrafficcontroller
+  - type: Clothing
+    sprite: _NF/Objects/Misc/id_cards.rsi
+  - type: Item
+    heldPrefix: silver
+
+- type: entity
+  parent: ValetIDCard
+  id: ValetNFIDCard
+  name: valet ID card
+  components:
+  - type: PresetIdCard
+  - type: Sprite
+    sprite: _NF/Objects/Misc/id_cards.rsi
+    layers:
+    - state: default
+    - state: idvalet
+
+# from _NF/Entities/Objects/Devices/pda.yml
+- type: entity
+  parent: BaseSecurityPDA
+  id: BailiffPDA
+  name: bailiff PDA
+  description: Whosoever bears this PDA puts the law on their back.
+  components:
+  - type: Pda
+    id: BailiffIDCard
+    bookSlot: # Frontier
+      startingItem: HyperlinkBookNfsdSop
+      priority: -2
+      whitelist:
+        tags:
+        - BookSpaceLaw
+        - BookNfsdSop
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-bailiff
+  - type: PdaBorderColor
+    borderColor: "#FFFDD0"
+    accentHColor: "#896b49"
+  - type: Icon
+    state: pda-bailiff
+
+- type: entity
+  parent: BaseSecurityPDA
+  id: BrigmedicNFPDA
+  name: brigmedic PDA
+  description: Whosoever bears this PDA heals the law.
+  components:
+  - type: Pda
+    id: BrigmedicNFIDCard
+    bookSlot: # Frontier
+      startingItem: HyperlinkBookNfsdSop
+      priority: -2
+      whitelist:
+        tags:
+        - BookSpaceLaw
+        - BookNfsdSop
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-brigmed
+  - type: PdaBorderColor
+    borderColor: "#FFFDD0"
+    accentHColor: "#896b49"
+  - type: Icon
+    state: pda-brigmed
+
+- type: entity
+  parent: [BaseSecurityPDA, BaseNanotrasenContrabandT1]
+  id: CadetPDA
+  name: cadet PDA
+  description: Whosoever bears this PDA could be the law.
+  components:
+  - type: Pda
+    id: CadetIDCard
+    bookSlot: # Frontier
+      startingItem: HyperlinkBookNfsdSop
+      priority: -2
+      whitelist:
+        tags:
+        - BookSpaceLaw
+        - BookNfsdSop
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-cadet
+  - type: PdaBorderColor
+    borderColor: "#FFFDD0"
+    accentHColor: "#896b49"
+  - type: Icon
+    state: pda-cadet
+
+- type: entity
+  parent: ClearPDA
+  id: ClearNFPDA
+  components:
+  - type: Pda
+    id: ContractorIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-clear
+
+- type: entity
+  parent: BaseSecurityPDA
+  id: DeputyPDA
+  name: deputy PDA
+  description: Whosoever bears this PDA is close to being the law.
+  components:
+  - type: Pda
+    id: DeputyIDCard
+    bookSlot: # Frontier
+      startingItem: HyperlinkBookNfsdSop
+      priority: -2
+      whitelist:
+        tags:
+        - BookSpaceLaw
+        - BookNfsdSop
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-deputy
+  - type: PdaBorderColor
+    borderColor: "#FFFDD0"
+    accentHColor: "#896b49"
+  - type: Icon
+    state: pda-deputy
+
+- type: entity
+  parent: [CMOPDA, BaseCommandContraband]
+  id: DocPDA
+  name: director of care PDA
+  description: It smells like disinfectant.
+  components:
+  - type: Pda
+    id: DocIDCard
+    penSlot:
+      startingItem: PenCentcom
+      priority: -1
+      whitelist:
+        tags:
+        - Write
+  - type: PdaBorderColor
+    borderColor: "#789876"
+    accentHColor: "#447987"
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-doc
+  - type: Icon
+    sprite: _NF/Objects/Devices/pda.rsi
+    state: pda-doc
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - YupiTransferCartridge # Lua
+    - NanoChatCartridge # Lua
+    - NanoTaskCartridge
+    - NewsReaderCartridge
+    - BountyContractsCartridge
+    - AstroNavCartridge
+    - MedTekCartridge
+
+- type: entity
+  parent: ERTLeaderPDA
+  id: ERTMailCarrierPDA
+  suffix: Mail Carrier
+  components:
+  - type: Pda
+    id: ERTMailCarrierIDCard
+    penSlot:
+      startingItem: PenCentcom
+      priority: -1
+      whitelist:
+        tags:
+        - Write
+
+- type: entity
+  parent: BasePDA
+  id: MercenaryPDA
+  name: mercenary PDA
+  description: This PDA smells of war.
+  components:
+  - type: Clothing
+    sprite: _Lua/Objects/Devices/MercenaryPDA.rsi
+  - type: Sprite
+    layers:
+    - sprite: _Lua/Objects/Devices/MercenaryPDA.rsi
+      map: [ "enum.PdaVisualLayers.Base" ]
+      state: "icon"
+    - sprite: _NF/Objects/Devices/pda.rsi
+      state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - sprite: _NF/Objects/Devices/pda.rsi
+      state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: "unshaded"
+      visible: false
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       icon
+  - type: Pda
+    id: MercenaryIDCard
+  - type: PdaBorderColor
+    borderColor: "#717059"
+    accentVColor: "#A32D26"
+  - type: Icon
+    sprite: _Lua/Objects/Devices/StormCreedPDA.rsi
+    state: icon
+  # - type: Pda
+  #   id: MercenaryIDCard
+  # - type: Appearance
+  #   appearanceDataInit:
+  #     enum.PdaVisuals.PdaType:
+  #       !type:String
+  #       pda-mercenary
+  # - type: PdaBorderColor
+  #   borderColor: "#717059"
+  #   accentVColor: "#A32D26"
+  # - type: Icon
+  #   state: pda-mercenary
+
+- type: entity
+  parent: [NFShantymanPDA, BaseC2PirateContrabandNoValue] # Lua-changes: added BaseC2PirateContrabandNoValue
+  id: NFCaptainShantymanPDA
+  components:
+  - type: Pda
+    id: NFPirateCaptainIDCard
+
+- type: entity
+  parent: BaseSecurityPDA
+  id: NFDetectivePDA
+  name: detective PDA
+  description: Smells like rain... pouring down the rooftops...
+  components:
+  - type: Pda
+    id: NFDetectiveIDCard
+    bookSlot: # Frontier
+      startingItem: HyperlinkBookNfsdSop
+      priority: -2
+      whitelist:
+        tags:
+        - BookSpaceLaw
+        - BookNfsdSop
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-nfdetective
+  - type: PdaBorderColor
+    borderColor: "#774705"
+  - type: Icon
+    state: pda-nfdetective
+
+- type: entity
+  parent: [NFShantymanPDA, BaseC2PirateContrabandNoValue] # Lua-changes: added BaseC2PirateContrabandNoValue
+  id: NFFirstMateShantymanPDA
+  components:
+  - type: Pda
+    id: NFPirateFirstMateIDCard
+
+- type: entity
+  parent: JanitorPDA
+  id: NFJanitorPDA
+  components:
+  - type: Pda
+    id: NFJanitorIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-janitor
+
+- type: entity
+  parent: [PiratePDA, BaseC2PirateContrabandNoValue] # Lua-changes: added BaseC2PirateContrabandNoValue
+  id: NFPirateCaptainPDA
+  name: pirate captain PDA
+  suffix: Frontier
+  components:
+  - type: Pda
+    id: NFPirateCaptainIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-pirate
+
+- type: entity
+  parent: [PiratePDA, BaseC2PirateContrabandNoValue] # Lua-changes: added BaseC2PirateContrabandNoValue
+  id: NFPirateFirstMatePDA
+  name: pirate first mate PDA
+  suffix: Frontier
+  components:
+  - type: Pda
+    id: NFPirateFirstMateIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-pirate
+
+- type: entity
+  parent: [PiratePDA, BaseC2PirateContrabandNoValue] # Lua-changes: added BaseC2PirateContrabandNoValue
+  id: NFPiratePDA
+  name: pirate PDA
+  suffix: Frontier
+  components:
+  - type: Pda
+    id: NFPirateIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-pirate
+
+- type: entity
+  parent: [PiratePDA, BaseC2PirateContrabandNoValue] # Lua-changes: added BaseC2PirateContrabandNoValue
+  id: NFShantymanPDA
+  name: shantyman PDA
+  description: It's pirate party time!
+  suffix: Frontier
+  components:
+  - type: Pda
+    id: NFPirateIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-shantyman
+  - type: Instrument
+    allowPercussion: false
+    handheld: true
+    bank: 1
+    program: 2
+  - type: SwappableInstrument
+    instrumentList:
+      "Default": {2: 1}
+      "Accordion": {21: 0}
+      "Fiddle": {110: 0}
+      "Guitar": {24: 0}
+      "Lyre": {46: 0}
+
+- type: entity
+  parent: BasePDA
+  id: PlantManagerPDA
+  name: plant manager PDA
+  description: Pristine, but smells strongly of ozone.
+  components:
+  - type: Pda
+    id: PlantManagerIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-plantmanager
+  - type: PdaBorderColor
+    borderColor: "#949137"
+    accentVColor: "#A32D26"
+    accentHColor: "#447987"
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - YupiTransferCartridge # Lua
+    - NanoChatCartridge # Lua
+    - NanoTaskCartridge
+    - NewsReaderCartridge
+    - BountyContractsCartridge
+    - AstroNavCartridge
+
+- type: entity
+  parent: BasePDA
+  id: PlantTechnicianPDA
+  name: plant technician PDA
+  description: Last shift must've bent the antenna somehow.
+  components:
+  - type: Pda
+    id: PlantTechnicianIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-planttechnician
+  - type: PdaBorderColor
+    borderColor: "#949137"
+    accentVColor: "#A32D26"
+  - type: Icon
+    state: pda-planttechnician
+
+- type: entity
+  parent: BaseSecurityPDA
+  id: PublicAffairsLiaisonPDA
+  name: public affairs liaison PDA
+  description: Paperwork, paperwork, paperwork!
+  components:
+  - type: Pda
+    id: PublicAffairsIDCard
+    penSlot:
+      startingItem: PublicAffairsPen
+      priority: -1
+      whitelist:
+        tags:
+        - Write
+    bookSlot: # Frontier
+      startingItem: HyperlinkBookNfsdSop
+      priority: -2
+      whitelist:
+        tags:
+        - BookSpaceLaw
+        - BookNfsdSop
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-pal
+  - type: PdaBorderColor
+    borderColor: "#FFFDD0"
+    accentHColor: "#896b49"
+  - type: Icon
+    state: pda-pal
+
+- type: entity
+  parent: BaseSecurityPDA
+  id: SDEngineerPDA
+  name: КПК Инженера СРБС
+  description: За многие годы эксплуатации он покрылся слоем пластитановой пыли.
+  components:
+  - type: Pda
+    id: SDEngineerIDCard
+    bookSlot: # Frontier
+      startingItem: HyperlinkBookNfsdSop
+      priority: -2
+      whitelist:
+        tags:
+        - BookSpaceLaw
+        - BookNfsdSop
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-nfdetective
+  - type: PdaBorderColor
+    borderColor: "#774705"
+  - type: Icon
+    state: pda-nfdetective
+
+- type: entity
+  parent: BaseSecurityPDA
+  id: SecurityGuardPDA
+  name: security guard PDA
+  description: Red to hide the stains of passenger blood.
+  components:
+  - type: Pda
+    id: SecurityGuardIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-security
+  - type: PdaBorderColor
+    borderColor: "#A32D26"
+  - type: Icon
+    state: pda-security
+
+- type: entity
+  parent: BaseSecurityPDA
+  id: SergeantPDA
+  name: sergeant PDA
+  description: Whosoever bears this PDA puts the law on their back.
+  components:
+  - type: Pda
+    id: SergeantIDCard
+    bookSlot: # Frontier
+      startingItem: HyperlinkBookNfsdSop
+      priority: -2
+      whitelist:
+        tags:
+        - BookSpaceLaw
+        - BookNfsdSop
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-sergeant
+  - type: PdaBorderColor
+    borderColor: "#FFFDD0"
+    accentHColor: "#896b49"
+  - type: Icon
+    state: pda-sergeant
+
+- type: entity
+  parent: [BaseSecurityPDA, BaseCommandContraband]
+  id: SheriffPDA
+  name: sheriff PDA
+  description: Whosoever bears this PDA is the law.
+  components:
+  - type: Pda
+    id: ShriffIDCard
+    bookSlot: # Frontier
+      startingItem: HyperlinkBookNfsdSop
+      priority: -2
+      whitelist:
+        tags:
+        - BookSpaceLaw
+        - BookNfsdSop
+    penSlot:
+      startingItem: PenCentcom
+      priority: -1
+      whitelist:
+        tags:
+        - Write
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-sheriff
+  - type: PdaBorderColor
+    borderColor: "#FFFDD0"
+    accentHColor: "#896b49"
+  - type: Icon
+    state: pda-sheriff
+  - type: CartridgeLoader # Extended with the ledger
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - YupiTransferCartridge # Lua
+    - NanoChatCartridge # Lua
+    - NanoTaskCartridge
+    - NewsReaderCartridge
+    - BountyContractsCartridge
+    - AstroNavCartridge
+    - WantedListCartridge
+
+- type: entity
+  parent: [BaseSecurityPDA, BaseCommandContraband]
+  id: SrPDA
+  name: station representative PDA
+  description: Looks like it's been clawed on.
+  components:
+  - type: Pda
+    id: SrIDCard
+    penSlot:
+      startingItem: PenCentcom
+      priority: -1
+      whitelist:
+        tags:
+        - Write
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-sr
+  - type: PdaBorderColor
+    borderColor: "#789876"
+    accentHColor: "#447987"
+  - type: Icon
+    state: pda-sr
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - YupiTransferCartridge # Lua
+    - NanoChatCartridge # Lua
+    - NanoTaskCartridge
+    - NewsReaderCartridge
+    - BountyContractsCartridge
+    - AstroNavCartridge
+    - MailMetricsCartridge
+
+- type: entity
+  parent: BaseSecurityPDA
+  id: StcPDA
+  name: station traffic controller PDA
+  description: Declare emergencies in style!
+  components:
+  - type: Pda
+    id: StcIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-stc
+  - type: PdaBorderColor
+    borderColor: "#F2F2F2"
+    accentVColor: "#FE4900"
+  - type: Icon
+    state: pda-stc
+

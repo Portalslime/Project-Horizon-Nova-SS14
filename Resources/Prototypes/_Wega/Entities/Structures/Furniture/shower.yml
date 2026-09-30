@@ -47,16 +47,24 @@
   - type: SolutionContainerManager
     solutions:
       shower:
-        maxVol: 7680
-        reagents:
-        - ReagentId: Water
-          Quantity: 7680
-  - type: SolutionRegeneration
+        maxVol: 100
+  # Horizon: fed from the plumbing supply line, so it sprays whatever liquid the pipes carry.
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+  - type: NodeContainer
+    nodes:
+      plumbing:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        portable: true
+        volume: 10
+  - type: PlumbingOutlet
     solution: shower
-    generated:
-      reagents:
-      - ReagentId: Water
-        Quantity: 100
+    rate: 40
   - type: DumpableSolution
     solution: shower
+  - type: Construction
+    graph: ShowerGraph
+    node: shower
   - type: Appearance

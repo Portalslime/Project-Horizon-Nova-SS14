@@ -5,6 +5,8 @@
   components:
   - type: Hunger
   - type: Thirst
+  - type: Defecation
+    baseFillRate: 0.01 # component default is 0.025
   - type: Icon
     sprite: Mobs/Species/Vox/parts.rsi
     state: vox_m

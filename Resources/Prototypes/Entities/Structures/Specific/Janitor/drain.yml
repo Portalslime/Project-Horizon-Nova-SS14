@@ -26,7 +26,22 @@
       range: 8
       sound:
         path: /Audio/Ambience/Objects/drain.ogg
+    # Horizon: the drain no longer destroys what it collects, it sends it into the sewage pipes.
+    # If they are full or missing it backs up (and can be plunged) instead of spilling again.
     - type: Drain
+      unitsDestroyedPerSecond: 0
+    - type: NodeContainer
+      nodes:
+        plumbing:
+          !type:PlumbingNode
+          nodeGroupID: Plumbing
+          portable: true
+          volume: 10
+    - type: PlumbingInlet
+      rate: 30
+      spillWhenBlocked: false
+    # If the pipes are full and being pushed into, the drain overflows onto the floor to make room.
+    - type: PlumbingOverflow
     - type: DumpableSolution
       solution: drainBuffer
     - type: Appearance
@@ -37,7 +52,7 @@
     - type: SolutionContainerManager
       solutions:
         drainBuffer:
-          maxVol: 1000
+          maxVol: 200
     - type: DrainableSolution
       solution: drainBuffer
     - type: Damageable

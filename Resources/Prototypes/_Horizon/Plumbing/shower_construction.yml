@@ -1,0 +1,42 @@
+- type: constructionGraph
+  id: ShowerGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: shower
+      steps:
+      - material: Steel
+        amount: 2
+      - material: Plastic
+        amount: 2
+        doAfter: 3
+
+  - node: shower
+    entity: Shower
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:SpawnPrototype
+        prototype: SheetPlastic1
+        amount: 2
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 3
+
+- type: construction
+  id: ShowerConstruction
+  graph: ShowerGraph
+  startNode: start
+  targetNode: shower
+  category: construction-category-plumbing
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false

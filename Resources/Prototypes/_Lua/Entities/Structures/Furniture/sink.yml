@@ -28,12 +28,9 @@
   id: SinkWide
   parent: SinkWideEmpty
   suffix: Water
+  # Horizon: no starting water, sinks are filled through the plumbing supply line.
   components:
   - type: SolutionContainerManager
     solutions:
       drainBuffer:
         maxVol: 200
-      tank:
-        reagents:
-        - ReagentId: Water
-          Quantity: 300

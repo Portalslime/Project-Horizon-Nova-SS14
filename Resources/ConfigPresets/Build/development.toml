@@ -3,7 +3,7 @@ asteroid_sector_enabled = false
 # Straight in-game baby
 lobbyenabled = false
 # Frontier: special map
-map = "NFDev"
+map = "Frontier"
 role_timers = false
 
 [events]

@@ -8,6 +8,10 @@
   components:
   - type: Clickable
   - type: InteractionOutline
+  # Horizon: a sink has to be anchored to join the plumbing network (an unanchored node never connects).
+  - type: Transform
+    anchored: true
+  - type: Anchorable
   - type: Sprite
     sprite: Structures/Furniture/sink.rsi
     layers:
@@ -26,12 +30,17 @@
         maxVol: 200 # Lua: 100 < 200
       tank:
         maxVol: 300 # Lua: 500 < 300
-  - type: SolutionRegeneration
+  # Horizon: the tank is filled from the plumbing supply line (whatever liquid it carries) instead of
+  # regenerating water out of thin air. Only an intake, the sink has no sewage connection.
+  - type: NodeContainer
+    nodes:
+      plumbing:
+        !type:PlumbingNode
+        nodeGroupID: Plumbing
+        portable: true
+        volume: 10
+  - type: PlumbingOutlet
     solution: tank
-    generated:
-      reagents:
-      - ReagentId: Water
-        Quantity: 1
   - type: DrainableSolution
     solution: tank
   - type: ReagentTank
@@ -76,15 +85,12 @@
   id: Sink
   parent: SinkEmpty
   suffix: Water
+  # Horizon: no starting water, sinks are filled through the plumbing supply line.
   components:
   - type: SolutionContainerManager
     solutions:
       drainBuffer:
         maxVol: 200
-      tank:
-        reagents:
-        - ReagentId: Water
-          Quantity: 300 # Lua: 500 < 300
 
 #
 # Lua start
@@ -129,12 +135,9 @@
   id: SinkStemlessWater
   parent: SinkStemless
   suffix: Water
+  # Horizon: no starting water, sinks are filled through the plumbing supply line.
   components:
   - type: SolutionContainerManager
     solutions:
       drainBuffer:
         maxVol: 200 # Lua: 100 < 200
-      tank:
-        reagents:
-        - ReagentId: Water
-          Quantity: 300 # Lua: 500 < 300

@@ -16,4 +16,10 @@ public enum NodeGroupID : byte
     /// <seealso cref="Content.Server.Power.Generation.Teg.TegSystem"/>
     /// <seealso cref="Content.Server.Power.Generation.Teg.TegNodeGroup"/>
     Teg,
+
+    /// <summary>
+    /// Liquid plumbing (sewage and water supply) pipes.
+    /// </summary>
+    /// <seealso cref="Content.Server._Horizon.Plumbing.NodeGroups.PlumbingNet"/>
+    Plumbing,
 }
