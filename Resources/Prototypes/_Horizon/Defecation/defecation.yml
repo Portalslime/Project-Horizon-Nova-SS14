@@ -28,7 +28,7 @@
   components:
   - type: Action
     icon:
-      sprite: /Textures/_Horizon/Objects/Misc/feces.rsi
+      sprite: /Textures/_Horizon/Interface/Actions/defecation.rsi
       state: icon
     useDelay: 10
   - type: InstantAction
