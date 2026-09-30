@@ -390,8 +390,6 @@ ui-options-speech-bubble-text-opacity = Speech bubble text opacity
 ui-options-speech-bubble-speaker-opacity = Speech bubble speaker opacity
 ui-options-speech-bubble-background-opacity = Speech bubble background opacity
 
-ui-options-censor-nudity = Censor character nudity
-
 ## Admin menu
 
 ui-options-admin-player-panel = Admin Menu Players List

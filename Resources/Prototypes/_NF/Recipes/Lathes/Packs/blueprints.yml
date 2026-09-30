@@ -142,6 +142,7 @@
   - BiomassReclaimerMachineCircuitboard
   # BiochemicalStasis
   - StasisBedMachineCircuitboard
+  - StasisOperatingTableCircuitboard
   - CryoPodMachineCircuitboard
   - CryostasisBeaker
   - SyringeCryostasis
