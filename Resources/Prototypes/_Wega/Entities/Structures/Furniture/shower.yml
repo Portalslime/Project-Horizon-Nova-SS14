@@ -14,6 +14,10 @@
     noRot: true
     sprite: _Wega/Structures/Furniture/shower.rsi
     layers:
+    # Horizon: the supply pipe sticks out of the shower on its south side.
+    - sprite: _Horizon/Structures/Plumbing/pipe.rsi
+      state: pipeHalf
+      color: "#8a5a2b"
     - state: shower
     - state: water
       map: ["enum.ShowerVisuals.Spraying"]
@@ -57,7 +61,8 @@
       plumbing:
         !type:PlumbingNode
         nodeGroupID: Plumbing
-        connectSameTile: true
+        pipeDirection: South
+        rotationsEnabled: false # the sprite does not rotate
         volume: 10
   - type: PlumbingOutlet
     solution: shower

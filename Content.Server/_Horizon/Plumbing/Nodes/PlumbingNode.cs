@@ -1,3 +1,5 @@
+using Content.Server.NodeContainer.EntitySystems;
+using Content.Server.NodeContainer.NodeGroups;
 using Content.Server.NodeContainer.Nodes;
 using Content.Shared.Atmos;
 using Content.Shared.FixedPoint;
@@ -31,19 +33,58 @@ public sealed partial class PlumbingNode : Node, IRotatableNode
     public FixedPoint2 Volume = 50;
 
     /// <summary>
-    /// Connects to the pipes lying on the same tile instead of (or as well as) those in adjacent tiles.
-    /// For furniture such as sinks and toilets, which sit on top of the pipe that feeds or drains them.
-    /// Two nodes that both have this set never connect to each other.
+    /// If false the direction never changes with the entity rotation, for sprites that do not rotate.
+    /// </summary>
+    [DataField("rotationsEnabled")]
+    public bool RotationsEnabled = true;
+
+    /// <summary>
+    /// The fixture side of a port: connects to the portable node of a device anchored on the same tile, besides
+    /// the pipes it opens to as usual.
     /// </summary>
     [DataField]
-    public bool ConnectSameTile;
+    public bool Port;
+
+    /// <summary>
+    /// The device side of a port (a barrel): connects to the port node on its own tile.
+    /// </summary>
+    [DataField]
+    public bool Portable;
+
+    /// <summary>
+    /// Whether this node can connect to others at all. Portable devices switch it with their anchoring.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool ConnectionsEnabled
+    {
+        get => _connectionsEnabled;
+        set
+        {
+            _connectionsEnabled = value;
+
+            if (NodeGroup != null)
+                IoCManager.Resolve<IEntityManager>().System<NodeGroupSystem>().QueueRemakeGroup((BaseNodeGroup) NodeGroup);
+        }
+    }
+
+    [DataField("connectionsEnabled")]
+    private bool _connectionsEnabled = true;
+
+    public override bool Connectable(IEntityManager entMan, TransformComponent? xform = null)
+    {
+        return _connectionsEnabled && base.Connectable(entMan, xform);
+    }
 
     public override void Initialize(EntityUid owner, IEntityManager entMan)
     {
         base.Initialize(owner, entMan);
 
-        var xform = entMan.GetComponent<TransformComponent>(owner);
-        CurrentPipeDirection = OriginalPipeDirection.RotatePipeDirection(xform.LocalRotation);
+        CurrentPipeDirection = RotatedDirection(entMan.GetComponent<TransformComponent>(owner).LocalRotation);
+    }
+
+    private PipeDirection RotatedDirection(Angle rotation)
+    {
+        return RotationsEnabled ? OriginalPipeDirection.RotatePipeDirection(rotation) : OriginalPipeDirection;
     }
 
     bool IRotatableNode.RotateNode(in MoveEvent ev)
@@ -52,7 +93,7 @@ public sealed partial class PlumbingNode : Node, IRotatableNode
             return false;
 
         var oldDirection = CurrentPipeDirection;
-        CurrentPipeDirection = OriginalPipeDirection.RotatePipeDirection(ev.NewRotation);
+        CurrentPipeDirection = RotatedDirection(ev.NewRotation);
         return oldDirection != CurrentPipeDirection;
     }
 
@@ -61,8 +102,7 @@ public sealed partial class PlumbingNode : Node, IRotatableNode
         if (!anchored)
             return;
 
-        var xform = entityManager.GetComponent<TransformComponent>(Owner);
-        CurrentPipeDirection = OriginalPipeDirection.RotatePipeDirection(xform.LocalRotation);
+        CurrentPipeDirection = RotatedDirection(entityManager.GetComponent<TransformComponent>(Owner).LocalRotation);
     }
 
     public override IEnumerable<Node> GetReachableNodes(TransformComponent xform,
@@ -76,7 +116,8 @@ public sealed partial class PlumbingNode : Node, IRotatableNode
 
         var pos = grid.TileIndicesFor(xform.Coordinates);
 
-        if (ConnectSameTile)
+        // A port and a portable device meet on the same tile.
+        if (Port || Portable)
         {
             foreach (var entity in grid.GetAnchoredEntities(pos))
             {
@@ -85,8 +126,12 @@ public sealed partial class PlumbingNode : Node, IRotatableNode
 
                 foreach (var node in container.Nodes.Values)
                 {
-                    if (node is PlumbingNode { ConnectSameTile: false } other && other.NodeGroupID == NodeGroupID)
+                    if (node is PlumbingNode other &&
+                        other.NodeGroupID == NodeGroupID &&
+                        (Port ? other.Portable : other.Port))
+                    {
                         yield return other;
+                    }
                 }
             }
         }

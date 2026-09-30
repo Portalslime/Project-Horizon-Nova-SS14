@@ -35,11 +35,13 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Sprite
-    sprite: Structures/Piping/Atmospherics/pipe.rsi
-    # Wider than the gas pipes and drawn underneath them.
+    sprite: _Horizon/Structures/Plumbing/pipe.rsi
+    # Drawn underneath the gas pipes.
     drawdepth: ThickPipe
     color: "#8a5a2b"
   - type: NodeContainer
+  # Two pieces can't be anchored together if they open in the same direction.
+  - type: PlumbingRestrictOverlap
   - type: Physics
     canCollide: false
     bodyType: static
@@ -74,7 +76,6 @@
   - type: Sprite
     layers:
     - state: pipeHalf
-      scale: 1.35, 1.35
   - type: Construction
     graph: PlumbingPipe
     node: half
@@ -96,7 +97,6 @@
   - type: Sprite
     layers:
     - state: pipeStraight
-      scale: 1.35, 1.35
   - type: Construction
     graph: PlumbingPipe
     node: straight
@@ -116,7 +116,6 @@
   - type: Sprite
     layers:
     - state: pipeBend
-      scale: 1.35, 1.35
   - type: Construction
     graph: PlumbingPipe
     node: bend
@@ -136,7 +135,6 @@
   - type: Sprite
     layers:
     - state: pipeTJunction
-      scale: 1.35, 1.35
   - type: Construction
     graph: PlumbingPipe
     node: tjunction
@@ -156,7 +154,6 @@
   - type: Sprite
     layers:
     - state: pipeFourway
-      scale: 1.35, 1.35
   - type: Construction
     graph: PlumbingPipe
     node: fourway

@@ -11,6 +11,10 @@
   - type: Sprite
     sprite: Structures/Furniture/sink.rsi
     layers:
+      # Horizon: the supply pipe sticks out of the sink on its south side.
+      - sprite: _Horizon/Structures/Plumbing/pipe.rsi
+        state: pipeHalf
+        color: "#8a5a2b"
       - state: sink_wide
       - map: [ "enum.SolutionContainerLayers.Fill" ]
         state: sink_wide-fill-1
@@ -28,12 +32,9 @@
   id: SinkWide
   parent: SinkWideEmpty
   suffix: Water
+  # Horizon: no starting water, sinks are filled through the plumbing supply line.
   components:
   - type: SolutionContainerManager
     solutions:
       drainBuffer:
         maxVol: 200
-      tank:
-        reagents:
-        - ReagentId: Water
-          Quantity: 300

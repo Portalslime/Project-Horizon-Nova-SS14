@@ -15,18 +15,10 @@
     edges:
     - to: SinkNode
       steps:
-      - tag: Pipe
-        icon:
-          sprite: Structures/Piping/Atmospherics/pipe.rsi
-          state: pipeStraight
-        name: construction-graph-tag-pipe
+      - material: Plastic
+        amount: 2
       - material: Steel
         amount: 5
-      - tag: WaterRegenerator
-        icon:
-          sprite: _Lua/Objects/Specific/Service/water_regenerator.rsi
-          state: icon
-        name: construction-graph-tag-water-regenerator
         doAfter: 10
 
   - node: SinkNode

@@ -6,27 +6,27 @@
     edges:
     - to: half
       steps:
-      - material: Steel
+      - material: Plastic
         amount: 1
         doAfter: 1
     - to: straight
       steps:
-      - material: Steel
+      - material: Plastic
         amount: 1
         doAfter: 1
     - to: bend
       steps:
-      - material: Steel
+      - material: Plastic
         amount: 1
         doAfter: 1
     - to: tjunction
       steps:
-      - material: Steel
+      - material: Plastic
         amount: 1
         doAfter: 1
     - to: fourway
       steps:
-      - material: Steel
+      - material: Plastic
         amount: 1
         doAfter: 1
 
@@ -39,7 +39,7 @@
         anchored: false
       completed:
       - !type:SpawnPrototype
-        prototype: SheetSteel1
+        prototype: SheetPlastic1
         amount: 1
       - !type:DeleteEntity
       steps:
@@ -55,7 +55,7 @@
         anchored: false
       completed:
       - !type:SpawnPrototype
-        prototype: SheetSteel1
+        prototype: SheetPlastic1
         amount: 1
       - !type:DeleteEntity
       steps:
@@ -71,7 +71,7 @@
         anchored: false
       completed:
       - !type:SpawnPrototype
-        prototype: SheetSteel1
+        prototype: SheetPlastic1
         amount: 1
       - !type:DeleteEntity
       steps:
@@ -87,7 +87,7 @@
         anchored: false
       completed:
       - !type:SpawnPrototype
-        prototype: SheetSteel1
+        prototype: SheetPlastic1
         amount: 1
       - !type:DeleteEntity
       steps:
@@ -103,7 +103,7 @@
         anchored: false
       completed:
       - !type:SpawnPrototype
-        prototype: SheetSteel1
+        prototype: SheetPlastic1
         amount: 1
       - !type:DeleteEntity
       steps:
@@ -121,11 +121,21 @@
       - material: Steel
         amount: 4
         doAfter: 2
-    - to: gauge
+    - to: filter
       steps:
       - material: Steel
-        amount: 2
-        doAfter: 1
+        amount: 6
+        doAfter: 3
+    - to: port
+      steps:
+      - material: Steel
+        amount: 3
+        doAfter: 2
+    - to: barrel
+      steps:
+      - material: Steel
+        amount: 8
+        doAfter: 4
 
   - node: pump
     entity: PlumbingPump
@@ -143,8 +153,8 @@
       - tool: Welding
         doAfter: 2
 
-  - node: gauge
-    entity: PlumbingPressureGauge
+  - node: filter
+    entity: PlumbingFilter
     edges:
     - to: start
       conditions:
@@ -153,11 +163,40 @@
       completed:
       - !type:SpawnPrototype
         prototype: SheetSteel1
-        amount: 2
+        amount: 6
       - !type:DeleteEntity
       steps:
       - tool: Welding
-        doAfter: 1
+        doAfter: 3
+
+  - node: port
+    entity: PlumbingPort
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 3
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 2
+
+  - node: barrel
+    entity: PlumbingBarrel
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 8
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 4
 
 - type: construction
   id: PlumbingPipeHalf
@@ -214,10 +253,28 @@
   canBuildInImpassable: true
 
 - type: construction
-  id: PlumbingPressureGauge
+  id: PlumbingFilter
   graph: PlumbingDevice
   startNode: start
-  targetNode: gauge
+  targetNode: filter
   category: construction-category-plumbing
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+
+- type: construction
+  id: PlumbingPort
+  graph: PlumbingDevice
+  startNode: start
+  targetNode: port
+  category: construction-category-plumbing
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
+  id: PlumbingBarrel
+  graph: PlumbingDevice
+  startNode: start
+  targetNode: barrel
+  category: construction-category-plumbing
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false

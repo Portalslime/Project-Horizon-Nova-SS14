@@ -11,6 +11,10 @@
   - type: Sprite
     sprite: Structures/Furniture/sink.rsi
     layers:
+      # Horizon: the supply pipe sticks out of the sink on its south side, like the cryo pod's.
+      - sprite: _Horizon/Structures/Plumbing/pipe.rsi
+        state: pipeHalf
+        color: "#8a5a2b"
       - state: sink_stem
       - map: [ "enum.SolutionContainerLayers.Fill" ]
         state: sink-fill-1
@@ -33,7 +37,7 @@
       plumbing:
         !type:PlumbingNode
         nodeGroupID: Plumbing
-        connectSameTile: true
+        pipeDirection: South
         volume: 10
   - type: PlumbingOutlet
     solution: tank
@@ -81,15 +85,12 @@
   id: Sink
   parent: SinkEmpty
   suffix: Water
+  # Horizon: no starting water, sinks are filled through the plumbing supply line.
   components:
   - type: SolutionContainerManager
     solutions:
       drainBuffer:
         maxVol: 200
-      tank:
-        reagents:
-        - ReagentId: Water
-          Quantity: 300 # Lua: 500 < 300
 
 #
 # Lua start
@@ -124,6 +125,9 @@
   - type: Sprite
     sprite: Structures/Furniture/sink.rsi
     layers:
+      - sprite: _Horizon/Structures/Plumbing/pipe.rsi
+        state: pipeHalf
+        color: "#8a5a2b"
       - state: sink
       - map: [ "enum.SolutionContainerLayers.Fill" ]
         state: sink-fill-1
@@ -134,12 +138,9 @@
   id: SinkStemlessWater
   parent: SinkStemless
   suffix: Water
+  # Horizon: no starting water, sinks are filled through the plumbing supply line.
   components:
   - type: SolutionContainerManager
     solutions:
       drainBuffer:
         maxVol: 200 # Lua: 100 < 200
-      tank:
-        reagents:
-        - ReagentId: Water
-          Quantity: 300 # Lua: 500 < 300

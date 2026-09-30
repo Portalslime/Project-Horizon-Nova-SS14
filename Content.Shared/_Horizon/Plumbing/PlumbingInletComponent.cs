@@ -3,11 +3,10 @@ using Content.Shared.FixedPoint;
 namespace Content.Shared._Horizon.Plumbing;
 
 /// <summary>
-/// Pushes the contents of one of the entity's solutions (a sink or toilet buffer, for example) into the plumbing
-/// network at its node. When the network cannot take it, the excess is spilled on the floor instead.
-/// Handled by PlumbingSystem.
+/// Pushes the contents of one of the entity's solutions (a sink or drain buffer, for example) into the plumbing
+/// network at its node. Handled by PlumbingInletSystem.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, AutoGenerateComponentPause]
 public sealed partial class PlumbingInletComponent : Component
 {
     /// <summary>
@@ -33,4 +32,10 @@ public sealed partial class PlumbingInletComponent : Component
     /// </summary>
     [DataField]
     public bool SpillWhenBlocked = true;
+
+    [DataField]
+    public TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
+
+    [DataField, AutoPausedField]
+    public TimeSpan NextUpdate;
 }
