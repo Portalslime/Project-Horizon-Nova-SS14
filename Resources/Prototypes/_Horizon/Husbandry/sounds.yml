@@ -1,0 +1,22 @@
+# PLACEHOLDERS, there are no real horse sounds in the repository yet. Replace the files with real ones
+# (and describe them in Resources/Audio/_Horizon/Animals/attributions.yml) and nothing else has to change.
+- type: soundCollection
+  id: HorseNeigh
+  files:
+  - /Audio/Animals/cow_moo.ogg
+
+- type: soundCollection
+  id: HorseFootstep
+  files:
+  - /Audio/Effects/Footsteps/wood1.ogg
+  - /Audio/Effects/Footsteps/wood2.ogg
+  - /Audio/Effects/Footsteps/wood3.ogg
+  - /Audio/Effects/Footsteps/wood4.ogg
+  - /Audio/Effects/Footsteps/wood5.ogg
+
+- type: soundCollection
+  id: HorseEat
+  files:
+  - /Audio/Items/eating_1.ogg
+  - /Audio/Items/eating_2.ogg
+  - /Audio/Items/eating_3.ogg

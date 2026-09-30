@@ -1,0 +1,205 @@
+- type: entity
+  parent: BaseHusbandryAnimal
+  id: MobHorse
+  name: horse
+  description: A big, strong animal. With a saddle it can carry you around.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Horizon/Mobs/Animals/horse.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base", "movement" ]
+      state: horse
+    - map: [ "saddle" ]
+      state: saddle
+      visible: false
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: horse-moving
+      saddle:
+        state: saddle-moving
+    noMovementLayers:
+      movement:
+        state: horse
+      saddle:
+        state: saddle
+  - type: GenericVisualizer
+    visuals:
+      enum.AnimalVisuals.Eating:
+        movement:
+          True: { state: horse-eating }
+          False: { state: horse }
+        saddle:
+          True: { state: saddle-eating }
+          False: { state: saddle }
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: horse
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 600
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      120: 0.7
+      160: 0.5
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 4.5
+    baseRunningSpeed: 8
+  - type: Body
+    prototype: AnimalRuminant
+  - type: NpcFactionMember
+    factions:
+    - Passive
+  - type: HTN
+    rootTask:
+      task: HorseCompound
+  # Eats what grows. The human feces also count as produce, hence the trash.
+  - type: Diet
+    whitelist:
+      components:
+      - Produce
+    blacklist:
+      tags:
+      - Meat
+      - Trash
+    nutritionPerUnit: 1
+    eatDelay: 2
+    eatSound:
+      collection: HorseEat
+  - type: ManureProducer
+    product: HorseManure
+    nutritionPerDrop: 50
+  - type: Growth
+    meat: FoodMeatHorse
+    stages:
+    - id: Foal
+      duration: 900
+      names:
+        Male: horse-name-foal
+        Female: horse-name-foal
+      scale: 0.6, 0.6
+      maxHealth: 80
+      meatCount: 2
+      price: 300
+    - id: Young
+      duration: 1800
+      names:
+        Male: horse-name-young-male
+        Female: horse-name-young-female
+      scale: 0.85, 0.85
+      maxHealth: 140
+      meatCount: 4
+      price: 700
+    - id: Adult
+      names:
+        Male: horse-name-adult-male
+        Female: horse-name-adult-female
+      scale: 1, 1
+      maxHealth: 200
+      meatCount: 6
+      price: 1500
+      components:
+      # Only a grown animal can be saddled and ridden.
+      # Same as for vehicles: a rider moving with the animal must not get unbuckled over tiny differences in position
+      # while the client predicts, and the rider is always drawn over the animal (see RideableVisualsSystem).
+      - type: Strap
+        position: Stand
+        enabled: false
+        unbuckleDistanceSquared: 0.09
+        maintainSpriteLayers: true
+      - type: ItemSlots
+        slots:
+          saddle_slot:
+            name: rideable-saddle-slot
+            whitelist:
+              components:
+              - Saddle
+      - type: ItemMapper
+        containerWhitelist:
+        - saddle_slot
+        mapLayers:
+          saddle:
+            whitelist:
+              components:
+              - Saddle
+      - type: Rideable
+        saddleSlot: saddle_slot
+        requiredHands: 1
+        redirectDamage: true
+        southOffset: 0, 0.3
+        northOffset: 0, 0.3
+        eastOffset: 0, 0.3
+        westOffset: 0, 0.3
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatHorse
+      amount: 6
+  - type: InteractionPopup
+    successChance: 0.7
+    interactDelay: 2
+    interactSuccessString: petting-success-soft-floofy
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      collection: HorseNeigh
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: HorseFootstep
+  - type: Perishable
+    molsPerSecondPerUnitMass: 0.0015
+  - type: GuideHelp
+    guides:
+    - Chef
+    - FoodRecipes
+
+- type: entity
+  parent: MobHorse
+  id: MobHorseFoal
+  suffix: Foal
+  components:
+  - type: Growth
+    initialStage: Foal
+
+- type: entity
+  parent: MobHorse
+  id: MobHorseYoung
+  suffix: Young
+  components:
+  - type: Growth
+    initialStage: Young
+
+- type: entity
+  parent: MobHorse
+  id: MobHorseMale
+  suffix: Male
+  components:
+  - type: AnimalSex
+    sex: Male
+    randomize: false
+
+- type: entity
+  parent: MobHorse
+  id: MobHorseFemale
+  suffix: Female
+  components:
+  - type: AnimalSex
+    sex: Female
+    randomize: false

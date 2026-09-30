@@ -1,0 +1,85 @@
+using System.Numerics;
+using Content.Shared._Horizon.Husbandry.Core;
+using Robust.Shared.Prototypes;
+
+namespace Content.Shared._Horizon.Husbandry.Growth;
+
+/// <summary>
+/// An animal that grows up through a number of stages. Handled by GrowthSystem and GrowthEffectsSystem.
+/// </summary>
+[RegisterComponent, AutoGenerateComponentPause]
+public sealed partial class GrowthComponent : Component
+{
+    [DataField(required: true)]
+    public List<GrowthStageDef> Stages = new();
+
+    /// <summary>
+    /// Id of the stage the animal starts in. The last stage if not set.
+    /// </summary>
+    [DataField]
+    public string? InitialStage;
+
+    /// <summary>
+    /// What the animal turns into when butchered, stages decide how much of it.
+    /// </summary>
+    [DataField]
+    public EntProtoId Meat = "FoodMeat";
+
+    [ViewVariables]
+    public int CurrentStage = -1;
+
+    /// <summary>
+    /// When the current stage ends. Null when it is the last one.
+    /// </summary>
+    [DataField, AutoPausedField]
+    public TimeSpan? StageEndTime;
+}
+
+/// <summary>
+/// One stage of growth, see <see cref="GrowthComponent"/>.
+/// </summary>
+[DataDefinition]
+public sealed partial class GrowthStageDef
+{
+    [DataField(required: true)]
+    public string Id = string.Empty;
+
+    /// <summary>
+    /// How long the stage lasts. Null means it is the final one.
+    /// </summary>
+    [DataField]
+    public TimeSpan? Duration;
+
+    /// <summary>
+    /// The name of the animal in this stage, by sex.
+    /// </summary>
+    [DataField]
+    public Dictionary<AnimalSexKind, LocId> Names = new();
+
+    [DataField]
+    public Vector2 Scale = Vector2.One;
+
+    /// <summary>
+    /// How much damage the animal can take before it dies in this stage. Zero leaves it as it is.
+    /// </summary>
+    [DataField]
+    public float MaxHealth;
+
+    /// <summary>
+    /// How many pieces of meat it gives when butchered.
+    /// </summary>
+    [DataField]
+    public int MeatCount;
+
+    /// <summary>
+    /// What the animal is worth.
+    /// </summary>
+    [DataField]
+    public double Price;
+
+    /// <summary>
+    /// Added to the animal when it enters the stage.
+    /// </summary>
+    [DataField]
+    public ComponentRegistry Components = new();
+}
