@@ -1,5 +1,5 @@
 # A trough for animals, filled from the plumbing network. Animals drink from it on their own, buckets can fill and
-# empty it. The sprite is the one of a sink for now, a PLACEHOLDER.
+# empty it. The sprite (trough.rsi) is a copy of the sink for now, a PLACEHOLDER.
 - type: entity
   name: animal trough
   id: AnimalTrough
@@ -14,16 +14,16 @@
     anchored: true
   - type: Anchorable
   - type: Sprite
-    sprite: Structures/Furniture/sink.rsi
+    sprite: _Horizon/Objects/Husbandry/trough.rsi
     layers:
-      - state: sink_stem
+      - state: trough
       - map: [ "enum.SolutionContainerLayers.Fill" ]
-        state: sink-fill-1
+        state: trough-fill-1
         visible: false
   - type: Appearance
   - type: SolutionContainerVisuals
     maxFillLevels: 1
-    fillBaseName: sink-fill-
+    fillBaseName: trough-fill-
     solutionName: tank
   - type: SolutionContainerManager
     solutions:

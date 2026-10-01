@@ -5,8 +5,10 @@
   id: FoodMeatHorse
   description: A slab of raw horse meat.
   components:
+  # PLACEHOLDER: a copy of the usual meat, recolored here. With real art in horse_meat.rsi drop the color.
   - type: Sprite
-    state: plain
+    sprite: _Horizon/Objects/Husbandry/horse_meat.rsi
+    state: raw
     color: "#c05a5a"
   - type: SolutionContainerManager
     solutions:
@@ -40,8 +42,9 @@
     - Meat
     - Steak
   - type: Sprite
+    sprite: _Horizon/Objects/Husbandry/horse_meat.rsi
     layers:
-    - state: plain-cooked
+    - state: cooked
   - type: SolutionContainerManager
     solutions:
       food:
@@ -94,7 +97,7 @@
     stackType: HorseManure
     count: 1
   - type: Sprite
-    sprite: _Horizon/Objects/Misc/feces.rsi
+    sprite: _Horizon/Objects/Husbandry/horse_manure.rsi
     state: icon
   - type: Tag
     tags:

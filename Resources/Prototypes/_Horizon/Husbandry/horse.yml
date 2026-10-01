@@ -26,6 +26,12 @@
         state: saddle
   - type: GenericVisualizer
     visuals:
+      # Set by SaddleVisualsSystem while a saddle is in the slot. Not ItemMapper: the stage components are added on the
+      # server only and ItemMapper is not networked, so the client never saw it.
+      enum.AnimalVisuals.Saddled:
+        saddle:
+          True: { visible: true }
+          False: { visible: false }
       enum.AnimalVisuals.Eating:
         movement:
           True: { state: horse-eating }
@@ -154,22 +160,15 @@
             whitelist:
               components:
               - Saddle
-      - type: ItemMapper
-        containerWhitelist:
-        - saddle_slot
-        mapLayers:
-          saddle:
-            whitelist:
-              components:
-              - Saddle
+      - type: SaddleVisuals
       - type: Rideable
         saddleSlot: saddle_slot
         requiredHands: 1
         redirectDamage: true
-        southOffset: 0, 0.3
-        northOffset: 0, 0.3
-        eastOffset: 0, 0.3
-        westOffset: 0, 0.3
+        southOffset: 0, 0.45
+        northOffset: 0, 0.45
+        eastOffset: 0, 0.45
+        westOffset: 0, 0.45
   - type: Butcherable
     spawned:
     - id: FoodMeatHorse

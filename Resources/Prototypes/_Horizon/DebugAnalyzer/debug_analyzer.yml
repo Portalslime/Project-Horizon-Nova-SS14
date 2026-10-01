@@ -5,7 +5,7 @@
   description: A hand-held scanner that shows everything there is to know about a living being. Health, hunger, thirst and more.
   components:
   - type: Sprite
-    sprite: Objects/Specific/Medical/healthanalyzer.rsi
+    sprite: _Horizon/Objects/Devices/debug_analyzer.rsi
     layers:
     - state: icon
     - state: analyzer

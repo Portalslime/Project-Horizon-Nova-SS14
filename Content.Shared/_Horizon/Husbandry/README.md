@@ -83,7 +83,9 @@ RideableSystem (Shared, предсказывается)
 | `Rideable/RiderComponent.cs` | 13 | на всаднике, ссылка на животное | нет |
 | `Rideable/RideableEvents.cs` | 13 | `RiderMountedEvent`, `RiderDismountedEvent` | `ByRefEvent` |
 | `Rideable/RideableSystem.cs` | 186 | вся логика езды | Buckle/Strap, ItemSlots, Hands, VirtualItem, Mover, MobState, Popups |
-| `Visuals/AnimalVisuals.cs` | 12 | ключ `Eating` для Appearance | `NetSerializable` |
+| `Visuals/AnimalVisuals.cs` | 17 | ключи `Eating` и `Saddled` для Appearance | `NetSerializable` |
+| `Visuals/SaddleVisualsComponent.cs` | 17 | слот седла для визуала (`Slot`) | нет |
+| `Visuals/SaddleVisualsSystem.cs` | 45 | ставит `Saddled` по слоту седла | `SharedAppearanceSystem`, `ItemSlotsSystem` |
 
 ### Content.Server/_Horizon/Husbandry
 
@@ -129,8 +131,12 @@ RideableSystem (Shared, предсказывается)
 | `Locale/en-US/_Horizon/husbandry.ftl`, `Locale/ru-RU/_Horizon/husbandry.ftl` | строки |
 | `Textures/_Horizon/Mobs/Animals/horse.rsi` | плейсхолдер лошади и седла на ней |
 | `Textures/_Horizon/Objects/Husbandry/saddle.rsi` | плейсхолдер иконки седла |
+| `Textures/_Horizon/Objects/Husbandry/trough.rsi` | плейсхолдер поилки (копия раковины) |
+| `Textures/_Horizon/Objects/Husbandry/horse_manure.rsi` | плейсхолдер иконки навоза |
+| `Textures/_Horizon/Objects/Husbandry/horse_meat.rsi` | плейсхолдер сырой и готовой конины (копия обычного мяса) |
+| `Textures/_Horizon/Objects/Devices/debug_analyzer.rsi` | плейсхолдер дебаг-анализатора (копия анализатора здоровья) |
 
-Ещё используются без изменений: `Textures/_Horizon/Objects/Misc/feces.rsi` (иконка навоза), `Objects/Consumable/Food/meat.rsi` (мясо), `Structures/Furniture/sink.rsi` (поилка).
+Все спрайты собственные папки `_Horizon`, ванильные ассеты модуль больше не использует. Список состояний, которые нужно нарисовать, см. раздел 11.
 
 ---
 
@@ -197,7 +203,7 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 | Рацион | `Produce`, без тегов `Meat` и `Trash` (человеческий `Feces` тоже `Produce`) |
 | Навоз | `HorseManure`, стак до 100 (стак `HorseManure`); кусков на единицу съеденной питательности: жеребёнок 0.25, молодая 0.5, взрослая 1; в каждом куске 0.5u `Feces` (раньше было 1.2u на единицу питательности) |
 | Стадии | жеребёнок 15 мин / масштаб 0.6 / 2 мяса / цена 300; молодая 30 мин / 0.85 / 4 / 700; взрослая / 1.0 / 6 / 1500 |
-| Езда | только у взрослой: `Strap`, `ItemSlots` (слот седла), `ItemMapper` и `Rideable` добавляет стадия `Adult` (у жеребёнка и молодой слота седла нет), одна рука на поводья. `Strap` с `unbuckleDistanceSquared: 0.09` и `maintainSpriteLayers: true`, как у транспорта |
+| Езда | только у взрослой: `Strap`, `ItemSlots` (слот седла) и `Rideable` добавляет стадия `Adult` (у жеребёнка и молодой слота седла нет), одна рука на поводья. Слой `saddle` включает `SaddleVisualsSystem` (компонент `SaddleVisuals`, поле `Slot`, от езды не зависит): он ставит `AnimalVisuals.Saddled`, а `GenericVisualizer` в `horse.yml` показывает слой. `ItemMapper` не подходит: стадию применяет только сервер, а `ItemMapper` не сетевой, поэтому клиент его не видит. `Strap` с `unbuckleDistanceSquared: 0.09` и `maintainSpriteLayers: true`, как у транспорта |
 | Цены мяса | сырое 40, готовое 60 (`StaticPrice`) |
 
 ---
@@ -214,7 +220,7 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 | Действие с задержкой | `SharedDoAfterSystem`, `DoAfterArgs`, `SimpleDoAfterEvent` | `AnimalFeedingSystem`, `FeedingEvents` | таймер действия с отменой при движении и уроне |
 | ИИ | HTN: `HTNOperator`, `HTNPrecondition`, `NPCBlackboard`, `PathfindingSystem.GetPath`, `PathPoly`, `InputMoverComponent.CurTick*Movement`, `WaitOperator`, `KeyExistsPrecondition`, `IdleCompound`, `HTNSystem.SetHTNEnabled` | `Npc/*`, `RideableNpcSystem`, `horse_npc.yml` | поведение ИИ: «проголодался → найти достижимую еду → дойти → съесть» |
 | Езда | `SharedBuckleSystem`/`StrapComponent`, `SharedMoverController.SetRelay`, `RelayInputMoverComponent`, `SharedVirtualItemSystem`, `ItemSlotsSystem`, `SharedHandsSystem`, `PullerComponent`/`PullAttemptEvent`, `ActionBlockerSystem` | `RideableSystem` | посадка, перенаправление управления, занятая рука, слот предмета |
-| Визуал | `SharedAppearanceSystem`, `GenericVisualizer`, `SpriteMovement`, `ItemMapper`, `SharedScaleVisualsSystem`, RSI | `AnimalFeedingSystem`, `GrowthEffectsSystem`, `horse.yml` | анимации и слои спрайта |
+| Визуал | `SharedAppearanceSystem`, `GenericVisualizer`, `SpriteMovement`, `SharedScaleVisualsSystem`, RSI | `AnimalFeedingSystem`, `GrowthEffectsSystem`, `horse.yml` | анимации и слои спрайта |
 | Разделка и цена | `ButcherableComponent.SpawnedEntities`, `MobPriceComponent` (`Content.Server._NF`), `StaticPrice` | `GrowthEffectsSystem`, `horse_food.yml` | данные «сколько мяса» и «сколько стоит» |
 | Имя | `MetaDataSystem.SetEntityName` | `GrowthEffectsSystem` | смена названия |
 | Осмотр | `ExaminedEvent`, `Identity` | `AnimalNeedsExamineSystem` | текст в описании |
@@ -287,6 +293,44 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 - **Поилка** не проверяет, что именно течёт по трубам: лошадь выпьет любую жидкость.
 - **Плейсхолдеры:**
   - `horse.rsi` (цветной спрайт коровы, все анимации — один кадр), `saddle.rsi` (нарисованный прямоугольник); в `meta.json` стоит пометка `PLACEHOLDER`;
-  - поилка использует спрайт раковины;
+  - поилка, навоз, конина и анализатор: копии ванильных спрайтов с пометкой `PLACEHOLDER` в `meta.json` (лицензия CC-BY-SA-3.0 перенесена с оригинала, при замене на свой арт поправь `license` и `copyright`);
+  - у сырой конины в `horse_food.yml` стоит `color` для перекраски копии, при своём арте убери;
   - звуки в `sounds.yml` (`cow_moo.ogg`, звуки дерева и еды); настоящие файлы положи в `Resources/Audio/_Horizon/Animals/` и опиши в `attributions.yml`.
 - **Размножения нет.** Пол и стадии готовы; отдельный `Breeding` можно сделать на их основе.
+
+---
+
+## 11. Ассеты: что нужно нарисовать и записать
+
+Папка для текстур: `Resources/Textures/_Horizon/`. У каждого RSI в `meta.json` поправь `license` и `copyright`, когда положишь свой арт. Размер кадра 32×32, если не сказано иначе. Если меняешь имя состояния, поменяй его и в YAML (указано в колонке «Где используется»).
+
+| RSI | Состояние | Направления | Что это | Где используется |
+|---|---|---|---|---|
+| `Mobs/Animals/horse.rsi` | `horse` | 4 | лошадь стоит | `horse.yml`, слой `Base` |
+| | `horse-moving` | 4 | лошадь идёт | `SpriteMovement` |
+| | `horse-eating` | 4 | лошадь ест или пьёт | `GenericVisualizer` по `AnimalVisuals.Eating` |
+| | `saddle`, `saddle-moving`, `saddle-eating` | 4 | только седло, кадры совпадают с лошадью, лежит поверх | слой `saddle`, показывается, когда седло в слоте |
+| | `dead` | 1 | мёртвая лошадь | `DamageStateVisuals` |
+| `Objects/Husbandry/saddle.rsi` | `icon` | 1 | седло как предмет | `saddle.yml`, меню строительства |
+| `Objects/Husbandry/trough.rsi` | `trough` | 4 (можно одинаковые) | поилка | `trough.yml`, меню строительства |
+| | `trough-fill-1` | 4 | вода в поилке, накладывается поверх | `SolutionContainerVisuals`, `fillBaseName: trough-fill-` |
+| `Objects/Husbandry/horse_manure.rsi` | `icon` | 1 | куча навоза (один спрайт для любого размера стака) | `horse_food.yml` |
+| `Objects/Husbandry/horse_meat.rsi` | `raw`, `cooked` | 1 | сырая и готовая конина | `horse_food.yml` |
+| `Objects/Devices/debug_analyzer.rsi` | `icon` | 1 | предмет | `debug_analyzer.yml` |
+| | `analyzer` | 1, 12 кадров | светящийся слой экрана (`unshaded`), задержки `0.1`×11 и `0.5` | `debug_analyzer.yml` |
+| | `analyzer-inhand-left`, `analyzer-inhand-right` | 4 | в руке, имена задаёт `heldPrefix: analyzer` | `Item` |
+
+Порядок направлений в PNG сетки 2×2: юг (слева сверху), север (справа сверху), **восток (слева снизу, смотрит вправо)**, запад (справа снизу, смотрит влево). У всех состояний `horse*` и `saddle*` он должен быть одинаковым, иначе лошадь при смене состояния (стоит, идёт, ест) разворачивается боком не туда. Верхом лошадь всегда в состоянии `horse-moving`, поэтому ошибка в порядке этого файла проявляется именно при езде влево и вправо.
+
+Окно дебаг-анализатора рисуется кодом (подписи и полосы), спрайтов не требует.
+
+Необязательно, если захочется:
+- **Уровни воды в поилке:** сейчас `maxFillLevels: 1`. Для трёх уровней нарисуй `trough-fill-1..3` и поставь `maxFillLevels: 3`.
+- **Свой арт жеребёнка и молодой лошади:** сейчас стадии только масштабируют спрайт (0.6 и 0.85), отдельных состояний нет, потребуется доработка `Growth`.
+- **Окрас:** серые слои шерсти, гривы и отметин для случайной раскраски (идея, не реализовано).
+- **Посадка всадника:** верхняя часть лошади отдельным слоем поверх всадника (идея, не реализовано, см. обсуждение в разделе 10).
+
+Звуки (не спрайты), положи в `Resources/Audio/_Horizon/Animals/` и опиши в `attributions.yml`; пути в `Prototypes/_Horizon/Husbandry/sounds.yml`:
+- `HorseNeigh`: ржание и фырканье, 1–3 с, несколько вариантов;
+- `HorseFootstep`: один удар копыта, 0.2–0.4 с, 4–6 вариантов;
+- `HorseEat`: хруст, 2–4 коротких клипа.

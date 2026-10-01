@@ -9,4 +9,9 @@ public enum AnimalVisuals : byte
     /// Bool, the animal is busy eating or drinking.
     /// </summary>
     Eating,
+
+    /// <summary>
+    /// Bool, a saddle sits in the saddle slot of the animal.
+    /// </summary>
+    Saddled,
 }
