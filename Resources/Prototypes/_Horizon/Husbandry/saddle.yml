@@ -1,0 +1,37 @@
+- type: entity
+  parent: BaseItem
+  id: HorseSaddle
+  name: saddle
+  description: Put it on a horse to ride it.
+  components:
+  - type: Sprite
+    sprite: _Horizon/Objects/Husbandry/saddle.rsi
+    state: icon
+  - type: Item
+    size: Normal
+  - type: Saddle
+  - type: Construction
+    graph: HorseSaddleGraph
+    node: HorseSaddleNode
+
+- type: constructionGraph
+  id: HorseSaddleGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: HorseSaddleNode
+      steps:
+      - material: Cloth
+        amount: 20
+        doAfter: 5
+  - node: HorseSaddleNode
+    entity: HorseSaddle
+
+- type: construction
+  id: HorseSaddleConstruction
+  graph: HorseSaddleGraph
+  startNode: start
+  targetNode: HorseSaddleNode
+  category: construction-category-clothing
+  objectType: Item

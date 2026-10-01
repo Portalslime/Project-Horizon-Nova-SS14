@@ -6,7 +6,7 @@
   - GateLavaDesert
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 40
   dungeonDistanceMax: 100
   worldRadiusMin: 212
@@ -33,7 +33,7 @@
   - GateLavaGrass
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 35
   dungeonDistanceMax: 80
   worldRadiusMin: 198
@@ -58,7 +58,7 @@
   - GateInferno
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 35
   dungeonDistanceMax: 90
   worldRadiusMin: 198

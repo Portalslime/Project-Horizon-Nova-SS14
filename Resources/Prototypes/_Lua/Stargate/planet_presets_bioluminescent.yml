@@ -4,7 +4,7 @@
   - GateBioluminescent
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 60
   dungeonDistanceMax: 140
   worldRadiusMin: 203
@@ -50,7 +50,7 @@
   - GateBioluminescent
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 70
   dungeonDistanceMax: 150
   worldRadiusMin: 198
@@ -76,7 +76,7 @@
   - GateBioluminescent
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 50
   dungeonDistanceMax: 120
   worldRadiusMin: 222
@@ -101,8 +101,8 @@
   biome:
   - GateBioluminescent
   dungeonPool: true
-  dungeonCountMin: 2
-  dungeonCountMax: 3
+  dungeonCountMin: 1
+  dungeonCountMax: 1
   dungeonDistanceMin: 80
   dungeonDistanceMax: 180
   worldRadiusMin: 191
@@ -128,7 +128,7 @@
   - GateBioluminescent
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 60
   dungeonDistanceMax: 130
   worldRadiusMin: 214

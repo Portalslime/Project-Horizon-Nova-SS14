@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Horse manure icon by mrl4an for Project Horizon (the same sprite as _Horizon/Objects/Misc/feces.rsi)",
+  "states": [
+    {
+      "name": "icon"
+    }
+  ]
+}

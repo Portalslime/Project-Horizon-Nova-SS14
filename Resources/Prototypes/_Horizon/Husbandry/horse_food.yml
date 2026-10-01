@@ -1,0 +1,114 @@
+# Raw horse meat. Sprites are the ones of ordinary meat, recolored.
+- type: entity
+  name: raw horse meat
+  parent: FoodMeatRawBase
+  id: FoodMeatHorse
+  description: A slab of raw horse meat.
+  components:
+  # PLACEHOLDER: a copy of the usual meat, recolored here. With real art in horse_meat.rsi drop the color.
+  - type: Sprite
+    sprite: _Horizon/Objects/Husbandry/horse_meat.rsi
+    state: raw
+    color: "#c05a5a"
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 9
+        - ReagentId: Fat
+          Quantity: 9
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatCutlet
+  - type: InternalTemperature
+    conductivity: 0.43
+  - type: Construction
+    graph: HorseMeatSteak
+    node: start
+    defaultTarget: horse steak
+  - type: StaticPrice
+    price: 40
+
+- type: entity
+  name: horse steak
+  parent: FoodMeatBase
+  id: FoodMeatHorseCooked
+  description: A cooked slab of horse meat. Lean and sweet.
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: _Horizon/Objects/Husbandry/horse_meat.rsi
+    layers:
+    - state: cooked
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 5
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatCutletCooked
+  - type: Construction
+    graph: HorseMeatSteak
+    node: horse steak
+  - type: StaticPrice
+    price: 60
+
+- type: constructionGraph
+  id: HorseMeatSteak
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: horse steak
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 335
+
+  - node: horse steak
+    entity: FoodMeatHorseCooked
+
+# What a horse leaves behind, one piece for every point of nutrition (less for young animals). It stacks, up to
+# a hundred pieces. The solution is per piece: a stack of a hundred holds a hundred times as much, the grinder
+# counts it that way. It is not food (no Food component), nothing eats it, but it is produce.
+- type: stack
+  id: HorseManure
+  name: stack-horse-manure
+  spawn: HorseManure
+  maxCount: 100
+
+- type: entity
+  parent: BaseItem
+  id: HorseManure
+  name: horse manure
+  description: A pile of horse manure. Plants like it, but not too much.
+  components:
+  - type: Stack
+    stackType: HorseManure
+    count: 1
+  - type: Sprite
+    sprite: _Horizon/Objects/Husbandry/horse_manure.rsi
+    state: icon
+  - type: Tag
+    tags:
+    - Trash
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 1
+        reagents:
+        - ReagentId: Feces
+          Quantity: 0.5
+  - type: Produce
+  - type: Extractable
+    grindableSolutionName: food

@@ -8595,13 +8595,6 @@ entities:
     - type: Transform
       pos: 0.5,36.5
       parent: 1
-- proto: GhostWarpPoint
-  entities:
-  - uid: 1120
-    components:
-    - type: Transform
-      pos: -2.5,31.5
-      parent: 1
 - proto: GravityGeneratorMini
   entities:
   - uid: 1121
@@ -11518,6 +11511,14 @@ entities:
       rot: 3.141592653589793 rad
       pos: -7.5,27.5
       parent: 1
+- proto: DefibrillatorCabinetFilled
+  entities:
+  - uid: 1602
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,54.5
+      parent: 1
 - proto: WarpPoint
   entities:
   - uid: 1590
@@ -11525,13 +11526,14 @@ entities:
     - type: Transform
       pos: -2.5,31.5
       parent: 1
-- proto: WarpPointAdmin
-  entities:
-  - uid: 1591
+  - uid: 1603
     components:
     - type: Transform
-      pos: -2.5,31.5
+      pos: 2.5,55.5
       parent: 1
+    - type: WarpPoint
+      location: Медбей
+      useStationName: false
 - proto: WarpPointBeacon
   entities:
   - uid: 1592

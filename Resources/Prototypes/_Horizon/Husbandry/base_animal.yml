@@ -1,0 +1,33 @@
+# The base of animals that live by the Husbandry rules. They have their own needs (satiety and hydration),
+# a sex and, if they get a Growth component, grow up through stages. This is SimpleMobBase without its
+# Hunger and Thirst, which would only get in the way of AnimalNeeds.
+- type: entity
+  abstract: true
+  parent:
+  - MobRespirator
+  - MobAtmosStandard
+  - SimpleSpaceMobBase
+  id: BaseHusbandryAnimal
+  suffix: AI
+  components:
+  - type: DiseaseCarrier
+  - type: StatusEffects
+    allowed:
+    - Stutter
+    - Electrocution
+    - TemporaryBlindness
+    - Pacified
+    - StaminaModifier
+    - Flashed
+    - RadiationProtection
+    - Adrenaline
+  - type: Bloodstream
+    bloodMaxVolume: 150
+  - type: FloatingVisuals
+  # Animals of this kind do not open doors on their own, unlike the usual ones.
+  - type: Tag
+    tags:
+    - StunImmune
+  - type: AnimalNeeds
+  - type: AnimalSex
+  - type: Appearance

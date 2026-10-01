@@ -6,7 +6,7 @@
   - GateInferno
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 60
   dungeonDistanceMax: 140
   worldRadiusMin: 212
@@ -34,7 +34,7 @@
   - GateJungle
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 60
   dungeonDistanceMax: 130
   worldRadiusMin: 190
@@ -62,7 +62,7 @@
   - GateBioluminescent
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 50
   dungeonDistanceMax: 120
   worldRadiusMin: 216
@@ -89,8 +89,8 @@
   - GateInferno
   - GateJungle
   dungeonPool: true
-  dungeonCountMin: 2
-  dungeonCountMax: 3
+  dungeonCountMin: 1
+  dungeonCountMax: 1
   dungeonDistanceMin: 70
   dungeonDistanceMax: 160
   worldRadiusMin: 199
@@ -117,7 +117,7 @@
   - GateBioluminescent
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 60
   dungeonDistanceMax: 140
   worldRadiusMin: 224

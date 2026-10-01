@@ -1,0 +1,25 @@
+# HorseNeigh (a cow) and HorseFootstep (wood) are PLACEHOLDERS, there are no real recordings for them in the repository yet.
+# HorseEat is real, see Resources/Audio/_Horizon/Animals/attributions.yml. Replace the placeholder files (and describe the
+# new ones in the same attributions.yml) and nothing else has to change.
+# Take CC0 recordings or your own only: CC-BY and the like want the author named in the credits of the game.
+# Raw recordings are cut and encoded with Tools/_Horizon/audio/prepare_sfx.py.
+- type: soundCollection
+  id: HorseNeigh
+  files:
+  - /Audio/Animals/cow_moo.ogg
+
+- type: soundCollection
+  id: HorseFootstep
+  files:
+  - /Audio/Effects/Footsteps/wood1.ogg
+  - /Audio/Effects/Footsteps/wood2.ogg
+  - /Audio/Effects/Footsteps/wood3.ogg
+  - /Audio/Effects/Footsteps/wood4.ogg
+  - /Audio/Effects/Footsteps/wood5.ogg
+
+- type: soundCollection
+  id: HorseEat
+  files:
+  - /Audio/_Horizon/Animals/horse_eat_1.ogg
+  - /Audio/_Horizon/Animals/horse_eat_2.ogg
+  - /Audio/_Horizon/Animals/horse_eat_3.ogg

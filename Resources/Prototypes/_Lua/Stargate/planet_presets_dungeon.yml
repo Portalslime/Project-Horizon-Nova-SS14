@@ -6,7 +6,7 @@
   - GateSnowLava
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 30
   dungeonDistanceMax: 70
   worldRadiusMin: 190
@@ -29,7 +29,7 @@
   dungeonMobDensity: 12
   dungeonMobCap: 40
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 25
   dungeonDistanceMax: 60
   worldRadiusMin: 160
@@ -50,7 +50,7 @@
   - GateCavesGrass
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 30
   dungeonDistanceMax: 70
   worldRadiusMin: 190
@@ -70,7 +70,7 @@
   - GateGrassLava
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 50
   dungeonDistanceMax: 100
   worldRadiusMin: 194
@@ -94,7 +94,7 @@
   - GateLavaGrass
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 35
   dungeonDistanceMax: 80
   worldRadiusMin: 201
@@ -121,7 +121,7 @@
   - GateDesertShadow
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 40
   dungeonDistanceMax: 90
   worldRadiusMin: 229

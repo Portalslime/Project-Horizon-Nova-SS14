@@ -38,10 +38,6 @@
       tags:
       - NFSalvageOutpost
     presets:
-    - LuaFortress
-    - LuaMega
-    - LuaCitadel
-    - LuaBastion
     - LuaCross
     - LuaHub
     - LuaWings
@@ -92,8 +88,6 @@
       tags:
       - NFCaveFactory
     presets:
-    - LuaSprawl
-    - LuaMega
     - LuaGrid
     - LuaCascade
     - LuaLongmarch
@@ -138,8 +132,6 @@
       tags:
       - NFSalvageExperiment
     presets:
-    - LuaCampus
-    - LuaMega
     - LuaGrid
     - LuaSpine
     - LuaFork
@@ -191,10 +183,7 @@
       tags:
       - NFLavaBrig
     presets:
-    - LuaFortress
-    - LuaCampus
     - LuaGateHex
-    - LuaBastion
     - LuaCross
     - LuaHive
 
@@ -232,7 +221,6 @@
       tags:
       - NFHaunted
     presets:
-    - LuaMega
     - LuaWow
     - LuaTall
     - LuaHive
@@ -258,10 +246,8 @@
       tags:
       - NFSnowyLabs
     presets:
-    - LuaCampus
     - LuaGrid
     - LuaFork
-    - LuaCitadel
     - LuaBucket
     - LuaRing
 
@@ -303,10 +289,7 @@
       tags:
       - NFLavaMercenary
     presets:
-    - LuaBastion
-    - LuaFortress
     - LuaCross
-    - LuaCitadel
     - LuaWings
 
   - !type:CorridorDunGen
@@ -355,7 +338,6 @@
       tags:
       - NFVirologyLab
     presets:
-    - LuaCampus
     - LuaGrid
     - LuaSpine
     - LuaFork

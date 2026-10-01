@@ -1,0 +1,262 @@
+- type: entity
+  parent: BaseHusbandryAnimal
+  id: MobHorse
+  name: horse
+  description: A big, strong animal. With a saddle it can carry you around.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Horizon/Mobs/Animals/horse.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base", "movement" ]
+      state: horse
+    - map: [ "saddle" ]
+      state: saddle
+      visible: false
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: horse-moving
+      saddle:
+        state: saddle-moving
+    noMovementLayers:
+      movement:
+        state: horse
+      saddle:
+        state: saddle
+  - type: GenericVisualizer
+    visuals:
+      # Set by SaddleVisualsSystem while a saddle is in the slot. Not ItemMapper: the stage components are added on the
+      # server only and ItemMapper is not networked, so the client never saw it.
+      enum.AnimalVisuals.Saddled:
+        saddle:
+          True: { visible: true }
+          False: { visible: false }
+      enum.AnimalVisuals.Eating:
+        movement:
+          True: { state: horse-eating }
+          False: { state: horse }
+        saddle:
+          True: { state: saddle-eating }
+          False: { state: saddle }
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: horse
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 600
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      120: 0.7
+      160: 0.5
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 4.5
+    baseRunningSpeed: 8
+  # The horse stays heavy, but while somebody drags it it weighs like a mob, otherwise it cannot be moved.
+  - type: PullMass
+    density: 50
+  # It is led head first, not dragged backwards.
+  - type: PullFacing
+  # It walks along routes in straight lines (see AnimalWalker), for strolls and on the way to food and water.
+  - type: AnimalWalker
+  # It stands around and now and then goes for a stroll in the open (see HorseIdleCompound).
+  - type: AnimalWander
+  - type: Body
+    prototype: AnimalRuminant
+  - type: NpcFactionMember
+    factions:
+    - Passive
+  - type: HTN
+    rootTask:
+      task: HorseCompound
+    # The AI of this server stops when no player is within 32 tiles (npc.player_pause_distance), a horse keeps going
+    # from further away, it eats, drinks and walks about for the sake of a farm far from the players.
+    sleepPlayerCheckRangeOverride: 100
+  # Eats what grows. The human feces also count as produce, hence the trash.
+  - type: Diet
+    whitelist:
+      components:
+      - Produce
+    blacklist:
+      tags:
+      - Meat
+      - Trash
+    nutritionPerUnit: 1
+    eatDelay: 2
+  # A piece of manure for every point of nutrition, the stage scales it (see Growth).
+  # It is left behind the horse, a bit short of the end of the rump: further would put it into the wall behind.
+  - type: ManureProducer
+    product: HorseManure
+    dropOffset: 0.45
+  - type: Growth
+    meat: FoodMeatHorse
+    stages:
+    - id: Foal
+      duration: 900
+      names:
+        Male: horse-name-foal
+        Female: horse-name-foal
+      scale: 0.6, 0.6
+      maxHealth: 80
+      meatCount: 2
+      price: 300
+      satietySeekBelow: 50
+      satietyDecayPerMinute: 1
+      manureUnitsPerNutrition: 0.25
+    - id: Young
+      duration: 1800
+      names:
+        Male: horse-name-young-male
+        Female: horse-name-young-female
+      scale: 0.85, 0.85
+      maxHealth: 140
+      meatCount: 4
+      price: 700
+      satietySeekBelow: 50
+      satietyDecayPerMinute: 1.5
+      manureUnitsPerNutrition: 0.5
+    - id: Adult
+      names:
+        Male: horse-name-adult-male
+        Female: horse-name-adult-female
+      scale: 1, 1
+      maxHealth: 200
+      meatCount: 6
+      price: 1500
+      # A big animal gets hungry sooner, burns more and so eats more, and leaves more manure for it.
+      satietySeekBelow: 90
+      satietyDecayPerMinute: 2.5
+      manureUnitsPerNutrition: 1
+      components:
+      # Only a grown animal can be saddled and ridden.
+      # Same as for vehicles: a rider moving with the animal must not get unbuckled over tiny differences in position
+      # while the client predicts, and the rider is always drawn over the animal (see RideableVisualsSystem).
+      - type: Strap
+        position: Stand
+        enabled: false
+        unbuckleDistanceSquared: 0.09
+        maintainSpriteLayers: true
+      - type: ItemSlots
+        slots:
+          saddle_slot:
+            name: rideable-saddle-slot
+            whitelist:
+              components:
+              - Saddle
+      - type: SaddleVisuals
+      - type: Rideable
+        saddleSlot: saddle_slot
+        requiredHands: 1
+        redirectDamage: true
+        # In tiles, 32 px each. The horse sprite is 64x64, the rider 32x32, both centred on the animal. A human sprite has
+        # its pelvis 23 px from the top, so 7 px below its centre: 39 px down in the horse frame. The seat of the saddle
+        # is at 25 px in the side view, so the rider goes up by 14 px = 0.44. X stays 0, the saddle is in the middle.
+        southOffset: 0, 0.44
+        northOffset: 0, 0.44
+        eastOffset: 0, 0.44
+        westOffset: 0, 0.44
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatHorse
+      amount: 6
+  - type: InteractionPopup
+    successChance: 0.7
+    interactDelay: 2
+    interactSuccessString: petting-success-soft-floofy
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      collection: HorseNeigh
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: HorseFootstep
+  # What the horse sounds like for what happens to it (see SoundCues). A cue that is not listed here makes no sound.
+  # Mounted (somebody climbed on) is not listed: there is no horse recording for it yet. Add it here when there is one,
+  # the rider hears it at once, mounting is predicted.
+  - type: SoundCues
+    cues:
+      # Chewing starts with the meal and is cut short if the horse is interrupted. The clips are about as long as the meal.
+      EatStarted:
+        sound:
+          collection: HorseEat
+      Drank:
+        sound:
+          path: /Audio/Items/drink.ogg
+      # The manure.
+      Produced:
+        sound:
+          path: /Audio/Effects/Fluids/splat.ogg
+  - type: Perishable
+    molsPerSecondPerUnitMass: 0.0015
+  - type: GuideHelp
+    guides:
+    - Chef
+    - FoodRecipes
+
+- type: entity
+  parent: MobHorse
+  id: MobHorseFoal
+  suffix: Foal
+  components:
+  - type: Growth
+    initialStage: Foal
+
+- type: entity
+  parent: MobHorse
+  id: MobHorseYoung
+  suffix: Young
+  components:
+  - type: Growth
+    initialStage: Young
+
+- type: entity
+  parent: MobHorse
+  id: MobHorseMale
+  suffix: Male
+  components:
+  - type: AnimalSex
+    sex: Male
+    randomize: false
+
+- type: entity
+  parent: MobHorse
+  id: MobHorseFemale
+  suffix: Female
+  components:
+  - type: AnimalSex
+    sex: Female
+    randomize: false
+
+# For the spawn menu: an adult horse that already wears a saddle. The slot is declared here as well, not taken from the
+# Adult stage: the stage adds its components only if the horse has not got them yet (removeExisting: false), so this
+# slot stays and puts the saddle in at map init. Strap, Rideable and the visuals still come from the stage.
+- type: entity
+  parent: MobHorse
+  id: MobHorseSaddled
+  suffix: With saddle
+  components:
+  - type: ItemSlots
+    slots:
+      saddle_slot:
+        name: rideable-saddle-slot
+        startingItem: HorseSaddle
+        whitelist:
+          components:
+          - Saddle
