@@ -131,7 +131,7 @@ RideableSystem (Shared, предсказывается)
 | `Locale/en-US/_Horizon/husbandry.ftl`, `Locale/ru-RU/_Horizon/husbandry.ftl` | строки |
 | `Textures/_Horizon/Mobs/Animals/horse.rsi` | плейсхолдер лошади и седла на ней |
 | `Textures/_Horizon/Objects/Husbandry/saddle.rsi` | плейсхолдер иконки седла |
-| `Textures/_Horizon/Objects/Husbandry/trough.rsi` | плейсхолдер поилки (копия раковины) |
+| `Textures/_Horizon/Objects/Husbandry/trough.rsi` | поилка (распиленное бревно): `trough` (4 направления, пустое корыто) и `trough-fill-1` (вода, отдельный слой); нарисована под проект, черновик |
 | `Textures/_Horizon/Objects/Husbandry/horse_manure.rsi` | плейсхолдер иконки навоза |
 | `Textures/_Horizon/Objects/Husbandry/horse_meat.rsi` | плейсхолдер сырой и готовой конины (копия обычного мяса) |
 | `Textures/_Horizon/Objects/Devices/debug_analyzer.rsi` | плейсхолдер дебаг-анализатора (копия анализатора здоровья) |
@@ -293,7 +293,7 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 - **Поилка** не проверяет, что именно течёт по трубам: лошадь выпьет любую жидкость.
 - **Плейсхолдеры:**
   - `horse.rsi` (цветной спрайт коровы, все анимации — один кадр), `saddle.rsi` (нарисованный прямоугольник); в `meta.json` стоит пометка `PLACEHOLDER`;
-  - поилка, навоз, конина и анализатор: копии ванильных спрайтов с пометкой `PLACEHOLDER` в `meta.json` (лицензия CC-BY-SA-3.0 перенесена с оригинала, при замене на свой арт поправь `license` и `copyright`);
+  - навоз, конина и анализатор: копии ванильных спрайтов с пометкой `PLACEHOLDER` в `meta.json` (лицензия CC-BY-SA-3.0 перенесена с оригинала, при замене на свой арт поправь `license` и `copyright`);
   - у сырой конины в `horse_food.yml` стоит `color` для перекраски копии, при своём арте убери;
   - звуки в `sounds.yml` (`cow_moo.ogg`, звуки дерева и еды); настоящие файлы положи в `Resources/Audio/_Horizon/Animals/` и опиши в `attributions.yml`.
 - **Размножения нет.** Пол и стадии готовы; отдельный `Breeding` можно сделать на их основе.

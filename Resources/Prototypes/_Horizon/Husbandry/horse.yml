@@ -165,10 +165,13 @@
         saddleSlot: saddle_slot
         requiredHands: 1
         redirectDamage: true
-        southOffset: 0, 0.45
-        northOffset: 0, 0.45
-        eastOffset: 0, 0.45
-        westOffset: 0, 0.45
+        # In tiles, 32 px each. The horse sprite is 64x64, the rider 32x32, both centred on the animal. A human sprite has
+        # its pelvis 23 px from the top, so 7 px below its centre: 39 px down in the horse frame. The seat of the saddle
+        # is at 25 px in the side view, so the rider goes up by 14 px = 0.44. X stays 0, the saddle is in the middle.
+        southOffset: 0, 0.44
+        northOffset: 0, 0.44
+        eastOffset: 0, 0.44
+        westOffset: 0, 0.44
   - type: Butcherable
     spawned:
     - id: FoodMeatHorse

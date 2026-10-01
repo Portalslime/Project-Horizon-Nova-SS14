@@ -1,5 +1,5 @@
 # A trough for animals, filled from the plumbing network. Animals drink from it on their own, buckets can fill and
-# empty it. The sprite (trough.rsi) is a copy of the sink for now, a PLACEHOLDER.
+# empty it. The sprite (trough.rsi) is a half log with a hollow, the water is a separate layer.
 - type: entity
   name: animal trough
   id: AnimalTrough
