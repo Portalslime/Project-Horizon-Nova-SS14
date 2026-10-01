@@ -100,8 +100,6 @@
       - Trash
     nutritionPerUnit: 1
     eatDelay: 2
-    eatSound:
-      collection: HorseEat
   # A piece of manure for every point of nutrition, the stage scales it (see Growth).
   # It is left behind the horse, a bit short of the end of the rump: further would put it into the wall behind.
   - type: ManureProducer
@@ -189,6 +187,22 @@
   - type: FootstepModifier
     footstepSoundCollection:
       collection: HorseFootstep
+  # What the horse sounds like for what happens to it (see SoundCues). A cue that is not listed here makes no sound.
+  # Mounted (somebody climbed on) is not listed: there is no horse recording for it yet. Add it here when there is one,
+  # the rider hears it at once, mounting is predicted.
+  - type: SoundCues
+    cues:
+      # Chewing starts with the meal and is cut short if the horse is interrupted. The clips are about as long as the meal.
+      EatStarted:
+        sound:
+          collection: HorseEat
+      Drank:
+        sound:
+          path: /Audio/Items/drink.ogg
+      # The manure.
+      Produced:
+        sound:
+          path: /Audio/Effects/Fluids/splat.ogg
   - type: Perishable
     molsPerSecondPerUnitMass: 0.0015
   - type: GuideHelp

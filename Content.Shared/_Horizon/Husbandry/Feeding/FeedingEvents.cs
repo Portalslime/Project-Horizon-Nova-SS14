@@ -4,6 +4,18 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._Horizon.Husbandry.Feeding;
 
 /// <summary>
+/// Raised on an animal when it starts eating. The food is still there, the animal gets it when it is done.
+/// </summary>
+[ByRefEvent]
+public readonly record struct AnimalEatStartedEvent(EntityUid Food);
+
+/// <summary>
+/// Raised on an animal when it was interrupted while eating and got nothing.
+/// </summary>
+[ByRefEvent]
+public readonly record struct AnimalEatInterruptedEvent;
+
+/// <summary>
 /// Raised on an animal whenever it ate something, after its satiety was updated.
 /// </summary>
 [ByRefEvent]

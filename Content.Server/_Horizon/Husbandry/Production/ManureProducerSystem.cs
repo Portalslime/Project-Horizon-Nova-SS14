@@ -2,7 +2,6 @@ using Content.Server.Stack;
 using Content.Shared._Horizon.Husbandry.Core;
 using Content.Shared._Horizon.Husbandry.Feeding;
 using Content.Shared._Horizon.Husbandry.Production;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 
 namespace Content.Server._Horizon.Husbandry.Production;
@@ -12,7 +11,6 @@ namespace Content.Server._Horizon.Husbandry.Production;
 /// </summary>
 public sealed class ManureProducerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -30,7 +28,9 @@ public sealed class ManureProducerSystem : EntitySystem
             return;
 
         _stack.SpawnMultiple(ent.Comp.Product, units, GetDropCoordinates(ent));
-        _audio.PlayPvs(ent.Comp.Sound, ent);
+
+        var produced = new AnimalProducedEvent(ent.Comp.Product, units);
+        RaiseLocalEvent(ent, ref produced);
     }
 
     /// <summary>

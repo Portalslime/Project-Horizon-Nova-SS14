@@ -1,4 +1,3 @@
-using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Horizon.Husbandry.Production;
@@ -32,7 +31,4 @@ public sealed partial class ManureProducerComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public float Accumulated;
-
-    [DataField]
-    public SoundSpecifier? Sound = new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg");
 }

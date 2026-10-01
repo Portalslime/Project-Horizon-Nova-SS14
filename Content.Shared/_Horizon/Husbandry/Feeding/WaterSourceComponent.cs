@@ -1,5 +1,3 @@
-using Robust.Shared.Audio;
-
 namespace Content.Shared._Horizon.Husbandry.Feeding;
 
 /// <summary>
@@ -25,7 +23,4 @@ public sealed partial class WaterSourceComponent : Component
 
     [DataField]
     public TimeSpan Delay = TimeSpan.FromSeconds(2);
-
-    [DataField]
-    public SoundSpecifier? DrinkSound;
 }

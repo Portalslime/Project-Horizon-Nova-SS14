@@ -2,9 +2,9 @@
 
 Автономный модуль: нужды (сытость и жажда), пол, рост по стадиям, питание и питьё, навоз, езда верхом. Первое животное — лошадь (`MobHorse`). Новые животные делаются от `BaseHusbandryAnimal` (см. раздел 9).
 
-Модуль почти не правит апстримные файлы (исключение: две правки для стаков навоза, см. раздел 10) и не зависит от ванильных `Hunger`, `Thirst`, `Reproductive`, `Vehicle`, `Defecation`. Он использует только публичные системы и события движка (раздел 6). Поэтому его можно вынуть папками и перенести.
+Модуль почти не правит апстримные файлы (исключение: две правки для стаков навоза, см. раздел 10) и не зависит от ванильных `Hunger`, `Thirst`, `Reproductive`, `Vehicle`, `Defecation`. Он использует только публичные системы и события движка (раздел 6) и общий модуль звуков `_Horizon/SoundCues` (свой README рядом с кодом). Поэтому его можно вынуть папками и перенести.
 
-Статус: собирается, YAML-линтер прототипов модуля проходит, интеграционные тесты `Content.IntegrationTests/Tests/_Horizon/HorseRideTest.cs` проходят (езда, снятие седла, жеребёнок и молодая, здоровье по стадиям), в игре проверено частично. Спрайты и звуки — плейсхолдеры (раздел 10).
+Статус: собирается, YAML-линтер прототипов модуля проходит, интеграционные тесты `Content.IntegrationTests/Tests/_Horizon/HorseRideTest.cs` проходят (езда, снятие седла, жеребёнок и молодая, здоровье по стадиям), в игре проверено частично. Звуки через `SoundCues` и их тесты (`SoundCuesTest.cs`, `HorseRideTest.MountingMakesTheSoundOfTheMountedCue`) добавлены позже, сборка и тесты после них ещё не прогонялись. Спрайты — плейсхолдеры, из звуков настоящий только хруст (раздел 10).
 
 ---
 
@@ -27,8 +27,10 @@ AnimalFeedingSystem
   TryEat / TryDrink ─► DoAfter ─► по завершении:
      AnimalNeedsSystem.ModifySatiety / ModifyHydration
      Appearance AnimalVisuals.Eating (true на время DoAfter) ─► GenericVisualizer меняет состояние слоёв
-     событие AnimalAteEvent  ─► ManureProducerSystem: питательность × UnitsPerNutrition = куски Product (стак), остаток копится
-     событие AnimalDrankEvent (пока никто не слушает)
+     событие AnimalAteEvent  ─► ManureProducerSystem: питательность × UnitsPerNutrition = куски Product (стак), остаток копится,
+                                потом событие AnimalProducedEvent
+     событие AnimalDrankEvent
+  TryEat в начале поднимает AnimalEatStartedEvent, а если еду прервали (DoAfter отменён) — AnimalEatInterruptedEvent
 
 GrowthSystem
   MapInit: AnimalSexSystem.EnsureRolled, выбор начальной стадии ─► SetStage
@@ -47,6 +49,12 @@ RideableSystem (Shared, предсказывается)
   Поводья лежат в свободной руке, которая не активна: активная остаётся свободной для кликов по дверям и предметам
   RiderDamageRedirectSystem: урон по всаднику отменяется и применяется к животному
   RideableVisualsSystem (Client): сдвигает спрайт всадника по стороне, куда смотрит животное; на юг (животное мордой к камере) всадник рисуется под животным, в остальных сторонах над ним
+
+AnimalSoundBindingsSystem (Shared; единственное место, где Husbandry встречается со звуком, сами звуки — модуль _Horizon/SoundCues)
+  RiderMountedEvent ─► cue Mounted (всадник передаётся как User: его клиент предсказал посадку и играет звук сам, сервер ему свою копию не шлёт)
+  AnimalEatStartedEvent ─► cue EatStarted, AnimalEatInterruptedEvent ─► обрыв звука EatStarted
+  AnimalDrankEvent ─► cue Drank, AnimalProducedEvent ─► cue Produced
+  что слышно на каждый cue, написано в таблице SoundCues самого животного (horse.yml); нет таблицы, cue или файла — тишина
 ```
 
 ---
@@ -70,10 +78,11 @@ RideableSystem (Shared, предсказывается)
 | `Sex/AnimalSexComponent.cs` | 23 | пол, `Randomize`, `MaleChance` | сетевой компонент |
 | `Growth/GrowthComponent.cs` | 79 | стадии (`GrowthStageDef`), текущая стадия, таймер | `ComponentRegistry`, `AutoPausedField` |
 | `Growth/GrowthEvents.cs` | 7 | `GrowthStageChangedEvent` | `ByRefEvent` |
-| `Feeding/DietComponent.cs` | 42 | что ест животное | `EntityWhitelist` |
-| `Feeding/WaterSourceComponent.cs` | 31 | из чего пьёт животное | нет |
-| `Feeding/FeedingEvents.cs` | 22 | `AnimalAteEvent`, `AnimalDrankEvent`, DoAfter-события | `DoAfterEvent` |
-| `Production/ManureProducerComponent.cs` | 32 | продукт и кусков на единицу питательности | нет |
+| `Feeding/DietComponent.cs` | 38 | что ест животное | `EntityWhitelist` |
+| `Feeding/WaterSourceComponent.cs` | 26 | из чего пьёт животное | нет |
+| `Feeding/FeedingEvents.cs` | 34 | `AnimalEatStartedEvent`, `AnimalEatInterruptedEvent`, `AnimalAteEvent`, `AnimalDrankEvent`, DoAfter-события | `DoAfterEvent` |
+| `Production/ManureProducerComponent.cs` | 34 | продукт и кусков на единицу питательности | нет |
+| `Production/ProductionEvents.cs` | 9 | `AnimalProducedEvent` | `ByRefEvent` |
 | `Walking/AnimalWalkerComponent.cs` | 115 | настройки ходьбы (допуски, зазор, замедление, застревание), маршрут и статус | нет |
 | `Wander/AnimalWanderComponent.cs` | 125 | настройки прогулок: шанс, время стоянки, отрезки, дистанции, повороты, паузы | нет |
 | `Pulling/PullFacingComponent.cs` | 21 | скорость поворота и минимальная дистанция | нет |
@@ -86,6 +95,9 @@ RideableSystem (Shared, предсказывается)
 | `Visuals/AnimalVisuals.cs` | 17 | ключи `Eating` и `Saddled` для Appearance | `NetSerializable` |
 | `Visuals/SaddleVisualsComponent.cs` | 17 | слот седла для визуала (`Slot`) | нет |
 | `Visuals/SaddleVisualsSystem.cs` | 45 | ставит `Saddled` по слоту седла | `SharedAppearanceSystem`, `ItemSlotsSystem` |
+| `Sounds/AnimalSoundBindingsSystem.cs` | 65 | события животного → звуковые сигналы | модуль `_Horizon/SoundCues` |
+
+Сам звуковой модуль, `Content.Shared/_Horizon/SoundCues`, описан в своём README.
 
 ### Content.Server/_Horizon/Husbandry
 
@@ -95,8 +107,8 @@ RideableSystem (Shared, предсказывается)
 | `Sex/AnimalSexSystem.cs` | 39 | бросок пола, `EnsureRolled` | random |
 | `Growth/GrowthSystem.cs` | 84 | стадии по времени | MobState, `AddComponents` |
 | `Growth/GrowthEffectsSystem.cs` | 46 | применяет стадию к имени, размеру, мясу, цене | MetaData, ScaleVisuals, `Butcherable`, `MobPrice` (`_NF`) |
-| `Feeding/AnimalFeedingSystem.cs` | 180 | `CanEat`, `TryEat`, `CanDrink`, `TryDrink`, обработка DoAfter | DoAfter, Appearance, Audio, SolutionContainer, Whitelist, Container, `FoodComponent` |
-| `Production/ManureProducerSystem.cs` | 37 | навоз по `AnimalAteEvent` | Audio, `StackSystem` (стаки) |
+| `Feeding/AnimalFeedingSystem.cs` | 186 | `CanEat`, `TryEat`, `CanDrink`, `TryDrink`, обработка DoAfter | DoAfter, Appearance, SolutionContainer, Whitelist, Container, `FoodComponent` |
+| `Production/ManureProducerSystem.cs` | 49 | навоз по `AnimalAteEvent`, потом `AnimalProducedEvent` | `StackSystem` (стаки) |
 | `Npc/NeedPrecondition.cs` | 32 | предусловие HTN «нужда ниже порога» | HTN |
 | `Npc/FindFoodOperator.cs` | 93 | ищет ближайшую съедобную и достижимую еду | HTN, EntityLookup, Pathfinding |
 | `Npc/FindWaterOperator.cs` | 89 | то же для воды | HTN, EntityLookup, Pathfinding |
@@ -128,6 +140,9 @@ RideableSystem (Shared, предсказывается)
 | `Prototypes/_Horizon/Husbandry/saddle.yml` | `HorseSaddle` + граф и рецепт (20 ткани) |
 | `Prototypes/_Horizon/Husbandry/trough.yml` | `AnimalTrough` + граф и рецепт (5 стали, категория сантехники) |
 | `Prototypes/_Horizon/Husbandry/sounds.yml` | коллекции `HorseNeigh`, `HorseFootstep`, `HorseEat` |
+| `Prototypes/_Horizon/Husbandry/sound_cues.yml` | сигналы животных: `Mounted`, `EatStarted`, `Drank`, `Produced` (что слышно на каждый, написано в `SoundCues` животного) |
+| `Audio/_Horizon/Animals/` | `horse_eat_1..3.ogg` и `attributions.yml` (раздел 12) |
+| `Tools/_Horizon/audio/prepare_sfx.py` | нарезка записей в mono OGG (раздел 11) |
 | `Locale/en-US/_Horizon/husbandry.ftl`, `Locale/ru-RU/_Horizon/husbandry.ftl` | строки |
 | `Textures/_Horizon/Mobs/Animals/horse.rsi` | лошадь и седло на ней (автор mrl4an), черновик |
 | `Textures/_Horizon/Objects/Husbandry/saddle.rsi` | иконка седла (автор mrl4an), черновик |
@@ -147,9 +162,9 @@ RideableSystem (Shared, предсказывается)
 | `AnimalNeeds` | `satiety` и `hydration` (`NeedState`), `updateRate` 1 с, `damageInterval` 10 с | `AnimalNeedsSystem`, `AnimalNeedsExamineSystem` |
 | `AnimalSex` | `sex`, `randomize` true, `maleChance` 0.5 | `AnimalSexSystem` |
 | `Growth` | `stages`, `initialStage` (последняя, если не задана), `meat` `FoodMeat` | `GrowthSystem`, `GrowthEffectsSystem` |
-| `Diet` | `whitelist`, `blacklist`, `solution` `food`, `nutritionPerUnit` 1, `eatDelay` 2 с, `eatSound` | `AnimalFeedingSystem`, операторы HTN |
-| `WaterSource` | `solution` `tank`, `amountPerDrink` 15, `hydrationPerUnit` 1, `delay` 2 с, `drinkSound` | `AnimalFeedingSystem` |
-| `ManureProducer` | `product` (обязательно, стакающаяся сущность), `unitsPerNutrition` 1, `dropOffset` 0 (на сколько тайлов позади животного класть, против его взгляда), `sound` | `ManureProducerSystem` |
+| `Diet` | `whitelist`, `blacklist`, `solution` `food`, `nutritionPerUnit` 1, `eatDelay` 2 с | `AnimalFeedingSystem`, операторы HTN |
+| `WaterSource` | `solution` `tank`, `amountPerDrink` 15, `hydrationPerUnit` 1, `delay` 2 с | `AnimalFeedingSystem` |
+| `ManureProducer` | `product` (обязательно, стакающаяся сущность), `unitsPerNutrition` 1, `dropOffset` 0 (на сколько тайлов позади животного класть, против его взгляда) | `ManureProducerSystem` |
 | `AnimalWalker` | `waypointTolerance` 0.4, `slowDistance` 1.5, `minSpeedFraction` 0.35, `clearance` 0.45 (половина ширины коридора), `stuckTime` 1.5 с, `stuckDistance` 0.2, `maxRouteTime` 90 с, `smoothLookahead` 15 | `AnimalWalkerSystem` |
 | `AnimalWander` | `walkChance` 0.85, `standTime` 4–12 с, `retryTime` 2–5 с (если места нет), `legs` 2–4 (отрезков за прогулку), `minDistance` 4 и `maxDistance` 10 (желаемая длина отрезка, короче там, где тесно), `minLegDistance` 2, `turnAngle` 70°, `legPause` 0.5–2.5 с, `probes` 10, `minClearProbes` 3, `arriveDistance` 0.3, `maxWalkTime` 120 с | `AnimalWanderSystem`, `AnimalWanderOperator` |
 | `PullMass` | `density` 50 | `PullMassSystem` |
@@ -157,6 +172,7 @@ RideableSystem (Shared, предсказывается)
 | `Rideable` | `saddleSlot` `saddle_slot`, `requiredHands` 1, `redirectDamage` true, `riderOpensDoors` true, `south/north/east/westOffset` (в тайлах; идут по сети, потому что компонент добавляет стадия на сервере, а смещение рисует клиент) | `RideableSystem`, `RideableNpcSystem`, `RiderDamageRedirectSystem`, `RideableVisualsSystem` |
 | `Saddle` | маркер | белый список слота |
 | `Rider` | `mount` | ставится и снимается `RideableSystem` |
+| `SoundCues` | `cues`: имя сигнала → `sound` (файл или коллекция) и `cooldown`; компонент модуля `_Horizon/SoundCues`, не сетевой, объявляется в самом прототипе | `SoundCueSystem`, привязки `AnimalSoundBindingsSystem` |
 
 `NeedState` (вложенные `satiety` и `hydration`): `value` (−1 = бросить из `startingRange`), `max` 100, `startingRange` 70–100, `decayPerMinute`, `seekBelow` 50, `deprivationDamage` (урон в минуту при нуле). По умолчанию сытость убывает на 2 в минуту, жажда на 1.
 
@@ -168,10 +184,13 @@ RideableSystem (Shared, предсказывается)
 
 | Событие | Кто поднимает | Где поднимается | Кто слушает |
 |---|---|---|---|
+| `AnimalEatStartedEvent(Food)` | `AnimalFeedingSystem` (`TryEat`) | на животном | `AnimalSoundBindingsSystem` |
+| `AnimalEatInterruptedEvent` | `AnimalFeedingSystem` (еду прервали) | на животном | `AnimalSoundBindingsSystem` |
 | `AnimalAteEvent(Food, Nutrition)` | `AnimalFeedingSystem` | на животном | `ManureProducerSystem` |
-| `AnimalDrankEvent(Source, Amount)` | `AnimalFeedingSystem` | на животном | никто |
+| `AnimalDrankEvent(Source, Amount)` | `AnimalFeedingSystem` | на животном | `AnimalSoundBindingsSystem` |
+| `AnimalProducedEvent(Product, Units)` | `ManureProducerSystem` | на животном | `AnimalSoundBindingsSystem` |
 | `GrowthStageChangedEvent(Index, Stage)` | `GrowthSystem` | на животном | `GrowthEffectsSystem` |
-| `RiderMountedEvent(Rider)` | `RideableSystem` | на животном | `RideableNpcSystem` |
+| `RiderMountedEvent(Rider)` | `RideableSystem` | на животном | `RideableNpcSystem`, `AnimalSoundBindingsSystem` |
 | `RiderDismountedEvent(Rider)` | `RideableSystem` | на животном | `RideableNpcSystem` |
 
 Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, слушает `GenericVisualizer` из YAML лошади.
@@ -187,7 +206,7 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 ## 5. Прототипы и ключи
 
 Сущности: `BaseHusbandryAnimal`, `MobHorse`, `MobHorseFoal`, `MobHorseYoung`, `MobHorseMale`, `MobHorseFemale`, `MobHorseSaddled`, `FoodMeatHorse`, `FoodMeatHorseCooked`, `HorseManure`, `HorseSaddle`, `AnimalTrough`.
-Прочее: HTN `HorseCompound`, графы `HorseMeatSteak`, `HorseSaddleGraph`, `AnimalTroughGraph`, рецепты `HorseSaddleConstruction`, `AnimalTroughConstruction`, коллекции звуков `HorseNeigh`, `HorseFootstep`, `HorseEat`.
+Прочее: HTN `HorseCompound`, графы `HorseMeatSteak`, `HorseSaddleGraph`, `AnimalTroughGraph`, рецепты `HorseSaddleConstruction`, `AnimalTroughConstruction`, коллекции звуков `HorseNeigh`, `HorseFootstep`, `HorseEat`, сигналы `soundCue`: `Mounted`, `EatStarted`, `Drank`, `Produced`.
 
 Ключи локализации: `horse-name-foal`, `horse-name-young-male`, `horse-name-young-female`, `horse-name-adult-male`, `horse-name-adult-female`, `animal-needs-{satiety|hydration}-{satisfied|low|empty}`, `rideable-saddle-slot`, `rideable-no-saddle`, `rideable-not-alive`, `rideable-occupied`, `rideable-no-free-hands`, `rideable-cannot-pull`, плюс `ent-*` в ru-RU.
 
@@ -205,6 +224,7 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 | Стадии | жеребёнок 15 мин / масштаб 0.6 / 2 мяса / цена 300; молодая 30 мин / 0.85 / 4 / 700; взрослая / 1.0 / 6 / 1500 |
 | Езда | только у взрослой: `Strap`, `ItemSlots` (слот седла) и `Rideable` добавляет стадия `Adult` (у жеребёнка и молодой слота седла нет), одна рука на поводья. Слой `saddle` включает `SaddleVisualsSystem` (компонент `SaddleVisuals`, поле `Slot`, от езды не зависит): он ставит `AnimalVisuals.Saddled`, а `GenericVisualizer` в `horse.yml` показывает слой. `ItemMapper` не подходит: стадию применяет только сервер, а `ItemMapper` не сетевой, поэтому клиент его не видит. `Strap` с `unbuckleDistanceSquared: 0.09` и `maintainSpriteLayers: true`, как у транспорта |
 | Цены мяса | сырое 40, готовое 60 (`StaticPrice`) |
+| Звуки | таблица `SoundCues` в `horse.yml`: `EatStarted` (коллекция `HorseEat`, жуёт с начала еды и обрывается, если лошадь прервали), `Drank` (`/Audio/Items/drink.ogg`), `Produced` (`splat.ogg`). Для посадки (`Mounted`) звука пока нет. Шаги (`FootstepModifier`) и ржание при поглаживании (`InteractionPopup`) — ванильные компоненты, через `SoundCues` не идут |
 
 ---
 
@@ -228,6 +248,7 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 | Кулинария | граф `construction` с `minTemperature` | `horse_food.yml` | готовка |
 | Сущности | `ComponentRegistry`/`AddComponents`, ECS | `GrowthSystem` | механизм «добавить компоненты при входе в стадию» |
 | Локализация | Fluent (`.ftl`) | `Locale/*` | система строк игры |
+| Звук | `SharedAudioSystem.PlayPredicted`/`Stop`, `SoundSpecifier`, `IResourceManager.ContentFileExists` | модуль `_Horizon/SoundCues`, `AnimalSoundBindingsSystem` | воспроизведение и остановка звука на объекте (см. README `SoundCues`, раздел 7) |
 
 Порядок инициализации: в SS14 порядок обработчиков `MapInit` у разных компонентов не определён, поэтому `GrowthSystem` сам вызывает `AnimalSexSystem.EnsureRolled`, а не полагается на порядок. В другом движке эта связка может понадобиться или исчезнуть.
 
@@ -241,6 +262,7 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 4. **Связь между системами** идёт через события из раздела 4: сохрани их, и система станет собираться из независимых кусков.
 5. **Данные лошади.** Все числа лежат в `horse.yml`, `horse_food.yml`, `trough.yml`; переноси их в формат игры отдельно от кода.
 6. **Что можно не переносить сразу.** Езду (`Rideable*`, `Saddle`, `Rider`, `RideableNpcSystem`, `RiderDamageRedirectSystem`, `RideableVisualsSystem`) можно вынуть последней: остальные системы её не используют. Навоз (`ManureProducer*`) и рост (`Growth*`, `AnimalSex*`) тоже независимы друг от друга.
+7. **Звуки.** `_Horizon/SoundCues` переносится отдельным модулем (его README, раздел 7). Привязки `Sounds/AnimalSoundBindingsSystem` перепиши под события твоей игры: они только переводят `RiderMountedEvent`, `AnimalEatStartedEvent` и другие в сигналы.
 
 Проверка, что ничего не забыто: в `Core/*` не должно быть `using Robust.*` и `using Content.*`; компоненты модуля не должны ссылаться на ванильные `Hunger`, `Thirst`, `Reproductive`, `Vehicle`.
 
@@ -257,6 +279,7 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 | Пол (`AnimalSex`) | да: рост (имя) | random |
 | Рост (`Growth`) | нет; `Rideable` добавляется через стадию | Пол (для имени), Butcherable, MobPrice |
 | Езда (`Rideable*`) | нет | Buckle, ItemSlots, Hands, Mover; ИИ выключается событиями |
+| Звуки (`SoundCues`, привязки) | нет | события Питания, Навоза и Езды; без них лошадь работает, только молча |
 
 Без роста лошадь работает (стадий просто нет, `Butcherable` берётся из YAML). Без езды тоже. Без питания лошадь тупо голодает: нужды работают независимо.
 
@@ -272,6 +295,7 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 6. ИИ: скопируй `HorseCompound` (или собери свою ветку из тех же операторов) и укажи `rootTask` в `HTN`. Прогулки (`AnimalWander`) у лошади свои: чтобы новое животное ходило так же, добавь ему компонент `AnimalWander` и используй `HorseIdleCompound` (или свою ветку с `AnimalWanderOperator`), иначе оно ходит по-ванильному.
 7. Если на животном можно ездить: слот `saddle_slot` с белым списком по компоненту `Saddle`, `Strap` с `enabled: false`, `Rideable` (в `Growth.stages[].components` для взрослой стадии, если оно растёт).
 8. Мясо: свои `Food...` и граф приготовления; `Growth.meat` указывает прототип сырого мяса.
+9. Звуки: добавь `SoundCues` с нужными сигналами (`EatStarted`, `Drank`, `Produced`, `Mounted`; имена в `sound_cues.yml`). Чего нет в таблице, то животное не озвучивает, ломать ничего не нужно. Объявляй компонент в самом прототипе, не через `components` стадии `Growth`: он не сетевой, клиент такой компонент не знает.
 
 ---
 
@@ -295,7 +319,7 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
   - `horse.rsi`, `saddle.rsi` и `trough.rsi` нарисованы заново (раздел 12), это черновики: ходьба и еда пока один кадр на направление, `dead` заглушка;
   - конина и анализатор: копии ванильных спрайтов с пометкой `PLACEHOLDER` в `meta.json` (лицензия CC-BY-SA-3.0 перенесена с оригинала, при замене на свой арт поправь `license` и `copyright`);
   - у сырой конины в `horse_food.yml` стоит `color` для перекраски копии, при своём арте убери;
-  - звуки в `sounds.yml` (`cow_moo.ogg`, звуки дерева и еды); настоящие файлы положи в `Resources/Audio/_Horizon/Animals/` и опиши в `attributions.yml`.
+  - в `sounds.yml` заглушки остались у ржания `HorseNeigh` (`cow_moo.ogg`, играет при поглаживании) и шагов `HorseFootstep` (звуки дерева); настоящие файлы положи в `Resources/Audio/_Horizon/Animals/` и опиши в `attributions.yml`. Хруст `HorseEat` уже настоящий (раздел 12), для посадки (`Mounted`) звука пока нет.
 - **Размножения нет.** Пол и стадии готовы; отдельный `Breeding` можно сделать на их основе.
 
 ---
@@ -331,9 +355,12 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 - **Посадка всадника:** верхняя часть лошади отдельным слоем поверх всадника (идея, не реализовано, см. обсуждение в разделе 10).
 
 Звуки (не спрайты), положи в `Resources/Audio/_Horizon/Animals/` и опиши в `attributions.yml`; пути в `Prototypes/_Horizon/Husbandry/sounds.yml`:
-- `HorseNeigh`: ржание и фырканье, 1–3 с, несколько вариантов;
-- `HorseFootstep`: один удар копыта, 0.2–0.4 с, 4–6 вариантов;
-- `HorseEat`: хруст, 2–4 коротких клипа.
+- `HorseNeigh`: ржание, 1–3 с, несколько вариантов (сейчас заглушка);
+- звук для посадки верхом, около 1 с, лучше фырканье (сигнал `Mounted`, сейчас звука нет: заведи коллекцию в `sounds.yml` и добавь `Mounted` в таблицу `SoundCues` лошади в `horse.yml`);
+- `HorseFootstep`: один удар копыта, 0.2–0.4 с, 4–6 вариантов (сейчас заглушка);
+- `HorseEat`: хруст, 2–4 коротких клипа (готово, 3 клипа).
+
+Требования к файлам: **mono OGG**. Движок не умеет позиционировать стерео: звук на сущности из стерео-файла в Debug-сборке падает на `Assert` (`AudioSource.cs`), в Release играет без затухания по расстоянию. Громкость подгоняется под соседние звуки игры (звук около −20…−27 dBFS, пики не выше −3). Записи берутся только под CC0 или свои: CC-BY и подобные требуют указать автора в титрах игры, а проект этого не хочет (фырканье под CC-BY 4.0 поэтому убрано). Всё это делает скрипт `Tools/_Horizon/audio/prepare_sfx.py` (нарезка, моно, громкость, OGG; нужен `pip install soundfile numpy`): новый звук добавляется как `Job` в его список.
 
 ---
 
@@ -347,6 +374,12 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 | `Objects/Husbandry/saddle.rsi` | mrl4an | иконка сделана из арта лошади и седла |
 | `Objects/Husbandry/trough.rsi` | mrl4an | распиленное бревно с выемкой под воду |
 | `Objects/Husbandry/horse_manure.rsi` | mrl4an | тот же спрайт, что `_Horizon/Objects/Misc/feces.rsi` (его автор тоже mrl4an) |
+
+**Звуки** (`Resources/Audio/_Horizon/Animals/`, описаны в `attributions.yml` рядом) сделаны из чужих записей. Берутся только CC0 и свои записи, чтобы не пришлось указывать авторов в титрах игры:
+
+| Что | Автор | Лицензия | Примечание |
+|---|---|---|---|
+| `horse_eat_1..3.ogg` | Joseph Sardin ([BigSoundBank](https://bigsoundbank.com/horse-eats-carrot-3-s1847.html)) | CC0-1.0 | одна запись, нарезана на три клипа; ограничений нет |
 
 **Чужое, не переписывать на себя**, пока спрайт реально не перерисован (проверено: пиксели совпадают с оригиналом): `horse_meat.rsi`, `Objects/Devices/debug_analyzer.rsi`. У них в `meta.json` остаются лицензия и авторство оригинала.
 

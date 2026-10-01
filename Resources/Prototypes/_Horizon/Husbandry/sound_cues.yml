@@ -1,0 +1,13 @@
+# The cues an animal can make a sound for, raised by AnimalSoundBindingsSystem. Only the names are here: what is heard
+# for each one is up to the SoundCues component of the animal (see horse.yml), and an animal without the cue is silent.
+- type: soundCue
+  id: Mounted # somebody climbed on the animal
+
+- type: soundCue
+  id: EatStarted # it started eating, the sound is stopped if it is interrupted
+
+- type: soundCue
+  id: Drank # it drank
+
+- type: soundCue
+  id: Produced # it left something behind, like manure

@@ -8,7 +8,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Whitelist;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 
 namespace Content.Server._Horizon.Husbandry.Feeding;
@@ -23,7 +22,6 @@ public sealed class AnimalFeedingSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
@@ -99,6 +97,9 @@ public sealed class AnimalFeedingSystem : EntitySystem
 
         delay = diet.EatDelay;
         _appearance.SetData(animal, AnimalVisuals.Eating, true);
+
+        var started = new AnimalEatStartedEvent(food);
+        RaiseLocalEvent(animal, ref started);
         return true;
     }
 
@@ -137,7 +138,14 @@ public sealed class AnimalFeedingSystem : EntitySystem
     {
         _appearance.SetData(ent, AnimalVisuals.Eating, false);
 
-        if (args.Cancelled || args.Handled || args.Target is not { } food)
+        if (args.Cancelled)
+        {
+            var interrupted = new AnimalEatInterruptedEvent();
+            RaiseLocalEvent(ent, ref interrupted);
+            return;
+        }
+
+        if (args.Handled || args.Target is not { } food)
             return;
 
         args.Handled = true;
@@ -147,7 +155,6 @@ public sealed class AnimalFeedingSystem : EntitySystem
 
         var nutrition = GetNutrition(ent, food);
         _needs.ModifySatiety((ent.Owner, needs), nutrition);
-        _audio.PlayPvs(ent.Comp.EatSound, ent);
         QueueDel(food);
 
         var ev = new AnimalAteEvent(food, nutrition);
@@ -172,7 +179,6 @@ public sealed class AnimalFeedingSystem : EntitySystem
             return;
 
         _needs.ModifyHydration(ent, taken * water.HydrationPerUnit);
-        _audio.PlayPvs(water.DrinkSound, ent);
 
         var ev = new AnimalDrankEvent(source, taken);
         RaiseLocalEvent(ent, ref ev);

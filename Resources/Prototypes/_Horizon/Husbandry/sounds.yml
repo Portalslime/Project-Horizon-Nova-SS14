@@ -1,5 +1,8 @@
-# PLACEHOLDERS, there are no real horse sounds in the repository yet. Replace the files with real ones
-# (and describe them in Resources/Audio/_Horizon/Animals/attributions.yml) and nothing else has to change.
+# HorseNeigh (a cow) and HorseFootstep (wood) are PLACEHOLDERS, there are no real recordings for them in the repository yet.
+# HorseEat is real, see Resources/Audio/_Horizon/Animals/attributions.yml. Replace the placeholder files (and describe the
+# new ones in the same attributions.yml) and nothing else has to change.
+# Take CC0 recordings or your own only: CC-BY and the like want the author named in the credits of the game.
+# Raw recordings are cut and encoded with Tools/_Horizon/audio/prepare_sfx.py.
 - type: soundCollection
   id: HorseNeigh
   files:
@@ -17,6 +20,6 @@
 - type: soundCollection
   id: HorseEat
   files:
-  - /Audio/Items/eating_1.ogg
-  - /Audio/Items/eating_2.ogg
-  - /Audio/Items/eating_3.ogg
+  - /Audio/_Horizon/Animals/horse_eat_1.ogg
+  - /Audio/_Horizon/Animals/horse_eat_2.ogg
+  - /Audio/_Horizon/Animals/horse_eat_3.ogg

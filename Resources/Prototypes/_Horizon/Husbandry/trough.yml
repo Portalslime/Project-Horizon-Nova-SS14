@@ -43,8 +43,6 @@
     amountPerDrink: 15
     hydrationPerUnit: 1
     delay: 2
-    drinkSound:
-      path: /Audio/Items/drink.ogg
   - type: DrainableSolution
     solution: tank
   - type: RefillableSolution

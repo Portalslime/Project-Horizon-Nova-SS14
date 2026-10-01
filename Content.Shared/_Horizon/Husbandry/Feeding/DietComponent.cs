@@ -1,5 +1,4 @@
 using Content.Shared.Whitelist;
-using Robust.Shared.Audio;
 
 namespace Content.Shared._Horizon.Husbandry.Feeding;
 
@@ -36,7 +35,4 @@ public sealed partial class DietComponent : Component
 
     [DataField]
     public TimeSpan EatDelay = TimeSpan.FromSeconds(2);
-
-    [DataField]
-    public SoundSpecifier? EatSound;
 }

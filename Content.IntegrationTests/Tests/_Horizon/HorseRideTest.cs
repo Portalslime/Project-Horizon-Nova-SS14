@@ -9,6 +9,7 @@ using Content.Shared._Horizon.Husbandry.Needs;
 using Content.Shared._Horizon.Husbandry.Wander;
 using Content.Shared._Horizon.Husbandry.Production;
 using Content.Shared._Horizon.Husbandry.Rideable;
+using Content.Shared._Horizon.SoundCues;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Containers.ItemSlots;
@@ -16,6 +17,8 @@ using Content.Shared.Doors;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Doors.Components;
 using Content.Shared.Hands.Components;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Content.Shared.Mobs;
@@ -37,7 +40,7 @@ public sealed class HorseRideTest : MovementTest
 {
     protected override int Tiles => 25;
 
-    private async Task<EntityUid> Mount()
+    private async Task<EntityUid> Mount(Action<EntityUid>? beforeMounting = null)
     {
         await SpawnTarget("MobHorse");
         var horse = STarget!.Value;
@@ -45,6 +48,7 @@ public sealed class HorseRideTest : MovementTest
 
         await Server.WaitPost(() =>
         {
+            beforeMounting?.Invoke(horse);
             saddle = SEntMan.SpawnEntity("HorseSaddle", Transform.GetMapCoordinates(horse));
             var slots = SEntMan.System<ItemSlotsSystem>();
             Assert.That(slots.TryInsert(horse, "saddle_slot", saddle, null), Is.True, "saddle did not go in");
@@ -101,6 +105,28 @@ public sealed class HorseRideTest : MovementTest
         Assert.That(moved, Is.GreaterThan(3f), "horse barely moved");
         Assert.That(reversals, Is.EqualTo(0), "horse went backwards");
         Assert.That(maxGap, Is.LessThan(0.5f), "client and server disagree");
+    }
+
+    /// <summary>
+    /// Climbing on raises the Mounted cue, so the horse makes whatever sound it has for it. It has none yet (there is no
+    /// recording), so the test gives it one.
+    /// </summary>
+    [Test]
+    public async Task MountingMakesTheSoundOfTheMountedCue()
+    {
+        const string sound = "/Audio/_Horizon/Animals/horse_eat_1.ogg";
+        await Mount(horse =>
+            SEntMan.GetComponent<SoundCuesComponent>(horse).Cues["Mounted"] = new SoundCueDef { Sound = new SoundPathSpecifier(sound) });
+
+        var played = 0;
+        var query = SEntMan.EntityQueryEnumerator<AudioComponent>();
+        while (query.MoveNext(out _, out var audio))
+        {
+            if (audio.FileName == sound)
+                played++;
+        }
+
+        Assert.That(played, Is.EqualTo(1), "the horse made no sound for the Mounted cue when somebody climbed on");
     }
 
     [Test]
