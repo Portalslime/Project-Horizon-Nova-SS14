@@ -323,3 +323,7 @@ DonatSystem/
 /Tools/lua/achievements_editor
 /Tools/lua/StarPosEditor.exe
 
+
+# AI agent rules (local only)
+/AGENTS.md
+/CLAUDE.md
