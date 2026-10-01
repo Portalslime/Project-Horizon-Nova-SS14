@@ -4,8 +4,8 @@
     "x": 32,
     "y": 32
   },
-  "license": "CC0-1.0",
-  "copyright": "PLACEHOLDER, replace with real art. Horse manure. 'icon' is a copy of 'icon' from _Horizon/Objects/Misc/feces.rsi (Placeholder sprite generated for Project Horizon)",
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Horse manure icon by mrl4an for Project Horizon (the same sprite as _Horizon/Objects/Misc/feces.rsi)",
   "states": [
     {
       "name": "icon"

@@ -129,8 +129,8 @@ RideableSystem (Shared, предсказывается)
 | `Prototypes/_Horizon/Husbandry/trough.yml` | `AnimalTrough` + граф и рецепт (5 стали, категория сантехники) |
 | `Prototypes/_Horizon/Husbandry/sounds.yml` | коллекции `HorseNeigh`, `HorseFootstep`, `HorseEat` |
 | `Locale/en-US/_Horizon/husbandry.ftl`, `Locale/ru-RU/_Horizon/husbandry.ftl` | строки |
-| `Textures/_Horizon/Mobs/Animals/horse.rsi` | плейсхолдер лошади и седла на ней |
-| `Textures/_Horizon/Objects/Husbandry/saddle.rsi` | плейсхолдер иконки седла |
+| `Textures/_Horizon/Mobs/Animals/horse.rsi` | лошадь и седло на ней (автор mrl4an), черновик |
+| `Textures/_Horizon/Objects/Husbandry/saddle.rsi` | иконка седла (автор mrl4an), черновик |
 | `Textures/_Horizon/Objects/Husbandry/trough.rsi` | поилка (распиленное бревно): `trough` (4 направления, пустое корыто) и `trough-fill-1` (вода, отдельный слой); нарисована под проект, черновик |
 | `Textures/_Horizon/Objects/Husbandry/horse_manure.rsi` | плейсхолдер иконки навоза |
 | `Textures/_Horizon/Objects/Husbandry/horse_meat.rsi` | плейсхолдер сырой и готовой конины (копия обычного мяса) |
@@ -292,8 +292,8 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 - **Кулинарные рецепты**, принимающие `FoodMeat`, конину не принимают. Стейк готовится своим графом, нарезка даёт обычные котлеты.
 - **Поилка** не проверяет, что именно течёт по трубам: лошадь выпьет любую жидкость.
 - **Плейсхолдеры:**
-  - `horse.rsi` (цветной спрайт коровы, все анимации — один кадр), `saddle.rsi` (нарисованный прямоугольник); в `meta.json` стоит пометка `PLACEHOLDER`;
-  - навоз, конина и анализатор: копии ванильных спрайтов с пометкой `PLACEHOLDER` в `meta.json` (лицензия CC-BY-SA-3.0 перенесена с оригинала, при замене на свой арт поправь `license` и `copyright`);
+  - `horse.rsi`, `saddle.rsi` и `trough.rsi` нарисованы заново (раздел 12), это черновики: ходьба и еда пока один кадр на направление, `dead` заглушка;
+  - конина и анализатор: копии ванильных спрайтов с пометкой `PLACEHOLDER` в `meta.json` (лицензия CC-BY-SA-3.0 перенесена с оригинала, при замене на свой арт поправь `license` и `copyright`);
   - у сырой конины в `horse_food.yml` стоит `color` для перекраски копии, при своём арте убери;
   - звуки в `sounds.yml` (`cow_moo.ogg`, звуки дерева и еды); настоящие файлы положи в `Resources/Audio/_Horizon/Animals/` и опиши в `attributions.yml`.
 - **Размножения нет.** Пол и стадии готовы; отдельный `Breeding` можно сделать на их основе.
@@ -334,3 +334,20 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 - `HorseNeigh`: ржание и фырканье, 1–3 с, несколько вариантов;
 - `HorseFootstep`: один удар копыта, 0.2–0.4 с, 4–6 вариантов;
 - `HorseEat`: хруст, 2–4 коротких клипа.
+
+---
+
+## 12. Лицензия и авторство
+
+Автор модуля и ассетов ниже: **mrl4an**. Лицензия этих ассетов: **CC-BY-SA-3.0**: её можно использовать где угодно с указанием авторства, а переработки должны остаться под той же лицензией. Поэтому любая чужая переработка этих спрайтов доступна и автору.
+
+| Что | Автор | Примечание |
+|---|---|---|
+| `Mobs/Animals/horse.rsi` | mrl4an | сделана по большому референсу: уменьшена, обведена, перерисована, разрезана на направления и слой седла, позы «ест» и «мёртвая» |
+| `Objects/Husbandry/saddle.rsi` | mrl4an | иконка сделана из арта лошади и седла |
+| `Objects/Husbandry/trough.rsi` | mrl4an | распиленное бревно с выемкой под воду |
+| `Objects/Husbandry/horse_manure.rsi` | mrl4an | тот же спрайт, что `_Horizon/Objects/Misc/feces.rsi` (его автор тоже mrl4an) |
+
+**Чужое, не переписывать на себя**, пока спрайт реально не перерисован (проверено: пиксели совпадают с оригиналом): `horse_meat.rsi`, `Objects/Devices/debug_analyzer.rsi`. У них в `meta.json` остаются лицензия и авторство оригинала.
+
+Код модуля отдельно от ассетов, он лежит под лицензией проекта; здесь автор и лицензия кода не менялись.
