@@ -103,8 +103,10 @@
     eatSound:
       collection: HorseEat
   # A piece of manure for every point of nutrition, the stage scales it (see Growth).
+  # It is left behind the horse, a bit short of the end of the rump: further would put it into the wall behind.
   - type: ManureProducer
     product: HorseManure
+    dropOffset: 0.45
   - type: Growth
     meat: FoodMeatHorse
     stages:
@@ -227,3 +229,20 @@
   - type: AnimalSex
     sex: Female
     randomize: false
+
+# For the spawn menu: an adult horse that already wears a saddle. The slot is declared here as well, not taken from the
+# Adult stage: the stage adds its components only if the horse has not got them yet (removeExisting: false), so this
+# slot stays and puts the saddle in at map init. Strap, Rideable and the visuals still come from the stage.
+- type: entity
+  parent: MobHorse
+  id: MobHorseSaddled
+  suffix: With saddle
+  components:
+  - type: ItemSlots
+    slots:
+      saddle_slot:
+        name: rideable-saddle-slot
+        startingItem: HorseSaddle
+        whitelist:
+          components:
+          - Saddle

@@ -22,6 +22,12 @@ public sealed partial class ManureProducerComponent : Component
     public float UnitsPerNutrition = 1f;
 
     /// <summary>
+    /// How far behind the animal (opposite to where it looks), in tiles, the product is left. 0 is under its centre.
+    /// </summary>
+    [DataField]
+    public float DropOffset;
+
+    /// <summary>
     /// The part of a piece that is not enough for one yet, it is kept for the next meal.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]

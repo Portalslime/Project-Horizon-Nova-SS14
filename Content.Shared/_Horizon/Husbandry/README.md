@@ -122,7 +122,7 @@ RideableSystem (Shared, предсказывается)
 | Файл | Что это |
 |---|---|
 | `Prototypes/_Horizon/Husbandry/base_animal.yml` | `BaseHusbandryAnimal` (абстрактный) |
-| `Prototypes/_Horizon/Husbandry/horse.yml` | `MobHorse` и варианты `MobHorseFoal`, `MobHorseYoung`, `MobHorseMale`, `MobHorseFemale` |
+| `Prototypes/_Horizon/Husbandry/horse.yml` | `MobHorse` и варианты `MobHorseFoal`, `MobHorseYoung`, `MobHorseMale`, `MobHorseFemale`, `MobHorseSaddled` (взрослая уже в седле, для меню спавна: слот седла объявлен в самом прототипе, а стадия `Adult` добавляет компоненты только если их ещё нет) |
 | `Prototypes/_Horizon/Husbandry/horse_npc.yml` | HTN `HorseCompound` |
 | `Prototypes/_Horizon/Husbandry/horse_food.yml` | `FoodMeatHorse`, `FoodMeatHorseCooked`, граф `HorseMeatSteak`, `HorseManure` |
 | `Prototypes/_Horizon/Husbandry/saddle.yml` | `HorseSaddle` + граф и рецепт (20 ткани) |
@@ -149,12 +149,12 @@ RideableSystem (Shared, предсказывается)
 | `Growth` | `stages`, `initialStage` (последняя, если не задана), `meat` `FoodMeat` | `GrowthSystem`, `GrowthEffectsSystem` |
 | `Diet` | `whitelist`, `blacklist`, `solution` `food`, `nutritionPerUnit` 1, `eatDelay` 2 с, `eatSound` | `AnimalFeedingSystem`, операторы HTN |
 | `WaterSource` | `solution` `tank`, `amountPerDrink` 15, `hydrationPerUnit` 1, `delay` 2 с, `drinkSound` | `AnimalFeedingSystem` |
-| `ManureProducer` | `product` (обязательно, стакающаяся сущность), `unitsPerNutrition` 1, `sound` | `ManureProducerSystem` |
+| `ManureProducer` | `product` (обязательно, стакающаяся сущность), `unitsPerNutrition` 1, `dropOffset` 0 (на сколько тайлов позади животного класть, против его взгляда), `sound` | `ManureProducerSystem` |
 | `AnimalWalker` | `waypointTolerance` 0.4, `slowDistance` 1.5, `minSpeedFraction` 0.35, `clearance` 0.45 (половина ширины коридора), `stuckTime` 1.5 с, `stuckDistance` 0.2, `maxRouteTime` 90 с, `smoothLookahead` 15 | `AnimalWalkerSystem` |
 | `AnimalWander` | `walkChance` 0.85, `standTime` 4–12 с, `retryTime` 2–5 с (если места нет), `legs` 2–4 (отрезков за прогулку), `minDistance` 4 и `maxDistance` 10 (желаемая длина отрезка, короче там, где тесно), `minLegDistance` 2, `turnAngle` 70°, `legPause` 0.5–2.5 с, `probes` 10, `minClearProbes` 3, `arriveDistance` 0.3, `maxWalkTime` 120 с | `AnimalWanderSystem`, `AnimalWanderOperator` |
 | `PullMass` | `density` 50 | `PullMassSystem` |
 | `PullFacing` | `rotationSpeed` 8, `minDistance` 0.4 | `PullFacingSystem` |
-| `Rideable` | `saddleSlot` `saddle_slot`, `requiredHands` 1, `redirectDamage` true, `riderOpensDoors` true, `south/north/east/westOffset` | `RideableSystem`, `RideableNpcSystem`, `RiderDamageRedirectSystem`, `RideableVisualsSystem` |
+| `Rideable` | `saddleSlot` `saddle_slot`, `requiredHands` 1, `redirectDamage` true, `riderOpensDoors` true, `south/north/east/westOffset` (в тайлах; идут по сети, потому что компонент добавляет стадия на сервере, а смещение рисует клиент) | `RideableSystem`, `RideableNpcSystem`, `RiderDamageRedirectSystem`, `RideableVisualsSystem` |
 | `Saddle` | маркер | белый список слота |
 | `Rider` | `mount` | ставится и снимается `RideableSystem` |
 
@@ -186,7 +186,7 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 
 ## 5. Прототипы и ключи
 
-Сущности: `BaseHusbandryAnimal`, `MobHorse`, `MobHorseFoal`, `MobHorseYoung`, `MobHorseMale`, `MobHorseFemale`, `FoodMeatHorse`, `FoodMeatHorseCooked`, `HorseManure`, `HorseSaddle`, `AnimalTrough`.
+Сущности: `BaseHusbandryAnimal`, `MobHorse`, `MobHorseFoal`, `MobHorseYoung`, `MobHorseMale`, `MobHorseFemale`, `MobHorseSaddled`, `FoodMeatHorse`, `FoodMeatHorseCooked`, `HorseManure`, `HorseSaddle`, `AnimalTrough`.
 Прочее: HTN `HorseCompound`, графы `HorseMeatSteak`, `HorseSaddleGraph`, `AnimalTroughGraph`, рецепты `HorseSaddleConstruction`, `AnimalTroughConstruction`, коллекции звуков `HorseNeigh`, `HorseFootstep`, `HorseEat`.
 
 Ключи локализации: `horse-name-foal`, `horse-name-young-male`, `horse-name-young-female`, `horse-name-adult-male`, `horse-name-adult-female`, `animal-needs-{satiety|hydration}-{satisfied|low|empty}`, `rideable-saddle-slot`, `rideable-no-saddle`, `rideable-not-alive`, `rideable-occupied`, `rideable-no-free-hands`, `rideable-cannot-pull`, плюс `ent-*` в ru-RU.
@@ -308,7 +308,7 @@ Appearance: `AnimalVisuals.Eating` (bool) ставит `AnimalFeedingSystem`, с
 |---|---|---|---|---|
 | `Mobs/Animals/horse.rsi` | `horse` | 4 | лошадь стоит | `horse.yml`, слой `Base` |
 | | `horse-moving` | 4 | лошадь идёт | `SpriteMovement` |
-| | `horse-eating` | 4 | лошадь ест или пьёт | `GenericVisualizer` по `AnimalVisuals.Eating` |
+| | `horse-eating` | 4 | лошадь ест или пьёт: голова опущена (нарисована из `horse` поворотом головы и шеи, черновик) | `GenericVisualizer` по `AnimalVisuals.Eating` |
 | | `saddle`, `saddle-moving`, `saddle-eating` | 4 | только седло, кадры совпадают с лошадью, лежит поверх | слой `saddle`, показывается, когда седло в слоте |
 | | `dead` | 1 | мёртвая лошадь | `DamageStateVisuals` |
 | `Objects/Husbandry/saddle.rsi` | `icon` | 1 | седло как предмет | `saddle.yml`, меню строительства |

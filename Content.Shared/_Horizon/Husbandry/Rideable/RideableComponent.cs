@@ -42,18 +42,19 @@ public sealed partial class RideableComponent : Component
     public bool AddedBumpTag;
 
     /// <summary>
-    /// How far the rider is drawn from the animal while it faces each way. Only a visual thing.
+    /// How far the rider is drawn from the animal while it faces each way. Only a visual thing, but the client draws it,
+    /// and the component is added by the growth stage on the server, so the values have to be networked.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public Vector2 SouthOffset = Vector2.Zero;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public Vector2 NorthOffset = Vector2.Zero;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public Vector2 EastOffset = Vector2.Zero;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public Vector2 WestOffset = Vector2.Zero;
 
     [DataField, AutoNetworkedField]
