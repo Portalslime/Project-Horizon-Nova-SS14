@@ -282,8 +282,8 @@
   - GateInferno
   - GateLavaShadow
   dungeonPool: true
-  dungeonCountMin: 2
-  dungeonCountMax: 3
+  dungeonCountMin: 1
+  dungeonCountMax: 1
   dungeonDistanceMin: 30
   dungeonDistanceMax: 80
   worldRadiusMin: 202
@@ -314,8 +314,8 @@
   - GateVolcanicSavanna
   - GateInferno
   dungeonPool: true
-  dungeonCountMin: 3
-  dungeonCountMax: 3
+  dungeonCountMin: 1
+  dungeonCountMax: 1
   dungeonDistanceMin: 80
   dungeonDistanceMax: 250
   worldRadiusMin: 228

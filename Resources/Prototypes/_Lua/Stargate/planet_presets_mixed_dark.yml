@@ -7,7 +7,7 @@
   - GateCavesShadow
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 35
   dungeonDistanceMax: 90
   worldRadiusMin: 215
@@ -37,7 +37,7 @@
   - GateInferno
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 35
   dungeonDistanceMax: 80
   worldRadiusMin: 215
@@ -69,7 +69,7 @@
   - GateWasteland
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 45
   dungeonDistanceMax: 100
   worldRadiusMin: 202

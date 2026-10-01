@@ -6,7 +6,7 @@
   - GateGrassCaves
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 60
   dungeonDistanceMax: 140
   worldRadiusMin: 211
@@ -37,7 +37,7 @@
   - GateDesertGrass
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 60
   dungeonDistanceMax: 140
   worldRadiusMin: 193
@@ -67,7 +67,7 @@
   - GateCavesGrass
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 60
   dungeonDistanceMax: 130
   worldRadiusMin: 225
@@ -95,7 +95,7 @@
   - GateGrassLava
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 60
   dungeonDistanceMax: 140
   worldRadiusMin: 211
@@ -124,7 +124,7 @@
   - GateGrassDesert
   dungeonPool: true
   dungeonCountMin: 1
-  dungeonCountMax: 3
+  dungeonCountMax: 1
   dungeonDistanceMin: 70
   dungeonDistanceMax: 150
   worldRadiusMin: 198
