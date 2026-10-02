@@ -1,2 +1,25 @@
 ent-NFClothingBackpackDuffelColorRandom = вещмешок панка
     .desc = {ent-NFClothingDuffel.desc}
+#HN: отсутствовал перевод (_NF/Entities/Clothing/Back/duffel_color.yml)
+ent-ClothingBackpackDuffelTrauma = вещмешок специалиста ОБР
+    .desc = Вещмешок, изготовленный для специалиста ОБР.
+ent-NFClothingBackpackDuffelChaplain = вещмешок священника
+    .desc = Не забудьте затушить кадило, прежде чем положить его внутрь.
+ent-NFClothingBackpackDuffelColorBlack = чёрный вещмешок
+    .desc = Большой вещмешок для хранения дополнительных предметов.
+ent-NFClothingBackpackDuffelColorBlue = синий вещмешок
+    .desc = Большой вещмешок для хранения дополнительных предметов.
+ent-NFClothingBackpackDuffelColorBrown = коричневый вещмешок
+    .desc = Большой вещмешок для хранения дополнительных предметов.
+ent-NFClothingBackpackDuffelColorBrownLight = светло-коричневый вещмешок
+    .desc = Большой вещмешок для хранения дополнительных предметов.
+ent-NFClothingBackpackDuffelColorGreen = зелёный вещмешок
+    .desc = Большой вещмешок для хранения дополнительных предметов.
+ent-NFClothingBackpackDuffelColorOrange = оранжевый вещмешок
+    .desc = Большой вещмешок для хранения дополнительных предметов.
+ent-NFClothingBackpackDuffelColorPurple = фиолетовый вещмешок
+    .desc = Большой вещмешок для хранения дополнительных предметов.
+ent-NFClothingBackpackDuffelColorRed = красный вещмешок
+    .desc = Большой вещмешок для хранения дополнительных предметов.
+ent-NFClothingBackpackDuffelColorWhite = белый вещмешок
+    .desc = Большой вещмешок для хранения дополнительных предметов.

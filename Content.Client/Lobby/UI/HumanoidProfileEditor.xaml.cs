@@ -1232,8 +1232,50 @@ namespace Content.Client.Lobby.UI
                         SetDirty();
                     };
 
+                    //HN Start: возвращена кнопка выбора снаряжения роли (потеряна в ветке checkpoint)
+                    var loadoutWindowBtn = new Button()
+                    {
+                        Text = Loc.GetString("loadout-window"),
+                        HorizontalAlignment = HAlignment.Right,
+                        VerticalAlignment = VAlignment.Center,
+                        Margin = new Thickness(3f, 3f, 0f, 0f),
+                    };
+
+                    var collection = IoCManager.Instance!;
+                    var protoManager = collection.Resolve<IPrototypeManager>();
+
+                    // If no loadout found then disabled button
+                    if (!protoManager.TryIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(job.ID), out var roleLoadoutProto))
+                    {
+                        loadoutWindowBtn.Disabled = true;
+                    }
+                    // else
+                    else
+                    {
+                        loadoutWindowBtn.OnPressed += args =>
+                        {
+                            RoleLoadout? loadout = null;
+
+                            // Clone so we don't modify the underlying loadout.
+                            Profile?.Loadouts.TryGetValue(LoadoutSystem.GetJobPrototype(job.ID), out loadout);
+                            loadout = loadout?.Clone();
+
+                            if (loadout == null)
+                            {
+                                loadout = new RoleLoadout(roleLoadoutProto.ID);
+                                loadout.SetDefault(Profile, _playerManager.LocalSession, _prototypeManager);
+                            }
+
+                            OpenLoadout(job, loadout, roleLoadoutProto);
+                        };
+                    }
+                    //HN End
+
                     _jobPriorities.Add((job.ID, selector));
                     jobContainer.AddChild(selector);
+                    //HN Start
+                    jobContainer.AddChild(loadoutWindowBtn);
+                    //HN End
                     category.AddChild(jobContainer);
                 }
             }
@@ -1255,7 +1297,8 @@ namespace Content.Client.Lobby.UI
 
             _loadoutWindow = new LoadoutWindow(Profile, roleLoadout, roleLoadoutProto, _playerManager.LocalSession, collection)
             {
-                Title = jobProto?.ID + "-loadout",
+                //HN: локализованный заголовок вместо сырого "<JobId>-loadout"
+                Title = Loc.GetString("loadout-window-title-loadout", ("job", jobProto?.LocalizedName ?? string.Empty)),
             };
 
             // Refresh the buttons etc.

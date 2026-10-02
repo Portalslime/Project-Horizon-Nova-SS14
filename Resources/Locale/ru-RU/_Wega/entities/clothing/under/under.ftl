@@ -1454,3 +1454,17 @@ ent-ClothingUnderTopGold = золотой бюстгальтер
     .desc = Напоминает пятнышки божьей коровки.
     .suffix = Спонсор
 
+#HN: отсутствовал перевод купальников (_Wega/Entities/Clothing/Under/bottom.yml)
+ent-ClothingUniformSwimBlack = чёрный купальник
+    .desc = Стильный чёрный купальник для пляжа или бассейна.
+ent-ClothingUniformSwimBlue = синий купальник
+    .desc = Яркий синий купальник, идеальный для летних дней.
+ent-ClothingUniformSwimDarkGreen = тёмно-зелёный купальник
+    .desc = Тёмно-зелёный купальник с классическим видом.
+ent-ClothingUniformSwimGreen = зелёный купальник
+    .desc = Насыщенный зелёный купальник для смелых.
+ent-ClothingUniformSwimPurple = фиолетовый купальник
+    .desc = Красивый фиолетовый купальник с элегантным дизайном.
+ent-ClothingUniformSwimRed = красный купальник
+    .desc = Эффектный красный купальник, привлекающий внимание.
+

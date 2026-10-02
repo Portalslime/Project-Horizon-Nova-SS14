@@ -23,6 +23,8 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
-  - TopUnderwear
-  - PantsUnderwear
-  - SocksUnderwear
+  #HN Start: белье из сборки Wega (полный каталог); группы TopUnderwear/PantsUnderwear/SocksUnderwear не используем
+  - Top
+  - Bottom
+  - Socks
+  #HN End
