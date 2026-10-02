@@ -21,6 +21,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System.Linq;
 using Content.Shared.Movement.Systems;
+using Content.Shared._HorizonNova.Flash; //HN
 
 namespace Content.Shared.Flash;
 
@@ -154,6 +155,11 @@ public abstract class SharedFlashSystem : EntitySystem
         bool melee = false,
         TimeSpan? stunDuration = null)
     {
+        //HN Start: раса Резоми — вспышки действуют дольше
+        if (TryComp<FlashModifierComponent>(target, out var flashModifier))
+            flashDuration *= flashModifier.Modifier;
+        //HN End
+
         var attempt = new FlashAttemptEvent(target, user, used);
         RaiseLocalEvent(target, ref attempt, true);
 

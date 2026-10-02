@@ -1,0 +1,27 @@
+# Horizon Nova — AGPLv3
+# Copyright (c) 2026 Horizon Nova Contributors
+# Способности резоми. Имя/описание — в локали (ent-ActionResomiSprint, ent-ActionResomiFourChannelHearing).
+
+- type: entity
+  parent: BaseAction
+  id: ActionResomiSprint
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 0.5
+    icon: _HorizonNova/Mobs/Species/Resomi/Abilities/Agility/AgilityOff.png
+    iconOn: _HorizonNova/Mobs/Species/Resomi/Abilities/Agility/AgilityOn.png
+  - type: InstantAction
+    event: !type:ResomiSprintToggleEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionResomiFourChannelHearing
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 0.5
+    icon: _HorizonNova/Mobs/Species/Resomi/Abilities/ListenUp/EarsDown.png
+    iconOn: _HorizonNova/Mobs/Species/Resomi/Abilities/ListenUp/EarsUp.png
+  - type: InstantAction
+    event: !type:ResomiHearingToggleEvent

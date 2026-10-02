@@ -11,6 +11,7 @@ using Content.Server.Station.Systems;
 using Content.Server.Discord.DiscordLink;
 using Content.Shared._Lua.Chat.Systems;
 using Content.Shared._Lua.Language;
+using Content.Shared._HorizonNova.Chat; //HN
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -604,7 +605,16 @@ public sealed partial class ChatSystem : SharedChatSystem
                 continue; // Won't get logged to chat, and ghosts are too far away to see the pop-up, so we just won't send it to them.
 
             var canUnderstandLanguage = _language.CanUnderstand(listener, language.ID); // backmen: language
-            if (data.Range <= WhisperClearRange || data.Observer)
+            //HN Start: раса Резоми — расширенный радиус разборчивого шёпота
+            var whisperClearRange = WhisperClearRange;
+            if (TryComp<ChatModifierComponent>(listener, out var chatModifier)
+                && chatModifier.WhisperListeningRange > whisperClearRange)
+            {
+                whisperClearRange = chatModifier.WhisperListeningRange;
+            }
+
+            if (data.Range <= whisperClearRange || data.Observer)
+            //HN End
             {
                 var perceivedMessage = FormattedMessage.EscapeText(canUnderstandLanguage ? message : languageObfuscatedMessage); // backmen: language
                 var wrappedPerceivedMessage = WrapWhisperMessage(source, "chat-manager-entity-whisper-wrap-message", nameIdentity, perceivedMessage, language);

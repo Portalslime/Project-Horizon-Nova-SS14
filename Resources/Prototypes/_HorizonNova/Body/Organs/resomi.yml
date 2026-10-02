@@ -1,0 +1,35 @@
+# Horizon Nova — AGPLv3
+# Copyright (c) 2026 Horizon Nova Contributors
+# Порт с Goob-Station: Resources/Prototypes/_Floofstation/Body/Organs/resomi.yml.
+#
+# «Скорость метаболизма 1.0 ед/тик»: базовый MetabolismRate еды/питья 0.5,
+# множитель 2.0 даёт 1.0 — быстрее человека (1.0 против 0.5).
+
+- type: entity
+  id: OrganResomiStomach
+  parent: OrganAnimalStomach
+  name: stomach
+  categories: [ HideSpawnMenu ]
+  suffix: Resomi
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/Human/organs.rsi
+    state: stomach
+  - type: Stomach
+  - type: SolutionContainerManager
+    solutions:
+      stomach:
+        maxVol: 50
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 5
+  - type: Metabolizer # желудок животного типа, ускоренный обмен
+    maxReagents: 3
+    metabolizerTypes: [ Animal ]
+    groups:
+    - id: Food
+      rateModifier: 2.0
+    - id: Drink
+      rateModifier: 2.0

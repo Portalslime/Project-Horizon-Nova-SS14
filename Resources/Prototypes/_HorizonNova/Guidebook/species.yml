@@ -1,0 +1,7 @@
+# Horizon Nova — AGPLv3
+# Copyright (c) 2026 Horizon Nova Contributors
+
+- type: guideEntry
+  id: Resomi
+  name: species-name-resomi
+  text: "/ServerInfo/Guidebook/Mobs/_HorizonNova/resomi.xml"

@@ -1,0 +1,185 @@
+# Horizon Nova — AGPLv3
+# Copyright (c) 2026 Horizon Nova Contributors
+# Порт с Goob-Station: Resources/Prototypes/_Floofstation/Body/Parts/resomi.yml,
+# адаптировано под структуру частей тела этой сборки (как у Авали).
+
+- type: entity
+  id: PartResomi
+  parent: BaseItem
+  name: туловище
+  abstract: true
+  components:
+  - type: Damageable
+    damageContainer: Biological
+  - type: BodyPart
+    species: Resomi
+  - type: SurgeryTool # Shitmed Change
+    startSound:
+      path: /Audio/_Shitmed/Medical/Surgery/organ1.ogg
+    endSound:
+      path: /Audio/_Shitmed/Medical/Surgery/organ2.ogg
+  - type: ContainerContainer
+    containers:
+      bodypart: !type:Container
+        ents: []
+  - type: StaticPrice #DynamicPrice
+    price: 100
+  - type: Tag
+    tags:
+      - Trash
+
+- type: entity
+  id: TorsoResomi
+  name: торс
+  parent: PartResomi
+  components:
+  - type: Sprite
+    netsync: false
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "chest_m"
+  - type: Icon
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "chest_m"
+  - type: BodyPart
+    partType: Torso
+
+- type: entity
+  id: HeadResomi
+  name: голова
+  parent: PartResomi
+  components:
+  - type: Sprite
+    netsync: false
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "head_m"
+  - type: Icon
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "head_m"
+  - type: BodyPart
+    partType: Head
+    vital: true
+  - type: Input
+    context: "ghost"
+  - type: InputMover
+  - type: GhostOnMove
+  - type: Tag
+    tags:
+      - Head
+
+- type: entity
+  id: LeftArmResomi
+  name: левая рука
+  parent: [PartResomi, BaseLeftArm]
+  components:
+  - type: Sprite
+    netsync: false
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "l_arm"
+  - type: Icon
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "l_arm"
+
+- type: entity
+  id: RightArmResomi
+  name: правая рука
+  parent: [PartResomi, BaseRightArm]
+  components:
+  - type: Sprite
+    netsync: false
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "r_arm"
+  - type: Icon
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "r_arm"
+
+- type: entity
+  id: LeftHandResomi
+  name: левая ладонь
+  parent: [PartResomi, BaseLeftHand]
+  components:
+  - type: Sprite
+    netsync: false
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "l_hand"
+  - type: Icon
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "l_hand"
+
+- type: entity
+  id: RightHandResomi
+  name: правая ладонь
+  parent: [PartResomi, BaseRightHand]
+  components:
+  - type: Sprite
+    netsync: false
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "r_hand"
+  - type: Icon
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "r_hand"
+
+- type: entity
+  id: LeftLegResomi
+  name: левая нога
+  parent: PartResomi
+  components:
+  - type: Sprite
+    netsync: false
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "l_leg"
+  - type: Icon
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "l_leg"
+  - type: BodyPart
+    partType: Leg
+    symmetry: Left
+  - type: MovementBodyPart
+
+- type: entity
+  id: RightLegResomi
+  name: правая нога
+  parent: PartResomi
+  components:
+  - type: Sprite
+    netsync: false
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "r_leg"
+  - type: Icon
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "r_leg"
+  - type: BodyPart
+    partType: Leg
+    symmetry: Right
+  - type: MovementBodyPart
+
+- type: entity
+  id: LeftFootResomi
+  name: левая пятка
+  parent: PartResomi
+  components:
+  - type: Sprite
+    netsync: false
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "l_foot"
+  - type: Icon
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "l_foot"
+  - type: BodyPart
+    partType: Foot
+    symmetry: Left
+
+- type: entity
+  id: RightFootResomi
+  name: правая пятка
+  parent: PartResomi
+  components:
+  - type: Sprite
+    netsync: false
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "r_foot"
+  - type: Icon
+    sprite: _HorizonNova/Mobs/Species/Resomi/parts.rsi
+    state: "r_foot"
+  - type: BodyPart
+    partType: Foot
+    symmetry: Right

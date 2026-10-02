@@ -1,0 +1,25 @@
+# Horizon Nova — AGPLv3
+# Copyright (c) 2026 Horizon Nova Contributors
+# Порт с Goob-Station: Resources/Prototypes/_Goobstation/Entities/Mobs/Customization/Markings/resomi.yml
+#
+# Базовые маркировки резоми (хвост, перья, пух, причёски) уже есть в сборке —
+# Resources/Prototypes/_Lua/Species/Avali/Entities/Mobs/Customization/Markings/.
+# Здесь только уникальные для Goob маркировки.
+
+- type: marking
+  id: ResomiEars
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Resomi]
+  sprites:
+  - sprite: _HorizonNova/Mobs/Species/Resomi/Customization/Resomi_headtop.rsi
+    state: resomi_ears
+
+- type: marking
+  id: ResomiFluffyChest
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Resomi]
+  sprites:
+  - sprite: _HorizonNova/Mobs/Species/Resomi/Customization/Resomi_chest.rsi
+    state: resomifluffchest

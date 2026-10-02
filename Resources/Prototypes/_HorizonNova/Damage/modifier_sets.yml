@@ -1,0 +1,21 @@
+# Horizon Nova — AGPLv3
+# Copyright (c) 2026 Horizon Nova Contributors
+# Резоми получают +15% любого урона, кроме обморожения (Cold).
+
+- type: damageModifierSet
+  id: Resomi
+  coefficients:
+    Asphyxiation: 1.15
+    Bloodloss: 1.15
+    Blunt: 1.15
+    Cellular: 1.15
+    Caustic: 1.15
+    Cold: 1.0
+    Heat: 1.15
+    Piercing: 1.15
+    Poison: 1.15
+    Radiation: 1.15
+    Shock: 1.15
+    Slash: 1.15
+    Structural: 1.0
+    Holy: 1.15

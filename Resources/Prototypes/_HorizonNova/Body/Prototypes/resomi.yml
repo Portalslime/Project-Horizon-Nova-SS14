@@ -1,0 +1,56 @@
+# Horizon Nova — AGPLv3
+# Copyright (c) 2026 Horizon Nova Contributors
+# Порт с Goob-Station: Resources/Prototypes/_Floofstation/Body/Prototypes/resomi.yml,
+# приведено к структуре тел этой сборки (root: torso, как у человека/авали).
+
+# Slot ids must use spaces (Shitmed GetSlotFromBodyPart), not snake_case.
+- type: body
+  id: Resomi
+  name: "resomi"
+  root: torso
+  slots:
+    head:
+      part: HeadResomi
+      connections:
+      - torso
+      organs:
+        brain: OrganHumanBrain
+        eyes: OrganHumanEyes
+    torso:
+      part: TorsoResomi
+      connections:
+      - right arm
+      - left arm
+      - right leg
+      - left leg
+      - head # Shitmed
+      organs:
+        heart: OrganAnimalHeart
+        lungs: OrganHumanLungs
+        stomach: OrganResomiStomach
+        liver: OrganAnimalLiver
+        kidneys: OrganAnimalKidneys
+    right arm:
+      part: RightArmResomi
+      connections:
+      - right hand
+    left arm:
+      part: LeftArmResomi
+      connections:
+      - left hand
+    right hand:
+      part: RightHandResomi
+    left hand:
+      part: LeftHandResomi
+    right leg:
+      part: RightLegResomi
+      connections:
+      - right foot
+    left leg:
+      part: LeftLegResomi
+      connections:
+      - left foot
+    right foot:
+      part: RightFootResomi
+    left foot:
+      part: LeftFootResomi

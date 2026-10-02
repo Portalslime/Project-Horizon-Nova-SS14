@@ -1,0 +1,15 @@
+# Horizon Nova — AGPLv3
+# Copyright (c) 2026 Horizon Nova Contributors
+# Имена резоми (порт с Goob-Station: _Floofstation/Datasets/Names/resomi.yml).
+
+- type: localizedDataset
+  id: NamesResomiMale
+  values:
+    prefix: names-resomi-male-dataset-
+    count: 50
+
+- type: localizedDataset
+  id: NamesResomiFemale
+  values:
+    prefix: names-resomi-female-dataset-
+    count: 50
