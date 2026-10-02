@@ -108,6 +108,17 @@ public sealed class UrinationSystem : EntitySystem
             UpdateAlert(ent);
     }
 
+    /// <summary>
+    /// Horizon: принудительно задать уровень потребности (для админ-команд).
+    /// </summary>
+    public void SetNeed(EntityUid uid, float value, UrinationComponent? comp = null)
+    {
+        if (!Resolve(uid, ref comp))
+            return;
+
+        SetValue((uid, comp), value);
+    }
+
     private void UpdateAlert(Entity<UrinationComponent> ent)
     {
         var comp = ent.Comp;

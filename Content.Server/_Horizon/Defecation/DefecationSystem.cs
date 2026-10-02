@@ -94,6 +94,17 @@ public sealed class DefecationSystem : EntitySystem
             UpdateAlert(ent);
     }
 
+    /// <summary>
+    /// Horizon: принудительно задать уровень потребности (для админ-команд).
+    /// </summary>
+    public void SetNeed(EntityUid uid, float value, DefecationComponent? comp = null)
+    {
+        if (!Resolve(uid, ref comp))
+            return;
+
+        SetValue((uid, comp), value);
+    }
+
     private void UpdateAlert(Entity<DefecationComponent> ent)
     {
         var comp = ent.Comp;
