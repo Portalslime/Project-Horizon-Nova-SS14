@@ -3,7 +3,9 @@
 - type: loadoutGroup
   id: Top
   name: loadout-group-top
-  minLimit: 0
+  #HN Start: лифчик обязателен (как трусы). Все предметы FemaleRequired, поэтому у мужчин группа пустая.
+  minLimit: 1
+  #HN End
   loadouts:
   - ClothingUnderTopBraGrey # default
 # sport

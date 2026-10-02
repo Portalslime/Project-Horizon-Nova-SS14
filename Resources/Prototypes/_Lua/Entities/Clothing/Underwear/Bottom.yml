@@ -14,6 +14,11 @@
   - type: Item
     size: Small
   - type: Clothing
+    #HN Start: надевание/снятие трусов за 2 секунды
+    equipDelay: 2
+    unequipDelay: 2
+    quickEquip: false
+    #HN End
     slots: [underwearb]
   - type: Food
     requiresSpecialDigestion: true
