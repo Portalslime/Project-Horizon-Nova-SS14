@@ -235,6 +235,16 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         if (!HasComp<DamageableComponent>(target))
             return;
 
+        var msg = CreateHealthAnalyzerMessage(target, scanMode, part, HasComp<HealthAnalyzerPrinterComponent>(healthAnalyzer));
+        _uiSystem.ServerSendUiMessage(healthAnalyzer, HealthAnalyzerUiKey.Key, msg);
+    }
+
+    /// <summary>
+    ///HN: Builds the health analyzer message for a target.
+    /// Extracted from <see cref="UpdateScannedUser"/> so that the cryo pod UI can reuse it.
+    /// </summary>
+    public HealthAnalyzerScannedUserMessage CreateHealthAnalyzerMessage(EntityUid target, bool scanMode, EntityUid? part = null, bool printable = false)
+    {
         var bodyTemperature = float.NaN;
 
         if (TryComp<TemperatureComponent>(target, out var temp))
@@ -260,8 +270,6 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         if (TryComp<UnclonableComponent>(target, out var unclonableComp) && unclonableComp.Analyzable)
             unclonable = true;
         // End Frontier: add unclonable
-
-        var printable = HasComp<HealthAnalyzerPrinterComponent>(healthAnalyzer); // Frontier
 
         Dictionary<TargetBodyPart, TargetIntegrity>? body = null;
         if (HasComp<TargetingComponent>(target))
@@ -297,7 +305,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         }
         // Lua end
 
-        _uiSystem.ServerSendUiMessage(healthAnalyzer, HealthAnalyzerUiKey.Key, new HealthAnalyzerScannedUserMessage(
+        return new HealthAnalyzerScannedUserMessage(
             GetNetEntity(target),
             bodyTemperature,
             bloodAmount,
@@ -310,7 +318,8 @@ public sealed class HealthAnalyzerSystem : EntitySystem
             body,
             bodyDamageTypes,
             part != null ? GetNetEntity(part) : null
-        ));
+        );
+        //HN End
     }
 
     private Dictionary<TargetBodyPart, Dictionary<string, FixedPoint2>>? GetBodyDamageTypes(EntityUid target)

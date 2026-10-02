@@ -243,6 +243,23 @@ public sealed class GasAnalyzerSystem : EntitySystem
     }
 
     /// <summary>
+    ///HN: Generates a GasMixEntry for a given GasMixture. Used by the cryo pod UI.
+    /// </summary>
+    public GasMixEntry GenerateGasMixEntry(string name, GasMixture? mixture)
+    {
+        if (mixture == null)
+            return new GasMixEntry(name, 0, 0, 0);
+
+        return new GasMixEntry(
+            name,
+            mixture.Volume,
+            mixture.Pressure,
+            mixture.Temperature,
+            GenerateGasEntryArray(mixture)
+        );
+    }
+
+    /// <summary>
     /// Generates a GasEntry array for a given GasMixture
     /// </summary>
     private GasEntry[] GenerateGasEntryArray(GasMixture? mixture)

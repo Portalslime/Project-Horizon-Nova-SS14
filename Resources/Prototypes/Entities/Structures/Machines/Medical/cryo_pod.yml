@@ -88,16 +88,14 @@
           components:
             - FitsInDispenser
   # - type: ItemToggle # Frontier
-  - type: HealthAnalyzer
-    scanDelay: 0
   - type: UserInterface
     interfaces:
-      enum.HealthAnalyzerUiKey.Key:
-        type: HealthAnalyzerBoundUserInterface
+      enum.CryoPodUiKey.Key: #HN: HealthAnalyzerUiKey<CryoPodUiKey
+        type: CryoPodBoundUserInterface #HN: HealthAnalyzerBoundUserInterface<CryoPodBoundUserInterface
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
   - type: ActivatableUI
-    key: enum.HealthAnalyzerUiKey.Key
+    key: enum.CryoPodUiKey.Key #HN: HealthAnalyzerUiKey<CryoPodUiKey
     requiresComplex: false
   - type: ActivatableUIRequiresPower
   - type: PointLight
@@ -108,6 +106,10 @@
   - type: EmptyOnMachineDeconstruct
     containers:
       - scanner-body
+  - type: SolutionContainerManager #HN: cryo pod injection buffer
+    solutions:
+      injectionBuffer:
+        maxVol: 50
   - type: CryoPod
   - type: CryoPodAir
   - type: ContainerTemperatureDamageThresholds

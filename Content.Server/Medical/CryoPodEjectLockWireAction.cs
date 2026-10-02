@@ -18,7 +18,10 @@ public sealed partial class CryoPodEjectLockWireAction: ComponentWireAction<Cryo
     public override bool Cut(EntityUid user, Wire wire, CryoPodComponent cryoPodComponent)
     {
         if (!cryoPodComponent.PermaLocked)
+        {
             cryoPodComponent.Locked = true;
+            EntityManager.Dirty(wire.Owner, cryoPodComponent); //HN: Locked is networked now
+        }
 
         return true;
     }
@@ -26,7 +29,10 @@ public sealed partial class CryoPodEjectLockWireAction: ComponentWireAction<Cryo
     public override bool Mend(EntityUid user, Wire wire, CryoPodComponent cryoPodComponent)
     {
         if (!cryoPodComponent.PermaLocked)
+        {
             cryoPodComponent.Locked = false;
+            EntityManager.Dirty(wire.Owner, cryoPodComponent); //HN: Locked is networked now
+        }
 
         return true;
     }
