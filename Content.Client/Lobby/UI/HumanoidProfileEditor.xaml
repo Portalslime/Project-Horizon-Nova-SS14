@@ -119,6 +119,22 @@
                                 </ui:HighlightedContainer>
                             </BoxContainer>
 
+                            <!-- Horizon: рост и вес -->
+                            <ui:HighlightedContainer>
+                                <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+                                    <BoxContainer Orientation="Horizontal" SeparationOverride="6" HorizontalExpand="True">
+                                        <Label Name="HeightDescribeLabel" MinWidth="136" VerticalAlignment="Center" />
+                                        <Slider Name="HeightSlider" MinValue="0.5" MaxValue="1.5" Value="1" HorizontalExpand="True" />
+                                        <Button Name="HeightResetButton" Text="{Loc 'humanoid-profile-editor-slider-reset'}" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Horizontal" SeparationOverride="6" HorizontalExpand="True">
+                                        <Label Name="WidthDescribeLabel" MinWidth="136" VerticalAlignment="Center" />
+                                        <Slider Name="WidthSlider" MinValue="0.5" MaxValue="1.5" Value="1" HorizontalExpand="True" />
+                                        <Button Name="WidthResetButton" Text="{Loc 'humanoid-profile-editor-slider-reset'}" />
+                                    </BoxContainer>
+                                </BoxContainer>
+                            </ui:HighlightedContainer>
+
                             <ui:HighlightedContainer>
                                 <BoxContainer Orientation="Vertical" SeparationOverride="6" HorizontalExpand="True">
                                     <BoxContainer Orientation="Horizontal" SeparationOverride="6" HorizontalExpand="True">

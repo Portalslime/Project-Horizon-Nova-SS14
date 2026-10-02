@@ -319,7 +319,7 @@ namespace Content.Server.Database
                 traits.ToHashSet(),
                 loadouts,
                 company
-            );
+            ).WithSize(profile.Width, profile.Height); // Horizon: рост/вес
         }
 
         private static Profile ConvertProfiles(HumanoidCharacterProfile humanoid, int slot, Profile? profile = null)
@@ -351,6 +351,8 @@ namespace Content.Server.Database
             // Erida-End
             profile.Species = humanoid.Species;
             profile.Voice = humanoid.Voice; // Corvax-TTS
+            profile.Width = humanoid.Width; // Horizon
+            profile.Height = humanoid.Height; // Horizon
             profile.Age = humanoid.Age;
             profile.Sex = humanoid.Sex.ToString();
             profile.Gender = humanoid.Gender.ToString();

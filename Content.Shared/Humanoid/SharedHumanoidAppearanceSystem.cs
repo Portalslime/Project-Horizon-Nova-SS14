@@ -11,6 +11,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Corvax.TTS;
 using Content.Shared.Inventory;
 using Content.Shared.Preferences;
+using Content.Shared.Sprite;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects.Components.Localization;
@@ -42,6 +43,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
     [Dependency] private readonly MarkingManager _markingManager = default!;
     [Dependency] private readonly GrammarSystem _grammarSystem = default!;
     [Dependency] private readonly SharedIdentitySystem _identity = default!;
+    [Dependency] private readonly SharedScaleVisualsSystem _scaleVisuals = default!; // Horizon
 
     public static readonly ProtoId<SpeciesPrototype> DefaultSpecies = "Human";
     // Corvax-TTS-Start
@@ -497,6 +499,11 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
 
         humanoid.Age = profile.Age;
         humanoid.ProfileLoaded = true;
+
+        // Horizon: рост/ширина из профиля -> масштаб спрайта (клиент/сервер через Appearance)
+        humanoid.Width = profile.Width <= 0f ? 1f : profile.Width;
+        humanoid.Height = profile.Height <= 0f ? 1f : profile.Height;
+        _scaleVisuals.SetSpriteScale(uid, new Vector2(humanoid.Width, humanoid.Height));
 
         RaiseLocalEvent(uid, new ProfileLoadFinishedEvent());
         Dirty(uid, humanoid);

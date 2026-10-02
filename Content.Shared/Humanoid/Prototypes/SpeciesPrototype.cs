@@ -139,6 +139,26 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// </summary>
     [DataField]
     public Color ForcedMarkingColor { get; private set; } = new();
+
+    // Horizon: диапазоны роста/ширины и вес (порт из Lust/Sunrise)
+    [DataField] public float MinWidth { get; private set; } = 0.95f;
+    [DataField] public float MaxWidth { get; private set; } = 1.1f;
+    [DataField] public float DefaultWidth { get; private set; } = 1f;
+    [DataField] public float MinHeight { get; private set; } = 0.9f;
+    [DataField] public float MaxHeight { get; private set; } = 1.1f;
+    [DataField] public float DefaultHeight { get; private set; } = 1f;
+    [DataField] public float MinHeightCm { get; private set; } = 150f;
+    [DataField] public float MaxHeightCm { get; private set; } = 200f;
+    [DataField] public int StandardWeight { get; private set; } = 75;
+    [DataField] public int StandardDensity { get; private set; } = 120;
+
+    /// <summary>
+    /// Вес в килограммах для заданных множителей роста/ширины.
+    /// </summary>
+    public float GetProfileWeight(float width, float height)
+    {
+        return StandardWeight + StandardDensity * (width * height - 1f);
+    }
 }
 
 public enum SpeciesNaming : byte

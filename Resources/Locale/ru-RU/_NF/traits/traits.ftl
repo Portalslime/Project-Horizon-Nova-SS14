@@ -10,8 +10,7 @@ trait-pious-desc = Ты связан с богами, но твои обеты �
 trait-streetpunk-accent-name = Акцент Уличного Бунтаря
 trait-streetpunk-accent-desc = Ты родился в огромном мегаполисе и так и не ходил в школу. И это заметно, чувак.
 # Эти черты скоро заменят на ползунок, но пока они здесь.
-trait-tall-name = Высокий
-trait-short-name = Низкий
+# HN: черты Tall/Short удалены (рост/вес — слайдерами)
 trait-lizard-accent-name = Рептилоидный акцент
 trait-lizard-accent-desc = Из-за постоянного воссздествия или по другим причинам вы звучите как рептилоид.
 trait-moth-accent-name = Мотыльковый акцент

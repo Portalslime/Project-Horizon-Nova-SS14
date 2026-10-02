@@ -79,11 +79,6 @@
     - Tail
   - type: Sprite
     scale: 1, 1.1
-  - type: ShortWhitelist
-    scale: 0.8
-    density: 140
-    pseudoItem: false
-    cosmeticOnly: false
   - type: Inventory
     speciesId: reptilian # Reuse lizard displacements, especially for the feet.
     femaleDisplacements:

@@ -10,6 +10,7 @@ namespace Content.Server.Humanoid;
 public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
 {
     [Dependency] private readonly MarkingManager _markingManager = default!;
+    [Dependency] private readonly HumanoidSizeSystem _size = default!; // Horizon
 
     public override void Initialize()
     {
@@ -18,6 +19,17 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         SubscribeLocalEvent<HumanoidAppearanceComponent, HumanoidMarkingModifierMarkingSetMessage>(OnMarkingsSet);
         SubscribeLocalEvent<HumanoidAppearanceComponent, HumanoidMarkingModifierBaseLayersSetMessage>(OnBaseLayersSet);
         SubscribeLocalEvent<HumanoidAppearanceComponent, GetVerbsEvent<Verb>>(OnVerbsRequest);
+    }
+
+    // Horizon: после загрузки профиля применяем массу от роста/веса
+    public override void LoadProfile(EntityUid uid, HumanoidCharacterProfile? profile, HumanoidAppearanceComponent? humanoid = null)
+    {
+        base.LoadProfile(uid, profile, humanoid);
+
+        if (profile == null || !Resolve(uid, ref humanoid))
+            return;
+
+        _size.ApplyPhysicalStats(uid, profile.Species, humanoid.Width, humanoid.Height);
     }
 
     /// <summary>

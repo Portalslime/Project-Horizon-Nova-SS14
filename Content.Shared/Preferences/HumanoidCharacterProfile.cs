@@ -153,6 +153,18 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterAppearance Appearance { get; set; } = new();
 
         /// <summary>
+        /// Horizon: множитель ширины персонажа (ползунок «Вес»).
+        /// </summary>
+        [DataField]
+        public float Width { get; private set; } = 1f;
+
+        /// <summary>
+        /// Horizon: множитель роста персонажа.
+        /// </summary>
+        [DataField]
+        public float Height { get; private set; } = 1f;
+
+        /// <summary>
         /// When spawning into a round what's the preferred spot to spawn.
         /// </summary>
         [DataField]
@@ -264,6 +276,8 @@ namespace Content.Shared.Preferences
                 jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts, other.Company)
         {
             YupiAccountCode = other.YupiAccountCode; //Lua
+            Width = other.Width; //Horizon
+            Height = other.Height; //Horizon
         }
 
         /// <summary>Copy constructor</summary>
@@ -300,6 +314,8 @@ namespace Content.Shared.Preferences
                 other.Company)
         {
             YupiAccountCode = other.YupiAccountCode; //Lua копирования
+            Width = other.Width; //Horizon
+            Height = other.Height; //Horizon
         }
 
         /// <summary>
@@ -320,10 +336,20 @@ namespace Content.Shared.Preferences
         {
             species ??= SharedHumanoidAppearanceSystem.DefaultSpecies;
 
-            return new()
+            var profile = new HumanoidCharacterProfile
             {
                 Species = species,
             };
+
+            // Horizon: рост/вес по умолчанию для вида
+            var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
+            if (prototypeManager.TryIndex<SpeciesPrototype>(species, out var speciesPrototype))
+            {
+                profile.Width = speciesPrototype.DefaultWidth;
+                profile.Height = speciesPrototype.DefaultHeight;
+            }
+
+            return profile;
         }
 
         // TODO: This should eventually not be a visual change only.
@@ -386,6 +412,8 @@ namespace Content.Shared.Preferences
                 Species = species,
                 Voice = voiceId, // Corvax-TTS
                 Appearance = HumanoidCharacterAppearance.Random(species, sex),
+                Width = speciesPrototype?.DefaultWidth ?? 1f, // Horizon
+                Height = speciesPrototype?.DefaultHeight ?? 1f, // Horizon
             };
         }
 
@@ -490,6 +518,22 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithSpecies(string species)
         {
             return new(this) { Species = species };
+        }
+
+        // Horizon: рост и ширина
+        public HumanoidCharacterProfile WithWidth(float width)
+        {
+            return new(this) { Width = width };
+        }
+
+        public HumanoidCharacterProfile WithHeight(float height)
+        {
+            return new(this) { Height = height };
+        }
+
+        public HumanoidCharacterProfile WithSize(float width, float height)
+        {
+            return new(this) { Width = width, Height = height };
         }
 
         // Corvax-TTS-Start
@@ -676,6 +720,8 @@ namespace Content.Shared.Preferences
             if (Sex != other.Sex) return false;
             if (Gender != other.Gender) return false;
             if (Species != other.Species) return false;
+            if (MathF.Abs(Width - other.Width) > 0.0001f) return false; // Horizon
+            if (MathF.Abs(Height - other.Height) > 0.0001f) return false; // Horizon
             if (BankBalance != other.BankBalance) return false; // Frontier
             if (YupiAccountCode != other.YupiAccountCode) return false; //Lua
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
@@ -932,6 +978,14 @@ namespace Content.Shared.Preferences
 
             var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, Sex);
 
+            // Horizon: клампим рост/вес по диапазону вида
+            var width = float.IsFinite(Width)
+                ? Math.Clamp(Width, speciesPrototype.MinWidth, speciesPrototype.MaxWidth)
+                : speciesPrototype.DefaultWidth;
+            var height = float.IsFinite(Height)
+                ? Math.Clamp(Height, speciesPrototype.MinHeight, speciesPrototype.MaxHeight)
+                : speciesPrototype.DefaultHeight;
+
             var prefsUnavailableMode = PreferenceUnavailable switch
             {
                 PreferenceUnavailableMode.StayInLobby => PreferenceUnavailableMode.StayInLobby,
@@ -996,6 +1050,8 @@ namespace Content.Shared.Preferences
             Gender = gender;
             BankBalance = bankBalance;
             Appearance = appearance;
+            Width = width; // Horizon
+            Height = height; // Horizon
             SpawnPriority = spawnPriority;
 
             // Check if the company exists, if not set to "None"
@@ -1137,6 +1193,8 @@ namespace Content.Shared.Preferences
             hashCode.Add(NSFWTagsFlavorText);
             // Erida-End
             hashCode.Add(Species);
+            hashCode.Add(Width); // Horizon
+            hashCode.Add(Height); // Horizon
             hashCode.Add(Age);
             hashCode.Add((int)Sex);
             hashCode.Add((int)Gender);

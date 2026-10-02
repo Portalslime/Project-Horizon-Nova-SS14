@@ -126,6 +126,8 @@ namespace Content.Client.Lobby.UI
 
         private bool _isDirty;
 
+        private bool _updatingSizeControls; //Horizon
+
         private static readonly ProtoId<GuideEntryPrototype> DefaultSpeciesGuidebook = "Species";
 
         public event Action<List<ProtoId<GuideEntryPrototype>>>? OnOpenGuidebook;
@@ -261,6 +263,7 @@ namespace Content.Client.Lobby.UI
             RefreshSpecies();
             InitializeHairGradientControls(); //Lua
             InitializeAllMarkingsGradientControls(); //Lua
+            InitializeSizeControls(); //Horizon
 
             SpeciesButton.OnItemSelected += args =>
             {
@@ -268,6 +271,7 @@ namespace Content.Client.Lobby.UI
                 SetSpecies(_species[args.Id].ID);
                 UpdateHairPickers();
                 OnSkinColorOnValueChanged();
+                UpdateSizeControls(); //Horizon
             };
 
             #region Skin
@@ -1027,6 +1031,7 @@ namespace Content.Client.Lobby.UI
             UpdateGenderControls();
             UpdateSkinColor();
             UpdateSpawnPriorityControls();
+            UpdateSizeControls(); //Horizon
             UpdateAgeEdit();
             UpdateEyePickers();
             UpdateSaveButton();
@@ -1281,6 +1286,108 @@ namespace Content.Client.Lobby.UI
             }
 
             UpdateJobPriorities();
+        }
+
+        // Horizon: рост и вес (порт из Lust/Sunrise)
+        private void InitializeSizeControls()
+        {
+            HeightSlider.OnValueChanged += _ =>
+            {
+                if (_updatingSizeControls)
+                    return;
+
+                SetCharacterHeight(HeightSlider.Value);
+            };
+
+            WidthSlider.OnValueChanged += _ =>
+            {
+                if (_updatingSizeControls)
+                    return;
+
+                SetCharacterWidth(WidthSlider.Value);
+            };
+
+            HeightResetButton.OnPressed += _ => ResetHeight();
+            WidthResetButton.OnPressed += _ => ResetWidth();
+        }
+
+        private void UpdateSizeControls()
+        {
+            if (Profile is null ||
+                !_prototypeManager.TryIndex<SpeciesPrototype>(Profile.Species, out var species))
+                return;
+
+            _updatingSizeControls = true;
+
+            var width = Math.Clamp(Profile.Width, species.MinWidth, species.MaxWidth);
+            var height = Math.Clamp(Profile.Height, species.MinHeight, species.MaxHeight);
+            Profile = Profile.WithSize(width, height);
+
+            HeightSlider.MinValue = species.MinHeight;
+            HeightSlider.MaxValue = species.MaxHeight;
+            HeightSlider.Value = height;
+
+            WidthSlider.MinValue = species.MinWidth;
+            WidthSlider.MaxValue = species.MaxWidth;
+            WidthSlider.Value = width;
+
+            HeightDescribeLabel.Text = Loc.GetString(
+                "humanoid-profile-editor-height-label",
+                ("height", GetSizeHeightCm(species, height)));
+            WidthDescribeLabel.Text = Loc.GetString(
+                "humanoid-profile-editor-width-label",
+                ("weight", GetSizeWeightKg(species, width, height)));
+
+            _updatingSizeControls = false;
+        }
+
+        private void SetCharacterHeight(float height)
+        {
+            Profile = Profile?.WithHeight(height);
+            UpdateSizeControls();
+            ReloadPreview();
+            SetDirty();
+        }
+
+        private void SetCharacterWidth(float width)
+        {
+            Profile = Profile?.WithWidth(width);
+            UpdateSizeControls();
+            ReloadPreview();
+            SetDirty();
+        }
+
+        private void ResetHeight()
+        {
+            if (Profile is null ||
+                !_prototypeManager.TryIndex<SpeciesPrototype>(Profile.Species, out var species))
+                return;
+
+            SetCharacterHeight(species.DefaultHeight);
+        }
+
+        private void ResetWidth()
+        {
+            if (Profile is null ||
+                !_prototypeManager.TryIndex<SpeciesPrototype>(Profile.Species, out var species))
+                return;
+
+            SetCharacterWidth(species.DefaultWidth);
+        }
+
+        private static int GetSizeHeightCm(SpeciesPrototype species, float height)
+        {
+            var span = species.MaxHeight - species.MinHeight;
+            if (MathF.Abs(span) < 0.001f)
+                return (int) MathF.Round(species.MinHeightCm);
+
+            var ratio = Math.Clamp((height - species.MinHeight) / span, 0f, 1f);
+            return (int) MathF.Round(species.MinHeightCm + (species.MaxHeightCm - species.MinHeightCm) * ratio);
+        }
+
+        private static int GetSizeWeightKg(SpeciesPrototype species, float width, float height)
+        {
+            return (int) MathF.Round(species.GetProfileWeight(width, height));
         }
 
         private void OpenLoadout(JobPrototype? jobProto, RoleLoadout roleLoadout, RoleLoadoutPrototype roleLoadoutProto)
