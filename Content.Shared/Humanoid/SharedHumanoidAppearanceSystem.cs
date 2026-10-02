@@ -500,13 +500,22 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         humanoid.Age = profile.Age;
         humanoid.ProfileLoaded = true;
 
-        // Horizon: рост/ширина из профиля -> масштаб спрайта (клиент/сервер через Appearance)
-        humanoid.Width = profile.Width <= 0f ? 1f : profile.Width;
-        humanoid.Height = profile.Height <= 0f ? 1f : profile.Height;
-        _scaleVisuals.SetSpriteScale(uid, new Vector2(humanoid.Width, humanoid.Height));
+        // Horizon: рост/ширина из профиля -> масштаб спрайта
+        ApplyProfileSize(uid, humanoid, profile.Width, profile.Height);
 
         RaiseLocalEvent(uid, new ProfileLoadFinishedEvent());
         Dirty(uid, humanoid);
+    }
+
+    /// <summary>
+    /// Horizon: применяет рост/ширину профиля к сущности (поля + масштаб спрайта).
+    /// Используется и серверным, и клиентским (превью) LoadProfile.
+    /// </summary>
+    protected void ApplyProfileSize(EntityUid uid, HumanoidAppearanceComponent humanoid, float width, float height)
+    {
+        humanoid.Width = width <= 0f ? 1f : width;
+        humanoid.Height = height <= 0f ? 1f : height;
+        _scaleVisuals.SetSpriteScale(uid, new Vector2(humanoid.Width, humanoid.Height));
     }
 
     /// <summary>

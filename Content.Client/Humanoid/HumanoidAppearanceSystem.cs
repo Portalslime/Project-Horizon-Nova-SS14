@@ -240,6 +240,8 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         humanoid.CachedHairColor = hairColor;
         humanoid.CachedFacialHairColor = facialHairColor; //Lua end
 
+        ApplyProfileSize(uid, humanoid, profile.Width, profile.Height); //Horizon
+
         UpdateSprite((uid, humanoid, Comp<SpriteComponent>(uid)));
     }
 

@@ -24,4 +24,12 @@ public sealed partial class ScaleVisualsComponent : Component
     [DataField]
     [ViewVariables]
     public Vector2? OriginalScale;
+
+    /// <summary>
+    /// The original sprite offset, used to keep humanoids grounded when scaled.
+    /// Only set on the client.
+    /// </summary>
+    [DataField]
+    [ViewVariables]
+    public Vector2? OriginalOffset;
 }
