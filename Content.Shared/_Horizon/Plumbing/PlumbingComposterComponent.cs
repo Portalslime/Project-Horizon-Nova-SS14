@@ -23,7 +23,7 @@ public sealed partial class PlumbingComposterComponent : Component, IPlumbingTim
     /// The reagent that is consumed.
     /// </summary>
     [DataField]
-    public ProtoId<ReagentPrototype> Reagent = "Feces";
+    public ProtoId<ReagentPrototype> Reagent = "Sewage";
 
     /// <summary>
     /// The material that is produced into the material storage.

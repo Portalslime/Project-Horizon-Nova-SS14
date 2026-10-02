@@ -13,6 +13,7 @@
   - type: Hunger
   - type: Thirst
   - type: Defecation
+  - type: Urination
     baseFillRate: 0.01 # component default is 0.025
   - type: Sericulture
     productionLength: 2

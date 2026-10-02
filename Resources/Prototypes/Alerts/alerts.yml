@@ -24,6 +24,7 @@
     - category: Hunger
     - category: Thirst
     - category: Defecation
+    - category: Urination
     - alertType: Magboots
     - alertType: Rooted
     - alertType: Pacified

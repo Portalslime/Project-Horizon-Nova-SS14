@@ -19,7 +19,7 @@ public sealed partial class DefecationSeatComponent : Component
     public string Solution = "drainBuffer";
 
     [DataField]
-    public ProtoId<ReagentPrototype> Reagent = "Feces";
+    public ProtoId<ReagentPrototype> Reagent = "Sewage";
 
     /// <summary>
     /// Units added per use, the same amount as the item holds.
