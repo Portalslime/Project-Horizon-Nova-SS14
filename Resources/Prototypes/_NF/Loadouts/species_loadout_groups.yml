@@ -21,11 +21,11 @@
   hidden: true
   loadouts:
   - LoadoutTankHarness
-  - NfsdVoxClothingMaskGasNfsd
+  # - NfsdVoxClothingMaskGasNfsd #HN: лодаут отсутствует (профессия удалена)
   - LoadoutSpeciesVoxNitrogen
   fallbacks:
   - LoadoutTankHarness
-  - NfsdVoxClothingMaskGasNfsd
+  # - NfsdVoxClothingMaskGasNfsd #HN: лодаут отсутствует (профессия удалена)
   - LoadoutSpeciesVoxNitrogen
 
 # Forced EVA
@@ -36,9 +36,9 @@
   maxLimit: 1
   hidden: true
   loadouts:
-  - NfsdForcedClothingOuterEVASuitNfsd
+  # - NfsdForcedClothingOuterEVASuitNfsd #HN: лодаут отсутствует (профессия удалена)
   fallbacks:
-  - NfsdForcedClothingOuterEVASuitNfsd
+  # - NfsdForcedClothingOuterEVASuitNfsd #HN: лодаут отсутствует (профессия удалена)
 
 - type: loadoutGroup
   id: NFPirateForcedOuterClothing
@@ -47,9 +47,9 @@
   maxLimit: 1
   hidden: true
   loadouts:
-  - NFPirateForcedClothingOuterEVASuitPirate
+  # - NFPirateForcedClothingOuterEVASuitPirate #HN: лодаут отсутствует (профессия удалена)
   fallbacks:
-  - NFPirateForcedClothingOuterEVASuitPirate
+  # - NFPirateForcedClothingOuterEVASuitPirate #HN: лодаут отсутствует (профессия удалена)
 
 - type: loadoutGroup
   id: PrisonerForcedOuterClothing
@@ -58,9 +58,9 @@
   maxLimit: 1
   hidden: true
   loadouts:
-  - PrisonerForcedClothingOuterEVASuitPrisoner
+  # - PrisonerForcedClothingOuterEVASuitPrisoner #HN: лодаут отсутствует (профессия удалена)
   fallbacks:
-  - PrisonerForcedClothingOuterEVASuitPrisoner
+  # - PrisonerForcedClothingOuterEVASuitPrisoner #HN: лодаут отсутствует (профессия удалена)
 
 - type: loadoutGroup
   id: StationRepForcedOuterClothing
@@ -69,9 +69,9 @@
   maxLimit: 1
   hidden: true
   loadouts:
-  - StationRepForcedClothingOuterEVASuitSr
+  # - StationRepForcedClothingOuterEVASuitSr #HN: лодаут отсутствует (профессия удалена)
   fallbacks:
-  - StationRepForcedClothingOuterEVASuitSr
+  # - StationRepForcedClothingOuterEVASuitSr #HN: лодаут отсутствует (профессия удалена)
 
 - type: loadoutGroup
   id: StcForcedOuterClothing
@@ -80,9 +80,9 @@
   maxLimit: 1
   hidden: true
   loadouts:
-  - StcForcedClothingOuterEVASuitStc
+  # - StcForcedClothingOuterEVASuitStc #HN: лодаут отсутствует (профессия удалена)
   fallbacks:
-  - StcForcedClothingOuterEVASuitStc
+  # - StcForcedClothingOuterEVASuitStc #HN: лодаут отсутствует (профессия удалена)
 
 - type: loadoutGroup
   id: DocForcedOuterClothing
@@ -91,9 +91,9 @@
   maxLimit: 1
   hidden: true
   loadouts:
-  - DocForcedClothingOuterEVASuitMedic
+  # - DocForcedClothingOuterEVASuitMedic #HN: лодаут отсутствует (профессия удалена)
   fallbacks:
-  - DocForcedClothingOuterEVASuitMedic
+  # - DocForcedClothingOuterEVASuitMedic #HN: лодаут отсутствует (профессия удалена)
 
 - type: loadoutGroup
   id: SecurityGuardForcedOuterClothing
@@ -102,9 +102,9 @@
   maxLimit: 1
   hidden: true
   loadouts:
-  - SecurityGuardForcedClothingOuterEVASuitPrivateSec
+  # - SecurityGuardForcedClothingOuterEVASuitPrivateSec #HN: лодаут отсутствует (профессия удалена)
   fallbacks:
-  - SecurityGuardForcedClothingOuterEVASuitPrivateSec
+  # - SecurityGuardForcedClothingOuterEVASuitPrivateSec #HN: лодаут отсутствует (профессия удалена)
 
 - type: loadoutGroup
   id: JanitorNFForcedOuterClothing
@@ -113,9 +113,9 @@
   maxLimit: 1
   hidden: true
   loadouts:
-  - JanitorForcedClothingOuterEVASuitJanitor
+  # - JanitorForcedClothingOuterEVASuitJanitor #HN: лодаут отсутствует (профессия удалена)
   fallbacks:
-  - JanitorForcedClothingOuterEVASuitJanitor
+  # - JanitorForcedClothingOuterEVASuitJanitor #HN: лодаут отсутствует (профессия удалена)
 
 - type: loadoutGroup
   id: ValetForcedOuterClothing
@@ -124,9 +124,9 @@
   maxLimit: 1
   hidden: true
   loadouts:
-  - ValetForcedClothingOuterEVASuitValet
+  # - ValetForcedClothingOuterEVASuitValet #HN: лодаут отсутствует (профессия удалена)
   fallbacks:
-  - ValetForcedClothingOuterEVASuitValet
+  # - ValetForcedClothingOuterEVASuitValet #HN: лодаут отсутствует (профессия удалена)
 
 - type: loadoutGroup
   id: MailCarrierForcedOuterClothing
@@ -135,9 +135,9 @@
   maxLimit: 1
   hidden: true
   loadouts:
-  - MailCarrierForcedClothingOuterEVASuitMailman
+  # - MailCarrierForcedClothingOuterEVASuitMailman #HN: лодаут отсутствует (профессия удалена)
   fallbacks:
-  - MailCarrierForcedClothingOuterEVASuitMailman
+  # - MailCarrierForcedClothingOuterEVASuitMailman #HN: лодаут отсутствует (профессия удалена)
 
 - type: loadoutGroup
   id: ContractorForcedOuterClothing
@@ -168,6 +168,6 @@
   maxLimit: 1
   hidden: true
   loadouts:
-  - MercenaryForcedClothingOuterEVASuitMercenary
+  # - MercenaryForcedClothingOuterEVASuitMercenary #HN: лодаут отсутствует (профессия удалена)
   fallbacks:
-  - MercenaryForcedClothingOuterEVASuitMercenary
+  # - MercenaryForcedClothingOuterEVASuitMercenary #HN: лодаут отсутствует (профессия удалена)
