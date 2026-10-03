@@ -26,6 +26,10 @@
     slots: [innerclothing]
     equipSound:
       path: /Audio/Items/jumpsuit_equip.ogg
+  #HN Start: комбинезон блокирует бельё (механика слоёв)
+  - type: SlotBlock
+    slots: [underweart, underwearb]
+  #HN End
   - type: Butcherable
     butcheringType: Knife
     spawned:

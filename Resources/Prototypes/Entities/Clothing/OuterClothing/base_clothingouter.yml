@@ -24,6 +24,10 @@
     - outerClothing
     equipSound:
       collection: GenericEquip
+  #HN Start: верхняя одежда блокирует комбинезон и бельё (механика слоёв)
+  - type: SlotBlock
+    slots: [innerclothing, underweart, underwearb]
+  #HN End
   # Goobstation edit end
   - type: Sprite
     state: icon
