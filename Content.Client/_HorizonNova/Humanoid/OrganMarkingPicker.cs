@@ -8,20 +8,20 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._HorizonNova.Humanoid;
 
 /// <summary>
-/// Horizon Nova: the markings of a single body region, split into tabs per marking category.
+/// Horizon Nova: the markings of a single body region, split into tabs per marking layer.
 /// Port of the Wega organ marking picker (Content.Client/Humanoid/OrganMarkingPicker.xaml.cs),
 /// with the organ concept mapped onto <see cref="MarkingRegion"/> and the layers onto
-/// <see cref="MarkingCategories"/>.
+/// <see cref="MarkingLayerEntry"/>.
 /// </summary>
 [GenerateTypedNameReferences]
 public sealed partial class OrganMarkingPicker : Control
 {
     private readonly MarkingsViewModel _markingsModel;
-    private readonly HashSet<MarkingCategories> _layers;
+    private readonly List<MarkingLayerEntry> _layers;
 
     public bool Empty => LayerTabs.ChildCount == 0;
 
-    public OrganMarkingPicker(MarkingsViewModel markingsModel, MarkingRegion organ, HashSet<MarkingCategories> layers)
+    public OrganMarkingPicker(MarkingsViewModel markingsModel, MarkingRegion organ, List<MarkingLayerEntry> layers)
     {
         RobustXamlLoader.Load(this);
 
@@ -52,15 +52,9 @@ public sealed partial class OrganMarkingPicker : Control
         var i = 0;
         foreach (var layer in _layers)
         {
-            var allMarkings = _markingsModel.GetAvailable(layer);
-            var control = new LayerMarkingPicker(_markingsModel, layer, allMarkings);
+            var control = new LayerMarkingPicker(_markingsModel, layer);
             LayerTabs.AddChild(control);
-
-            if (Loc.TryGetString($"markings-layer-{layer}", out var layerTitle))
-                LayerTabs.SetTabTitle(i, layerTitle);
-            else
-                LayerTabs.SetTabTitle(i, Loc.GetString($"markings-category-{layer}"));
-
+            LayerTabs.SetTabTitle(i, Loc.GetString($"markings-category-{layer.Category}"));
             i++;
         }
 

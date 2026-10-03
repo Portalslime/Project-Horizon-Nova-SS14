@@ -54,13 +54,13 @@ public sealed partial class MarkingsViewModel
         }
     }
 
-    private Dictionary<MarkingRegion, HashSet<MarkingCategories>> _organData = new();
+    private Dictionary<MarkingRegion, List<MarkingLayerEntry>> _organData = new();
 
     /// <summary>
-    /// The categories that can be edited for the current species and sex, grouped by body region.
+    /// The layers that can be edited for the current species and sex, grouped by body region.
     /// Mirrors the organ data of the Wega markings view model.
     /// </summary>
-    public Dictionary<MarkingRegion, HashSet<MarkingCategories>> OrganData
+    public Dictionary<MarkingRegion, List<MarkingLayerEntry>> OrganData
     {
         get => _organData;
         set
@@ -90,18 +90,58 @@ public sealed partial class MarkingsViewModel
         IoCManager.InjectDependencies(this);
     }
 
-    /// <summary>
-    /// Returns the markings that can be applied to the given category for the current species and sex.
-    /// </summary>
-    public IReadOnlyDictionary<string, MarkingPrototype> GetAvailable(MarkingCategories category)
+    // Body part groups used to split arms and legs into left and right regions.
+    public static readonly HashSet<HumanoidVisualLayers> LeftArmLayers = new()
     {
-        return EnforceSpeciesAndSex
+        HumanoidVisualLayers.LArm,
+        HumanoidVisualLayers.LHand,
+        HumanoidVisualLayers.LArmExtension,
+    };
+
+    public static readonly HashSet<HumanoidVisualLayers> RightArmLayers = new()
+    {
+        HumanoidVisualLayers.RArm,
+        HumanoidVisualLayers.RHand,
+        HumanoidVisualLayers.RArmExtension,
+    };
+
+    public static readonly HashSet<HumanoidVisualLayers> LeftLegLayers = new()
+    {
+        HumanoidVisualLayers.LLeg,
+        HumanoidVisualLayers.LFoot,
+    };
+
+    public static readonly HashSet<HumanoidVisualLayers> RightLegLayers = new()
+    {
+        HumanoidVisualLayers.RLeg,
+        HumanoidVisualLayers.RFoot,
+    };
+
+    /// <summary>
+    /// Returns the markings that can be applied to the given category, optionally restricted to specific body parts.
+    /// </summary>
+    public IReadOnlyDictionary<string, MarkingPrototype> GetAvailable(MarkingCategories category, HashSet<HumanoidVisualLayers>? bodyParts)
+    {
+        var all = EnforceSpeciesAndSex
             ? _marking.MarkingsByCategoryAndSpeciesAndSex(category, Species, Sex)
             : _marking.MarkingsByCategoryAndSex(category, Sex);
+
+        if (bodyParts == null)
+            return all;
+
+        var result = new Dictionary<string, MarkingPrototype>();
+        foreach (var (id, prototype) in all)
+        {
+            if (bodyParts.Contains(prototype.BodyPart))
+                result[id] = prototype;
+        }
+
+        return result;
     }
 
     /// <summary>
     /// Maps a flat marking category onto the body region used by the picker navigation.
+    /// Arms and legs are handled separately by the picker (left/right split).
     /// </summary>
     public static MarkingRegion RegionOf(MarkingCategories category)
     {
@@ -110,8 +150,6 @@ public sealed partial class MarkingsViewModel
             MarkingCategories.Hair or MarkingCategories.FacialHair or MarkingCategories.Head
                 or MarkingCategories.HeadTop or MarkingCategories.HeadSide or MarkingCategories.Snout
                 => MarkingRegion.Head,
-            MarkingCategories.Arms => MarkingRegion.Arms,
-            MarkingCategories.Legs => MarkingRegion.Legs,
             MarkingCategories.Tail => MarkingRegion.Tail,
             MarkingCategories.Special => MarkingRegion.Special,
             _ => MarkingRegion.Torso,
@@ -262,53 +300,76 @@ public sealed partial class MarkingsViewModel
     }
 
     /// <summary>
-    /// Reorders the specified marking to a position relative to the given index.
+    /// Returns the selected markings of a category, optionally restricted to specific body parts.
+    /// </summary>
+    public IReadOnlyList<Marking>? SelectedMarkings(MarkingCategories category, HashSet<HumanoidVisualLayers>? bodyParts)
+    {
+        if (!_markings.Markings.TryGetValue(category, out var all))
+            return null;
+
+        if (bodyParts == null)
+            return all;
+
+        return all.Where(m => GetBodyPart(m) is { } bodyPart && bodyParts.Contains(bodyPart)).ToList();
+    }
+
+    /// <summary>
+    /// Reorders the specified marking to a position relative to the given index within its body part group.
     /// </summary>
     public void ChangeMarkingOrder(MarkingCategories category,
+        HashSet<HumanoidVisualLayers>? bodyParts,
         string markingId,
         CandidatePosition position,
         int positionIndex)
     {
-        if (!_markings.Markings.TryGetValue(category, out var layerMarkings))
+        if (!_markings.Markings.TryGetValue(category, out var all))
             return;
 
-        var currentIndex = layerMarkings.FindIndex(marking => marking.MarkingId == markingId);
+        var currentIndex = all.FindIndex(marking => marking.MarkingId == markingId);
         if (currentIndex < 0)
             return;
 
-        var currentMarking = layerMarkings[currentIndex];
+        var view = bodyParts == null
+            ? Enumerable.Range(0, all.Count).ToList()
+            : Enumerable.Range(0, all.Count)
+                .Where(i => GetBodyPart(all[i]) is { } bodyPart && bodyParts.Contains(bodyPart))
+                .ToList();
 
-        if (position == CandidatePosition.Before)
-        {
-            layerMarkings.RemoveAt(currentIndex);
-            var insertionIndex = currentIndex < positionIndex ? positionIndex - 1 : positionIndex;
-            layerMarkings.Insert(Math.Clamp(insertionIndex, 0, layerMarkings.Count), currentMarking);
-        }
-        else if (position == CandidatePosition.After)
-        {
-            layerMarkings.RemoveAt(currentIndex);
-            var insertionIndex = currentIndex > positionIndex ? positionIndex + 1 : positionIndex;
-            layerMarkings.Insert(Math.Clamp(insertionIndex, 0, layerMarkings.Count), currentMarking);
-        }
-        else
-        {
+        if (positionIndex < 0 || positionIndex >= view.Count)
             return;
-        }
+
+        var target = all[view[positionIndex]];
+        if (target.MarkingId == markingId)
+            return;
+
+        var current = all[currentIndex];
+        all.RemoveAt(currentIndex);
+
+        var targetIndex = all.IndexOf(target);
+        if (targetIndex < 0)
+            return;
+
+        var insertion = position == CandidatePosition.Before ? targetIndex : targetIndex + 1;
+        all.Insert(Math.Clamp(insertion, 0, all.Count), current);
 
         RaiseChanged(category, MarkingChangeType.Rank);
     }
 
     /// <summary>
-    /// Gets the count data for a category.
+    /// Gets the count data for a category, optionally restricted to specific body parts.
     /// </summary>
-    public void GetMarkingCounts(MarkingCategories category, out bool isRequired, out int count, out int selected)
+    public void GetMarkingCounts(MarkingCategories category, HashSet<HumanoidVisualLayers>? bodyParts, out bool isRequired, out int count, out int selected)
     {
         isRequired = false;
         count = -1;
         selected = 0;
 
-        if (_markings.Markings.TryGetValue(category, out var layerMarkings))
-            selected = layerMarkings.Count;
+        if (_markings.Markings.TryGetValue(category, out var all))
+        {
+            selected = bodyParts == null
+                ? all.Count
+                : all.Count(m => GetBodyPart(m) is { } bodyPart && bodyParts.Contains(bodyPart));
+        }
 
         if (!_markings.Points.TryGetValue(category, out var points))
             return;
@@ -342,11 +403,22 @@ public sealed partial class MarkingsViewModel
         return markings;
     }
 
+    private HumanoidVisualLayers? GetBodyPart(Marking marking)
+    {
+        return _marking.Markings.TryGetValue(marking.MarkingId, out var prototype) ? prototype.BodyPart : null;
+    }
+
     private void RaiseChanged(MarkingCategories category, MarkingChangeType type)
     {
         MarkingsChanged?.Invoke(category, type);
     }
 }
+
+/// <summary>
+/// A single editable layer of the picker: a marking category, optionally restricted to a set of body parts.
+/// Arms and legs share a category but are split by body part into left and right.
+/// </summary>
+public readonly record struct MarkingLayerEntry(MarkingCategories Category, HashSet<HumanoidVisualLayers>? BodyParts);
 
 /// <summary>
 /// Specifies whether an item in a list will be moved to before or after a corresponding index.
@@ -377,8 +449,10 @@ public enum MarkingRegion : byte
 {
     Head,
     Torso,
-    Arms,
-    Legs,
+    LeftArm,
+    RightArm,
+    LeftLeg,
+    RightLeg,
     Tail,
     Special,
 }

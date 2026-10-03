@@ -1,0 +1,69 @@
+# Horizon Nova — AGPLv3
+# Copyright (c) 2026 Horizon Nova Contributors
+#
+# Порт с wega-team/ss14-wega:
+#   Resources/Prototypes/_Wega/Entities/Mobs/Customization/Markings/human_breasts.yml
+# Адаптировано под Горизон Нова: только люди (speciesRestriction: [Human]),
+# все размеры отображаются на слое Chest, чтобы попадать во регион "Туловище".
+# Спрайты: Resources/Textures/_Wega/Mobs/Customization/human_breasts.rsi
+#   лицензия CC-BY-SA-3.0, автор zekins3366.
+
+- type: marking
+  id: HumanBreastSmall
+  bodyPart: Chest
+  markingCategory: Chest
+  followSkinColor: true
+  forcedColoring: true
+  speciesRestriction: [Human]
+  sexRestriction: Female
+  sprites:
+  - sprite: _Wega/Mobs/Customization/human_breasts.rsi
+    state: small
+
+- type: marking
+  id: HumanBreastDefault
+  bodyPart: Chest
+  markingCategory: Chest
+  followSkinColor: true
+  forcedColoring: true
+  speciesRestriction: [Human]
+  sexRestriction: Female
+  sprites:
+  - sprite: _Wega/Mobs/Customization/human_breasts.rsi
+    state: default
+
+- type: marking
+  id: HumanBreastMedium
+  bodyPart: Chest
+  markingCategory: Chest
+  followSkinColor: true
+  forcedColoring: true
+  speciesRestriction: [Human]
+  sexRestriction: Female
+  sprites:
+  - sprite: _Wega/Mobs/Customization/human_breasts.rsi
+    state: medium
+
+- type: marking
+  id: HumanBreastBig
+  bodyPart: Chest
+  markingCategory: Chest
+  followSkinColor: true
+  forcedColoring: true
+  speciesRestriction: [Human]
+  sexRestriction: Female
+  sprites:
+  - sprite: _Wega/Mobs/Customization/human_breasts.rsi
+    state: big
+
+- type: marking
+  id: HumanBreastSuperBig
+  bodyPart: Chest
+  markingCategory: Chest
+  followSkinColor: true
+  forcedColoring: true
+  speciesRestriction: [Human]
+  sexRestriction: Female
+  sprites:
+  - sprite: _Wega/Mobs/Customization/human_breasts.rsi
+    state: superbig

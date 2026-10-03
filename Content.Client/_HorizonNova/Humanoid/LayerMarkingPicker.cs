@@ -12,28 +12,26 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._HorizonNova.Humanoid;
 
 /// <summary>
-/// Horizon Nova: list of markings belonging to a single <see cref="MarkingCategories"/>.
+/// Horizon Nova: list of markings belonging to a single marking layer.
 /// Port of the Wega layer marking picker (Content.Client/Humanoid/LayerMarkingPicker.xaml.cs),
-/// with layers replaced by marking categories.
+/// with layers mapped onto <see cref="MarkingLayerEntry"/>.
 /// </summary>
 [GenerateTypedNameReferences]
 public sealed partial class LayerMarkingPicker : BoxContainer
 {
-    private readonly IReadOnlyDictionary<string, MarkingPrototype> _allMarkings;
-    private readonly MarkingCategories _category;
+    private readonly MarkingLayerEntry _entry;
     private readonly MarkingsViewModel _markingsModel;
     private List<ISearchableControl> _searchable = new();
     private const int ColumnWidth = 500;
 
-    public LayerMarkingPicker(MarkingsViewModel markingsModel, MarkingCategories category, IReadOnlyDictionary<string, MarkingPrototype> allMarkings)
+    public LayerMarkingPicker(MarkingsViewModel markingsModel, MarkingLayerEntry entry)
     {
         RobustXamlLoader.Load(this);
 
         _markingsModel = markingsModel;
-        _allMarkings = allMarkings;
-        _category = category;
+        _entry = entry;
 
-        OrderingItems.AddChild(new LayerMarkingOrderer(markingsModel, category));
+        OrderingItems.AddChild(new LayerMarkingOrderer(markingsModel, entry));
 
         UpdateMarkings();
 
@@ -68,7 +66,7 @@ public sealed partial class LayerMarkingPicker : BoxContainer
 
     private void MarkingsChanged(MarkingCategories category, MarkingChangeType type)
     {
-        if (_category != category)
+        if (_entry.Category != category)
             return;
 
         UpdateCount();
@@ -76,9 +74,11 @@ public sealed partial class LayerMarkingPicker : BoxContainer
 
     private void UpdateMarkings()
     {
-        foreach (var marking in _allMarkings.Values.OrderBy(GetMarkingName))
+        var available = _markingsModel.GetAvailable(_entry.Category, _entry.BodyParts);
+
+        foreach (var marking in available.Values.OrderBy(GetMarkingName))
         {
-            var item = new LayerMarkingItem(_markingsModel, _category, marking, true);
+            var item = new LayerMarkingItem(_markingsModel, _entry.Category, marking, true);
             Items.AddChild(item);
         }
 
@@ -87,7 +87,7 @@ public sealed partial class LayerMarkingPicker : BoxContainer
 
     private void UpdateCount()
     {
-        _markingsModel.GetMarkingCounts(_category, out var isRequired, out var count, out var selected);
+        _markingsModel.GetMarkingCounts(_entry.Category, _entry.BodyParts, out var isRequired, out var count, out var selected);
 
         if (count < 0)
         {

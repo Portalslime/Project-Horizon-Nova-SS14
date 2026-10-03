@@ -17,16 +17,16 @@ using Robust.Shared.Timing;
 namespace Content.Client._HorizonNova.Humanoid;
 
 /// <summary>
-/// Horizon Nova: drag and drop reordering of the selected markings in a category.
+/// Horizon Nova: drag and drop reordering of the selected markings in a layer.
 /// Port of the Wega layer marking orderer (Content.Client/Humanoid/LayerMarkingOrderer.xaml.cs),
-/// with the organ concept replaced by a marking category. The drop target style is applied
+/// with layers mapped onto <see cref="MarkingLayerEntry"/>. The drop target style is applied
 /// directly through <see cref="StyleBoxFlat"/> because Horizon Nova does not ship the newer
 /// style class sheetlets used by Wega.
 /// </summary>
 [GenerateTypedNameReferences]
 public sealed partial class LayerMarkingOrderer : BoxContainer
 {
-    private readonly MarkingCategories _category;
+    private readonly MarkingLayerEntry _entry;
     private readonly MarkingsViewModel _markingsModel;
     private readonly DragDropHelper<LayerMarkingDragged> _dragDropHelper;
     private readonly List<LayerDragDropBeacon> _beacons = new();
@@ -34,13 +34,13 @@ public sealed partial class LayerMarkingOrderer : BoxContainer
 
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
-    public LayerMarkingOrderer(MarkingsViewModel markingsModel, MarkingCategories category)
+    public LayerMarkingOrderer(MarkingsViewModel markingsModel, MarkingLayerEntry entry)
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
         _markingsModel = markingsModel;
-        _category = category;
+        _entry = entry;
         _dragDropHelper = new DragDropHelper<LayerMarkingDragged>(OnBeginDrag, OnContinueDrag, OnEndDrag);
 
         UpdateItems();
@@ -64,7 +64,7 @@ public sealed partial class LayerMarkingOrderer : BoxContainer
 
     private void MarkingsChanged(MarkingCategories category, MarkingChangeType type)
     {
-        if (_category != category)
+        if (_entry.Category != category)
             return;
 
         UpdateItems();
@@ -75,7 +75,7 @@ public sealed partial class LayerMarkingOrderer : BoxContainer
         Items.RemoveAllChildren();
         _beacons.Clear();
 
-        if (!_markingsModel.Markings.Markings.TryGetValue(_category, out var markings))
+        if (_markingsModel.SelectedMarkings(_entry.Category, _entry.BodyParts) is not { } markings)
             return;
 
         for (var idx = 0; idx < markings.Count; idx++)
@@ -90,7 +90,7 @@ public sealed partial class LayerMarkingOrderer : BoxContainer
                 Margin = new Thickness(4),
             };
 
-            var item = new LayerMarkingItem(_markingsModel, _category, prototype, false)
+            var item = new LayerMarkingItem(_markingsModel, _entry.Category, prototype, false)
             {
                 DefaultCursorShape = CursorShape.Hand,
             };
@@ -169,7 +169,7 @@ public sealed partial class LayerMarkingOrderer : BoxContainer
 
         if (_dragTarget != null)
         {
-            _markingsModel.ChangeMarkingOrder(_category, item.MarkingId, _dragTarget.CandidatePosition, _dragTarget.Index);
+            _markingsModel.ChangeMarkingOrder(_entry.Category, _entry.BodyParts, item.MarkingId, _dragTarget.CandidatePosition, _dragTarget.Index);
         }
     }
 }

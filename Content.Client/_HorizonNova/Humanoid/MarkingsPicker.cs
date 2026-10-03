@@ -18,7 +18,7 @@ namespace Content.Client._HorizonNova.Humanoid;
 /// Horizon Nova: the "appearance features" (markings) picker used in the character editor.
 /// Port of the Wega markings picker interface (Content.Client/Humanoid/MarkingPicker.cs and
 /// related controls). The organ tabs are mapped onto <see cref="MarkingRegion"/> and the layer
-/// tabs onto <see cref="MarkingCategories"/>.
+/// tabs onto <see cref="MarkingLayerEntry"/>.
 /// </summary>
 [GenerateTypedNameReferences]
 public sealed partial class MarkingsPicker : Control
@@ -207,9 +207,12 @@ public sealed partial class MarkingsPicker : Control
         CategoryTabs.RemoveAllChildren();
 
         var index = 0;
-        foreach (var (region, categories) in _model.OrganData)
+        foreach (var region in RegionOrder)
         {
-            var control = new OrganMarkingPicker(_model, region, categories);
+            if (!_model.OrganData.TryGetValue(region, out var layers))
+                continue;
+
+            var control = new OrganMarkingPicker(_model, region, layers);
             if (control.Empty)
                 continue;
 
@@ -224,32 +227,70 @@ public sealed partial class MarkingsPicker : Control
         CategoryTabs.TabsVisible = index > 1;
     }
 
-    private Dictionary<MarkingRegion, HashSet<MarkingCategories>> BuildOrganData()
+    private static readonly MarkingRegion[] RegionOrder =
     {
-        var result = new Dictionary<MarkingRegion, HashSet<MarkingCategories>>();
+        MarkingRegion.Head,
+        MarkingRegion.Torso,
+        MarkingRegion.LeftArm,
+        MarkingRegion.RightArm,
+        MarkingRegion.LeftLeg,
+        MarkingRegion.RightLeg,
+        MarkingRegion.Tail,
+        MarkingRegion.Special,
+    };
+
+    private Dictionary<MarkingRegion, List<MarkingLayerEntry>> BuildOrganData()
+    {
+        var result = new Dictionary<MarkingRegion, List<MarkingLayerEntry>>();
 
         foreach (var category in Enum.GetValues<MarkingCategories>())
         {
             if (_ignoredCategories.Contains(category))
                 continue;
 
-            var hasSelected = _model.Markings.Markings.TryGetValue(category, out var selected) && selected.Count > 0;
-            var available = _model.GetAvailable(category);
+            var available = _model.GetAvailable(category, null);
 
-            if (available.Count == 0 && !hasSelected)
-                continue;
-
-            var region = MarkingsViewModel.RegionOf(category);
-            if (!result.TryGetValue(region, out var categories))
+            switch (category)
             {
-                categories = new HashSet<MarkingCategories>();
-                result[region] = categories;
+                case MarkingCategories.Arms:
+                    AddEntry(result, MarkingRegion.LeftArm, category, MarkingsViewModel.LeftArmLayers, available);
+                    AddEntry(result, MarkingRegion.RightArm, category, MarkingsViewModel.RightArmLayers, available);
+                    break;
+                case MarkingCategories.Legs:
+                    AddEntry(result, MarkingRegion.LeftLeg, category, MarkingsViewModel.LeftLegLayers, available);
+                    AddEntry(result, MarkingRegion.RightLeg, category, MarkingsViewModel.RightLegLayers, available);
+                    break;
+                default:
+                    AddEntry(result, MarkingsViewModel.RegionOf(category), category, null, available);
+                    break;
             }
-
-            categories.Add(category);
         }
 
         return result;
+    }
+
+    private void AddEntry(Dictionary<MarkingRegion, List<MarkingLayerEntry>> result,
+        MarkingRegion region,
+        MarkingCategories category,
+        HashSet<HumanoidVisualLayers>? bodyParts,
+        IReadOnlyDictionary<string, MarkingPrototype> available)
+    {
+        var hasAvailable = bodyParts == null
+            ? available.Count > 0
+            : available.Values.Any(prototype => bodyParts.Contains(prototype.BodyPart));
+
+        var hasSelected = _model.SelectedMarkings(category, bodyParts) is { Count: > 0 };
+
+        if (!hasAvailable && !hasSelected)
+            return;
+
+        if (!result.TryGetValue(region, out var layers))
+        {
+            layers = new List<MarkingLayerEntry>();
+            result[region] = layers;
+        }
+
+        layers.Add(new MarkingLayerEntry(category, bodyParts));
     }
 
     private void RebuildIgnoredCategories()

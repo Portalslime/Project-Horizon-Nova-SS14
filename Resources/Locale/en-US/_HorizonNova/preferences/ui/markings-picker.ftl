@@ -22,7 +22,9 @@ markings-reorder = Reorder markings
 # Body regions (organ tabs)
 markings-organ-Head = Head
 markings-organ-Torso = Torso
-markings-organ-Arms = Arms
-markings-organ-Legs = Legs
+markings-organ-LeftArm = Left Arm
+markings-organ-RightArm = Right Arm
+markings-organ-LeftLeg = Left Leg
+markings-organ-RightLeg = Right Leg
 markings-organ-Tail = Tail
 markings-organ-Special = Special
