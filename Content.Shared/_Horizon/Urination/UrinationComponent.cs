@@ -17,6 +17,13 @@ namespace Content.Shared._Horizon.Urination;
 public sealed partial class UrinationComponent : Component
 {
     /// <summary>
+    /// Horizon: если false — потребность никогда не накапливается и не справляется
+    /// (используется для отказа видам, например Дионе, у которых иначе не убрать унаследованный компонент).
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public bool Enabled = true;
+
+    /// <summary>
     /// Текущее заполнение, от 0 до порога <see cref="UrinationThreshold.Accident"/>.
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]

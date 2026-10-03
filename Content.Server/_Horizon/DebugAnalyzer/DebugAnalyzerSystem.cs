@@ -316,7 +316,7 @@ public sealed class DebugAnalyzerSystem : EntitySystem
 
     private DebugAnalyzerSection? BuildDefecation(EntityUid target)
     {
-        if (!TryComp<DefecationComponent>(target, out var defecation))
+        if (!TryComp<DefecationComponent>(target, out var defecation) || !defecation.Enabled)
             return null;
 
         var value = defecation.Value;

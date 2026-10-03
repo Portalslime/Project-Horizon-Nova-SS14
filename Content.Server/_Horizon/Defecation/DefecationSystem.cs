@@ -34,6 +34,9 @@ public sealed class DefecationSystem : EntitySystem
     private void OnMapInit(Entity<DefecationComponent> ent, ref MapInitEvent args)
     {
         var comp = ent.Comp;
+        if (!comp.Enabled)
+            return;
+
         if (comp.Value < 0)
             comp.Value = _random.NextFloat(comp.StartingRange.X, comp.StartingRange.Y);
 
@@ -134,6 +137,9 @@ public sealed class DefecationSystem : EntitySystem
         var query = EntityQueryEnumerator<DefecationComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
+            if (!comp.Enabled)
+                continue;
+
             if (_timing.CurTime < comp.NextUpdateTime)
                 continue;
 

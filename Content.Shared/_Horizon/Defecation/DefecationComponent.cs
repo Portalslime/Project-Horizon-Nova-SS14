@@ -15,6 +15,13 @@ namespace Content.Shared._Horizon.Defecation;
 public sealed partial class DefecationComponent : Component
 {
     /// <summary>
+    /// Horizon: when false the entity never accumulates or relieves this need (used to opt out
+    /// species such as Diona, which cannot remove the inherited component any other way).
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public bool Enabled = true;
+
+    /// <summary>
     /// Current fill of the need, from 0 up to the <see cref="DefecationThreshold.Accident"/> threshold.
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]

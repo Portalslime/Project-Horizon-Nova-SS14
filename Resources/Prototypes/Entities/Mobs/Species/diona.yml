@@ -11,6 +11,11 @@
     baseDecayRate: 0.0083
   - type: Thirst
     baseDecayRate: 0.0083
+  # Horizon: Diona does not use the toilet needs inherited from BaseMobSpeciesOrganic.
+  - type: Defecation
+    enabled: false
+  - type: Urination
+    enabled: false
   - type: Icon
     sprite: Mobs/Species/Diona/parts.rsi
     state: full

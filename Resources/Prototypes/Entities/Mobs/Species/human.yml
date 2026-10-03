@@ -10,9 +10,6 @@
     sprite: Mobs/Species/Human/parts.rsi
     state: full
   - type: Thirst
-  - type: Defecation
-  - type: Urination
-    baseFillRate: 0.01 # component default is 0.025
   - type: Butcherable
     butcheringType: Spike
     spawned:
