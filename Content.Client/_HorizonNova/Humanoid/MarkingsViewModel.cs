@@ -54,6 +54,27 @@ public sealed partial class MarkingsViewModel
         }
     }
 
+    private Dictionary<MarkingRegion, HashSet<MarkingCategories>> _organData = new();
+
+    /// <summary>
+    /// The categories that can be edited for the current species and sex, grouped by body region.
+    /// Mirrors the organ data of the Wega markings view model.
+    /// </summary>
+    public Dictionary<MarkingRegion, HashSet<MarkingCategories>> OrganData
+    {
+        get => _organData;
+        set
+        {
+            _organData = value;
+            OrganDataChanged?.Invoke();
+        }
+    }
+
+    /// <summary>
+    /// Raised whenever the set of possible markings and their grouping may have changed.
+    /// </summary>
+    public event Action? OrganDataChanged;
+
     /// <summary>
     /// Raised whenever the set of markings has fully changed and requires a UI reload.
     /// </summary>
@@ -67,6 +88,34 @@ public sealed partial class MarkingsViewModel
     public MarkingsViewModel()
     {
         IoCManager.InjectDependencies(this);
+    }
+
+    /// <summary>
+    /// Returns the markings that can be applied to the given category for the current species and sex.
+    /// </summary>
+    public IReadOnlyDictionary<string, MarkingPrototype> GetAvailable(MarkingCategories category)
+    {
+        return EnforceSpeciesAndSex
+            ? _marking.MarkingsByCategoryAndSpeciesAndSex(category, Species, Sex)
+            : _marking.MarkingsByCategoryAndSex(category, Sex);
+    }
+
+    /// <summary>
+    /// Maps a flat marking category onto the body region used by the picker navigation.
+    /// </summary>
+    public static MarkingRegion RegionOf(MarkingCategories category)
+    {
+        return category switch
+        {
+            MarkingCategories.Hair or MarkingCategories.FacialHair or MarkingCategories.Head
+                or MarkingCategories.HeadTop or MarkingCategories.HeadSide or MarkingCategories.Snout
+                => MarkingRegion.Head,
+            MarkingCategories.Arms => MarkingRegion.Arms,
+            MarkingCategories.Legs => MarkingRegion.Legs,
+            MarkingCategories.Tail => MarkingRegion.Tail,
+            MarkingCategories.Special => MarkingRegion.Special,
+            _ => MarkingRegion.Torso,
+        };
     }
 
     /// <summary>
@@ -317,4 +366,19 @@ public enum MarkingChangeType : byte
     Removed,
     Color,
     Rank,
+}
+
+/// <summary>
+/// Coarse body region grouping used by the markings picker navigation.
+/// Horizon Nova markings are stored per <see cref="MarkingCategories"/>, so a region is a
+/// presentational grouping of categories, analogous to an organ in Wega.
+/// </summary>
+public enum MarkingRegion : byte
+{
+    Head,
+    Torso,
+    Arms,
+    Legs,
+    Tail,
+    Special,
 }

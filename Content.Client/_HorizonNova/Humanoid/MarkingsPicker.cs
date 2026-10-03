@@ -17,8 +17,8 @@ namespace Content.Client._HorizonNova.Humanoid;
 /// <summary>
 /// Horizon Nova: the "appearance features" (markings) picker used in the character editor.
 /// Port of the Wega markings picker interface (Content.Client/Humanoid/MarkingPicker.cs and
-/// related controls), adapted so that each top level tab is a <see cref="MarkingCategories"/>
-/// instead of an organ.
+/// related controls). The organ tabs are mapped onto <see cref="MarkingRegion"/> and the layer
+/// tabs onto <see cref="MarkingCategories"/>.
 /// </summary>
 [GenerateTypedNameReferences]
 public sealed partial class MarkingsPicker : Control
@@ -97,6 +97,7 @@ public sealed partial class MarkingsPicker : Control
         set
         {
             _ignoreSpecies = value;
+            _model.EnforceSpeciesAndSex = !value;
             if (_ready)
                 Refresh();
         }
@@ -201,23 +202,19 @@ public sealed partial class MarkingsPicker : Control
         if (CategoryTabs == null)
             return;
 
+        _model.OrganData = BuildOrganData();
+
         CategoryTabs.RemoveAllChildren();
 
         var index = 0;
-        foreach (var category in Enum.GetValues<MarkingCategories>())
+        foreach (var (region, categories) in _model.OrganData)
         {
-            if (_ignoredCategories.Contains(category))
+            var control = new OrganMarkingPicker(_model, region, categories);
+            if (control.Empty)
                 continue;
 
-            var hasSelected = _model.Markings.Markings.TryGetValue(category, out var selected) && selected.Count > 0;
-            var available = GetAvailable(category);
-
-            if (available.Count == 0 && !hasSelected)
-                continue;
-
-            var control = new LayerMarkingPicker(_model, category, available);
             CategoryTabs.AddChild(control);
-            CategoryTabs.SetTabTitle(index, Loc.GetString($"markings-category-{category}"));
+            CategoryTabs.SetTabTitle(index, Loc.GetString($"markings-organ-{region}"));
             index++;
         }
 
@@ -227,11 +224,32 @@ public sealed partial class MarkingsPicker : Control
         CategoryTabs.TabsVisible = index > 1;
     }
 
-    private IReadOnlyDictionary<string, MarkingPrototype> GetAvailable(MarkingCategories category)
+    private Dictionary<MarkingRegion, HashSet<MarkingCategories>> BuildOrganData()
     {
-        return _ignoreSpecies
-            ? _markingManager.MarkingsByCategoryAndSex(category, _sex)
-            : _markingManager.MarkingsByCategoryAndSpeciesAndSex(category, _species, _sex);
+        var result = new Dictionary<MarkingRegion, HashSet<MarkingCategories>>();
+
+        foreach (var category in Enum.GetValues<MarkingCategories>())
+        {
+            if (_ignoredCategories.Contains(category))
+                continue;
+
+            var hasSelected = _model.Markings.Markings.TryGetValue(category, out var selected) && selected.Count > 0;
+            var available = _model.GetAvailable(category);
+
+            if (available.Count == 0 && !hasSelected)
+                continue;
+
+            var region = MarkingsViewModel.RegionOf(category);
+            if (!result.TryGetValue(region, out var categories))
+            {
+                categories = new HashSet<MarkingCategories>();
+                result[region] = categories;
+            }
+
+            categories.Add(category);
+        }
+
+        return result;
     }
 
     private void RebuildIgnoredCategories()

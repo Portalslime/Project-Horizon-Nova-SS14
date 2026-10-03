@@ -18,3 +18,11 @@ markings-limits = { $required ->
         }
 }
 markings-reorder = Выбранные черты
+
+# Body regions (organ tabs)
+markings-organ-Head = Голова
+markings-organ-Torso = Туловище
+markings-organ-Arms = Руки
+markings-organ-Legs = Ноги
+markings-organ-Tail = Хвост
+markings-organ-Special = Особое
