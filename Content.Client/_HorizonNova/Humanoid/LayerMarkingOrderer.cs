@@ -129,10 +129,7 @@ public sealed partial class LayerMarkingOrderer : BoxContainer
 
     private bool OnBeginDrag()
     {
-        if (_dragDropHelper.Dragged is not { } dragged)
-            return false;
-
-        var (item, container) = dragged;
+        var (item, container) = _dragDropHelper.Dragged;
 
         container.Visible = false;
         item.Orphan();
@@ -144,10 +141,7 @@ public sealed partial class LayerMarkingOrderer : BoxContainer
 
     private bool OnContinueDrag(float frameTime)
     {
-        if (_dragDropHelper.Dragged is not { } dragged)
-            return false;
-
-        var (item, _) = dragged;
+        var (item, _) = _dragDropHelper.Dragged;
 
         LayoutContainer.SetPosition(item, UserInterfaceManager.MousePositionScaled.Position - new Vector2(32, 32));
 
@@ -166,10 +160,7 @@ public sealed partial class LayerMarkingOrderer : BoxContainer
 
     private void OnEndDrag()
     {
-        if (_dragDropHelper.Dragged is not { } dragged)
-            return;
-
-        var (item, container) = dragged;
+        var (item, container) = _dragDropHelper.Dragged;
 
         container.Visible = true;
         item.Orphan();
