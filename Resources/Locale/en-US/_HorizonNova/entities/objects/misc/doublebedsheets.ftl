@@ -1,7 +1,6 @@
 # Horizon Nova — AGPLv3
 # Copyright (c) 2026 Horizon Nova Contributors
 # Порт с lust-station: Resources/Locale/en-US/_prototypes/_sunrise/entities/objects/misc/bedsheets.ftl
-#                      Resources/Prototypes/_Lust/Entities/Objects/Misc/doublebedsheets.yml (Qillu)
 
 ent-DoubleBedsheetBase = BedsheetBase
     .desc = A surprisingly soft linen bedsheet.
@@ -63,9 +62,3 @@ ent-DoubleBedsheetWiz = wizard's bedsheet
     .desc = A special fabric enchanted with magic so you can have an enchanted night. It even glows!
 ent-DoubleBedsheetYellow = yellow bedsheet
     .desc = { ent-DoubleBedsheetBase.desc }
-ent-DoubleBedsheetCaptainQillu = captain's bedsheet
-    .desc = It has a Qillu symbol on it, and was woven with a revolutionary new kind of thread guaranteed to have 0.01% permeability for most non-chemical substances, popular among most modern captains.
-ent-DoubleBedsheetCentcomQillu = CentComm bedsheet
-    .desc = Woven with advanced nanothread for warmth as well as being very decorated, essential for all officials.
-ent-DoubleBedsheetQillu = Qillu bedsheet
-    .desc = It has the Qillu logo on it and an aura of lust.
