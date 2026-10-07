@@ -14,7 +14,6 @@ namespace Content.Client.FlavorText
     public sealed partial class FlavorText : Control
     {
         public Action<string>? OnFlavorTextChanged;
-        private RichTextLabel _erpInfoLabel => CERPLabelInfo;
         public Action<string>? OnFlavorOOCTextChanged;
         public Action<string>? OnCharacterTextChanged;
         public Action<string>? OnGreenTextChanged;
@@ -59,9 +58,6 @@ namespace Content.Client.FlavorText
             CFlavorTextInput.Placeholder = new Rope.Leaf(loc.GetString("flavor-text-placeholder"));
             CFlavorTextInput.OnTextChanged += _ => FlavorTextChanged();
 
-            var erpInfo = Loc.GetString("flavor-text-erp-info");
-            _erpInfoLabel.SetMarkup($"[font size=8][color=yellow]{erpInfo}[/color][/font]");
-
             CCharacterTextInput.Placeholder = new Rope.Leaf(loc.GetString("character-flavor-text-placeholder"));
             CCharacterTextInput.OnTextChanged += _ => CharacterTextChanged();
 
@@ -99,11 +95,6 @@ namespace Content.Client.FlavorText
         public void FlavorTextChanged()
         {
             OnFlavorTextChanged?.Invoke(Rope.Collapse(CFlavorTextInput.TextRope).Trim());
-        }
-
-        public void NoERPLabelInfo()
-        {
-            CERPLabelInfo.Visible = false;
         }
 
         public void FlavorOOCTextChanged()

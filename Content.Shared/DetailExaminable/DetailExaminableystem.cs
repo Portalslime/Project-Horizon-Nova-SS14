@@ -25,12 +25,14 @@ public sealed class DetailExaminableSystem : EntitySystem
         if (!HasComp<BankAccountComponent>(ent))
             return;
 
-        //HN: замена Lua EnumERPStatus на Lust Erp
+        //HN: замена Lua EnumERPStatus на Lust Erp (4 варианта)
         var color = ent.Comp.Erp switch
         {
-            Content.Shared.Humanoid.Erp.Yes => "green",
+            Content.Shared.Humanoid.Erp.No => "red",
             Content.Shared.Humanoid.Erp.Ask => "yellow",
-            _ => "red"
+            Content.Shared.Humanoid.Erp.Yes => "green",
+            Content.Shared.Humanoid.Erp.Absolute => "#ff69b4",
+            _ => "yellow"
         };
 
         var statusText = FormattedMessage.EscapeText(ent.Comp.GetERPStatusName());

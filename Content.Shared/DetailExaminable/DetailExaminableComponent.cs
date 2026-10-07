@@ -19,9 +19,11 @@ public sealed partial class DetailExaminableComponent : Component
     {
         return Erp switch
         {
-            Erp.Yes => Loc.GetString("humanoid-profile-editor-erp-yes-text"),
+            Erp.No => Loc.GetString("humanoid-profile-editor-erp-no-text"),
             Erp.Ask => Loc.GetString("humanoid-profile-editor-erp-ask-text"),
-            _ => Loc.GetString("humanoid-profile-editor-erp-no-text"),
+            Erp.Yes => Loc.GetString("humanoid-profile-editor-erp-yes-text"),
+            Erp.Absolute => Loc.GetString("humanoid-profile-editor-erp-absolute-text"),
+            _ => Loc.GetString("humanoid-profile-editor-erp-ask-text"),
         };
     }
     // Erida-Start

@@ -57,9 +57,6 @@ namespace Content.Client.Lobby.UI
         private readonly MarkingManager _markingManager;
         private readonly JobRequirementsManager _requirements;
         private readonly LobbyUIController _controller;
-        private OptionButton _erpStatus = null!; //HN: Lust Erp
-        private OptionButton _virginity = null!; //HN: Lust ERP
-        private OptionButton _analVirginity = null!; //HN: Lust ERP
         private readonly SpriteSystem _sprite;
 
         // CCvar.
@@ -476,6 +473,28 @@ namespace Content.Client.Lobby.UI
 
             RefreshFlavorText();
 
+            //HN: Lust Erp — выбор в "Внешность", 4 варианта
+            ErpButton.AddItem(Loc.GetString("humanoid-profile-editor-erp-no-text"), (int)Erp.No);
+            ErpButton.AddItem(Loc.GetString("humanoid-profile-editor-erp-ask-text"), (int)Erp.Ask);
+            ErpButton.AddItem(Loc.GetString("humanoid-profile-editor-erp-yes-text"), (int)Erp.Yes);
+            ErpButton.AddItem(Loc.GetString("humanoid-profile-editor-erp-absolute-text"), (int)Erp.Absolute);
+            ErpButton.OnItemSelected += args =>
+            {
+                ErpButton.SelectId(args.Id);
+                Profile = Profile?.WithErp((Erp) args.Id);
+                SetDirty();
+            };
+            if (!_cfgManager.GetCVar(CLVars.IsERP))
+            {
+                ErpButton.Visible = false;
+                if (Profile != null)
+                {
+                    Profile = Profile.WithErp(Erp.No);
+                    IsDirty = true;
+                }
+            }
+            UpdateERPStatus();
+
             #region Dummy
 
             SpriteRotateLeft.OnPressed += _ =>
@@ -538,57 +557,6 @@ namespace Content.Client.Lobby.UI
                 // Erida-End
 
                 _flavorText.OnFlavorTextChanged += OnFlavorTextChange;
-
-                //HN: Lust Erp/Virginity вместо Lua EnumERPStatus
-                _erpStatus = _flavorText.CERPStatusOption;
-                _virginity = _flavorText.CVirginityOption;
-                _analVirginity = _flavorText.CAnalVirginityOption;
-
-                if (!_cfgManager.GetCVar(CLVars.IsERP))
-                {
-                    _erpStatus.Visible = false;
-                    _flavorText.NoERPLabelInfo();
-
-                    if (Profile != null)
-                    {
-                        Profile = Profile.WithErp(Erp.No);
-                        IsDirty = true;
-                    }
-                }
-
-                _erpStatus.AddItem(Loc.GetString("humanoid-profile-editor-erp-yes-text"), (int)Erp.Yes);
-                _erpStatus.AddItem(Loc.GetString("humanoid-profile-editor-erp-ask-text"), (int)Erp.Ask);
-                _erpStatus.AddItem(Loc.GetString("humanoid-profile-editor-erp-no-text"), (int)Erp.No);
-                _erpStatus.OnItemSelected += args =>
-                {
-                    if (Profile is null)
-                        return;
-                    _erpStatus.SelectId(args.Id);
-                    Profile = Profile.WithErp((Erp)args.Id);
-                    IsDirty = true;
-                };
-
-                _virginity.AddItem(Loc.GetString("humanoid-profile-editor-virginity-yes-text"), (int)Virginity.Yes);
-                _virginity.AddItem(Loc.GetString("humanoid-profile-editor-virginity-no-text"), (int)Virginity.No);
-                _virginity.OnItemSelected += args =>
-                {
-                    if (Profile is null)
-                        return;
-                    _virginity.SelectId(args.Id);
-                    Profile = Profile.WithVirginity((Virginity)args.Id);
-                    IsDirty = true;
-                };
-
-                _analVirginity.AddItem(Loc.GetString("humanoid-profile-editor-anal-virginity-yes-text"), (int)Virginity.Yes);
-                _analVirginity.AddItem(Loc.GetString("humanoid-profile-editor-anal-virginity-no-text"), (int)Virginity.No);
-                _analVirginity.OnItemSelected += args =>
-                {
-                    if (Profile is null)
-                        return;
-                    _analVirginity.SelectId(args.Id);
-                    Profile = Profile.WithAnalVirginity((Virginity)args.Id);
-                    IsDirty = true;
-                };
 
                 // Erida-Start
                 _flavorText.OnFlavorOOCTextChanged += OnFlavorOOCTextChange;
@@ -1883,13 +1851,9 @@ namespace Content.Client.Lobby.UI
 
         private void UpdateERPStatus()
         {
-            //HN: Lust Erp/Virginity
-            if (_erpStatus != null)
-                _erpStatus.SelectId((int)(Profile?.Erp ?? Erp.Ask));
-            if (_virginity != null)
-                _virginity.SelectId((int)(Profile?.Virginity ?? Virginity.No));
-            if (_analVirginity != null)
-                _analVirginity.SelectId((int)(Profile?.AnalVirginity ?? Virginity.Yes));
+            //HN: Lust Erp (4 варианта)
+            if (ErpButton != null)
+                ErpButton.SelectId((int)(Profile?.Erp ?? Erp.Ask));
         }
 
         private void UpdateAgeEdit()

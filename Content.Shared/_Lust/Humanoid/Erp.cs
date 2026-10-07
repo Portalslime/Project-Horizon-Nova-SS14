@@ -8,9 +8,10 @@ namespace Content.Shared.Humanoid
     // You need to update profile, profile editor, maybe voices and names if you want to expand this further.
     public enum Erp : byte
     {
-        Yes,
-        Ask,
-        No
+        No = 0,
+        Ask = 1,
+        Yes = 2,
+        Absolute = 3
     }
 
     /// <summary>
