@@ -1,10 +1,10 @@
+#HN: цены лодаутов удалены (всё бесплатно)
 #T1
 - type: loadout
   id: ContractorClothingHandsGlovesColorYellow
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 1500
   equipment:
     gloves: ClothingHandsGlovesColorYellow
 
@@ -13,7 +13,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   equipment:
     gloves: ClothingHandsGlovesLeather
 
@@ -22,7 +21,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   equipment:
     gloves: ClothingHandsGlovesFingerless
 
@@ -31,7 +29,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   equipment:
     gloves: ClothingHandsGlovesLatex
 
@@ -40,7 +37,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   equipment:
     gloves: ClothingHandsGlovesNitrile
 
@@ -49,7 +45,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   equipment:
     gloves: ClothingHandsGlovesRobohands
 
@@ -58,7 +53,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   equipment:
     gloves: ClothingHandsGlovesColorBlack
 
@@ -67,7 +61,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   equipment:
     gloves: ClothingHandsGlovesColorBlue
 
@@ -76,7 +69,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   equipment:
     gloves: ClothingHandsGlovesColorGreen
 
@@ -85,7 +77,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   equipment:
     gloves: ClothingHandsGlovesColorGray
 
@@ -94,7 +85,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   equipment:
     gloves: ClothingHandsGlovesColorBrown
 
@@ -103,7 +93,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   equipment:
     gloves: ClothingHandsGlovesColorLightBrown
 
@@ -112,7 +101,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   equipment:
     gloves: ClothingHandsGlovesColorOrange
 
@@ -121,7 +109,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   equipment:
     gloves: ClothingHandsGlovesColorPurple
 
@@ -130,7 +117,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   equipment:
     gloves: ClothingHandsGlovesColorRed
 
@@ -140,7 +126,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 600
   equipment:
     gloves: ClothingHandsGlovesBoxingGreen
 
@@ -149,7 +134,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 600
   equipment:
     gloves: ClothingHandsGlovesBoxingBlue
 
@@ -158,7 +142,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 600
   equipment:
     gloves: ClothingHandsGlovesBoxingRed
 
@@ -167,7 +150,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 600
   equipment:
     gloves: ClothingHandsGlovesBoxingYellow
 
@@ -176,7 +158,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     gloves: ClothingHandsGlovesCaptain
 
@@ -186,6 +167,5 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2000
   equipment:
     gloves: ClothingHandsGlovesColorWhite

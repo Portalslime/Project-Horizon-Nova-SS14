@@ -1,0 +1,17 @@
+# Horizon Nova — AGPLv3
+# Copyright (c) 2026 Horizon Nova Contributors
+# Порт с lust-station: Resources/Prototypes/_Sunrise/Recipes/Construction/doublebeds.yml
+
+- type: construction
+  id: DoubleBed
+  name: construction-graph-tag-double-bed
+  description: construction-graph-tag-double-bed-desc
+  graph: DoubleBeds
+  startNode: start
+  targetNode: doubleBed
+  category: construction-category-furniture
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked

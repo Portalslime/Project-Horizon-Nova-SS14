@@ -1,10 +1,10 @@
+#HN: цены лодаутов удалены (всё бесплатно)
 #T1
 - type: loadout
   id: ContractorClothingNeckScarfStripedBlack
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckScarfStripedBlack
 
@@ -13,7 +13,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckScarfStripedBlue
 
@@ -22,7 +21,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckScarfStripedBrown
 
@@ -31,7 +29,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckScarfStripedGreen
 
@@ -40,7 +37,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieBH
   groupBy: "ties"
@@ -50,7 +46,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieRed
   groupBy: "ties"
@@ -60,7 +55,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieSci
   groupBy: "ties"
@@ -70,7 +64,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieObscure
   groupBy: "ties"
@@ -80,7 +73,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieDarkPurple
   groupBy: "ties"
@@ -90,7 +82,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieDarkBrown
   groupBy: "ties"
@@ -100,7 +91,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieChemist
   groupBy: "ties"
@@ -110,7 +100,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieGreen
   groupBy: "ties"
@@ -120,7 +109,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieWhite
   groupBy: "ties"
@@ -130,7 +118,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieAquamarine
   groupBy: "ties"
@@ -140,7 +127,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieAzure
   groupBy: "ties"
@@ -150,7 +136,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieBrown
   groupBy: "ties"
@@ -160,7 +145,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieBlue
   groupBy: "ties"
@@ -170,7 +154,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieGolden
   groupBy: "ties"
@@ -180,7 +163,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieLightGrey
   groupBy: "ties"
@@ -190,7 +172,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieOrange
   groupBy: "ties"
@@ -200,7 +181,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTiePink
   groupBy: "ties"
@@ -210,7 +190,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTiePurple
   groupBy: "ties"
@@ -220,7 +199,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckTieYellow
   groupBy: "ties"
@@ -230,7 +208,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckLawyerbadge
 
@@ -239,7 +216,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingMultipleHeadphones
 
@@ -248,7 +224,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckCrucifix
 
@@ -257,7 +232,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckBellCollar
 
@@ -266,7 +240,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: CDDogtags
 
@@ -275,7 +248,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingNeckStethoscope
 
@@ -284,7 +256,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingOuterPoncho
 
@@ -293,7 +264,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     neck: ClothingOuterPonchoClassic
 
@@ -303,7 +273,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckCloakCap
 
@@ -312,7 +281,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckCloakMiner
 
@@ -321,7 +289,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckCloakMoth
 
@@ -330,7 +297,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckScarfChaplainStole
 
@@ -339,7 +305,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckStoleChaplain
 
@@ -348,7 +313,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckCloakTrans
   groupBy: "flagCloaks"
@@ -358,7 +322,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckCloakAro
   groupBy: "flagCloaks"
@@ -368,7 +331,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckCloakAce
   groupBy: "flagCloaks"
@@ -378,7 +340,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckCloakAroace
   groupBy: "flagCloaks"
@@ -388,7 +349,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckCloakBi
   groupBy: "flagCloaks"
@@ -398,7 +358,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckCloakIntersex
   groupBy: "flagCloaks"
@@ -408,7 +367,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckCloakEnby
   groupBy: "flagCloaks"
@@ -418,7 +376,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckCloakPan
   groupBy: "flagCloaks"
@@ -428,7 +385,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckCloakGay
   groupBy: "flagCloaks"
@@ -438,7 +394,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckCloakLesbian
   groupBy: "flagCloaks"
@@ -448,7 +403,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: BedsheetRainbow
 
@@ -457,7 +411,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckIFFNeutral
   groupBy: "IFFstrobe"
@@ -467,7 +420,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckIFFGreen
   groupBy: "IFFstrobe"
@@ -477,7 +429,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckIFFRed
   groupBy: "IFFstrobe"
@@ -487,7 +438,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckIFFBlue
   groupBy: "IFFstrobe"
@@ -497,7 +447,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckIFFCyan
   groupBy: "IFFstrobe"
@@ -507,7 +456,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckIFFOrange
   groupBy: "IFFstrobe"
@@ -517,7 +465,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckIFFPurple
   groupBy: "IFFstrobe"
@@ -527,7 +474,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckCloakFormalSeniorEngineer
 
@@ -536,7 +482,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     neck: ClothingNeckMantleCap
 
@@ -546,7 +491,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2500
   equipment:
     neck: ClothingNeckCloakCapFormal
 
@@ -555,7 +499,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2500
   equipment:
     neck: ClothingNeckCloakQm
 
@@ -564,7 +507,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2500
   equipment:
     neck: ClothingNeckMantleQM
 
@@ -573,7 +515,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2500
   equipment:
     neck: ClothingCloakCmo
 
@@ -582,7 +523,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2500
   equipment:
     neck: ClothingNeckMantleCMO
 
@@ -591,7 +531,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2500
   equipment:
     neck: ClothingNeckCloakRd
 
@@ -600,7 +539,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2500
   equipment:
     neck: ClothingNeckMantleRD
 
@@ -609,7 +547,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2500
   equipment:
     neck: ClothingNeckCloakCe
 
@@ -618,7 +555,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2500
   equipment:
     neck: ClothingNeckMantleCE
 
@@ -627,7 +563,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2500
   equipment:
     neck: ClothingNeckCloakFormalSeniorEngineer
 
@@ -636,7 +571,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2500
   equipment:
     neck: ClothingNeckCloakVoid
 
@@ -645,6 +579,5 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 7500
   equipment:
     neck: ClothingNeckBling

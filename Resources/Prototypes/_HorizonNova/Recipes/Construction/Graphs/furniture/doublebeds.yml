@@ -1,0 +1,36 @@
+# Horizon Nova — AGPLv3
+# Copyright (c) 2026 Horizon Nova Contributors
+# Порт с lust-station: Resources/Prototypes/_Sunrise/Recipes/Construction/Graphs/structures/doublebeds.yml
+
+- type: constructionGraph
+  id: DoubleBeds
+  start: start
+  graph:
+  - node: start
+    actions:
+    - !type:DestroyEntity {}
+    edges:
+    - to: doubleBed
+      completed:
+      - !type:SnapToGrid { }
+      steps:
+      - material: Steel
+        amount: 4
+        doAfter: 1
+      - material: Cloth
+        amount: 4
+        doAfter: 1
+  - node: doubleBed
+    entity: DoubleBed
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 4
+      - !type:SpawnPrototype
+        prototype: MaterialCloth1
+        amount: 4
+      steps:
+      - tool: Screwing
+        doAfter: 1

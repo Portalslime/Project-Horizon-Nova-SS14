@@ -161,7 +161,8 @@
       slotTexture: id
       fullTextureName: template_small
       slotFlags: IDCARD
-      slotGroup: MainHotbar
+      #HN: КПК (id) перенесён на левую сторону — как в Wega
+      slotGroup: SecondHotbar
       stripTime: 6
       uiWindowPos: 2,1
       strippingWindowPos: 2,4

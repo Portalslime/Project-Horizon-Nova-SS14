@@ -1,6 +1,6 @@
+#HN: цены лодаутов удалены (всё бесплатно)
 - type: loadout
   id: PilotClothingUniformJumpsuitPilot
-  price: 0
   equipment:
     jumpsuit: ClothingUniformJumpsuitPilot
 
@@ -10,7 +10,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 675
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryPilot
 
@@ -19,7 +18,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 1250
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryContractor
 
@@ -28,6 +26,5 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 1250
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryContractorTac

@@ -1,3 +1,4 @@
+#HN: цены лодаутов удалены (всё бесплатно)
 #T0
 - type: loadout
   id: ContractorEncryptionKeyTraffic
@@ -9,19 +10,16 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFNotDoc
-  price: 20
   encryptionKeys:
   - EncryptionKeyMedical
 
 - type: loadout
   id: ContractorEncryptionKeyCargo
-  price: 20
   encryptionKeys:
   - EncryptionKeyCargo
 
 - type: loadout
   id: ContractorEncryptionKeyEngineering
-  price: 20
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFNotEngineering
@@ -30,6 +28,5 @@
 
 - type: loadout
   id: ContractorEncryptionKeyScience
-  price: 20
   encryptionKeys:
   - EncryptionKeyScience

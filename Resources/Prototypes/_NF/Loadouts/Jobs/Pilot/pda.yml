@@ -1,6 +1,6 @@
+#HN: цены лодаутов удалены (всё бесплатно)
 - type: loadout
   id: PilotPilotPDA
-  price: 0
   equipment:
     id: PilotPDA
     

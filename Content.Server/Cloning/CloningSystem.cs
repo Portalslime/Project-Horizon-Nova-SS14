@@ -152,8 +152,11 @@ public sealed partial class CloningSystem : EntitySystem
         {
             var cloneItem = CopyItem(item, coords, whitelist, blacklist);
 
-            if (cloneItem != null && !_inventory.TryEquip(clone, cloneItem.Value, slot.Name, silent: true, inventory: clone.Comp))
+            //HN Start: клонирование восстанавливает точный комплект — форсируем надевание,
+            //иначе блокировка слотов не дала бы надеть нижние слои поверх уже надетых верхних.
+            if (cloneItem != null && !_inventory.TryEquip(clone, cloneItem.Value, slot.Name, silent: true, force: true, inventory: clone.Comp))
                 Del(cloneItem); // delete it again if the clone cannot equip it
+            //HN End
         }
     }
 

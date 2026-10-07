@@ -244,7 +244,7 @@ namespace Content.Client.VendingMachines.UI
             }
 
             if (vendPrice > 0.0)
-                return (int)vendPrice;
+                return 0; //HN: автоматы бесплатные
 
             // ok so we dont really have access to the pricing system so we are doing a quick price check
             // based on prototype info since the items inside a vending machine dont actually exist as entities
@@ -294,7 +294,7 @@ namespace Content.Client.VendingMachines.UI
                 }
             }
 
-            return (int)cost;
+            return 0; //HN: автоматы бесплатные
         }
     }
     // End Frontier

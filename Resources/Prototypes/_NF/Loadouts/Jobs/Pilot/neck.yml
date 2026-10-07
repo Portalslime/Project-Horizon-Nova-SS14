@@ -1,6 +1,6 @@
+#HN: цены лодаутов удалены (всё бесплатно)
 #T0
 - type: loadout
   id: PilotClothingNeckScarfPilot
-  price: 0
   equipment:
     neck: ClothingNeckScarfPilot

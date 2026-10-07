@@ -1,9 +1,9 @@
+#HN: цены лодаутов удалены (всё бесплатно)
 - type: loadout
   id: ContractorClothingHeadBandBlack
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadBandBlack
 
@@ -12,7 +12,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadBandBlue
 
@@ -21,7 +20,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadBandGreen
 
@@ -30,7 +28,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadBandRed
 
@@ -39,7 +36,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadBandSkull
 
@@ -48,7 +44,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadHatGreysoft
 
@@ -57,7 +52,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadHatBluesoft
 
@@ -66,7 +60,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadHatYellowsoft
 
@@ -75,7 +68,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadHatGreensoft
 
@@ -84,7 +76,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadHatOrangesoft
 
@@ -93,7 +84,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadHatRedsoft
 
@@ -102,7 +92,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadHatBlacksoft
 
@@ -111,7 +100,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadHatPurplesoft
 
@@ -120,7 +108,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadHatCorpsoft
 
@@ -129,7 +116,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadBandGrey
 
@@ -138,7 +124,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadHatUshanka
 
@@ -147,7 +132,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadHatHardhatYellow
 
@@ -156,7 +140,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadHatChef
 
@@ -165,7 +148,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadHatCargosoft
 
@@ -174,7 +156,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 250
   equipment:
     head: ClothingHeadBandBotany
 
@@ -187,7 +168,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadHatHoodBioScientist
 
@@ -199,7 +179,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadRastaHat
 
@@ -211,7 +190,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadHatSombrero
 
@@ -223,7 +201,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadFishCap
 
@@ -235,7 +212,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadHatTrucker
 
@@ -247,7 +223,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadHatCasa
 
@@ -259,7 +234,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadHatBowlerHat
 
@@ -271,7 +245,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadHatGreyFlatcap
 
@@ -283,7 +256,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadHatBrownFlatcap
 
@@ -295,7 +267,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadHatParamedicsoft
 
@@ -307,7 +278,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadNurseHat
 
@@ -319,7 +289,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadHatBeretMedic
 
@@ -331,7 +300,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ADTClothingHeadHatsBeretChiefEngineer
 
@@ -343,7 +311,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ADTClothingHeadHatsBeretAtmosphericTechnician
 
@@ -355,7 +322,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ADTClothingHeadHatsBeretCargo
 
@@ -367,7 +333,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadBeretChemist
 
@@ -379,7 +344,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadHatSurgcapGreen
 
@@ -391,7 +355,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadHatSurgcapBlue
 
@@ -403,7 +366,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadHatSurgcapPurple
 
@@ -415,7 +377,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadHatFedoraGrey
 
@@ -427,7 +388,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 650
   equipment:
     head: ClothingHeadHatFedoraBrown
 
@@ -441,7 +401,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatCaptain
 
@@ -453,7 +412,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatCapcap
 
@@ -465,7 +423,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadTinfoil
 
@@ -477,7 +434,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatBeretRND
 
@@ -489,7 +445,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatBeretEngineering
 
@@ -501,7 +456,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatBeretSeniorPhysician
 
@@ -513,7 +467,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatBeretCmo
 
@@ -525,7 +478,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatBeretQM
 
@@ -537,7 +489,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatQMsoft
 
@@ -549,7 +500,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatCardinal
 
@@ -561,7 +511,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatHoodNunHood
 
@@ -573,7 +522,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadSafari
 
@@ -585,7 +533,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatJester
 
@@ -597,7 +544,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatJesterAlt
 
@@ -609,7 +555,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatBeret
 
@@ -621,7 +566,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatBeretFrench
 
@@ -633,7 +577,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatMimesoft
 
@@ -645,7 +588,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatPilgrim
 
@@ -657,7 +599,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatStrawHat
 
@@ -669,7 +610,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatCowboyBlack
 
@@ -681,7 +621,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatCowboyBrown
 
@@ -693,7 +632,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatCowboyGrey
 
@@ -705,7 +643,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatCowboyBountyHunter
 
@@ -717,7 +654,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatBH
 
@@ -729,7 +665,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatCowboyRed
 
@@ -741,7 +676,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatCowboyWhite
 
@@ -753,7 +687,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatWideBrimmed
 
@@ -765,7 +698,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatWitchhunter
 
@@ -777,7 +709,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatBishopMitre
 
@@ -789,7 +720,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatKippah
 
@@ -801,7 +731,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatPlaguedoctor
 
@@ -814,7 +743,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: Plunger
 
@@ -826,7 +754,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 1250
   equipment:
     head: ClothingHeadHatCone
 
@@ -838,7 +765,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 2500
   equipment:
     head: ClothingHeadBandGold
 
@@ -850,6 +776,5 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFHeadwearCapable
-  price: 5000
   equipment:
     head: ClothingHeadHatTophat

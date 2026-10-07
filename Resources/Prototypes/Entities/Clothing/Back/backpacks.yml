@@ -35,6 +35,10 @@
       params:
         volume: -11
   # Goobstation edit end
+  #HN Start: сумка/рюкзак — высший слой, блокирует верхнюю одежду, комбинезон и бельё
+  - type: SlotBlock
+    slots: [outerclothing, innerclothing, underweart, underwearb]
+  #HN End
   - type: Storage
     blacklist: #Lua
       tags:

@@ -26,6 +26,10 @@
       collection: GenericEquip
       params:
         volume: -5
+  #HN Start: обувь блокирует носки (механика слоёв)
+  - type: SlotBlock
+    slots: [socks]
+  #HN End
   # Goobstation edit end
   - type: Sprite
     state: icon

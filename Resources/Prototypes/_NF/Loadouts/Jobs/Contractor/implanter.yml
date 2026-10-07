@@ -1,3 +1,4 @@
+#HN: цены лодаутов удалены (всё бесплатно)
 #T0
 - type: loadout
   id: ContractorMedicalTrackingImplanter
@@ -12,7 +13,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 1000
   implants:
   - LightImplanter
 
@@ -22,7 +22,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 1000
   implants:
   - BikeHornImplanter
 
@@ -32,7 +31,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 1000
   implants:
   - SadTromboneImplanter
 
@@ -44,7 +42,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 5000
   implants:
   - MimePowersImplanter
 
@@ -55,6 +52,5 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 5000
   implants:
   - BibleUserImplanter
