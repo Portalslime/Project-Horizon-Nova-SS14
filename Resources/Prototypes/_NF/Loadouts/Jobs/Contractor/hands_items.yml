@@ -1,3 +1,4 @@
+#HN: цены лодаутов удалены (всё бесплатно)
 #T1
 - type: loadout
   id: ContractorBriefcaseBrownFilled
@@ -5,7 +6,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   inhand:
   - BriefcaseBrownFilled
 
@@ -15,7 +15,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   inhand:
   - ToolboxEmergency
 
@@ -25,7 +24,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   inhand:
   - ToolboxMechanical
 
@@ -35,7 +33,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   inhand:
   - Cane
 
@@ -44,7 +41,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   inhand:
   - LGBTQHandyFlag
 
@@ -53,7 +49,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 5000
   inhand:
   - NTHandyFlag
 
@@ -62,7 +57,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 5000
   inhand:
   - BalloonNT
 
@@ -72,7 +66,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 10000
   inhand:
   - FlashlightUmbrella
 
@@ -81,7 +74,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 20000
   inhand:
   - DawInstrumentFlatpack
 
@@ -90,7 +82,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 35000
   inhand:
   - HoverbikeFlatpack
 
@@ -100,7 +91,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 10000
   inhand:
   - PetCarrierNPCEmotionalSupportSafe
 
@@ -111,7 +101,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 350
   inhand:
     - AppraisalTool
 
@@ -120,7 +109,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 350
   inhand:
     - Pickaxe
 
@@ -129,7 +117,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 350
   inhand:
     - HandheldGPSBasic
 
@@ -138,7 +125,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 550
   inhand:
     - RadioHandheldNF
 
@@ -147,7 +133,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 350
   inhand:
     - NetworkConfigurator
 
@@ -156,7 +141,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 350
   inhand:
     - HandheldHealthAnalyzerUnpowered
 
@@ -165,7 +149,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 350
   inhand:
     - AnomalyScanner
 
@@ -174,7 +157,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 350
   inhand:
     - Bucket
 
@@ -183,7 +165,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 350
   inhand:
     - GeigerCounter
 
@@ -193,7 +174,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 3000
   inhand:
     - NFWeaponPka
 
@@ -202,7 +182,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 2000
   inhand:
     - PinpointerUniversal
 
@@ -211,7 +190,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 5000
   inhand:
     - ShipyardRCD
 
@@ -220,7 +198,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 2000
   inhand:
     - DoorRemoteShipyard
 
@@ -229,7 +206,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 2000
   inhand:
     - HandheldCrewMonitor
 
@@ -238,7 +214,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 5000
   inhand:
     - HypoMini
 
@@ -247,6 +222,5 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 500
   inhand:
     - Bible

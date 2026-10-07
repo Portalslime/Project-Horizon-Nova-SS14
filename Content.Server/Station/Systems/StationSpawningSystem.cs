@@ -229,16 +229,10 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
 
                     // Handle any extra data here.
 
-                    //Frontier - we handle bank stuff so we are wrapping each item spawn inside our own cached check.
-                    //If the user's preferences haven't been loaded, only give them free items or fallbacks.
-                    //This way, we will spawn every item we can afford in the order that they were originally sorted.
-                    if (loadoutProto.Price <= bankBalance && (loadoutProto.Price <= 0 || hasBalance))
-                    {
-                        bankBalance -= int.Max(0, loadoutProto.Price); // Treat negatives as zero.
-                        EquipStartingGear(entity.Value, loadoutProto, raiseEvent: false);
-                        CollectLoadout(loadoutProto, ref loadoutLast);
-                        equippedItems.Add(loadoutProto.ID);
-                    }
+                    //HN: цены лодаутов удалены — предметы всегда выдаются бесплатно.
+                    EquipStartingGear(entity.Value, loadoutProto, raiseEvent: false);
+                    CollectLoadout(loadoutProto, ref loadoutLast);
+                    equippedItems.Add(loadoutProto.ID);
                 }
 
                 // If a character cannot afford their current job loadout, ensure they have fallback items for mandatory categories.

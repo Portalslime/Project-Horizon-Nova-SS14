@@ -1,84 +1,72 @@
+#HN: цены лодаутов удалены (всё бесплатно)
 - type: loadout
   id: ContractorClothingBeltPlant
-  price: 500
   equipment:
     belt: ClothingBeltPlant
 
 - type: loadout
   id: ContractorClothingBeltPlantFilled
   name: botanical belt (filled)
-  price: 1500
   equipment:
     belt: ClothingBeltPlantFilled
 
 - type: loadout
   id: ContractorClothingBeltChef
-  price: 500
   equipment:
     belt: ClothingBeltChef
 
 - type: loadout
   id: ContractorClothingBeltChefFilled
   name: chef belt (filled)
-  price: 1500
   equipment:
     belt: ClothingBeltChefFilled
 
 - type: loadout
   id: ContractorClothingBeltStorageWaistbag
-  price: 500
   equipment:
     belt: ClothingBeltStorageWaistbag
 
 - type: loadout
   id: ContractorClothingBeltMedical
-  price: 500
   equipment:
     belt: ClothingBeltMedical
 
 - type: loadout
   id: ContractorClothingBeltMedicalFilled
   name: medical belt (filled)
-  price: 2000
   equipment:
     belt: ClothingBeltMedicalFilled
 
 - type: loadout
   id: ContractorClothingBeltMedicalEMT
-  price: 500
   equipment:
     belt: ClothingBeltMedicalEMT
 
 - type: loadout
   id: ContractorClothingBeltMedicalEMTFilled
   name: EMT belt (filled)
-  price: 2000
   equipment:
     belt: ClothingBeltMedicalEMTFilled
 
 - type: loadout
   id: ContractorClothingBeltUtility
-  price: 500
   equipment:
     belt: ClothingBeltUtility
 
 - type: loadout
   id: ContractorClothingBeltUtilityFilled
   name: utility belt (filled)
-  price: 1500
   equipment:
     belt: ClothingBeltUtilityEngineering
 
 - type: loadout
   id: ContractorClothingBeltSalvageWebbing
-  price: 500
   equipment:
     belt: ClothingBeltSalvageWebbing
 
 - type: loadout
   id: ContractorClothingBeltSalvageWebbingFilledNF
   name: salvage rig (filled)
-  price: 1500
   equipment:
     belt: ClothingBeltSalvageWebbingFilledNF
 
@@ -88,7 +76,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   equipment:
     belt: BoxFolderClipboard
 
@@ -97,7 +84,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 750
   equipment:
     belt: ClothingBeltPilot
 
@@ -107,7 +93,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 1500
   equipment:
     belt: ClothingBeltPilotFilled
 
@@ -116,7 +101,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 750
   equipment:
     belt: ClothingBeltBandolier
 
@@ -125,7 +109,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 750
   equipment:
     belt: ClothingBeltHolster
 
@@ -134,7 +117,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 750
   equipment:
     belt: ClothingBeltChaplainSash
 
@@ -144,7 +126,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 1500
   equipment:
     belt: ClothingBeltChaplainSashFilled
 
@@ -153,7 +134,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 750
   equipment:
     belt: BooksBag
 
@@ -162,7 +142,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 750
   equipment:
     belt: ChemBag
 
@@ -171,7 +150,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 750
   equipment:
     belt: OreBag
 
@@ -180,7 +158,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 750
   equipment:
     belt: PlantBag
 
@@ -189,7 +166,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 750
   equipment:
     belt: ConstructionBag
 
@@ -199,7 +175,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     belt: ClothingBeltMartialBlack
 
@@ -209,7 +184,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   equipment:
     belt: ClothingBeltPunkRandomized
 
@@ -219,7 +193,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1500
   equipment:
     belt: ClothingBeltPunkRandomizedFilled
 
@@ -229,7 +202,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 5000
   equipment:
     belt: ClothingBeltChampion
 
@@ -242,6 +214,5 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFNotStationRep
-  price: 2500
   equipment:
     belt: ClothingBeltSheathFilledHilt

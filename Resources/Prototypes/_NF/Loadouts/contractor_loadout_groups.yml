@@ -806,10 +806,7 @@
   - ContractorNFAshtray
   - ContractorTapeRecorder
   - ContractorSmokingPipeFilledTobacco
-  - ContractorTobaccoPouchBrownFilled
-  - ContractorTobaccoPouchBlueFilled
-  - ContractorTobaccoPouchRedFilled
-  - ContractorTobaccoPouchPurpleFilled
+  #HN: кисеты убраны из лодаута исследователя
   - ContractorVape
   - ContractorCigarGoldCase
   - ContractorMatchbox
@@ -843,8 +840,7 @@
   - ContractorPlushieRGBee
   - ContractorMysterySpaceBladeBox
   - ContractorHoloGraffitiProjector # Punkish (might be annoying)
-  - ContractorCrayonMagic
-  - ContractorSprayPainterMagic
+  #HN: волшебный мелок и магический краскопульт убраны из лодаута исследователя
     # Bureaucracy
   - ContractorBoxFolderMedicalDoctor
   - ContractorBrbSign

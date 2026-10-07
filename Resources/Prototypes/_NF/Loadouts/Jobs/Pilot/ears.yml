@@ -1,5 +1,5 @@
+#HN: цены лодаутов удалены (всё бесплатно)
 - type: loadout
   id: PilotClothingHeadsetAltPilotCommon
-  price: 0
   equipment:
     ears: ClothingHeadsetAltPilotCommon

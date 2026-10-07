@@ -1,9 +1,9 @@
+#HN: цены лодаутов удалены (всё бесплатно)
 - type: loadout
   id: PilotForcedClothingOuterEVASuitPilot
   effects:
   - !type:GroupLoadoutEffect
     proto: NFOuterSuitRequired
-  price: 0
   equipment:
     outerClothing: ClothingOuterEVASuitPilot
 
@@ -12,7 +12,6 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFCoatCapable
-  price: 1200
   equipment:
     outerClothing: ClothingOuterHardsuitPilot
 
@@ -21,6 +20,5 @@
   hideEffects:
   - !type:GroupLoadoutEffect
     proto: NFCoatCapable
-  price: 0
   equipment:
     outerClothing: ClothingOuterCoatBomber

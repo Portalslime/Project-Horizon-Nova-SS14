@@ -1,6 +1,6 @@
+#HN: цены лодаутов удалены (всё бесплатно)
 #T0
 - type: loadout
   id: PilotClothingHandsGlovesPilot
-  price: 0
   equipment:
     gloves: ClothingHandsGlovesPilot

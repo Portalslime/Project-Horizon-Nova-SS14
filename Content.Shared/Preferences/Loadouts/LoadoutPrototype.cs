@@ -68,11 +68,7 @@ public sealed partial class LoadoutPrototype : IPrototype, IEquipmentLoadout
     public List<EntProtoId> Cartridges { get; set; } = new();
     // End Frontier: extra fields
 
-    /// <summary>
-    /// Frontier - the cost of the item simple as
-    /// </summary>
-    [DataField]
-    public int Price = 0;
+    //HN: поле Price удалено — цены лодаутов отключены (всё бесплатно)
 
     /// <summary>
     /// Frontier - optional name of the loadout as it appears in the menu

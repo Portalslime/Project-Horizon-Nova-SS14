@@ -1,3 +1,4 @@
+#HN: цены лодаутов удалены (всё бесплатно)
 - type: loadoutGroup
   id: PantsUnderwear
   name: loadout-bottom-name
@@ -114,7 +115,6 @@
 
 - type: loadout
   id: LoadoutClothingUnderwearBottomBoxersWhite
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersWhite
 
@@ -124,13 +124,11 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesWhite
 
 - type: loadout
   id: LoadoutClothingUnderwearBottomBoxersNuclearOperative
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersNuclearOperative
 
@@ -142,13 +140,11 @@
     - JobNFPirate
     - JobNFPirateCaptain
     - JobNFPirateFirstMate
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersPirate
 
 - type: loadout
   id: LoadoutClothingUnderwearBottomBoxersSyndicateAgent
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersSyndicateAgent
 
@@ -158,7 +154,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobCargoTechnician
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersCargoTechnician
 
@@ -168,7 +163,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobQuartermaster
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersQuartermaster
 
@@ -178,7 +172,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobSalvageSpecialist
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersSalvageSpecialist
 
@@ -188,7 +181,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobBartender
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersBartender
 
@@ -198,7 +190,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobBotanist
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersBotanist
 
@@ -208,7 +199,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobBoxer
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersBoxer
 
@@ -218,7 +208,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobChaplain
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersChaplain
 
@@ -228,7 +217,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobChef
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersChef
 
@@ -238,7 +226,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobClown
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersClown
 
@@ -248,7 +235,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobHeadOfPersonnel
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersHeadofPersonnel
 
@@ -258,7 +244,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobJanitor
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersJanitor
 
@@ -268,7 +253,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobLibrarian
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersLibrarian
 
@@ -278,7 +262,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobMime
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersMime
 
@@ -288,7 +271,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobMusician
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersMusician
 
@@ -298,7 +280,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobReporter
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersReporter
 
@@ -308,7 +289,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobServiceWorker
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersService
 
@@ -318,7 +298,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobZookeeper
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersZoo
 
@@ -328,7 +307,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobCaptain
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersCaptain
 
@@ -342,7 +320,6 @@
     - JobCBURNLeader
     - JobCBURNSierraAgent
     - JobCBURNSierraLeader
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersCBURN
 
@@ -359,7 +336,6 @@
     - JobCentralCommandAdministrator
     - JobCentralCommandOfficer
     - JobCentralCommandSecOfficer
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersCentcomm
 
@@ -369,7 +345,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobDeathSquad
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersDeathSquad
 
@@ -404,7 +379,6 @@
     - JobFSFCommanderCharlie
     - JobFSFSpecialistBravo
     - JobFSFSpecialistCharlie
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersERT
 
@@ -414,7 +388,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobBlueShieldOfficer
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersBlueShieldOfficer
 
@@ -424,7 +397,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobAtmosphericTechnician
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersAtmosphericTechnician
 
@@ -434,7 +406,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobChiefEngineer
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersChiefEngineer
 
@@ -444,7 +415,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobStationEngineer
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersEngineer
 
@@ -454,7 +424,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobSeniorEngineer
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersSeniorEngineer
 
@@ -464,7 +433,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobTechnicalAssistant
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersTechnicalAssistant
 
@@ -474,7 +442,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobIAA
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersIAA
 
@@ -484,7 +451,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobLawyer
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersLawyer
 
@@ -494,7 +460,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobMagistrat
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersMagistrat
 
@@ -504,7 +469,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobChemist
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersChemist
 
@@ -514,7 +478,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobChiefMedicalOfficer
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersCMO
 
@@ -524,7 +487,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobMedicalDoctor
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersDoctor
 
@@ -534,7 +496,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobMedicalIntern
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersIntern
 
@@ -544,7 +505,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobParamedic
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersParamedic
 
@@ -554,7 +514,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobPsychologist
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersPsychologist
 
@@ -564,7 +523,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobSeniorPhysician
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersSeniorPhysician
 
@@ -574,7 +532,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobPathologist
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersPathologist
 
@@ -584,7 +541,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobResearchAssistant
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersResearchAssistant
 
@@ -594,7 +550,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobResearchDirector
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersResearchDirector
 
@@ -604,7 +559,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobScientist
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersScientist
 
@@ -614,7 +568,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobSeniorResearcher
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersSeniorResearcher
 
@@ -624,7 +577,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobBrigmedic
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersBrigmedic
 
@@ -634,7 +586,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobSecurityCadet
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersCadet
 
@@ -644,7 +595,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobDetective
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersDetective
 
@@ -654,7 +604,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobHeadOfSecurity
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersHeadofSecurity
 
@@ -664,7 +613,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobSecurityOfficer
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersSecurityOfficer
 
@@ -674,7 +622,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobSeniorOfficer
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersSeniorOfficer
 
@@ -684,7 +631,6 @@
   - !type:RoleWhitelistLoadoutEffect
     whitelist:
     - JobWarden
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomBoxersWarden
 
@@ -694,7 +640,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesNuclearOperative
 
@@ -709,7 +654,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesPirate
 
@@ -719,7 +663,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesSyndicateAgent
 
@@ -732,7 +675,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesCargoTechnician
 
@@ -745,7 +687,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesQuartermaster
 
@@ -758,7 +699,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesSalvageSpecialist
 
@@ -771,7 +711,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesBartender
 
@@ -784,7 +723,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesBotanist
 
@@ -797,7 +735,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesBoxer
 
@@ -810,7 +747,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesChaplain
 
@@ -823,7 +759,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesChef
 
@@ -836,7 +771,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesClown
 
@@ -849,7 +783,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesHeadofPersonnel
 
@@ -862,7 +795,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesJanitor
 
@@ -875,7 +807,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesLibrarian
 
@@ -888,7 +819,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesMime
 
@@ -901,7 +831,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesMusician
 
@@ -914,7 +843,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesReporter
 
@@ -927,7 +855,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesService
 
@@ -940,7 +867,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesZoo
 
@@ -953,7 +879,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesCaptain
 
@@ -970,7 +895,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesCBURN
 
@@ -990,7 +914,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesCentcomm
 
@@ -1003,7 +926,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesDeathSquad
 
@@ -1041,7 +963,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesERT
 
@@ -1054,7 +975,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesBlueShieldOfficer
 
@@ -1067,7 +987,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesAtmosphericTechnician
 
@@ -1080,7 +999,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesChiefEngineer
 
@@ -1093,7 +1011,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesEngineer
 
@@ -1106,7 +1023,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesSeniorEngineer
 
@@ -1119,7 +1035,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesTechnicalAssistant
 
@@ -1132,7 +1047,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesIAA
 
@@ -1145,7 +1059,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesLawyer
 
@@ -1158,7 +1071,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesMagistrat
 
@@ -1171,7 +1083,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesChemist
 
@@ -1184,7 +1095,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesCMO
 
@@ -1197,7 +1107,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesDoctor
 
@@ -1210,7 +1119,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesIntern
 
@@ -1223,7 +1131,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesParamedic
 
@@ -1236,7 +1143,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesPsychologist
 
@@ -1249,7 +1155,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesSeniorPhysician
 
@@ -1262,7 +1167,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesPathologist
 
@@ -1275,7 +1179,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesResearchAssistant
 
@@ -1288,7 +1191,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesResearchDirector
 
@@ -1301,7 +1203,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesScientist
 
@@ -1314,7 +1215,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesSeniorResearcher
 
@@ -1327,7 +1227,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesBrigmedic
 
@@ -1340,7 +1239,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesCadet
 
@@ -1353,7 +1251,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesDetective
 
@@ -1366,7 +1263,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesHeadofSecurity
 
@@ -1379,7 +1275,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesSecurityOfficer
 
@@ -1392,7 +1287,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesSeniorOfficer
 
@@ -1405,7 +1299,6 @@
   - !type:SexLoadoutEffect
     sex:
     - Female
-  price: 0
   equipment:
     underwearb: ClothingUnderwearBottomPantiesWarden
 

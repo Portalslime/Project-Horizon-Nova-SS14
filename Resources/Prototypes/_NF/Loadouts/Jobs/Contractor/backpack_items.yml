@@ -1,29 +1,26 @@
+#HN: цены лодаутов удалены (всё бесплатно)
 # Smokes:
 #T0
 - type: loadout
   id: ContractorCigPackBlue
-  price: 150
   storage:
     back:
     - CigPackBlue
 
 - type: loadout
   id: ContractorCigPackRed
-  price: 150
   storage:
     back:
     - CigPackRed
 
 - type: loadout
   id: ContractorCigPackBlack
-  price: 150
   storage:
     back:
     - CigPackBlack
 
 - type: loadout
   id: ContractorCigPackGreen
-  price: 150
   storage:
     back:
     - CigPackGreen
@@ -34,7 +31,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   storage:
     back:
     - CigarCase
@@ -44,7 +40,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 200
   storage:
     back:
     - NFAshtray
@@ -54,7 +49,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 600
   storage:
     back:
     - TapeRecorder
@@ -65,7 +59,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 600
   storage:
     back:
     - SmokingPipeFilledTobacco
@@ -75,7 +68,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 600
   storage:
     back:
     - TobaccoPouchBrownFilled
@@ -85,7 +77,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 600
   storage:
     back:
     - TobaccoPouchBlueFilled
@@ -95,7 +86,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 800
   storage:
     back:
     - TobaccoPouchRedFilled
@@ -105,7 +95,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 600
   storage:
     back:
     - TobaccoPouchPurpleFilled
@@ -115,7 +104,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 600
   storage:
     back:
     - Vape
@@ -126,7 +114,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2000
   storage:
     back:
     - CigarGoldCase
@@ -135,7 +122,6 @@
 #T0
 - type: loadout
   id: ContractorMatchbox
-  price: 100
   storage:
     back:
     - Matchbox
@@ -146,7 +132,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 200
   storage:
     back:
     - Lighter
@@ -157,7 +142,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 500
   storage:
     back:
     - FlippoLighter
@@ -168,7 +152,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 5000
   storage:
     back:
     - FlippoEngravedLighter
@@ -177,7 +160,6 @@
 #T0
 - type: loadout
   id: ContractorDrinkFlaskOld
-  price: 250
   storage:
     back:
     - DrinkFlaskOld
@@ -188,7 +170,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   storage:
     back:
     - DrinkShinyFlask
@@ -199,7 +180,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 1000
   storage:
     back:
     - DrinkFlask
@@ -210,7 +190,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2000
   storage:
     back:
     - DrinkVacuumFlask
@@ -219,21 +198,18 @@
 #T0
 - type: loadout
   id: ContractorFlashlightLantern
-  price: 100
   storage:
     back:
     - FlashlightLantern
 
 - type: loadout
   id: ContractorWristwatch
-  price: 500
   storage:
     back:
     - Wristwatch
 
 - type: loadout
   id: ContractorUrnMortuary
-  price: 500
   storage:
     back:
     - UrnMortuary
@@ -244,7 +220,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   storage:
     back:
     - Basketball
@@ -254,7 +229,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   storage:
     back:
     - Football
@@ -264,7 +238,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 300
   storage:
     back:
     - BeachBall
@@ -275,7 +248,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 600
   storage:
     back:
     - CrayonBox
@@ -285,7 +257,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 800
   storage:
     back:
     - SoapNT
@@ -295,7 +266,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 2000
   storage:
     back:
     - CardBoxBlack
@@ -306,7 +276,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2500
   storage:
     back:
     - WristwatchGold
@@ -316,7 +285,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2750
   storage:
     back:
     - SilverRing
@@ -326,7 +294,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 3000
   storage:
     back:
     - GoldRing
@@ -337,7 +304,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 500
   storage:
     back:
     - MonkeyCubeWrapped
@@ -347,7 +313,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 500
   storage:
     back:
     - KoboldCubeWrapped
@@ -359,7 +324,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   storage:
     back:
     - PlushieSharkGrey
@@ -369,7 +333,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   storage:
     back:
     - PlushieSharkBlue
@@ -379,7 +342,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   storage:
     back:
     - PlushieSharkPink
@@ -389,7 +351,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   storage:
     back:
     - HarmonicaInstrument
@@ -399,7 +360,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   storage:
     back:
     - SaxophoneInstrument
@@ -409,7 +369,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 500
   storage:
     back:
     - AcousticGuitarInstrument
@@ -420,7 +379,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT2
-  price: 5000
   storage:
     back:
     - PonderingOrb
@@ -431,7 +389,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 10000
   storage:
     back:
     - PlushieRGBee
@@ -441,7 +398,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 2400
   storage:
     back:
     - MysterySpaceBladeBox
@@ -451,7 +407,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 10000
   storage:
     back:
     - HoloGraffitiProjector
@@ -461,7 +416,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 30000
   storage:
     back:
     - CrayonMagic
@@ -471,7 +425,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3
-  price: 30000
   storage:
     back:
     - SprayPainterMagic
@@ -480,28 +433,24 @@
 #T0
 - type: loadout
   id: ContractorBoxFolderMedicalDoctor
-  price: 500
   storage:
     back:
     - BoxFolderMedicalDoctor
 
 - type: loadout
   id: ContractorBrbSign
-  price: 500
   storage:
     back:
     - BrbSign
 
 - type: loadout
   id: ContractorHandLabeler
-  price: 500
   storage:
     back:
     - HandLabeler
 
 - type: loadout
   id: ContractorStampsApprovedDenied
-  price: 1000
   name: approved and denied stamps
   description: A pair of stamps used for reviewing forms.
   previewEntity: RubberStampApproved
@@ -512,63 +461,54 @@
 
 - type: loadout
   id: ContractorRubberStampClown
-  price: 1500
   storage:
     back:
     - RubberStampClown
 
 - type: loadout
   id: ContractorRubberStampMime
-  price: 1500
   storage:
     back:
     - RubberStampMime
 
 - type: loadout
   id: ContractorRubberStampTrader
-  price: 500
   storage:
     back:
     - RubberStampTrader
 
 - type: loadout
   id: ContractorRubberStampChaplain
-  price: 500
   storage:
     back:
     - RubberStampChaplain
 
 - type: loadout
   id: ContractorRubberStampCaptain
-  price: 500
   storage:
     back:
     - RubberStampCaptain
 
 - type: loadout
   id: ContractorRubberStampLawyer
-  price: 500
   storage:
     back:
     - RubberStampLawyer
 
 - type: loadout
   id: ContractorRubberStampPsychologist
-  price: 500
   storage:
     back:
     - RubberStampPsychologist
 
 - type: loadout
   id: ContractorRubberStampDoctor
-  price: 500
   storage:
     back:
     - RubberStampDoctor
 
 - type: loadout
   id: ContractorRubberStampEngineer
-  price: 500
   storage:
     back:
     - RubberStampEngineer
