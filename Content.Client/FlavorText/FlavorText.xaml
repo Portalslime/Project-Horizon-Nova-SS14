@@ -21,6 +21,9 @@
                             <TextEdit Name="CFlavorTextInput" Access="Public" MinSize="110 140" HorizontalExpand="True" VerticalExpand="True" />
                             <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="False">
                                 <OptionButton Name="CERPStatusOption" Access="Public" MaxHeight="30" HorizontalExpand="True" />
+                                <!--HN: Lust ERP — девственность -->
+                                <OptionButton Name="CVirginityOption" Access="Public" MaxHeight="30" HorizontalExpand="True" Margin="0,4,0,0" />
+                                <OptionButton Name="CAnalVirginityOption" Access="Public" MaxHeight="30" HorizontalExpand="True" Margin="0,4,0,0" />
                                 <RichTextLabel Name="CERPLabelInfo" HorizontalExpand="True" Margin="0,8,0,0" />
                             </BoxContainer>
                         </BoxContainer>

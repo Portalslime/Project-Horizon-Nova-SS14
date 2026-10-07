@@ -10,7 +10,6 @@ using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
 using Content.Shared.Traits;
-using Content.Shared._Lua.ERP;
 using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
@@ -75,8 +74,15 @@ namespace Content.Shared.Preferences
         [DataField]
         public string FlavorText { get; set; } = string.Empty;
 
+        //HN: замена Lua EnumERPStatus на Lust Erp/Virginity (порт панели взаимодействий)
         [DataField]
-        public EnumERPStatus ERPStatus { get; set; } = EnumERPStatus.NO;
+        public Erp Erp { get; set; } = Erp.Ask;
+
+        [DataField]
+        public Virginity Virginity { get; set; } = Virginity.No;
+
+        [DataField]
+        public Virginity AnalVirginity { get; set; } = Virginity.Yes;
 
         // Erida-Start
         [DataField]
@@ -232,7 +238,7 @@ namespace Content.Shared.Preferences
         {
             Name = name;
             FlavorText = flavortext;
-            ERPStatus = (EnumERPStatus)erpStatus;
+            Erp = (Erp)erpStatus; //HN: значение Erp хранится в прежней колонке erpstatus
             // Erida-Start
             OOCFlavorText = oocflavortext;
             CharacterFlavorText = characterflavortext;
@@ -269,7 +275,7 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts)
-            : this(other.Name, other.FlavorText, (int)other.ERPStatus, other.OOCFlavorText, other.CharacterFlavorText,
+            : this(other.Name, other.FlavorText, (int)other.Erp, other.OOCFlavorText, other.CharacterFlavorText,
                 other.GreenFlavorText, other.YellowFlavorText, other.RedFlavorText, other.TagsFlavorText, other.LinksFlavorText,
                 other.NSFWFlavorText, other.NSFWOOCFlavorText, other.NSFWLinksFlavorText, other.NSFWTagsFlavorText,
                 other.Species, other.Voice, other.Age, other.Sex, other.Gender, other.BankBalance, other.Appearance, other.SpawnPriority,
@@ -278,13 +284,15 @@ namespace Content.Shared.Preferences
             YupiAccountCode = other.YupiAccountCode; //Lua
             Width = other.Width; //Horizon
             Height = other.Height; //Horizon
+            Virginity = other.Virginity; //HN: Lust ERP
+            AnalVirginity = other.AnalVirginity; //HN: Lust ERP
         }
 
         /// <summary>Copy constructor</summary>
         public HumanoidCharacterProfile(HumanoidCharacterProfile other)
             : this(other.Name,
                 other.FlavorText,
-                (int)other.ERPStatus,
+                (int)other.Erp,
                 // Erida-Start
                 other.OOCFlavorText,
                 other.CharacterFlavorText,
@@ -426,9 +434,20 @@ namespace Content.Shared.Preferences
         {
             return new(this) { FlavorText = flavorText };
         }
-        public HumanoidCharacterProfile WithERPStatus(EnumERPStatus state)
+        //HN: Lust ERP
+        public HumanoidCharacterProfile WithErp(Erp erp)
         {
-            return new(this) { ERPStatus = state };
+            return new(this) { Erp = erp };
+        }
+
+        public HumanoidCharacterProfile WithVirginity(Virginity virginity)
+        {
+            return new(this) { Virginity = virginity };
+        }
+
+        public HumanoidCharacterProfile WithAnalVirginity(Virginity analVirginity)
+        {
+            return new(this) { AnalVirginity = analVirginity };
         }
 
         // Erida-Start
@@ -787,7 +806,7 @@ namespace Content.Shared.Preferences
                 sex = speciesPrototype.Sexes[0];
 
             if (!configManager.GetCVar(CLVars.IsERP))
-                ERPStatus = EnumERPStatus.NO;
+                Erp = Erp.No;
 
             var age = Math.Clamp(Age, speciesPrototype.MinAge, speciesPrototype.MaxAge);
 

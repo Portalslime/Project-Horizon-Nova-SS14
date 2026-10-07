@@ -480,6 +480,12 @@ public enum LogType
     /// </summary>
     Instrument = 103,
 
+    //HN: порт панели взаимодействий с Lust Station (InteractionsPanel)
+    /// <summary>
+    /// Использование взаимодействий из ERP-панели.
+    /// </summary>
+    Interactions = 105,
+
     // Frontier Station Specific
     #region Frontier Values
     ATMUsage = 200,

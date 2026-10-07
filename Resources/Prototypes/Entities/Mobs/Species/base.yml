@@ -233,6 +233,8 @@
   - type: MobSpeedLimit # Lua
     maxLinearVelocity: 25
   - type: LuaSprint
+  #HN: ERP-панель взаимодействий (порт с Lust Station)
+  - type: Interactions
 
 - type: entity
   save: false

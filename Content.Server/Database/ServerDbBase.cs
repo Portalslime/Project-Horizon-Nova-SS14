@@ -335,7 +335,7 @@ namespace Content.Server.Database
 
             profile.CharacterName = humanoid.Name;
             profile.FlavorText = humanoid.FlavorText;
-            profile.ERPStatus = (int)humanoid.ERPStatus; //Lua
+            profile.ERPStatus = (int)humanoid.Erp; //HN: Lust Erp в прежней колонке erpstatus
             // Erida-Start
             profile.OOCFlavorText = humanoid.OOCFlavorText;
             profile.CharacterFlavorText = humanoid.CharacterFlavorText;

@@ -1,4 +1,4 @@
-using Content.Shared._Lua.ERP;
+using Content.Shared.Humanoid; //HN: замена Lua EnumERPStatus на Lust Erp
 using Content.Shared.Preferences;
 using Robust.Shared.GameStates;
 
@@ -10,21 +10,19 @@ public sealed partial class DetailExaminableComponent : Component
     [DataField, AutoNetworkedField] // Erida-Edit | Removed: "required: true"
     public string Content = string.Empty;
 
-    [DataField("ERPStatus", required: true), AutoNetworkedField]
+    //HN: замена Lua EnumERPStatus на Lust Erp
+    [DataField("Erp", required: true), AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
-    public EnumERPStatus ERPStatus = EnumERPStatus.NO;
+    public Erp Erp = Erp.Ask;
 
     public string GetERPStatusName()
     {
-        switch (ERPStatus)
+        return Erp switch
         {
-            case EnumERPStatus.HALF:
-                return Loc.GetString("humanoid-erp-status-half");
-            case EnumERPStatus.FULL:
-                return Loc.GetString("humanoid-erp-status-full");
-            default:
-                return Loc.GetString("humanoid-erp-status-no");
-        }
+            Erp.Yes => Loc.GetString("humanoid-profile-editor-erp-yes-text"),
+            Erp.Ask => Loc.GetString("humanoid-profile-editor-erp-ask-text"),
+            _ => Loc.GetString("humanoid-profile-editor-erp-no-text"),
+        };
     }
     // Erida-Start
     [DataField, AutoNetworkedField]
@@ -74,7 +72,7 @@ public sealed partial class DetailExaminableComponent : Component
         NSFWOOCContent = profile.NSFWOOCFlavorText;
         NSFWLinksContent = profile.NSFWLinksFlavorText;
         NSFWTagsContent = profile.NSFWTagsFlavorText;
-        ERPStatus = profile.ERPStatus;
+        Erp = profile.Erp; //HN: Lust Erp
     }
     // Erida-End
 }

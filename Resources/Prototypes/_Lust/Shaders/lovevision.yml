@@ -1,0 +1,6 @@
+# Порт с Lust Station (Resources/Prototypes/Shaders/lovevision.yml)
+#HN: LoveVision-оверлей ERP-панели. GradientCircleMask уже есть в шейдерах сборки.
+- type: shader
+  id: LoveVision
+  kind: source
+  path: "/Textures/Shaders/lovevision.swsl"
