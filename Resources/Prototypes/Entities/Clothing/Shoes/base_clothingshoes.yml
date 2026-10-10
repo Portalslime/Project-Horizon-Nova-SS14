@@ -50,6 +50,11 @@
     - Recyclable
     - WhitelistChameleon
   - type: ProtectedFromStepTriggers
+  #HN Start: загрязнение одежды (порт Wega)
+  - type: Dirtable
+    dirtState: shoes
+    equippedDirtState: equipped-shoes
+  #HN End
 
 - type: entity
   abstract: true
@@ -82,6 +87,11 @@
           tags:
           - Knife
           - Holdout #Lua
+  #HN Start: загрязнение одежды (порт Wega)
+  - type: Dirtable
+    dirtState: boots
+    equippedDirtState: equipped-shoes
+  #HN End
 
 - type: entity
   abstract: true
@@ -102,3 +112,8 @@
   - type: TemperatureProtection
     heatingCoefficient: 1.025
     coolingCoefficient: 0.5
+  #HN Start: загрязнение одежды (порт Wega)
+  - type: Dirtable
+    dirtState: jackboots
+    equippedDirtState: equipped-shoes
+  #HN End

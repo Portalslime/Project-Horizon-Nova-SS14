@@ -35,6 +35,11 @@
         Heat: 5 # the average lightbulb only does around four damage!
   - type: DiseaseProtection #Backmen & Ataraxia anti viral
     protection: 0.1
+  #HN Start: загрязнение одежды (порт Wega)
+  - type: Dirtable
+    dirtState: gloves
+    equippedDirtState: equipped-gloves
+  #HN End
 
 - type: entity
   abstract: true

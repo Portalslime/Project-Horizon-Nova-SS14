@@ -75,6 +75,9 @@
   # - type: WirelessNetworkConnection # Frontier - Remove range for long space sensors
   #   range: 1200 # Frontier - Remove range for long space sensors
   # - type: StationLimitedNetwork # Frontier - Remove range for long space sensors
+  #HN Start: загрязнение одежды (порт Wega)
+  - type: Dirtable
+  #HN End
 
 - type: entity
   abstract: true
@@ -84,3 +87,8 @@
   - type: Clothing
     slots: [innerclothing]
     femaleMask: UniformTop
+  #HN Start: загрязнение одежды (порт Wega)
+  - type: Dirtable
+    dirtState: jumpskirt
+    equippedDirtState: equipped-jumpskirt
+  #HN End

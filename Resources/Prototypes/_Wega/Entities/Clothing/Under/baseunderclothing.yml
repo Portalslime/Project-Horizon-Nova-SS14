@@ -46,6 +46,11 @@
   - type: Tag
     tags:
     - ClothMade
+  #HN Start: загрязнение белья (порт Wega). Отдельных спрайтов под бельё нет — берём jumpsuit.
+  - type: Dirtable
+    dirtState: jumpsuit
+    equippedDirtState: equipped-jumpsuit
+  #HN End
 
 - type: entity
   abstract: true
@@ -111,3 +116,8 @@
   - type: Tag
     tags:
     - ClothMade
+  #HN Start: загрязнение белья (порт Wega). Отдельных спрайтов под бельё нет — берём jumpsuit.
+  - type: Dirtable
+    dirtState: jumpsuit
+    equippedDirtState: equipped-jumpsuit
+  #HN End

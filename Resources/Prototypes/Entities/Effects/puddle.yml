@@ -207,6 +207,7 @@
   - type: EdgeSpreader
     id: Puddle
   - type: StepTrigger
+  - type: DirtSource #HN: загрязнение одежды (порт Wega)
   - type: Drink
     delay: 3
     transferAmount: 1

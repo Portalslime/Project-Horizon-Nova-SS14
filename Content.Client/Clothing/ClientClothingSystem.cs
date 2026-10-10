@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using Content.Client.DisplacementMap;
+using Content.Client.DirtVisuals; //HN: порт загрязнения одежды с Wega
 using Content.Client.Inventory;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
@@ -57,6 +58,7 @@ public sealed class ClientClothingSystem : ClothingSystem
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly DisplacementMapSystem _displacement = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly DirtVisualsSystem _dirt = default!; //HN: порт загрязнения одежды с Wega
 
     public override void Initialize()
     {
@@ -361,6 +363,11 @@ public sealed class ClientClothingSystem : ClothingSystem
                 }
             }
         }
+
+        //HN Start: порт загрязнения одежды с Wega
+        _dirt.TryAddEquipmentDirtLayer(equipee, equipment, inventory, sprite, clothingComponent, slotDef,
+            slotLayerExists, ref index, displacementData, revealedLayers);
+        //HN End
 
         RaiseLocalEvent(equipment, new EquipmentVisualsUpdatedEvent(equipee, slot, revealedLayers), true);
     }

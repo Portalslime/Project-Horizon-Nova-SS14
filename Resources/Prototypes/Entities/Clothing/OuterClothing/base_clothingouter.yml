@@ -33,6 +33,11 @@
     state: icon
   - type: StaticPrice # Frontier: setting base price to make material arbitrage happier
     price: 30 # Frontier
+  #HN Start: загрязнение одежды (порт Wega)
+  - type: Dirtable
+    dirtState: coat
+    equippedDirtState: equipped-coat
+  #HN End
 
 # База только для космических скафандров (EVA, хардсьют, софтсьют)
 - type: entity
@@ -206,6 +211,11 @@
   - type: StaticPrice # Frontier
     price: 20 # Frontier
     vendPrice: 1500 # Frontier
+  #HN Start: загрязнение одежды (порт Wega)
+  - type: Dirtable
+    dirtState: hardsuit
+    equippedDirtState: equipped-hardsuit
+  #HN End
 
 - type: entity
   abstract: true
@@ -237,6 +247,11 @@
     slots: OUTERCLOTHING
   - type: DiseaseProtection #Backmen & Ataraxia anti viral
     protection: 0.3
+  #HN Start: загрязнение одежды (порт Wega)
+  - type: Dirtable
+    dirtState: evasuit
+    equippedDirtState: equipped-evasuit
+  #HN End
 #  - type: PhysicalComposition # Frontier
 #    materialComposition: # Frontier
 #      Durathread: 100 # Frontier

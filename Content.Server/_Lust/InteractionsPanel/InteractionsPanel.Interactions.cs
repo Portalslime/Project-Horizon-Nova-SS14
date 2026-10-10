@@ -10,6 +10,7 @@ using Content.Shared.Chat;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Clothing;
 using Content.Shared.Database;
+using Content.Shared.DirtVisuals; //HN: загрязнение комбинезона (порт системы грязи с Wega)
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Humanoid;
@@ -27,9 +28,11 @@ namespace Content.Server._Lust.InteractionsPanel;
 public partial class InteractionsPanel
 {
     [Dependency] private readonly PuddleSystem _puddle = default!;
+    [Dependency] private readonly SharedDirtSystem _dirt = default!; //HN: загрязнение комбинезона (порт системы грязи с Wega)
 
     private const float LoveDecayRate = 0.5f;
     private const float OrgasmCooldownSeconds = 15f;
+    private const float OrgasmDirtAmount = 25f; //HN: загрязнение комбинезона спермой
 
     private void InitializeInteractions()
     {
@@ -386,7 +389,14 @@ public partial class InteractionsPanel
         _chatSystem.TryEmoteWithChat(uid, "Moan");
 
         if (TryComp<HumanoidAppearanceComponent>(uid, out var humanoidAppearanceComponent) && humanoidAppearanceComponent.Sex == Sex.Male)
+        {
             SpawnSemen("Semen", Transform(uid).Coordinates);
+
+            //HN Start: загрязнение белья и комбинезона спермой (порт системы грязи с Wega)
+            _dirt.AddDirtToSlots(uid, OrgasmDirtAmount, _dirt.GetReagentColor("Semen"),
+                "underwearb", "underweart", "jumpsuit");
+            //HN End
+        }
 
         SetCooldown(uid, "orgasm", TimeSpan.FromSeconds(OrgasmCooldownSeconds));
         Dirty(uid, comp);

@@ -28,6 +28,11 @@
     tags:
     - ClothMade
     - WhitelistChameleon
+  #HN Start: загрязнение одежды (порт Wega)
+  - type: Dirtable
+    dirtState: hat
+    equippedDirtState: equipped-hat
+  #HN End
 
 - type: entity
   abstract: true
@@ -108,6 +113,11 @@
   - type: ContainerContainer
     containers:
       cell_slot: !type:ContainerSlot {}
+  #HN Start: загрязнение одежды (порт Wega)
+  - type: Dirtable
+    dirtState: helmet
+    equippedDirtState: equipped-helmet
+  #HN End
 
 - type: entity
   abstract: true
@@ -146,6 +156,11 @@
     - HeadTop
     - HeadSide
     - Head
+  #HN Start: загрязнение одежды (порт Wega)
+  - type: Dirtable
+    dirtState: helmet
+    equippedDirtState: equipped-helmet
+  #HN End
 
 - type: entity
   abstract: true
@@ -195,6 +210,11 @@
     - HeadTop
     - HeadSide
     - Head
+  #HN Start: загрязнение одежды (порт Wega)
+  - type: Dirtable
+    dirtState: helmet
+    equippedDirtState: equipped-helmet
+  #HN End
 
 - type: entity
   abstract: true
@@ -291,3 +311,8 @@
     - Hair
     - HeadTop
     - HeadSide
+  #HN Start: загрязнение одежды (порт Wega)
+  - type: Dirtable
+    dirtState: winterhood
+    equippedDirtState: equipped-winterhood
+  #HN End

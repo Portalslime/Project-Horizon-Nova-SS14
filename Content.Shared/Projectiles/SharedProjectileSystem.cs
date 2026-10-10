@@ -6,6 +6,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
+using Content.Shared.DirtVisuals; //HN: загрязнение одежды (порт Wega)
 using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.Hands.EntitySystems;
@@ -63,6 +64,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly SharedDirtSystem _dirt = default!; //HN: загрязнение одежды (порт Wega)
 
     private float _minRaycastVelocity;
     private bool _adaptiveRaycasting;
@@ -178,6 +180,11 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         {
             modifiedDamage = new DamageSpecifier(ev.Damage);
         }
+
+        //HN Start: загрязнение одежды кровью от попадания (порт Wega, ProjectileSystem)
+        if (_net.IsServer && component.Shooter is { } bloodShooter && modifiedDamage.GetTotal() > 0)
+            _dirt.AddBloodDirtFromDamage(target, bloodShooter, modifiedDamage, true);
+        //HN End
 
         var deleted = Deleted(target);
         var filter = Filter.Pvs(coordinates, entityMan: EntityManager);

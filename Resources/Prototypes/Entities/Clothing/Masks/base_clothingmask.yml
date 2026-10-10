@@ -21,6 +21,11 @@
   # Goobstation edit end
   - type: StaticPrice
     price: 25
+  #HN Start: загрязнение одежды (порт Wega)
+  - type: Dirtable
+    dirtState: mask
+    equippedDirtState: equipped-mask
+  #HN End
 
 - type: entity
   abstract: true
