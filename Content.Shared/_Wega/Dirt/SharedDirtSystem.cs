@@ -26,6 +26,13 @@ public sealed partial class SharedDirtSystem : EntitySystem
 
     public const float MaxDirtLevel = 100f;
     private const float DirtAccumulationRate = 0.01f;
+
+    /// <summary>
+    /// HN: во сколько раз сильнее пачкает (и смывает) контакт с лужей/душем. В Wega было 1,
+    /// при этом пачкалась только обувь и незаметно.
+    /// </summary>
+    private const float ContactDirtMultiplier = 10f;
+
     private ProtoId<TagPrototype> _hardsuit = "Hardsuit";
 
     public override void Initialize()
@@ -118,12 +125,14 @@ public sealed partial class SharedDirtSystem : EntitySystem
 
     public void ApplyDirtToClothing(EntityUid wearer, Solution solution)
     {
-        var slots = new List<string> { "shoes" };
+        // HN: контакт с лужей пачкает не только обувь — бельё и комбинезон в первую очередь,
+        // как и испражнения (в Wega при ходьбе пачкалась только обувь).
+        var slots = new List<string> { "underwearb", "underweart", "jumpsuit", "socks", "shoes" };
 
         var isLyingDown = TryComp<StandingStateComponent>(wearer, out var standing) && !standing.Standing;
         if (isLyingDown)
         {
-            slots.AddRange(new[] { "outerClothing", "jumpsuit", "gloves", "belt", "mask", "head" });
+            slots.AddRange(new[] { "outerClothing", "gloves", "belt", "mask", "head" });
         }
         else
         {
@@ -135,7 +144,7 @@ public sealed partial class SharedDirtSystem : EntitySystem
         foreach (var slot in slots)
         {
             if (_inventory.TryGetSlotEntity(wearer, slot, out var clothing))
-                UpdateDirtFromSolution(clothing.Value, solution);
+                UpdateDirtFromSolution(clothing.Value, solution, ContactDirtMultiplier);
         }
     }
 
@@ -145,7 +154,7 @@ public sealed partial class SharedDirtSystem : EntitySystem
             UpdateDirtFromSolution(clothing.Value, solution);
     }
 
-    private void UpdateDirtFromSolution(EntityUid uid, Solution solution, DirtableComponent? comp = null)
+    private void UpdateDirtFromSolution(EntityUid uid, Solution solution, float rateMultiplier = 1f, DirtableComponent? comp = null)
     {
         if (!TryComp(uid, out comp) || solution.Volume == 0)
             return;
@@ -155,12 +164,12 @@ public sealed partial class SharedDirtSystem : EntitySystem
 
         if (isOnlyWater)
         {
-            float removedDirt = Math.Min(solution.Volume.Float() * DirtAccumulationRate * 2f, comp.CurrentDirtLevel.Float());
+            float removedDirt = Math.Min(solution.Volume.Float() * DirtAccumulationRate * 2f * rateMultiplier, comp.CurrentDirtLevel.Float());
             CleanDirt(uid, removedDirt);
             return;
         }
 
-        float addedDirt = Math.Min(solution.Volume.Float() * DirtAccumulationRate, 10f);
+        float addedDirt = Math.Min(solution.Volume.Float() * DirtAccumulationRate * rateMultiplier, 10f * rateMultiplier);
         comp.CurrentDirtLevel = FixedPoint2.New(
             Math.Min(comp.CurrentDirtLevel.Float() + addedDirt, MaxDirtLevel)
         );
