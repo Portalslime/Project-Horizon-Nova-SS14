@@ -33,6 +33,16 @@ public sealed partial class SharedDirtSystem : EntitySystem
     /// </summary>
     private const float ContactDirtMultiplier = 10f;
 
+    /// <summary>
+    /// HN: множитель душа — он моет верхние слои заметно сильнее контакта с лужей.
+    /// </summary>
+    private const float ShowerDirtMultiplier = 50f;
+
+    // HN: защита нижних слоёв верхними (замедляет и пачкание, и смывание).
+    private const float OuterClothingProtection = 0.5f; // куртка -> комбинезон: на 50% медленнее
+    private const float JumpsuitProtection = 0.1f;      // комбинезон -> бельё: на 90% медленнее
+    private const float ShoesProtection = 0.1f;         // обувь -> носки: на 90% медленнее
+
     private ProtoId<TagPrototype> _hardsuit = "Hardsuit";
 
     public override void Initialize()
@@ -126,13 +136,13 @@ public sealed partial class SharedDirtSystem : EntitySystem
     public void ApplyDirtToClothing(EntityUid wearer, Solution solution)
     {
         // HN: контакт с лужей пачкает не только обувь — бельё и комбинезон в первую очередь,
-        // как и испражнения (в Wega при ходьбе пачкалась только обувь).
-        var slots = new List<string> { "underwearb", "underweart", "jumpsuit", "socks", "shoes" };
+        // как и испражнения (в Wega при ходьбе пачкалась только обувь). Головные уборы тоже пачкаются.
+        var slots = new List<string> { "underwearb", "underweart", "jumpsuit", "socks", "shoes", "head" };
 
         var isLyingDown = TryComp<StandingStateComponent>(wearer, out var standing) && !standing.Standing;
         if (isLyingDown)
         {
-            slots.AddRange(new[] { "outerClothing", "gloves", "belt", "mask", "head" });
+            slots.AddRange(new[] { "outerClothing", "gloves", "belt", "mask" });
         }
         else
         {
@@ -144,14 +154,56 @@ public sealed partial class SharedDirtSystem : EntitySystem
         foreach (var slot in slots)
         {
             if (_inventory.TryGetSlotEntity(wearer, slot, out var clothing))
-                UpdateDirtFromSolution(clothing.Value, solution, ContactDirtMultiplier);
+            {
+                var rate = ContactDirtMultiplier * GetLayerDirtMultiplier(wearer, slot);
+                UpdateDirtFromSolution(clothing.Value, solution, rate);
+            }
         }
     }
 
     public void ApplyDirtToClothing(EntityUid wearer, Solution solution, string slot)
     {
         if (_inventory.TryGetSlotEntity(wearer, slot, out var clothing))
-            UpdateDirtFromSolution(clothing.Value, solution);
+            UpdateDirtFromSolution(clothing.Value, solution, GetLayerDirtMultiplier(wearer, slot));
+    }
+
+    /// <summary>
+    /// HN: душ обрабатывает только верхние (внешние) слои — бельё и носки под ними остаются грязными.
+    /// </summary>
+    public void ApplyDirtToUpperClothing(EntityUid wearer, Solution solution)
+    {
+        var slots = new[] { "outerClothing", "jumpsuit", "gloves", "head", "mask", "shoes" };
+        foreach (var slot in slots)
+        {
+            if (_inventory.TryGetSlotEntity(wearer, slot, out var clothing))
+                UpdateDirtFromSolution(clothing.Value, solution, ShowerDirtMultiplier);
+        }
+    }
+
+    /// <summary>
+    /// HN: верхняя одежда прикрывает нижние слои — те пачкаются (и отмываются) медленнее.
+    /// Куртка -> комбинезон ×0.5, комбинезон -> бельё ×0.1, обувь -> носки ×0.1.
+    /// </summary>
+    private float GetLayerDirtMultiplier(EntityUid wearer, string slot)
+    {
+        switch (slot)
+        {
+            case "jumpsuit":
+                if (_inventory.TryGetSlotEntity(wearer, "outerClothing", out _))
+                    return OuterClothingProtection;
+                break;
+            case "underwearb":
+            case "underweart":
+                if (_inventory.TryGetSlotEntity(wearer, "jumpsuit", out _))
+                    return JumpsuitProtection;
+                break;
+            case "socks":
+                if (_inventory.TryGetSlotEntity(wearer, "shoes", out _))
+                    return ShoesProtection;
+                break;
+        }
+
+        return 1f;
     }
 
     private void UpdateDirtFromSolution(EntityUid uid, Solution solution, float rateMultiplier = 1f, DirtableComponent? comp = null)
@@ -174,26 +226,27 @@ public sealed partial class SharedDirtSystem : EntitySystem
             Math.Min(comp.CurrentDirtLevel.Float() + addedDirt, MaxDirtLevel)
         );
 
-        if (comp.CurrentDirtLevel >= MaxDirtLevel)
-            return;
-
-        var colors = new List<Color>();
-        foreach (var reagent in solution.Contents)
+        if (comp.CurrentDirtLevel < MaxDirtLevel)
         {
-            if (reagent.Reagent.Prototype == "Water")
-                continue;
+            var colors = new List<Color>();
+            foreach (var reagent in solution.Contents)
+            {
+                if (reagent.Reagent.Prototype == "Water")
+                    continue;
 
-            if (!_prototype.TryIndex<ReagentPrototype>(reagent.Reagent.Prototype, out var proto))
-                continue;
+                if (!_prototype.TryIndex<ReagentPrototype>(reagent.Reagent.Prototype, out var proto))
+                    continue;
 
-            colors.Add(proto.SubstanceColor);
+                colors.Add(proto.SubstanceColor);
+            }
+
+            if (colors.Count > 0)
+                comp.DirtColor = BlendColorsProperly(comp.DirtColor, colors);
         }
 
-        if (colors.Count > 0)
-        {
-            comp.DirtColor = BlendColorsProperly(comp.DirtColor, colors);
-            Dirty(uid, comp);
-        }
+        // HN: состояние шлём всегда — иначе при пустом списке цветов клиент не увидит грязь,
+        // а при достижении максимума уровень не дойдёт до клиента.
+        Dirty(uid, comp);
     }
 
     public void CleanDirt(EntityUid uid, float amount, float efficiency = 1f, DirtableComponent? comp = null)

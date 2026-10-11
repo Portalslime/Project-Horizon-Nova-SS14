@@ -388,6 +388,23 @@
         amount: 1
         defaultPrototype: MicroprocessorEconomy1
 
+# Horizon: порт стиральной машины с Wega
+- type: entity
+  id: WashingMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: washing machine board
+  description: A machine printed circuit board for a washing machine.
+  components:
+  - type: Sprite
+    state: service
+  - type: MachineBoard
+    prototype: WashingMachine
+    requirements: # Frontier
+      Manipulator: 1 # Frontier stackRequirements<requirements
+    stackRequirements:
+      Glass: 2
+      Cable: 2
+
 - type: entity
   id: VaccinatorMachineCircuitboard
   parent: BaseMachineCircuitboard

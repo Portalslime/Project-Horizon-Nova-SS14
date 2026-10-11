@@ -33,6 +33,7 @@
   - PlumbingComposterMachineCircuitboard # Horizon
   # - BiogeneratorMachineCircuitboard # Frontier: dynamic
   - UniformPrinterMachineCircuitboard
+  - WashingMachineCircuitboard #HN: стиральная машина (порт Wega)
   # - MicrowaveMachineCircuitboard # Frontier: dynamic
   # - ReagentGrinderMachineCircuitboard # Frontier: dynamic
   # - ElectricGrillMachineCircuitboard # Frontier: dynamic

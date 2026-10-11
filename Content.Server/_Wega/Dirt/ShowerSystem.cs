@@ -137,8 +137,9 @@ namespace Content.Server.Shower
             foreach (var mob in mobsInRange)
             {
                 var splitSolution = _solutionContainer.SplitSolution(showerSol.Value, FixedPoint2.New(amountPerTarget));
-                //HN Start: загрязнение одежды — вода смывает грязь, прочие реагенты пачкают
-                _dirt.ApplyDirtToClothing(mob, splitSolution);
+                //HN Start: загрязнение одежды — вода смывает грязь, прочие реагенты пачкают.
+                // Душ обрабатывает только верхние слои, бельё и носки остаются.
+                _dirt.ApplyDirtToUpperClothing(mob, splitSolution);
                 //HN End
                 _reactive.DoEntityReaction(mob, splitSolution, ReactionMethod.Touch);
             }

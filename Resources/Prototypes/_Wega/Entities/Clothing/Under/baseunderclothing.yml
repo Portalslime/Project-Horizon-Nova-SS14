@@ -82,6 +82,11 @@
   - type: Tag
     tags:
     - ClothMade
+  #HN Start: загрязнение носков (порт Wega). Отдельных спрайтов нет — берём jumpsuit.
+  - type: Dirtable
+    dirtState: jumpsuit
+    equippedDirtState: equipped-jumpsuit
+  #HN End
 
 - type: entity
   abstract: true

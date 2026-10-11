@@ -450,6 +450,12 @@
   id: UniformPrinterMachineCircuitboard
   result: UniformPrinterMachineCircuitboard
 
+# Horizon: порт стиральной машины с Wega
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
+  id: WashingMachineCircuitboard
+  result: WashingMachineCircuitboard
+
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseGeneralMachineRecipeCategory ]
   id: SheetifierMachineCircuitboard
