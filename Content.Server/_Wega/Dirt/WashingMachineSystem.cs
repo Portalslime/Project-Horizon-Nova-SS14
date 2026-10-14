@@ -129,7 +129,10 @@ public sealed partial class WashingMachineSystem : EntitySystem
         foreach (var entity in container.ContainedEntities.ToList())
         {
             if (HasComp<DirtableComponent>(entity))
+            {
                 _dirt.CleanDirt(entity, 100f);
+                _dirt.ResetWetness(entity); //HN: стирка сушит
+            }
 
             // This is to clean the switchable clothes
             var attachedClothing = new List<EntityUid>();
@@ -143,7 +146,10 @@ public sealed partial class WashingMachineSystem : EntitySystem
             foreach (var clothing in attachedClothing)
             {
                 if (HasComp<DirtableComponent>(clothing))
+                {
                     _dirt.CleanDirt(clothing, 100f);
+                    _dirt.ResetWetness(clothing); //HN: стирка сушит
+                }
             }
         }
 

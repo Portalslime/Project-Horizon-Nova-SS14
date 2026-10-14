@@ -1,5 +1,6 @@
 using Content.Client.Clothing;
 using Content.Client.DisplacementMap;
+using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.DisplacementMap;
 using Content.Shared.DirtVisuals;
@@ -27,6 +28,7 @@ public sealed partial class DirtVisualsSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<DirtableComponent, ComponentHandleState>(OnHandleState);
+        SubscribeLocalEvent<DirtableComponent, EquipmentVisualsUpdatedEvent>(OnEquipmentVisualsUpdated);
     }
 
     private void OnHandleState(EntityUid uid, DirtableComponent comp, ref ComponentHandleState args)
@@ -36,6 +38,7 @@ public sealed partial class DirtVisualsSystem : EntitySystem
 
         comp.CurrentDirtLevel = state.CurrentDirtLevel;
         comp.DirtColor = state.DirtColor;
+        comp.CurrentWetness = state.CurrentWetness;
         UpdateDirtVisuals(uid, comp);
     }
 
@@ -77,6 +80,41 @@ public sealed partial class DirtVisualsSystem : EntitySystem
 
         if (TryComp(Transform(uid).ParentUid, out InventoryComponent? inventory))
             _clothing.InitClothing(Transform(uid).ParentUid, inventory);
+
+        // HN: мокрая одежда темнеет/синеет.
+        _sprite.SetColor(uid, GetWetTint(comp.CurrentWetness));
+    }
+
+    // HN: оттенок мокрости — от белого (сухо) к холодному синему.
+    private static Color GetWetTint(float wetness)
+    {
+        var t = Math.Clamp(wetness / SharedDirtSystem.MaxWetness, 0f, 1f);
+        return Color.InterpolateBetween(Color.White, Color.FromHex("#5a7ea8"), t * 0.6f);
+    }
+
+    // HN: тонируем надетые слои одежды — их цвета лежат не на предмете, а на спрайте носителя.
+    private void OnEquipmentVisualsUpdated(EntityUid uid, DirtableComponent comp, EquipmentVisualsUpdatedEvent args)
+    {
+        if (comp.CurrentWetness <= 0f)
+            return;
+
+        if (!TryComp<SpriteComponent>(args.Equipee, out var sprite))
+            return;
+
+        var tint = GetWetTint(comp.CurrentWetness);
+        foreach (var key in args.RevealedLayers)
+        {
+            if (key.StartsWith("dirt_"))
+                continue;
+
+            if (!_sprite.LayerMapTryGet((args.Equipee, sprite), key, out var index, false))
+                continue;
+
+            if (sprite[index] is not SpriteComponent.Layer layer)
+                continue;
+
+            _sprite.LayerSetColor((args.Equipee, sprite), index, layer.Color * tint);
+        }
     }
 
     public void TryAddEquipmentDirtLayer(

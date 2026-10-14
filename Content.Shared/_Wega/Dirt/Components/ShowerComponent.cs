@@ -26,6 +26,12 @@ public sealed partial class ShowerComponent : Component
 
     [DataField("waterAmount")]
     public float WaterAmount = 20f;
+
+    /// <summary>
+    /// HN: если false — душ работает без воды из бака (debug): не тратит раствор и не разливает лужу.
+    /// </summary>
+    [DataField("requiresWater")]
+    public bool RequiresWater = true;
 }
 
 [Serializable, NetSerializable]

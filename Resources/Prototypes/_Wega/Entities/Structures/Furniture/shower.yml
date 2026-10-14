@@ -68,3 +68,14 @@
     graph: ShowerGraph
     node: shower
   - type: Appearance
+
+# HN: debug-душ — работает без воды (для тестов). Мочит и моет так же, как обычный.
+- type: entity
+  parent: Shower
+  id: ShowerDebug
+  suffix: Debug
+  name: debug shower
+  description: "Debug shower: works without a water supply, same spray as a regular shower."
+  components:
+  - type: Shower
+    requiresWater: false

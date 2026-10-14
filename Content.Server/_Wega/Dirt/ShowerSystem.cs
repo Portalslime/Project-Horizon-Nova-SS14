@@ -87,11 +87,15 @@ namespace Content.Server.Shower
                 return;
 
             // Horizon: the shower is fed from the plumbing supply line, so it can be empty. No water, no spray.
-            if (!_solutionContainer.TryGetSolution(uid, ShowerSolutionName, out _, out var solution) ||
-                solution.Volume <= 0)
+            // HN: debug-душ (requiresWater: false) работает без воды.
+            if (component.RequiresWater)
             {
-                _popup.PopupEntity(Loc.GetString("shower-no-water"), uid);
-                return;
+                if (!_solutionContainer.TryGetSolution(uid, ShowerSolutionName, out _, out var solution) ||
+                    solution.Volume <= 0)
+                {
+                    _popup.PopupEntity(Loc.GetString("shower-no-water"), uid);
+                    return;
+                }
             }
 
             component.IsSpraying = true;
@@ -118,6 +122,22 @@ namespace Content.Server.Shower
 
         private void SprayWater(EntityUid uid, ShowerComponent component)
         {
+            var coordinates = Transform(uid).Coordinates;
+            var mobsInRange = _lookup.GetEntitiesInRange<ReactiveComponent>(coordinates, 0.5f);
+            var amountPerTarget = component.WaterAmount / (mobsInRange.Count + 1);
+
+            // HN: debug-душ — бесконечная вода, лужу не разливает.
+            if (!component.RequiresWater)
+            {
+                foreach (var mob in mobsInRange)
+                {
+                    var debugSolution = new Solution(component.WaterReagent, FixedPoint2.New(amountPerTarget));
+                    ApplyShowerToMob(mob, debugSolution);
+                }
+
+                return;
+            }
+
             if (!_solutionContainer.TryGetSolution(uid, ShowerSolutionName, out var showerSol, out var solution))
             {
                 StopSpraying(uid, component);
@@ -130,22 +150,25 @@ namespace Content.Server.Shower
                 return;
             }
 
-            var coordinates = Transform(uid).Coordinates;
-            var mobsInRange = _lookup.GetEntitiesInRange<ReactiveComponent>(coordinates, 0.5f);
-            var amountPerTarget = component.WaterAmount / (mobsInRange.Count + 1);
-
             foreach (var mob in mobsInRange)
             {
                 var splitSolution = _solutionContainer.SplitSolution(showerSol.Value, FixedPoint2.New(amountPerTarget));
-                //HN Start: загрязнение одежды — вода смывает грязь, прочие реагенты пачкают.
-                // Душ обрабатывает только верхние слои, бельё и носки остаются.
-                _dirt.ApplyDirtToUpperClothing(mob, splitSolution);
-                //HN End
-                _reactive.DoEntityReaction(mob, splitSolution, ReactionMethod.Touch);
+                ApplyShowerToMob(mob, splitSolution);
             }
 
             var floorSolution = _solutionContainer.SplitSolution(showerSol.Value, FixedPoint2.New(amountPerTarget));
             _puddle.TrySpillAt(coordinates, floorSolution, out _);
+        }
+
+        private void ApplyShowerToMob(EntityUid mob, Solution splitSolution)
+        {
+            //HN Start: загрязнение одежды — вода смывает грязь, прочие реагенты пачкают.
+            // Душ обрабатывает только верхние слои, бельё и носки остаются.
+            _dirt.ApplyDirtToUpperClothing(mob, splitSolution);
+            //HN: под душем вся одежда (кроме сумки) постепенно намокает.
+            _dirt.WetClothing(mob, splitSolution.Volume.Float());
+            //HN End
+            _reactive.DoEntityReaction(mob, splitSolution, ReactionMethod.Touch);
         }
     }
 }

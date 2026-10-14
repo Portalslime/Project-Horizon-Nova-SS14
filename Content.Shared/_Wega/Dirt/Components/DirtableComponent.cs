@@ -29,6 +29,12 @@ public sealed partial class DirtableComponent : Component
     [DataField, ViewVariables(VVAccess.ReadOnly)]
     public Color DirtColor { get; set; } = Color.White;
 
+    /// <summary>
+    /// HN: влажность одежды, 0..100. Намокает под душем, сохнет со временем.
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
+    public float CurrentWetness { get; set; }
+
     [ViewVariables]
     public bool IsDirty => CurrentDirtLevel >= Threshold;
 }
@@ -39,11 +45,13 @@ public sealed partial class DirtableComponentState : ComponentState
     public FixedPoint2 CurrentDirtLevel;
     public Color DirtColor;
     public bool IsDirty;
+    public float CurrentWetness;
 
-    public DirtableComponentState(FixedPoint2 currentDirtLevel, Color dirtColor, bool isDirty)
+    public DirtableComponentState(FixedPoint2 currentDirtLevel, Color dirtColor, bool isDirty, float currentWetness)
     {
         CurrentDirtLevel = currentDirtLevel;
         DirtColor = dirtColor;
         IsDirty = isDirty;
+        CurrentWetness = currentWetness;
     }
 }

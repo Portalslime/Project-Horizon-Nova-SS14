@@ -4,6 +4,9 @@ dirt-examined-level-low = слабое
 dirt-examined-level-medium = среднее
 dirt-examined-level-high = сильное
 
+# Намокание (HN)
+wet-examined-message = [color=#5a7ea8]Мокро на {$percentage}%[/color]
+
 # Стиральная машина (порт Wega)
 washing-machine-verb-start = Начать стирку
 
