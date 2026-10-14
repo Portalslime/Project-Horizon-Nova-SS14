@@ -58,6 +58,15 @@
     board: WashingMachineCircuitboard
   - type: Lock
     locked: false
+  # HN: бак для моющего средства (SpaceCleaner) — полная стирка.
+  - type: SolutionContainerManager
+    solutions:
+      cleaner:
+        maxVol: 50
+  - type: RefillableSolution
+    solution: cleaner
+  - type: ExaminableSolution
+    solution: cleaner
   - type: EntityStorage
     whitelist:
       components:

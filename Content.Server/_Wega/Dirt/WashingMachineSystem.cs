@@ -3,8 +3,10 @@ using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Storage.Components;
 using Content.Shared.Audio;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Clothing.Components;
 using Content.Shared.DirtVisuals;
+using Content.Shared.FixedPoint;
 using Content.Shared.Jittering;
 using Content.Shared.Lock;
 using Content.Shared.Power;
@@ -25,6 +27,7 @@ public sealed partial class WashingMachineSystem : EntitySystem
     [Dependency] private SharedDirtSystem _dirt = default!;
     [Dependency] private SharedJitteringSystem _jittering = default!;
     [Dependency] private LockSystem _lock = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
 
     public override void Initialize()
     {
@@ -125,14 +128,15 @@ public sealed partial class WashingMachineSystem : EntitySystem
 
     private void FinishWashing(EntityUid uid, WashingMachineComponent component)
     {
+        // HN: со средством — полная чистка и сушка, без — частичная.
+        var full = TryUseCleaner(uid, component);
+        var cleanAmount = full ? component.FullCleanAmount : component.PartialCleanAmount;
+
         var container = _container.GetContainer(uid, "entity_storage");
         foreach (var entity in container.ContainedEntities.ToList())
         {
             if (HasComp<DirtableComponent>(entity))
-            {
-                _dirt.CleanDirt(entity, 100f);
-                _dirt.ResetWetness(entity); //HN: стирка сушит
-            }
+                WashClothing(entity, cleanAmount, full);
 
             // This is to clean the switchable clothes
             var attachedClothing = new List<EntityUid>();
@@ -146,14 +150,42 @@ public sealed partial class WashingMachineSystem : EntitySystem
             foreach (var clothing in attachedClothing)
             {
                 if (HasComp<DirtableComponent>(clothing))
-                {
-                    _dirt.CleanDirt(clothing, 100f);
-                    _dirt.ResetWetness(clothing); //HN: стирка сушит
-                }
+                    WashClothing(clothing, cleanAmount, full);
             }
         }
 
         _audio.PlayPvs(component.FinishSound, uid);
         StopWashing(uid, component);
+    }
+
+    private void WashClothing(EntityUid clothing, float cleanAmount, bool full)
+    {
+        _dirt.CleanDirt(clothing, cleanAmount);
+
+        if (full)
+            _dirt.ResetWetness(clothing); //HN: стирка со средством сушит
+    }
+
+    /// <summary>
+    /// HN: если в баке достаточно моющего средства — списывает его и возвращает true (полная стирка).
+    /// </summary>
+    private bool TryUseCleaner(EntityUid uid, WashingMachineComponent component)
+    {
+        if (!_solutionContainer.TryGetSolution(uid, WashingMachineComponent.CleanerSolutionName, out var cleanerSol, out var cleaner))
+            return false;
+
+        var amount = FixedPoint2.Zero;
+        foreach (var reagent in cleaner.Contents)
+        {
+            if (reagent.Reagent.Prototype == component.CleanerReagent.Id)
+                amount += reagent.Quantity;
+        }
+
+        var needed = FixedPoint2.New(component.CleanerPerWash);
+        if (amount < needed)
+            return false;
+
+        _solutionContainer.RemoveReagent(cleanerSol.Value, component.CleanerReagent.Id, needed);
+        return true;
     }
 }
