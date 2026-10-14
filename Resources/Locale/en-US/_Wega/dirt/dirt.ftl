@@ -3,6 +3,7 @@ dirt-examined-message = [color={$color}]Soiled by {$percentage}% ({$level})[/col
 dirt-examined-level-low = light
 dirt-examined-level-medium = medium
 dirt-examined-level-high = heavy
+dirt-examined-reagents = [color=#8899aa]Soaked with: {$reagents}[/color]
 
 # Wetness (HN)
 wet-examined-message = [color=#5a7ea8]Wet by {$percentage}%[/color]

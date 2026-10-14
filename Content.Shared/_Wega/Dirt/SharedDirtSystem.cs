@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
@@ -55,6 +56,9 @@ public sealed partial class SharedDirtSystem : EntitySystem
     /// <summary>HN: комбинезон от луж пачкается на 40% медленнее.</summary>
     private const float PuddleJumpsuitMultiplier = 0.6f;
 
+    /// <summary>HN: сколько разных реагентов запоминаем для осмотра.</summary>
+    private const int MaxDirtyReagents = 5;
+
     // --- HN: намокание одежды ---
 
     /// <summary>Максимальная влажность.</summary>
@@ -111,7 +115,8 @@ public sealed partial class SharedDirtSystem : EntitySystem
             comp.CurrentDirtLevel,
             comp.DirtColor,
             comp.IsDirty,
-            comp.CurrentWetness
+            comp.CurrentWetness,
+            comp.DirtyReagents.Select(r => r.Id).ToList()
         );
     }
 
@@ -141,6 +146,19 @@ public sealed partial class SharedDirtSystem : EntitySystem
             args.PushMarkup(
                 Loc.GetString("dirt-examined-message", ("color", colorHex), ("percentage", (int)dirtPercentage), ("level", dirtLevel))
             );
+        }
+
+        if (entity.Comp.DirtyReagents.Count > 0)
+        {
+            var names = new List<string>();
+            foreach (var id in entity.Comp.DirtyReagents)
+            {
+                if (_prototype.TryIndex<ReagentPrototype>(id, out var proto))
+                    names.Add(proto.LocalizedName);
+            }
+
+            if (names.Count > 0)
+                args.PushMarkup(Loc.GetString("dirt-examined-reagents", ("reagents", string.Join(", ", names))));
         }
 
         if (entity.Comp.CurrentWetness > 0f)
@@ -299,6 +317,7 @@ public sealed partial class SharedDirtSystem : EntitySystem
                     continue;
 
                 colors.Add(proto.SubstanceColor);
+                AddDirtyReagent(comp, reagent.Reagent.Prototype);
             }
 
             if (colors.Count > 0)
@@ -320,7 +339,10 @@ public sealed partial class SharedDirtSystem : EntitySystem
         comp.CurrentDirtLevel = FixedPoint2.Max(comp.CurrentDirtLevel - actualRemoval, 0);
 
         if (comp.CurrentDirtLevel <= 0)
+        {
             comp.DirtColor = Color.White;
+            comp.DirtyReagents.Clear();
+        }
 
         Dirty(uid, comp);
         RefreshWearerSpeed(uid);
@@ -370,6 +392,50 @@ public sealed partial class SharedDirtSystem : EntitySystem
     {
         foreach (var slot in slots)
             AddDirtToSlot(wearer, slot, amount, color);
+    }
+
+    /// <summary>
+    /// HN: запомнить реагент, которым пропитана вещь (для осмотра).
+    /// </summary>
+    private static void AddDirtyReagent(DirtableComponent comp, string reagentId)
+    {
+        if (comp.DirtyReagents.Count >= MaxDirtyReagents)
+            return;
+
+        var protoId = new ProtoId<ReagentPrototype>(reagentId);
+        if (!comp.DirtyReagents.Contains(protoId))
+            comp.DirtyReagents.Add(protoId);
+    }
+
+    /// <summary>
+    /// HN: запачкать конкретным реагентом (попадёт в осмотр).
+    /// </summary>
+    public void AddDirtFromReagent(EntityUid uid, float amount, string reagentId, DirtableComponent? comp = null)
+    {
+        if (!Resolve(uid, ref comp, false) || amount <= 0f)
+            return;
+
+        AddDirtyReagent(comp, reagentId);
+        AddDirt(uid, amount, GetReagentColor(reagentId), comp);
+    }
+
+    /// <summary>
+    /// HN: запачкать несколько слотов конкретным реагентом.
+    /// </summary>
+    public void AddDirtToSlotsFromReagent(EntityUid wearer, float amount, string reagentId, params string[] slots)
+    {
+        var color = GetReagentColor(reagentId);
+        foreach (var slot in slots)
+        {
+            if (!_inventory.TryGetSlotEntity(wearer, slot, out var clothing))
+                continue;
+
+            if (!TryComp<DirtableComponent>(clothing.Value, out var comp))
+                continue;
+
+            AddDirtyReagent(comp, reagentId);
+            AddDirt(clothing.Value, amount, color, comp);
+        }
     }
 
     // --- HN: намокание одежды ---

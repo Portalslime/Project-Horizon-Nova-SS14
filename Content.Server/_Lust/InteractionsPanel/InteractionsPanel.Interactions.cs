@@ -393,7 +393,7 @@ public partial class InteractionsPanel
             SpawnSemen("Semen", Transform(uid).Coordinates);
 
             //HN Start: загрязнение белья и комбинезона спермой (порт системы грязи с Wega)
-            _dirt.AddDirtToSlots(uid, OrgasmDirtAmount, _dirt.GetReagentColor("Semen"),
+            _dirt.AddDirtToSlotsFromReagent(uid, OrgasmDirtAmount, "Semen",
                 "underwearb", "underweart", "jumpsuit");
             //HN End
         }

@@ -31,8 +31,8 @@ public sealed partial class DirtWasteSystem : EntitySystem
     }
 
     private void OnDefecationAccident(EntityUid uid, InventoryComponent comp, ref DefecationAccidentEvent args)
-        => _dirt.AddDirtToSlots(uid, AccidentDirtAmount, _dirt.GetReagentColor("Feces"), WasteSlots);
+        => _dirt.AddDirtToSlotsFromReagent(uid, AccidentDirtAmount, "Feces", WasteSlots);
 
     private void OnUrinationAccident(EntityUid uid, InventoryComponent comp, ref UrinationAccidentEvent args)
-        => _dirt.AddDirtToSlots(uid, AccidentDirtAmount, _dirt.GetReagentColor("Urine"), WasteSlots);
+        => _dirt.AddDirtToSlotsFromReagent(uid, AccidentDirtAmount, "Urine", WasteSlots);
 }

@@ -1,5 +1,6 @@
 using Content.Client.Clothing;
 using Content.Client.DisplacementMap;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.DisplacementMap;
@@ -9,6 +10,7 @@ using Content.Shared.Inventory;
 using Robust.Client.GameObjects;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using Robust.Shared.Utility;
 
@@ -39,6 +41,11 @@ public sealed partial class DirtVisualsSystem : EntitySystem
         comp.CurrentDirtLevel = state.CurrentDirtLevel;
         comp.DirtColor = state.DirtColor;
         comp.CurrentWetness = state.CurrentWetness;
+
+        comp.DirtyReagents.Clear();
+        foreach (var id in state.DirtyReagents)
+            comp.DirtyReagents.Add(new ProtoId<ReagentPrototype>(id));
+
         UpdateDirtVisuals(uid, comp);
     }
 
