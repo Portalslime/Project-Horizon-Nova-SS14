@@ -16,6 +16,8 @@
     enabled: false
   - type: Urination
     enabled: false
+  - type: Menstruation
+    enabled: false
   - type: Icon
     sprite: Mobs/Species/Diona/parts.rsi
     state: full
