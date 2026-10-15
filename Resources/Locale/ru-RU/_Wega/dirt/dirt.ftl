@@ -8,9 +8,6 @@ dirt-examined-reagents = [color=#8899aa]Пропитан: {$reagents}[/color]
 # Намокание (HN)
 wet-examined-message = [color=#5a7ea8]Мокро на {$percentage}%[/color]
 
-# Менструация (HN)
-menstruation-event-self = У вас начались месячные.
-
 # Стиральная машина (порт Wega)
 washing-machine-verb-start = Начать стирку
 

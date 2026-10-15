@@ -271,7 +271,6 @@
   - type: Defecation
   - type: Urination
     baseFillRate: 0.01 # keep the rate the species used to override; component default is 0.05
-  - type: Menstruation #HN: женские персонажи
   # Other
   - type: Temperature
     heatDamageThreshold: 325
