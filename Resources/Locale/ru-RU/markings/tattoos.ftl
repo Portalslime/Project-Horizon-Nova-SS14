@@ -18,3 +18,15 @@ marking-TattooCampbellLeftLeg = Татуировка, левая нога (Кэ�
 marking-TattooCampbellRightLeg = Татуировка, правая нога (Кэмпбелль)
 marking-TattooEyeRight = Правый глаз
 marking-TattooEyeLeft = Левый глаз
+
+marking-TattooEyeMothRight = Ниан, правый глаз
+marking-TattooEyeMothRight-tattoo_eye_moth_r = Ниан, правый глаз
+
+marking-TattooEyeMothLeft = Ниан, левый глаз
+marking-TattooEyeMothLeft-tattoo_eye_moth_l = Ниан, левый глаз
+
+marking-TattooEyeshadowUpper = Тени для век (Верхние)
+marking-TattooEyeshadowUpper-eyeshadow_upper = Тени для век (Верхние)
+
+marking-TattooEyeshadowLower = Тени для век (Нижние)
+marking-TattooEyeshadowLower-eyeshadow_lower = Тени для век (Нижние)

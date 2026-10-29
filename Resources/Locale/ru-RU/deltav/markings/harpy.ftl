@@ -36,3 +36,21 @@ marking-HarpyLegsDefault-thighs = Бедра
 marking-HarpyFeetDefault = Птичьи ноги
 marking-HarpyFeetDefault-feet = Ноги
 marking-HarpyFeetDefault-talons = Когти
+
+marking-HarpyWingClassic-classic_harpy = Классические крылья
+
+marking-HarpyWing2ToneClassic-harpy_2tone_1 = Верхняя половина
+marking-HarpyWing2ToneClassic-harpy_2tone_2 = Нижняя половина
+
+marking-HarpyWing3ToneClassic-harpy_3tone_1 = Верхняя треть
+marking-HarpyWing3ToneClassic-harpy_3tone_2 = Средняя треть
+marking-HarpyWing3ToneClassic-harpy_3tone_3 = Нижняя треть
+
+marking-HarpyWingSpeckledClassic-harpy_speckled_1 = Основа
+marking-HarpyWingSpeckledClassic-harpy_speckled_2 = Пятна
+
+marking-HarpyWingUndertoneClassic-harpy_undertone_1 = Передняя часть
+marking-HarpyWingUndertoneClassic-harpy_undertone_2 = Задняя часть
+
+marking-HarpyWingTipsClassic-harpy_wingtip_1 = Основа
+marking-HarpyWingTipsClassic-harpy_wingtip_2 = Кончики перьев

@@ -179,3 +179,55 @@ marking-VulpFacialHairRuff = Баки
 marking-VulpFacialHairElder = Старший
 marking-VulpFacialHairElderChin = Старческий подбородок
 marking-VulpFacialHairKita = Кита
+
+marking-VulpTailWag-vulp_wag-tip = Кончик
+
+marking-VulpHairAdhara-adhara = Адхара
+
+marking-VulpHairAnita-anita = Анита
+
+marking-VulpHairApollo-apollo = Аполлон
+
+marking-VulpHairBelle-belle = Белль
+
+marking-VulpHairBraided-braided = Косички
+
+marking-VulpHairBun-bun = Пучок
+
+marking-VulpHairCleanCut-clean_cut = Чистая стрижка
+
+marking-VulpHairCurl-curl = Завитки
+
+marking-VulpHairHawk-hawk = Ирокез
+
+marking-VulpHairJagged-jagged = Рваная стрижка
+
+marking-VulpHairJeremy-jeremy = Джереми
+
+marking-VulpHairKajam-kajam = Каджам
+
+marking-VulpHairKeid-keid = Кейд
+
+marking-VulpHairKleeia-kleeia = Клея
+
+marking-VulpHairMizar-mizar = Мизар
+
+marking-VulpHairPunkBraided-punkbraided = Панк-косички
+
+marking-VulpHairRaine-raine = Рейн
+
+marking-VulpHairRough-rough = Грубая стрижка
+
+marking-VulpHairShort-short = Короткая стрижка
+
+marking-VulpHairShort2-short2 = Короткая стрижка 2
+
+marking-VulpHairSpike-spike = Шипы
+
+marking-VulpFacialHairRuff-ruff = Баки
+
+marking-VulpFacialHairElder-elder = Старший
+
+marking-VulpFacialHairElderChin-elder_chin = Старческий подбородок
+
+marking-VulpFacialHairKita-kita = Кита

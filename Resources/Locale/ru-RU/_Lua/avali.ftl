@@ -56,3 +56,64 @@ marking-HairResomiPointy = Авали (остроконечный)
 marking-HairResomiTwies = Авали (твиз)
 marking-HairResomiUpright = Авали (прямостоячий)
 marking-HairResomiLong = Авали (длинный)
+
+marking-AvaliWingDefault-avali = Крылья 1
+
+marking-AvaliEarsDefault-avali_ears_default = Уши Авали 1
+
+marking-Avali2EarsDefault-avali_ears_default = Уши
+marking-Avali2EarsDefault-avali_ears_inner = Внутренняя часть
+
+marking-Avali2EarsLow-avali_ears_low = Уши
+marking-Avali2EarsLow-avali_ears_low_inner = Внутренняя часть
+
+marking-AvaliTailPhoenix-phoenix_tail = Хвост Феникса
+
+marking-AvaliTailDefault-avali_default = Хвост Авали
+
+marking-Avali3Color-avali_default = Основа
+marking-Avali3Color-avali_default_inner = Внутренняя часть
+marking-Avali3Color-avali_default_inner_second = Внутренняя часть 2
+
+marking-Avali2Color-avali_default = Основа
+marking-Avali2Color-avali_default_inner = Внутренняя часть
+
+marking-AvaliLines1-lines1 = Линии Авали 1
+
+marking-AvaliLines2-lines2 = Линии Авали 2
+
+marking-HairResomiBackstrafe-ResomiBackstrafe = Авали (Бэкстраф)
+
+marking-HairResomiBurstShort-ResomiBurstShort = Авали (короткий взрыв)
+
+marking-HairResomiDefault-ResomiDefault = Авали (обычный)
+
+marking-HairResomiDroopy-ResomiDroopy = Авали (свисающий)
+
+marking-HairResomiEars-ResomiEars = Уши Авали
+
+marking-HairResomiFluffymohawk-ResomiFluffymohawk = Авали (пушистый ирокез)
+
+marking-HairResomiHedge-ResomiHedge = Авали (ёж)
+
+marking-HairResomiLongway-ResomiLongway = Авали (длинный путь)
+
+marking-HairResomiMane-ResomiMane = Авали (грива)
+
+marking-HairResomiManeBeardless-ResomiManeBeardless = Авали (грива без бороды)
+
+marking-HairResomiMohawk-ResomiMohawk = Авали (ирокез)
+
+marking-HairResomiMushroom-ResomiMushroom = Авали (гриб)
+
+marking-HairResomiNotree-ResomiNotree = Авали (нетри)
+
+marking-HairResomiSpiky-ResomiSpiky = Авали (шипастый)
+
+marking-HairResomiPointy-ResomiPointy = Авали (остроконечный)
+
+marking-HairResomiTwies-ResomiTwies = Авали (твиз)
+
+marking-HairResomiUpright-ResomiUpright = Авали (прямостоячий)
+
+marking-HairResomiLong-ResomiLong = Авали (длинный)

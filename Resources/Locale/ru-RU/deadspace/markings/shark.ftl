@@ -25,3 +25,5 @@ ent-LeftFootShark = левая ступня плафеима
     .desc = { ent-PartShark.desc }
 ent-RightFootShark = правая ступня плафеима
     .desc = { ent-PartShark.desc }
+
+marking-LizardHornsShort1-horns_short = короткие рожки, ящер

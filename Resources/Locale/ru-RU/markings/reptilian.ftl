@@ -75,3 +75,28 @@ marking-LizardChestBackspikes = Унатх, грудь, шипы на спине
 marking-LizardSnoutSplotch = Унатх, морда лица (Пятно)
 marking-LizardSnoutSplotch-snout_splotch_primary = Морда
 marking-LizardSnoutSplotch-snout_splotch_secondary = Нос
+
+marking-LizardTailAquatic = Унатх, хвост (Водный)
+marking-LizardTailAquatic-tail_aquatic = Унатх, хвост (Водный)
+
+marking-LizardChestFin = Унатх, грудь (Плавник)
+marking-LizardChestFin-body_fin = Унатх, грудь (Плавник)
+
+marking-LizardTailSmoothAnimated = Унатх, хвост (Гладкий, анимированный)
+marking-LizardTailSmoothAnimated-tail_smooth_wagging_primary = Основа
+marking-LizardTailSmoothAnimated-tail_smooth_wagging_secondary = Оттенок
+
+marking-LizardTailLargeAnimated = Унатх, хвост (Большой, анимированный)
+marking-LizardTailLargeAnimated-tail_large_wagging = Унатх, хвост (Большой, анимированный)
+
+marking-LizardTailSpikesAnimated = Унатх, хвост (Шипастый, анимированный)
+marking-LizardTailSpikesAnimated-tail_spikes_wagging = Унатх, хвост (Шипастый, анимированный)
+
+marking-LizardTailLTigerAnimated = Унатх, хвост (Светлые тигриные полоски, анимированный)
+marking-LizardTailLTigerAnimated-tail_ltiger_wagging = Унатх, хвост (Светлые тигриные полоски, анимированный)
+
+marking-LizardTailDTigerAnimated = Унатх, хвост (Тёмные тигриные полоски, анимированный)
+marking-LizardTailDTigerAnimated-tail_dtiger_wagging = Унатх, хвост (Тёмные тигриные полоски, анимированный)
+
+marking-LizardTailAquaticAnimated = Унатх, хвост (Водный, анимированный)
+marking-LizardTailAquaticAnimated-tail_aquatic_wagging = Унатх, хвост (Водный, анимированный)

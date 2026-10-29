@@ -145,3 +145,13 @@ ent-BaseMobAriral = Урист МакАрирал
 
 ent-MobAriralDummy = Манекен арирала
     .desc = Манекен арирала, используется при создании персонажа.
+
+marking-AriralEars-ears = Арирал Уши
+
+marking-AriralTail-tail = Арирал Хвост
+
+marking-AriralTailFluff-tail = Хвост
+marking-AriralTailFluff-tail_overlay = Второй слой
+
+marking-AriralTailBigFluff-tail = Хвост
+marking-AriralTailBigFluff-tail_long = Второй слой

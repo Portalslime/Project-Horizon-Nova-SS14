@@ -64,3 +64,5 @@ marking-ArachnidRLegStripes-stripes_right = Полосы
 marking-ArachnidLLegStripes = Арахнид Полосы (Слева)
 marking-ArachnidLLegStripes-stripes_left = Полосы
 marking-ArachnidOverlayFuzzy = Пушистые
+
+marking-ArachnidOverlayFuzzy-fuzzy = Пушистые
