@@ -1,0 +1,81 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     x:Class="Content.Client._Arcane.ErpPanel.CustomEmoteWindow"
+                     Title="{Loc erp-panel-custom-create-title}"
+                     Resizable="True"
+                     MinSize="500 560"
+                     SetSize="520 620">
+    <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxFlat BackgroundColor="#14171C"
+                              BorderColor="#84566D"
+                              BorderThickness="2"/>
+        </PanelContainer.PanelOverride>
+
+        <BoxContainer Orientation="Vertical"
+                      Margin="12"
+                      SeparationOverride="8">
+            <PanelContainer HorizontalExpand="True" SetHeight="3">
+                <PanelContainer.PanelOverride>
+                    <gfx:StyleBoxFlat BackgroundColor="#D06486"/>
+                </PanelContainer.PanelOverride>
+            </PanelContainer>
+
+            <Label Text="{Loc erp-panel-custom-name-label}"
+                   StyleClasses="LabelSubText"/>
+            <LineEdit Name="NameInput"
+                      StyleClasses="LineEditDark"
+                      HorizontalExpand="True"/>
+
+            <Label Text="{Loc erp-panel-custom-category-label}"
+                   StyleClasses="LabelSubText"/>
+            <OptionButton Name="CategoryOption"
+                          HorizontalExpand="True"/>
+
+            <Label Text="{Loc erp-panel-custom-message-label}"
+                   StyleClasses="LabelSubText"/>
+            <TextEdit Name="MessageInput"
+                      MinHeight="90"
+                      HorizontalExpand="True"/>
+
+            <Label Text="{Loc erp-panel-custom-self-message-label}"
+                   StyleClasses="LabelSubText"/>
+            <TextEdit Name="SelfMessageInput"
+                      MinHeight="60"
+                      HorizontalExpand="True"/>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                <Label Text="{Loc erp-panel-custom-cooldown-label}"
+                       StyleClasses="LabelSubText"
+                       VerticalAlignment="Center"/>
+                <Slider Name="CooldownSlider"
+                        HorizontalExpand="True"
+                        MinWidth="200"
+                        MinValue="1"
+                        MaxValue="60"
+                        Value="3"/>
+                <Label Name="CooldownLabel"
+                       SetWidth="52"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"/>
+            </BoxContainer>
+
+            <Label Name="ValidationLabel"
+                   Modulate="#D06486"/>
+
+            <BoxContainer Orientation="Horizontal"
+                          HorizontalAlignment="Right"
+                          SeparationOverride="6">
+                <Button Name="DeleteButton"
+                        Text="{Loc erp-panel-custom-delete}"/>
+                <Button Name="CancelButton"
+                        Text="{Loc erp-panel-custom-cancel}"/>
+                <Button Name="SaveButton"
+                        StyleClasses="ButtonSmall"
+                        Text="{Loc erp-panel-custom-save}"/>
+            </BoxContainer>
+        </BoxContainer>
+    </PanelContainer>
+</controls:FancyWindow>
