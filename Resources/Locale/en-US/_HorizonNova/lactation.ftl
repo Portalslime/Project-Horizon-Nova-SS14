@@ -1,0 +1,9 @@
+reagent-name-lactation-milk = mother's milk
+reagent-desc-lactation-milk = Warm breast milk.
+alerts-lactation-milk-name = Milk
+alerts-lactation-milk-desc = Your breasts are full of milk and can be milked.
+erp-panel-interaction-milk-breasts-name = Milk breasts
+lactation-milking-empty = There is no milk yet.
+lactation-container-full = The container is full.
+lactation-milking-into-container = Milks { $amount } units of milk into { $container }.
+lactation-milking-spill = Milk ({ $amount } units) spills onto the floor.

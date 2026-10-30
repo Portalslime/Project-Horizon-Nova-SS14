@@ -276,6 +276,7 @@
   parent: [ MobResomiBase, BaseMobSpeciesOrganic ]
   id: MobResomi
   components:
+  - type: Lactation
   - type: CombatMode
   - type: InteractionPopup
     successChance: 1

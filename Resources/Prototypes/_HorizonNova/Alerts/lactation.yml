@@ -1,0 +1,20 @@
+- type: alertCategory
+  id: Lactation
+
+- type: alert
+  id: LactationMilk
+  category: Lactation
+  icons:
+  - sprite: /Textures/Objects/Consumable/Drinks/milkshake.rsi
+    state: fill-1
+  - sprite: /Textures/Objects/Consumable/Drinks/milkshake.rsi
+    state: fill-2
+  - sprite: /Textures/Objects/Consumable/Drinks/milkshake.rsi
+    state: fill-3
+  - sprite: /Textures/Objects/Consumable/Drinks/milkshake.rsi
+    state: fill-4
+  - sprite: /Textures/Objects/Consumable/Drinks/milkshake.rsi
+    state: fill-5
+  maxSeverity: 5
+  name: alerts-lactation-milk-name
+  description: alerts-lactation-milk-desc

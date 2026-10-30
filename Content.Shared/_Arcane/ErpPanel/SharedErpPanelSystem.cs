@@ -1,4 +1,5 @@
 using Content.Shared._Arcane.ERP;
+using Content.Shared._HorizonNova.Lactation;
 using Content.Shared._Lust.ErpStatus;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
@@ -179,6 +180,9 @@ public sealed class SharedErpPanelSystem : EntitySystem
 
         ProccessMessages(user, target, interaction);
         ProccessSounds(user, interaction);
+
+        if (interaction.MilkCollection)
+            RaiseLocalEvent(user, new ErpMilkCollectionEvent(user, target));
 
         if (interaction.ChanceLickCum > 0f && TryComp<CumOverlayComponent>(target, out var cumComp))
         {

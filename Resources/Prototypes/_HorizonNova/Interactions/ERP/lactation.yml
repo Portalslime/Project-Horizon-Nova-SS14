@@ -1,0 +1,32 @@
+# Horizon Nova: сцеживание молока (лактация).
+# Требование !type:LactationRequirement живёт в Content.Shared/_HorizonNova/Lactation.
+- type: panelInteraction
+  id: MilkBreasts
+  category: Chest
+  range: 1.5
+  cooldown: 20
+  sounds:
+  - /Audio/_Arcane/Interactions/friction1.ogg
+  - /Audio/_Arcane/Interactions/friction2.ogg
+  messages:
+  - сцеживает молоко из груди $target.
+  - выдаивает молоко из груди $target.
+  - собирает молоко из груди $target.
+  - осторожно сцеживает молоко у $target.
+  selfMessages:
+  - сцеживает у себя молоко.
+  - выдаивает молоко из своей груди.
+  - собирает молоко из своей груди.
+  icon: _Arcane/Interface/ErpPanel/boobs_paw.png
+  tags:
+  - RequiresERP
+  milkCollection: true
+  targetRequirements:
+  - !type:LactationRequirement
+    species:
+    - Human
+    - Resomi
+    - Demon
+    - Dwarf
+  - !type:ExposedBodyPartRequirement
+    part: Chest

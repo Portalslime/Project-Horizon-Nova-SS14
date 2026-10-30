@@ -54,6 +54,13 @@ public sealed partial class PanelInteractionPrototype : IPrototype
 
     [DataField]
     public float ChanceLickCum { get; private set; } = 0f;
+
+    /// <summary>
+    /// HN: после выполнения интеракции запускает сцеживание молока
+    /// (обрабатывается <c>LactationSystem</c>).
+    /// </summary>
+    [DataField]
+    public bool MilkCollection;
 }
 
 [Prototype]

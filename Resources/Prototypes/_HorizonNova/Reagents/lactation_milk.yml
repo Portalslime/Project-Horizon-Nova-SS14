@@ -1,0 +1,19 @@
+- type: reagent
+  id: LactationMilk
+  name: reagent-name-lactation-milk
+  group: Drinks
+  desc: reagent-desc-lactation-milk
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: milk
+  color: "#F7F1E3"
+  recognizable: true
+  plantMetabolism:
+    - !type:PlantAdjustNutrition
+      amount: 0.1
+    - !type:PlantAdjustWater
+      amount: 0.9
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 4

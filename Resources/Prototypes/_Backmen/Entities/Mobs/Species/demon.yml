@@ -15,6 +15,7 @@
     - HeadSide
     - Tail
   - type: Hunger
+  - type: Lactation
   - type: Thirst
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.5
