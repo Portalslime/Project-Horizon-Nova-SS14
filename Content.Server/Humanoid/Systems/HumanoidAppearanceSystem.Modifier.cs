@@ -88,6 +88,7 @@ public sealed partial class HumanoidAppearanceSystem
 
         component.MarkingSet = message.MarkingSet;
         Dirty(uid, component);
+        AnnounceMarkingSetChanged(uid);
 
         if (message.ResendState)
         {

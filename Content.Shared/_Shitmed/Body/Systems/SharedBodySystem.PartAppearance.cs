@@ -301,5 +301,6 @@ public partial class SharedBodySystem
         }
 
         Dirty(target, bodyAppearance);
+        _humanoid.AnnounceMarkingSetChanged(target);
     }
 }

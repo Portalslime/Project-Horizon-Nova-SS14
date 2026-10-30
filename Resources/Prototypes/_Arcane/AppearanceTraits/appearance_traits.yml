@@ -1,0 +1,52 @@
+# Черты внешности (appearanceTrait) — «Arcane».
+#
+# Черта активируется, когда на персонаже присутствуют указанные marking'и
+# (или любой marking из указанной категории), и даёт игровой эффект:
+# бонус к урону без оружия, сопротивляемость урону, скорость или компоненты.
+# Отслеживанием занимается AppearanceTraitsSystem: он пересчитывает активные
+# черты при каждой смене marking'ов (создание персонажа, админ-редактор,
+# хирургия, клонирование, виляние хвостом и т.п.).
+#
+# Полезные поля:
+#   markings / categories — условия активации (достаточно любого);
+#   requireAllMarkings   — требовать все marking'и из markings, а не один;
+#   species              — ограничение по расам (пусто = любая);
+#   damageModifier       — сопротивляемость входящему урону (coefficients/flatReductions);
+#   components           — компоненты, выдаваемые на время действия черты.
+#                          ВАЖНО: только shared-компоненты, иначе клиент не сможет
+#                          загрузить прототип (Unknown component).
+#
+# Ниже — демонстрационные черты расы Demon.
+
+- type: appearanceTrait
+  id: DemonClaws
+  name: appearance-trait-demon-claws
+  description: appearance-trait-demon-claws-desc
+  markings: [ DemonDrakeLArm, DemonDrakeRArm ]
+  meleeDamage:
+    types:
+      Slash: 4
+  priority: 10
+
+- type: appearanceTrait
+  id: DemonDrakeSpine
+  name: appearance-trait-demon-drake-spine
+  description: appearance-trait-demon-drake-spine-desc
+  markings: [ DemonDrakeSpine ]
+  damageModifier:
+    coefficients:
+      Slash: 0.8
+      Piercing: 0.85
+      Blunt: 0.9
+  priority: 10
+
+- type: appearanceTrait
+  id: DemonHorns
+  name: appearance-trait-demon-horns
+  description: appearance-trait-demon-horns-desc
+  species: [ Demon ]
+  categories: [ HeadTop ]
+  meleeDamage:
+    types:
+      Blunt: 3
+  priority: 5

@@ -188,6 +188,18 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
 
         _identity.QueueIdentityUpdate(target);
         Dirty(target, targetHumanoid);
+        AnnounceMarkingSetChanged(target);
+    }
+
+    /// <summary>
+    ///     Сообщает системам, что набор marking'ов («черт внешности») у гуманоида изменился.
+    ///     Используется системами вроде <c>AppearanceTraitsSystem</c>, которым нужно
+    ///     отслеживать текущую внешность персонажа.
+    /// </summary>
+    /// <param name="uid">Гуманоид, у которого изменился набор marking'ов.</param>
+    public void AnnounceMarkingSetChanged(EntityUid uid)
+    {
+        RaiseLocalEvent(uid, new HumanoidMarkingSetChangedEvent());
     }
 
     /// <summary>
@@ -287,6 +299,8 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
 
         if (sync)
             Dirty(uid, humanoid);
+
+        AnnounceMarkingSetChanged(uid);
     }
 
     /// <summary>
@@ -382,9 +396,9 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         RaiseLocalEvent(uid, new SexChangedEvent(oldSex, sex));
 
         if (sync)
-        {
             Dirty(uid, humanoid);
-        }
+
+        AnnounceMarkingSetChanged(uid);
     }
 
     /// <summary>
@@ -549,6 +563,8 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
 
         if (sync)
             Dirty(uid, humanoid);
+
+        AnnounceMarkingSetChanged(uid);
     }
 
     private void EnsureDefaultMarkings(EntityUid uid, HumanoidAppearanceComponent? humanoid)
@@ -583,6 +599,8 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
 
         if (sync)
             Dirty(uid, humanoid);
+
+        AnnounceMarkingSetChanged(uid);
     }
 
     // Corvax-TTS-Start
