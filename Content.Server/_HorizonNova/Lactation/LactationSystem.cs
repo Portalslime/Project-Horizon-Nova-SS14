@@ -13,6 +13,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
@@ -37,6 +38,17 @@ public sealed class LactationSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
+
+    /// <summary>
+    /// Размер груди, который считается «нормальным» и не даёт штрафа к скорости.
+    /// </summary>
+    private const int NormalBreastSize = 2;
+
+    /// <summary>
+    /// Штраф к скорости за каждый размер груди сверх нормального.
+    /// </summary>
+    private const float SpeedPenaltyPerExtraSize = 0.03f;
 
     /// <summary>
     /// Категория алертов лактации.
@@ -57,7 +69,24 @@ public sealed class LactationSystem : EntitySystem
         SubscribeLocalEvent<LactationComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<LactationComponent, HumanoidMarkingSetChangedEvent>(OnMarkingSetChanged);
         SubscribeLocalEvent<LactationComponent, ProfileLoadFinishedEvent>(OnProfileLoadFinished);
+        SubscribeLocalEvent<LactationComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
         SubscribeLocalEvent<ArousalComponent, ErpMilkCollectionEvent>(OnMilkCollection);
+    }
+
+    /// <summary>
+    /// Большая грудь немного замедляет: каждый размер сверх нормального — −3% к скорости.
+    /// </summary>
+    private void OnRefreshSpeed(Entity<LactationComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        if (!TryComp<HumanoidAppearanceComponent>(ent, out var humanoid))
+            return;
+
+        var extraSize = LactationHelpers.GetBreastSize(humanoid) - NormalBreastSize;
+        if (extraSize <= 0)
+            return;
+
+        var modifier = Math.Max(0.5f, 1f - extraSize * SpeedPenaltyPerExtraSize);
+        args.ModifySpeed(modifier, modifier);
     }
 
     private void OnMobStateChanged(Entity<LactationComponent> ent, ref MobStateChangedEvent args)
@@ -80,35 +109,31 @@ public sealed class LactationSystem : EntitySystem
         _solutions.EnsureSolution(ent.Owner, ent.Comp.SolutionName, out _, maxVol: maxVolume);
         ent.Comp.NextProduction = _timing.CurTime + ent.Comp.ProductionInterval;
 
-        if (TryComp<HumanoidAppearanceComponent>(ent.Owner, out var humanoid))
-            Recompute(ent.Owner, ent.Comp, humanoid);
+        RefreshAppearance(ent);
     }
 
     private void OnMarkingSetChanged(Entity<LactationComponent> ent, ref HumanoidMarkingSetChangedEvent args)
     {
-        if (TryComp<HumanoidAppearanceComponent>(ent.Owner, out var humanoid))
-            Recompute(ent.Owner, ent.Comp, humanoid);
+        RefreshAppearance(ent);
     }
 
     private void OnProfileLoadFinished(Entity<LactationComponent> ent, ref ProfileLoadFinishedEvent args)
     {
-        if (TryComp<HumanoidAppearanceComponent>(ent.Owner, out var humanoid))
-            Recompute(ent.Owner, ent.Comp, humanoid);
+        RefreshAppearance(ent);
     }
 
     /// <summary>
-    /// Пересчитывает размер груди и максимальный запас молока по внешности персонажа.
+    /// Обновляет состояние раствора/алерта и скорость после смены внешности.
+    /// Размер груди не хранится — он считается по marking'ам при необходимости.
     /// </summary>
-    private void Recompute(EntityUid uid, LactationComponent comp, HumanoidAppearanceComponent humanoid)
+    private void RefreshAppearance(Entity<LactationComponent> ent)
     {
-        comp.BreastSize = LactationHelpers.GetBreastSize(humanoid);
-        comp.MaxMilk = LactationHelpers.GetMaxMilk(comp.BreastSize, comp.BaseMaxMilk, comp.MaxMilkPerSize);
+        if (_solutions.ResolveSolution(ent.Owner, ent.Comp.SolutionName, ref ent.Comp.Solution, out var solution))
+            ent.Comp.MilkVolume = solution.Volume;
 
-        if (_solutions.ResolveSolution(uid, comp.SolutionName, ref comp.Solution, out var solution))
-            comp.MilkVolume = solution.Volume;
-
-        Dirty(uid, comp);
-        UpdateAlert(uid, comp);
+        Dirty(ent.Owner, ent.Comp);
+        UpdateAlert(ent.Owner, ent.Comp);
+        _movement.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     public override void Update(float frameTime)
@@ -119,9 +144,6 @@ public sealed class LactationSystem : EntitySystem
         var query = EntityQueryEnumerator<LactationComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (comp.BreastSize <= 0)
-                continue;
-
             if (_mobState.IsDead(uid))
                 continue;
 
@@ -139,22 +161,31 @@ public sealed class LactationSystem : EntitySystem
     /// </summary>
     private void Produce(EntityUid uid, LactationComponent comp)
     {
+        if (!TryComp<HumanoidAppearanceComponent>(uid, out var humanoid))
+            return;
+
+        var size = LactationHelpers.GetBreastSize(humanoid);
+        if (size <= 0)
+            return;
+
+        var maxMilk = LactationHelpers.GetMaxMilk(size, comp.BaseMaxMilk, comp.MaxMilkPerSize);
+
         if (!_solutions.ResolveSolution(uid, comp.SolutionName, ref comp.Solution, out var solution))
             return;
 
-        if (solution.Volume >= comp.MaxMilk)
+        if (solution.Volume >= maxMilk)
         {
             SyncVolume(uid, comp, solution);
             return;
         }
 
-        // Без запаса сытости молоко не вырабатывается (как у UdderSystem).
+        // Без запаса сытости/питья молоко не вырабатывается (как у UdderSystem).
         if (!HasEnoughNutrition(uid))
             return;
 
-        var amount = LactationHelpers.GetProductionAmount(comp.BreastSize, comp.MilkPerSizePerSecond, comp.ProductionInterval);
+        var amount = LactationHelpers.GetProductionAmount(size, comp.MilkPerSizePerSecond, comp.ProductionInterval);
 
-        var freeSpace = comp.MaxMilk - solution.Volume;
+        var freeSpace = maxMilk - solution.Volume;
         if (amount > freeSpace)
             amount = freeSpace;
 
@@ -200,7 +231,15 @@ public sealed class LactationSystem : EntitySystem
         if (!TryComp<LactationComponent>(target, out var comp))
             return;
 
-        if (comp.BreastSize <= 0)
+        // Размер груди проверяем в момент взаимодействия, а не по кэшу.
+        if (!TryComp<HumanoidAppearanceComponent>(target, out var humanoid))
+        {
+            PopupMilkingEmpty(user, target);
+            return;
+        }
+
+        var size = LactationHelpers.GetBreastSize(humanoid);
+        if (size <= 0)
         {
             PopupMilkingEmpty(user, target);
             return;
@@ -218,7 +257,7 @@ public sealed class LactationSystem : EntitySystem
             return;
         }
 
-        var amount = LactationHelpers.GetMilkingAmount(comp.BreastSize, comp.MilkingAmounts);
+        var amount = LactationHelpers.GetMilkingAmount(size, comp.MilkingAmounts);
         if (amount > solution.Volume)
             amount = solution.Volume;
 
@@ -334,14 +373,24 @@ public sealed class LactationSystem : EntitySystem
     /// </summary>
     private void UpdateAlert(EntityUid uid, LactationComponent comp)
     {
-        if (comp.BreastSize <= 0 || comp.MilkVolume <= FixedPoint2.Zero)
+        if (!TryComp<HumanoidAppearanceComponent>(uid, out var humanoid))
+        {
+            _alerts.ClearAlertCategory(uid, AlertCategory);
+            return;
+        }
+
+        var size = LactationHelpers.GetBreastSize(humanoid);
+        if (size <= 0 || comp.MilkVolume <= FixedPoint2.Zero)
         {
             _alerts.ClearAlertCategory(uid, AlertCategory);
             return;
         }
 
         // Шкала наполненности: 1..5 уровней, как иконки fill-1..fill-5.
-        var maxMilk = comp.MaxMilk > FixedPoint2.Zero ? comp.MaxMilk : FixedPoint2.New(1);
+        var maxMilk = LactationHelpers.GetMaxMilk(size, comp.BaseMaxMilk, comp.MaxMilkPerSize);
+        if (maxMilk <= FixedPoint2.Zero)
+            maxMilk = FixedPoint2.New(1);
+
         var ratio = comp.MilkVolume.Float() / maxMilk.Float();
         var severity = (short) Math.Clamp((int) Math.Ceiling(ratio * 5), 1, 5);
         _alerts.ShowAlert(uid, AlertMilk, severity);

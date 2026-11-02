@@ -28,5 +28,8 @@
     - Resomi
     - Demon
     - Dwarf
-  - !type:ExposedBodyPartRequirement
-    part: Chest
+  - !type:LactationClothingRequirement
+    slots:
+    - underweart
+    - jumpsuit
+    - outerClothing

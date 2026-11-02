@@ -33,22 +33,12 @@ public sealed partial class LactationComponent : Component
     public Entity<SolutionComponent>? Solution;
 
     /// <summary>
-    /// Размер груди 0..5. 0 — лактация недоступна.
-    /// </summary>
-    [AutoNetworkedField]
-    public int BreastSize;
-
-    /// <summary>
     /// Текущий объём молока (зеркало раствора для клиента и требований).
+    /// Размер груди намеренно не кэшируется: он проверяется по marking'ам
+    /// в момент взаимодействия/выработки.
     /// </summary>
     [AutoNetworkedField]
     public FixedPoint2 MilkVolume;
-
-    /// <summary>
-    /// Максимальный объём молока при текущем размере груди.
-    /// </summary>
-    [AutoNetworkedField]
-    public FixedPoint2 MaxMilk = 20;
 
     /// <summary>
     /// Максимум молока при минимальном размере груди.

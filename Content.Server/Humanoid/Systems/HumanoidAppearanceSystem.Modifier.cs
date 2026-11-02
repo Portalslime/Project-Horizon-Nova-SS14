@@ -27,7 +27,7 @@ public sealed partial class HumanoidAppearanceSystem
 
         args.Verbs.Add(new Verb
         {
-            Text = "Modify markings",
+            Text = Loc.GetString("admin-trick-modify-markings"),
             Category = VerbCategory.Tricks,
             Icon = new SpriteSpecifier.Rsi(new("/Textures/Clothing/Head/Hats/catears.rsi"), "icon"), // Lua
             Message = Loc.GetString("admin-trick-modify-markings-description"), // Lua

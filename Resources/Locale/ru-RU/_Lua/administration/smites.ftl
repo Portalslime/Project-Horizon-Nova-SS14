@@ -8,4 +8,5 @@ admin-smite-caveman-description = Даёт цели постоянную пор�
 admin-smite-omni-accent-description = Заставляет цель говорить с почти каждым возможным акцентом.
 admin-smite-crawler-description = Заставляет цель упасть и убирает возможность встать. Стоит заодно убрать ей руки!
 
-admin-trick-modify-markings-description = Изменить черты
+admin-trick-modify-markings = Изменить черты внешности
+admin-trick-modify-markings-description = Открывает редактор черт внешности (marking'ов) для цели.
