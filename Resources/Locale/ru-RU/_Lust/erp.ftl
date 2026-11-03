@@ -13,6 +13,3 @@ detail-examinable-erp-no-text = [color=red]Нет ЕРП[/color]
 detail-examinable-erp-ask-text = [color=yellow]Спрашивать о ЕРП[/color]
 detail-examinable-erp-yes-text = [color=green]Да ЕРП[/color]
 detail-examinable-erp-absolute-text = [color=#ff69b4]ОБСОЛЮТНОЕ ЕРП[/color]
-erp-panel-sex-male-text = Мужской пол
-erp-panel-sex-female-text = Женский
-erp-panel-sex-unsexed-text = Бесполый

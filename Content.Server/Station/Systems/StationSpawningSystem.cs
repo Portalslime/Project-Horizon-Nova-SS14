@@ -31,7 +31,6 @@ using System.Linq; // Frontier
 using Content.Server.CartridgeLoader; // Frontier
 using Content.Shared.CartridgeLoader; // Frontier
 using Content.Shared._Lust.ErpStatus; //HN: порт ERP-панели с Lust
-using Content.Shared._Lust.InteractionsPanel.Data.Components; //HN: порт ERP-панели с Lust
 using Robust.Server.GameObjects; // Frontier
 using Robust.Shared.Containers; // Frontier
 using Content.Shared.Radio.Components; // Frontier
@@ -193,14 +192,8 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
                 AddComp<DetailExaminableComponent>(entity.Value).SetProfile(profile);
             // Erida-End
 
-            //HN: Lust ERP + панель взаимодействий (замена Lua EnumERPStatus)
+            //HN: Lust ERP статус (замена Lua EnumERPStatus)
             EnsureComp<ErpStatusComponent>(entity.Value).Erp = profile.Erp;
-            var interactions = EnsureComp<InteractionsComponent>(entity.Value);
-            interactions.Erp = profile.Erp != Erp.No;
-            interactions.Virginity = profile.Virginity;
-            interactions.AnalVirginity = profile.AnalVirginity;
-            if (!interactions.Erp)
-                profile.Erp = Erp.No;
         }
 
         if (loadout != null)

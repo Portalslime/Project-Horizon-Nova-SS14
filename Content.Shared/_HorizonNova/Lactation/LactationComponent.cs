@@ -9,7 +9,6 @@ namespace Content.Shared._HorizonNova.Lactation;
 /// <summary>
 /// Лактация: накопление «материнского молока» в отдельном растворе на теле.
 /// Сила зависит от размера груди (marking'и груди у Human/Demon, у Resomi/Dwarf — минимальный размер).
-/// Сцеживание выполняется через ERP-панель (см. <c>LactationSystem</c>).
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class LactationComponent : Component
@@ -33,7 +32,7 @@ public sealed partial class LactationComponent : Component
     public Entity<SolutionComponent>? Solution;
 
     /// <summary>
-    /// Текущий объём молока (зеркало раствора для клиента и требований).
+    /// Текущий объём молока (зеркало раствора для клиента).
     /// Размер груди намеренно не кэшируется: он проверяется по marking'ам
     /// в момент взаимодействия/выработки.
     /// </summary>
@@ -75,12 +74,6 @@ public sealed partial class LactationComponent : Component
     /// </summary>
     [DataField]
     public float ThirstUsagePerUnit = 0.4f;
-
-    /// <summary>
-    /// Объём молока за одно сцеживание по размерам груди 1..5.
-    /// </summary>
-    [DataField]
-    public List<FixedPoint2> MilkingAmounts = new() { 10, 14, 18, 22, 28 };
 
     /// <summary>
     /// Когда следующий тик выработки (только сервер).

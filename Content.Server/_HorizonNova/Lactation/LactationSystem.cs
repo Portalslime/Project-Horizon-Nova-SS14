@@ -1,41 +1,29 @@
-using System.Diagnostics.CodeAnalysis;
-using Content.Server.Fluids.EntitySystems;
-using Content.Shared._Arcane.ERP;
 using Content.Shared._HorizonNova.Lactation;
 using Content.Shared._Shitmed.Humanoid.Events;
 using Content.Shared.Alert;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.DirtVisuals;
 using Content.Shared.FixedPoint;
-using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
-using Content.Shared.Popups;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Server._HorizonNova.Lactation;
 
 /// <summary>
-/// Лактация: пассивная выработка молока в раствор на теле, алерт о наличии молока
-/// и сцеживание по <see cref="ErpMilkCollectionEvent"/> — в ёмкость в руке или на пол.
+/// Лактация: пассивная выработка молока в раствор на теле и алерт о наличии молока.
 /// </summary>
 public sealed class LactationSystem : EntitySystem
 {
     [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedDirtSystem _dirt = default!;
-    [Dependency] private readonly PuddleSystem _puddle = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly ThirstSystem _thirst = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
@@ -70,7 +58,6 @@ public sealed class LactationSystem : EntitySystem
         SubscribeLocalEvent<LactationComponent, HumanoidMarkingSetChangedEvent>(OnMarkingSetChanged);
         SubscribeLocalEvent<LactationComponent, ProfileLoadFinishedEvent>(OnProfileLoadFinished);
         SubscribeLocalEvent<LactationComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
-        SubscribeLocalEvent<ArousalComponent, ErpMilkCollectionEvent>(OnMilkCollection);
     }
 
     /// <summary>
@@ -218,141 +205,6 @@ public sealed class LactationSystem : EntitySystem
             return false;
 
         return true;
-    }
-
-    /// <summary>
-    /// Сцеживание по запросу ERP-панели: в ёмкость в руке пользователя либо разливом на пол.
-    /// </summary>
-    private void OnMilkCollection(Entity<ArousalComponent> ent, ref ErpMilkCollectionEvent args)
-    {
-        var user = args.User;
-        var target = args.Target;
-
-        if (!TryComp<LactationComponent>(target, out var comp))
-            return;
-
-        // Размер груди проверяем в момент взаимодействия, а не по кэшу.
-        if (!TryComp<HumanoidAppearanceComponent>(target, out var humanoid))
-        {
-            PopupMilkingEmpty(user, target);
-            return;
-        }
-
-        var size = LactationHelpers.GetBreastSize(humanoid);
-        if (size <= 0)
-        {
-            PopupMilkingEmpty(user, target);
-            return;
-        }
-
-        if (!_solutions.ResolveSolution(target, comp.SolutionName, ref comp.Solution, out var solution))
-        {
-            PopupMilkingEmpty(user, target);
-            return;
-        }
-
-        if (solution.Volume <= FixedPoint2.Zero)
-        {
-            PopupMilkingEmpty(user, target);
-            return;
-        }
-
-        var amount = LactationHelpers.GetMilkingAmount(size, comp.MilkingAmounts);
-        if (amount > solution.Volume)
-            amount = solution.Volume;
-
-        if (TryFindHeldContainer(user, out var held, out var containerSoln, out var containerSolution))
-        {
-            if (containerSolution.AvailableVolume <= FixedPoint2.Zero)
-            {
-                _popup.PopupEntity(Loc.GetString("lactation-container-full"), target, user);
-                return;
-            }
-
-            if (amount > containerSolution.AvailableVolume)
-                amount = containerSolution.AvailableVolume;
-
-            var intoContainer = _solutions.SplitSolution(comp.Solution.Value, amount);
-            if (!_solutions.TryAddSolution(containerSoln.Value, intoContainer))
-            {
-                // Ёмкость могла заполниться между проверкой и переносом — возвращаем молоко в грудь.
-                _solutions.TryAddSolution(comp.Solution.Value, intoContainer);
-                _popup.PopupEntity(Loc.GetString("lactation-container-full"), target, user);
-                return;
-            }
-
-            _popup.PopupEntity(
-                Loc.GetString("lactation-milking-into-container",
-                    ("amount", intoContainer.Volume),
-                    ("container", Identity.Entity(held, EntityManager)),
-                    ("target", Identity.Entity(target, EntityManager))),
-                target,
-                user,
-                PopupType.Medium);
-        }
-        else
-        {
-            var spill = _solutions.SplitSolution(comp.Solution.Value, amount);
-            _puddle.TrySpillAt(target, spill, out _);
-
-            _dirt.AddDirtToSlotsFromReagent(target, spill.Volume.Float() * 2f, comp.ReagentId.Id,
-                "underweart", "jumpsuit", "outerClothing");
-
-            _popup.PopupEntity(
-                Loc.GetString("lactation-milking-spill",
-                    ("amount", spill.Volume),
-                    ("target", Identity.Entity(target, EntityManager))),
-                target,
-                user,
-                PopupType.Medium);
-        }
-
-        SyncVolume(target, comp, solution);
-    }
-
-    /// <summary>
-    /// Ищет любую ёмкость с refillable-раствором в руках пользователя:
-    /// сначала активная рука, затем остальные.
-    /// </summary>
-    private bool TryFindHeldContainer(EntityUid user, out EntityUid held,
-        [NotNullWhen(true)] out Entity<SolutionComponent>? containerSoln,
-        [NotNullWhen(true)] out Solution? containerSolution)
-    {
-        held = default;
-        containerSoln = null;
-        containerSolution = null;
-
-        if (_hands.TryGetActiveItem(user, out var activeItem)
-            && _solutions.TryGetRefillableSolution(activeItem.Value, out containerSoln, out containerSolution))
-        {
-            held = activeItem.Value;
-            return true;
-        }
-
-        foreach (var hand in _hands.EnumerateHands(user))
-        {
-            if (!_hands.TryGetHeldItem(user, hand, out var item))
-                continue;
-
-            if (activeItem != null && item.Value == activeItem.Value)
-                continue;
-
-            if (!_solutions.TryGetRefillableSolution(item.Value, out containerSoln, out containerSolution))
-                continue;
-
-            held = item.Value;
-            return true;
-        }
-
-        return false;
-    }
-
-    private void PopupMilkingEmpty(EntityUid user, EntityUid target)
-    {
-        _popup.PopupEntity(
-            Loc.GetString("lactation-milking-empty", ("target", Identity.Entity(target, EntityManager))),
-            target,
-            user);
     }
 
     /// <summary>

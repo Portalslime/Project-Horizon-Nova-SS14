@@ -42,8 +42,6 @@
       collection: MaleDeathGasp
     Belch: # Frontier
       collection: Belch # Frontier
-    Moan: #HN: порт с Lust
-      collection: MaleMoan
 
 - type: emoteSounds
   id: FemaleHuman
@@ -88,8 +86,6 @@
       collection: FemaleDeathGasp
     Belch: # Frontier
       collection: Belch # Frontier
-    Moan: #HN: порт с Lust
-      collection: FemaleMoan
 
 - type: emoteSounds
   id: MaleReptilian

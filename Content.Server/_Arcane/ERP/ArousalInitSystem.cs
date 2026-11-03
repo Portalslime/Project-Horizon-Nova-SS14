@@ -1,5 +1,4 @@
 using Content.Shared._Arcane.ERP;
-using Content.Shared._Arcane.ErpPanel;
 using Content.Shared.Humanoid;
 using Robust.Shared.Player;
 
@@ -21,6 +20,5 @@ public sealed class ArousalInitSystem : EntitySystem
     private void OnPlayerAttached(Entity<HumanoidAppearanceComponent> ent, ref PlayerAttachedEvent args)
     {
         EnsureComp<ArousalComponent>(ent);
-        EnsureComp<ErpPanelOwnerComponent>(ent);
     }
 }

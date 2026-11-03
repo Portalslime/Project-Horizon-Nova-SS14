@@ -7,7 +7,7 @@ namespace Content.Shared._HorizonNova.Lactation;
 
 /// <summary>
 /// Общие правила лактации: список рас, размер груди по marking'ам и формулы
-/// объёмов. Используется и серверной системой, и ERP-требованием (на клиенте).
+/// объёмов. Используется серверной системой.
 /// </summary>
 public static class LactationHelpers
 {
@@ -72,30 +72,6 @@ public static class LactationHelpers
     public static FixedPoint2 GetMaxMilk(int size, FixedPoint2 baseMax, FixedPoint2 perSize)
     {
         return baseMax + perSize * Math.Max(size, 0);
-    }
-
-    /// <summary>
-    /// Сколько молока сцеживается за одно действие (по размеру груди 1..5).
-    /// </summary>
-    public static FixedPoint2 GetMilkingAmount(int size, IReadOnlyList<FixedPoint2> amounts)
-    {
-        if (amounts.Count == 0)
-            return FixedPoint2.Zero;
-
-        var index = Math.Clamp(size - 1, 0, amounts.Count - 1);
-        return amounts[index];
-    }
-
-    /// <summary>
-    /// Порог возбуждения для сцеживания: чем больше грудь, тем ниже порог.
-    /// </summary>
-    public static float GetArousalThreshold(int size, IReadOnlyList<float> thresholds)
-    {
-        if (thresholds.Count == 0)
-            return 0f;
-
-        var index = Math.Clamp(size - 1, 0, thresholds.Count - 1);
-        return thresholds[index];
     }
 
     /// <summary>

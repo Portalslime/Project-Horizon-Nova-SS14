@@ -1,4 +1,0 @@
-- type: interactionEntityEffect
-  id: InteractionEffectHearts
-  name: lust-interaction-effect-InteractionEffectHearts
-  entityEffect: EffectHearts

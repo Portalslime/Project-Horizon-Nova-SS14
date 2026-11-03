@@ -22,7 +22,6 @@ using Content.Client.Viewport;
 using Content.Client.Voting;
 using Content.Shared.Administration.Logs;
 using Content.Client.Lobby;
-using Content.Client._Lust.InteractionsPanel.Models; //HN: порт ERP-панели с Lust
 using Content.Client.Players.RateLimiting;
 using Content.Shared.Administration.Managers;
 using Content.Shared.Chat;
@@ -66,7 +65,6 @@ namespace Content.Client.IoC
             collection.Register<JoinQueueManager>(); // Corvax-Queue
             collection.Register<DiscordAuthManager>(); // Corvax-DiscordAuth
             collection.Register<ClientsidePlaytimeTrackingManager>();
-            collection.Register<CustomInteractionService, CustomInteractionService>(true); //HN: порт ERP-панели с Lust
         }
     }
 }

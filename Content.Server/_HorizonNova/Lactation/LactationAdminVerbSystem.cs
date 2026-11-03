@@ -6,7 +6,6 @@ using Content.Shared.Humanoid;
 using Content.Shared.Verbs;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Server._HorizonNova.Lactation;
 
@@ -63,7 +62,6 @@ public sealed class LactationAdminVerbSystem : EntitySystem
             return;
 
         var target = args.Target;
-        var icon = new SpriteSpecifier.Texture(new("/Textures/_Arcane/Interface/ErpPanel/boobs_paw.png"));
 
         foreach (var (nameKey, markingId) in breasts)
         {
@@ -72,7 +70,6 @@ public sealed class LactationAdminVerbSystem : EntitySystem
             {
                 Text = Loc.GetString(nameKey),
                 Category = VerbCategory.Tricks,
-                Icon = icon,
                 Act = () => SetBreast(target, humanoid, breasts, selected),
                 Impact = LogImpact.Low,
                 Message = Loc.GetString("lactation-admin-breast-desc"),
@@ -84,7 +81,6 @@ public sealed class LactationAdminVerbSystem : EntitySystem
         {
             Text = Loc.GetString("lactation-admin-breast-remove"),
             Category = VerbCategory.Tricks,
-            Icon = icon,
             Act = () => SetBreast(target, humanoid, breasts, null),
             Impact = LogImpact.Low,
             Message = Loc.GetString("lactation-admin-breast-desc"),
