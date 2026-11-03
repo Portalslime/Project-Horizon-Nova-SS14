@@ -1,3 +1,8 @@
+# ВРЕМЕННО ОТКЛЮЧЕНО: пункт «дойка» убран из ERP-панели.
+# Код лактации (LactationSystem, компоненты, требования, реагент, алерт,
+# админ-выбор размера груди) остаётся на месте.
+# Чтобы вернуть пункт: переименуйте файл обратно в lactation.yml (без .disabled).
+#
 # Horizon Nova: сцеживание молока (лактация).
 # Требование !type:LactationRequirement живёт в Content.Shared/_HorizonNova/Lactation.
 - type: panelInteraction
