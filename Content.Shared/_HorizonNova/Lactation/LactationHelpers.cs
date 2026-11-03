@@ -43,10 +43,14 @@ public static class LactationHelpers
     /// Размер груди персонажа: 0 — лактации нет, 1..5 — сила лактации.
     /// У Human/Demon определяется выбранным marking'ом груди; у Resomi/Dwarf
     /// своих грудных marking'ов нет, поэтому у женщин фиксированный минимальный размер.
+    /// Лактация доступна только женщинам.
     /// </summary>
     public static int GetBreastSize(HumanoidAppearanceComponent humanoid)
     {
         if (!LactatingSpecies.Contains(humanoid.Species))
+            return 0;
+
+        if (humanoid.Sex != Sex.Female)
             return 0;
 
         var size = 0;
@@ -59,11 +63,22 @@ public static class LactationHelpers
         if (size > 0)
             return size;
 
-        // Resomi/Dwarf: без грудных marking'ов — минимальный размер, только женский пол.
+        // Resomi/Dwarf: без грудных marking'ов — минимальный размер.
         if (humanoid.Species == "Resomi" || humanoid.Species == "Dwarf")
-            return humanoid.Sex == Sex.Female ? 1 : 0;
+            return 1;
 
         return 0;
+    }
+
+    /// <summary>
+    /// Можно ли сцеживать молоко у этого персонажа: женщина, одна из четырёх рас
+    /// и у неё есть грудь (размер больше нуля).
+    /// </summary>
+    public static bool CanMilk(HumanoidAppearanceComponent humanoid)
+    {
+        return humanoid.Sex == Sex.Female
+               && LactatingSpecies.Contains(humanoid.Species)
+               && GetBreastSize(humanoid) > 0;
     }
 
     /// <summary>
