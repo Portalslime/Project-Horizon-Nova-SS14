@@ -9,6 +9,15 @@ lactation-admin-breast-big = Breasts: big
 lactation-admin-breast-superbig = Breasts: super big
 lactation-admin-breast-remove = Breasts: remove
 lactation-admin-breast-desc = Change breast size (admin tool).
+lactation-admin-verb = Change breast size
+lactation-admin-eui-title = Breast size
+lactation-admin-eui-target = Target: { $name }
+lactation-admin-eui-species = Species: { $species }
+lactation-admin-eui-current = Current size: { $size }
+lactation-admin-eui-note-no-sprites = This species has no breast sprites - only milk production and volume will change.
+lactation-admin-deny-female = Not allowed: the character is not female.
+lactation-admin-deny-species = Not allowed: this species is not supported.
+lactation-admin-deny-missing = Not allowed: target is unavailable.
 
 lactation-verb-milk = Milk ({ $amount } u.)
 lactation-verb-milk-desc = Milk the breasts into a held container or onto the floor.
@@ -17,4 +26,5 @@ lactation-container-full = The container is full.
 lactation-milking-into-container = Milks { $amount } units of milk into { $container }.
 lactation-milking-spill = Milk ({ $amount } units) spills onto the floor.
 lactation-needs-exposed = The chest must be exposed first.
+lactation-milking-cooldown = Available again in { $seconds } s.
 lactation-examined-milk = [color=#ffb6c1]Milk:[/color] { $amount } / { $max } units (breast { $size })

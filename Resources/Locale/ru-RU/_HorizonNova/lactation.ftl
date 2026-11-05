@@ -9,6 +9,15 @@ lactation-admin-breast-big = Грудь: большая
 lactation-admin-breast-superbig = Грудь: очень большая
 lactation-admin-breast-remove = Грудь: убрать
 lactation-admin-breast-desc = Изменить размер груди (админ-инструмент).
+lactation-admin-verb = Изменить грудь
+lactation-admin-eui-title = Изменение груди
+lactation-admin-eui-target = Цель: { $name }
+lactation-admin-eui-species = Раса: { $species }
+lactation-admin-eui-current = Текущий размер: { $size }
+lactation-admin-eui-note-no-sprites = У этой расы нет спрайтов груди — меняется только выработка и объём молока.
+lactation-admin-deny-female = Нельзя: персонаж не женского пола.
+lactation-admin-deny-species = Нельзя: эта раса не поддерживается.
+lactation-admin-deny-missing = Нельзя: цель недоступна.
 
 lactation-verb-milk = Сцедить молоко ({ $amount } ед.)
 lactation-verb-milk-desc = Сцедить молоко из груди в ёмкость в руке или на пол.
@@ -17,4 +26,5 @@ lactation-container-full = Ёмкость полна.
 lactation-milking-into-container = Сцеживает { $amount } ед. молока в { $container }.
 lactation-milking-spill = Молоко ({ $amount } ед.) сцеживается на пол.
 lactation-needs-exposed = Сначала нужно обнажить грудь.
+lactation-milking-cooldown = Снова можно через { $seconds } с.
 lactation-examined-milk = [color=#ffb6c1]Молоко:[/color] { $amount } / { $max } ед. (грудь { $size })

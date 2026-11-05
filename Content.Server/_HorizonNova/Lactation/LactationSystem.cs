@@ -96,7 +96,7 @@ public sealed class LactationSystem : EntitySystem
         if (!TryComp<HumanoidAppearanceComponent>(ent, out var humanoid))
             return;
 
-        var extraSize = LactationHelpers.GetBreastSize(humanoid) - NormalBreastSize;
+        var extraSize = LactationHelpers.GetBreastSize(humanoid, ent.Comp.BreastSizeOverride) - NormalBreastSize;
         if (extraSize <= 0)
             return;
 
@@ -143,12 +143,54 @@ public sealed class LactationSystem : EntitySystem
     /// </summary>
     private void RefreshAppearance(Entity<LactationComponent> ent)
     {
-        if (_solutions.ResolveSolution(ent.Owner, ent.Comp.SolutionName, ref ent.Comp.Solution, out var solution))
-            ent.Comp.MilkVolume = solution.Volume;
+        if (!_solutions.ResolveSolution(ent.Owner, ent.Comp.SolutionName, ref ent.Comp.Solution, out var solution))
+            return;
 
-        Dirty(ent.Owner, ent.Comp);
+        // HN: к началу раунда грудь уже полная — заполняем один раз,
+        // когда впервые удалось определить размер груди (маркировки могут прийти позже MapInit).
+        if (ent.Comp.FillAtStart
+            && !ent.Comp.FilledAtStart
+            && TryComp<HumanoidAppearanceComponent>(ent.Owner, out var humanoid))
+        {
+            var size = LactationHelpers.GetBreastSize(humanoid, ent.Comp.BreastSizeOverride);
+            if (size > 0)
+            {
+                var maxMilk = LactationHelpers.GetMaxMilk(size, ent.Comp.BaseMaxMilk, ent.Comp.MaxMilkPerSize);
+                var missing = maxMilk - solution.Volume;
+                if (missing > FixedPoint2.Zero)
+                {
+                    if (_solutions.TryAddReagent(ent.Comp.Solution!.Value, ent.Comp.ReagentId, missing, out _))
+                    {
+                        ent.Comp.FilledAtStart = true;
+                        if (!_solutions.ResolveSolution(ent.Owner, ent.Comp.SolutionName, ref ent.Comp.Solution, out var refilled))
+                            return;
+                        solution = refilled;
+                    }
+                }
+                else
+                {
+                    ent.Comp.FilledAtStart = true;
+                }
+            }
+        }
+
+        if (ent.Comp.MilkVolume != solution.Volume)
+        {
+            ent.Comp.MilkVolume = solution.Volume;
+            Dirty(ent.Owner, ent.Comp);
+        }
+
         UpdateAlert(ent.Owner, ent.Comp);
         _movement.RefreshMovementSpeedModifiers(ent.Owner);
+    }
+
+    /// <summary>
+    /// Пересчитать лактацию после внешних правок (админ-панель, размер груди и т.п.).
+    /// </summary>
+    public void RefreshLactation(EntityUid uid)
+    {
+        if (TryComp<LactationComponent>(uid, out var comp))
+            RefreshAppearance((uid, comp));
     }
 
     public override void Update(float frameTime)
@@ -179,7 +221,7 @@ public sealed class LactationSystem : EntitySystem
         if (!TryComp<HumanoidAppearanceComponent>(uid, out var humanoid))
             return;
 
-        var size = LactationHelpers.GetBreastSize(humanoid);
+        var size = LactationHelpers.GetBreastSize(humanoid, comp.BreastSizeOverride);
         if (size <= 0)
             return;
 
@@ -247,7 +289,7 @@ public sealed class LactationSystem : EntitySystem
         if (!TryComp<HumanoidAppearanceComponent>(ent.Owner, out var humanoid))
             return;
 
-        if (!LactationHelpers.CanMilk(humanoid))
+        if (!LactationHelpers.CanMilk(humanoid, ent.Comp.BreastSizeOverride))
             return;
 
         var target = ent.Owner;
@@ -270,6 +312,13 @@ public sealed class LactationSystem : EntitySystem
     /// </summary>
     private string? GetMilkingBlockReason(EntityUid target, LactationComponent comp)
     {
+        var now = _timing.CurTime;
+        if (comp.NextMilking > now)
+        {
+            var seconds = (int) Math.Ceiling((comp.NextMilking - now).TotalSeconds);
+            return Loc.GetString("lactation-milking-cooldown", ("seconds", seconds));
+        }
+
         if (!IsChestExposed(target))
             return Loc.GetString("lactation-needs-exposed");
 
@@ -324,7 +373,7 @@ public sealed class LactationSystem : EntitySystem
         var user = args.User;
         var target = ent.Owner;
 
-        if (!TryComp<HumanoidAppearanceComponent>(target, out var humanoid) || !LactationHelpers.CanMilk(humanoid))
+        if (!TryComp<HumanoidAppearanceComponent>(target, out var humanoid) || !LactationHelpers.CanMilk(humanoid, ent.Comp.BreastSizeOverride))
             return;
 
         if (!IsChestExposed(target))
@@ -339,8 +388,13 @@ public sealed class LactationSystem : EntitySystem
             return;
         }
 
-        // Сколько выдаивается, зависит от того, сколько молока сейчас в груди.
-        var amount = solution.Volume;
+        // Сколько выдаивается, зависит от того, сколько молока сейчас в груди: половина запаса.
+        var amount = solution.Volume * ent.Comp.MilkingFraction;
+        if (amount <= FixedPoint2.Zero)
+        {
+            PopupMilkingEmpty(user, target);
+            return;
+        }
 
         if (TryFindHeldContainer(user, out var held, out var containerSoln, out var containerSolution))
         {
@@ -386,6 +440,8 @@ public sealed class LactationSystem : EntitySystem
         }
 
         SyncVolume(target, ent.Comp, solution);
+        ent.Comp.NextMilking = _timing.CurTime + ent.Comp.MilkingCooldown;
+        Dirty(target, ent.Comp);
         args.Handled = true;
     }
 
@@ -442,10 +498,10 @@ public sealed class LactationSystem : EntitySystem
         if (!args.IsInDetailsRange)
             return;
 
-        if (!TryComp<HumanoidAppearanceComponent>(ent.Owner, out var humanoid) || !LactationHelpers.CanMilk(humanoid))
+        if (!TryComp<HumanoidAppearanceComponent>(ent.Owner, out var humanoid) || !LactationHelpers.CanMilk(humanoid, ent.Comp.BreastSizeOverride))
             return;
 
-        var size = LactationHelpers.GetBreastSize(humanoid);
+        var size = LactationHelpers.GetBreastSize(humanoid, ent.Comp.BreastSizeOverride);
         var maxMilk = LactationHelpers.GetMaxMilk(size, ent.Comp.BaseMaxMilk, ent.Comp.MaxMilkPerSize);
         if (maxMilk <= FixedPoint2.Zero)
             return;
@@ -480,7 +536,7 @@ public sealed class LactationSystem : EntitySystem
             return;
         }
 
-        var size = LactationHelpers.GetBreastSize(humanoid);
+        var size = LactationHelpers.GetBreastSize(humanoid, comp.BreastSizeOverride);
         if (size <= 0 || comp.MilkVolume <= FixedPoint2.Zero)
         {
             _alerts.ClearAlertCategory(uid, AlertCategory);

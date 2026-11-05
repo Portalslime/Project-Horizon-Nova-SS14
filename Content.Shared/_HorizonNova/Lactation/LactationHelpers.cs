@@ -44,14 +44,21 @@ public static class LactationHelpers
     /// У Human/Demon определяется выбранным marking'ом груди; у Resomi/Dwarf
     /// своих грудных marking'ов нет, поэтому у женщин фиксированный минимальный размер.
     /// Лактация доступна только женщинам.
+    /// <paramref name="overrideSize"/>: 0 — не задан, -1 — грудь убрана админом, 1..5 — принудительный размер.
     /// </summary>
-    public static int GetBreastSize(HumanoidAppearanceComponent humanoid)
+    public static int GetBreastSize(HumanoidAppearanceComponent humanoid, int overrideSize = 0)
     {
         if (!LactatingSpecies.Contains(humanoid.Species))
             return 0;
 
         if (humanoid.Sex != Sex.Female)
             return 0;
+
+        if (overrideSize < 0)
+            return 0;
+
+        if (overrideSize > 0)
+            return Math.Clamp(overrideSize, 1, 5);
 
         var size = 0;
         foreach (var marking in humanoid.MarkingSet.GetForwardEnumerator())
@@ -74,11 +81,38 @@ public static class LactationHelpers
     /// Можно ли сцеживать молоко у этого персонажа: женщина, одна из четырёх рас
     /// и у неё есть грудь (размер больше нуля).
     /// </summary>
-    public static bool CanMilk(HumanoidAppearanceComponent humanoid)
+    public static bool CanMilk(HumanoidAppearanceComponent humanoid, int overrideSize = 0)
     {
         return humanoid.Sex == Sex.Female
                && LactatingSpecies.Contains(humanoid.Species)
-               && GetBreastSize(humanoid) > 0;
+               && GetBreastSize(humanoid, overrideSize) > 0;
+    }
+
+    /// <summary>
+    /// Грудные marking'и расы (1..5) или null, если у расы их нет.
+    /// </summary>
+    public static readonly string[] HumanBreastMarkings =
+    {
+        "HumanBreastSmall", "HumanBreastDefault", "HumanBreastMedium", "HumanBreastBig", "HumanBreastSuperBig",
+    };
+
+    /// <inheritdoc cref="HumanBreastMarkings"/>
+    public static readonly string[] DemonBreastMarkings =
+    {
+        "DemonBreastSmall", "DemonBreastDefault", "DemonBreastMedium", "DemonBreastBig", "DemonBreastSuperBig",
+    };
+
+    /// <summary>
+    /// Возвращает список marking'ов груди для расы (1..5) или null, если их нет.
+    /// </summary>
+    public static string[]? GetBreastMarkings(ProtoId<SpeciesPrototype> species)
+    {
+        return species.Id switch
+        {
+            "Human" => HumanBreastMarkings,
+            "Demon" => DemonBreastMarkings,
+            _ => null,
+        };
     }
 
     /// <summary>

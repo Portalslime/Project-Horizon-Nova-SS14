@@ -46,6 +46,13 @@ public sealed partial class LactationComponent : Component
     public FixedPoint2 BaseMaxMilk = 10;
 
     /// <summary>
+    /// Админский размер груди для рас без грудных marking'ов (0 — не задан).
+    /// Для Human/Demon размер берётся из marking'ов, тут 0.
+    /// </summary>
+    [DataField]
+    public int BreastSizeOverride;
+
+    /// <summary>
     /// Прибавка к максимуму за каждый размер груди.
     /// </summary>
     [DataField]
@@ -55,7 +62,7 @@ public sealed partial class LactationComponent : Component
     /// Пассивная выработка молока в секунду за каждый размер груди.
     /// </summary>
     [DataField]
-    public float MilkPerSizePerSecond = 0.1f;
+    public float MilkPerSizePerSecond = 0.05f;
 
     /// <summary>
     /// Интервал между тиками выработки.
@@ -74,6 +81,36 @@ public sealed partial class LactationComponent : Component
     /// </summary>
     [DataField]
     public float ThirstUsagePerUnit = 0.4f;
+
+    /// <summary>
+    /// Начинать раунд с полной грудью (заполнение один раз при первом определении размера).
+    /// </summary>
+    [DataField]
+    public bool FillAtStart = true;
+
+    /// <summary>
+    /// Заполнено ли молоко в начале раунда (только сервер).
+    /// </summary>
+    [ViewVariables]
+    public bool FilledAtStart;
+
+    /// <summary>
+    /// Доля молока, которая сцеживается за одно действие (0..1).
+    /// </summary>
+    [DataField]
+    public float MilkingFraction = 0.5f;
+
+    /// <summary>
+    /// Кулдаун между сцеживаниями.
+    /// </summary>
+    [DataField]
+    public TimeSpan MilkingCooldown = TimeSpan.FromSeconds(60);
+
+    /// <summary>
+    /// Когда можно будет сцедить молоко снова (только сервер).
+    /// </summary>
+    [ViewVariables]
+    public TimeSpan NextMilking;
 
     /// <summary>
     /// Когда следующий тик выработки (только сервер).
