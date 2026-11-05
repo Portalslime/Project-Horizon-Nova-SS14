@@ -20,19 +20,28 @@ public sealed class LactationAdminEuiSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<HumanoidAppearanceComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
+
+        // Подписка на уровне сущности: на (HumanoidAppearanceComponent, GetVerbsEvent<Verb>)
+        // уже подписан HumanoidAppearanceSystem, повторная подписка на ту же пару запрещена шиной.
+        SubscribeLocalEvent<GetVerbsEvent<Verb>>(OnGetVerbs);
     }
 
-    private void OnGetVerbs(Entity<HumanoidAppearanceComponent> ent, ref GetVerbsEvent<Verb> args)
+    private void OnGetVerbs(GetVerbsEvent<Verb> args)
     {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
+        if (!HasComp<HumanoidAppearanceComponent>(args.Target))
+            return;
+
         if (!TryComp<ActorComponent>(args.User, out var actor))
             return;
 
         if (!_adminManager.HasAdminFlag(actor.PlayerSession, AdminFlags.Fun))
             return;
 
-        var user = args.User;
-        var target = ent.Owner;
+        var target = args.Target;
+        var session = actor.PlayerSession;
 
         args.Verbs.Add(new Verb
         {
@@ -40,7 +49,7 @@ public sealed class LactationAdminEuiSystem : EntitySystem
             Category = VerbCategory.Tricks,
             Priority = 10,
             Impact = LogImpact.Low,
-            Act = () => _eui.OpenEui(new LactationAdminEui(target), actor.PlayerSession),
+            Act = () => _eui.OpenEui(new LactationAdminEui(target), session),
         });
     }
 }
